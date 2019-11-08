@@ -1,0 +1,68 @@
+[
+  {
+    "type": "directory",
+    "name": "/",
+    "contents": [
+      {
+        "type": "file",
+        "name": "SETTINGS.TXT"
+      },
+      {
+        "type": "directory",
+        "name": "VOLS",
+        "contents": [
+          {
+            "type": "file",
+            "name": "19103100.IGC"
+          },
+          {
+            "type": "file",
+            "name": "19102900.IGC"
+          },
+          {
+            "type": "file",
+            "name": "19102901.IGC"
+          },
+          {
+            "type": "file",
+            "name": "19102902.IGC"
+          }
+        ]
+      },
+      {
+        "type": "directory",
+        "name": "WWW",
+        "contents": [
+          {
+            "type": "file",
+            "name": "FAVI.ICO"
+          },
+          {
+            "type": "file",
+            "name": "INDEX.HTM"
+          },
+          {
+            "type": "file",
+            "name": "INDEXB.JS"
+          },
+          {
+            "type": "file",
+            "name": "INDEXB~1.MAP"
+          }
+        ]
+      },
+      {
+        "type": "file",
+        "name": "FAVI.ICO"
+      },
+      {
+        "type": "file",
+        "name": "FR5758~1.JSO"
+      },
+      {
+        "type": "file",
+        "name": "PARAMS.JSO"
+      }
+    ]
+  }
+]
