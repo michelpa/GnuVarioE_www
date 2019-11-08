@@ -178,6 +178,24 @@ export const actions = {
             });
         });
     },
+    downloadFile: function (context, filename) {
+        // let param = encodeURIComponent('?path=/vols/' + filename);
+        let url = "/file?path=" + filename;
+        if (env.NODE_ENV == "development") {
+            url = "/19022402.IGC";
+        }
+        let axiosConfig = {}
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            return axios.get(url, axiosConfig).then(response => {
+                return response;
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
 }
 
 export const mutations = {

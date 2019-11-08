@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import store from "@/store";
 let nbLevelOpened = 2;
 export default {
   name: "TreeItem",
@@ -97,25 +98,25 @@ export default {
       alert("soon");
       console.log(this.fullFilename);
       let self = this;
-      // store.dispatch("downloadFlight", f).then(
-      //   response => {
-      //     const url = window.URL.createObjectURL(new Blob([response.data]));
-      //     const link = document.createElement("a");
-      //     link.href = url;
-      //     link.setAttribute("download", f);
-      //     document.body.appendChild(link);
-      //     link.click();
-      //   },
-      //   // eslint-disable-next-line
-      //   error => {
-      //     self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
-      //       title: "Mon vol",
-      //       toaster: "b-toaster-top-right",
-      //       solid: true,
-      //       variant: "danger"
-      //     });
-      //   }
-      // );
+      store.dispatch("downloadFile", f).then(
+        response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", f);
+          document.body.appendChild(link);
+          link.click();
+        },
+        // eslint-disable-next-line
+        error => {
+          self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
+            title: "SD",
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "danger"
+          });
+        }
+      );
     },
     uploadToSD: function() {
       alert("soon");
