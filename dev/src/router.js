@@ -7,6 +7,7 @@ import Configuration from './components/Configuration.vue'
 import ScreenConfigurator from './components/ScreenConfigurator.vue'
 import SD from './components/SD.vue'
 import OTA from './components/OTA.vue'
+import Wifi from './components/Wifi.vue'
 
 //Vue.use(Router)
 
@@ -42,6 +43,10 @@ export default new VueRouter({
       path: '/ota',
       name: 'ota',
       component: OTA
+    }, {
+      path: '/wifi',
+      name: 'wifi',
+      component: Wifi
     },
     // {
     //   path: '/about',

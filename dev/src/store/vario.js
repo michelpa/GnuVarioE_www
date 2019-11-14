@@ -19,6 +19,8 @@ const env = process.env;
 const initialState = {
     configLoaded: false,
     config: false,
+    configWifi: false,
+    configWifiLoaded: false,
     flightsLoaded: false,
     flights: false,
     fileslistLoaded: false,
@@ -62,6 +64,50 @@ export const actions = {
             context.commit('setLoadingState', true);
             // eslint-disable-next-line
             return axios.post(url, context.state.config).then(response => {
+                // context.commit('setConfig', config);
+                return true;
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    loadWifiConfig: function (context) {
+        let url = "/wifi";
+        if (env.NODE_ENV == "development") {
+            url = "config/wifi.cfg";
+        }
+
+        let axiosConfig = {
+            headers: {
+                "Content-Type": "application/octet-stream"
+            }
+        };
+
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            return axios.get(url, axiosConfig).then(response => {
+                let config = response.data;
+                context.commit('setconfigWifi', config);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    saveWifiConfig: function (context) {
+        let url = "/wifi";
+
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            //recomposition du fichier
+
+
+
+            // eslint-disable-next-line
+            return axios.post(url, context.state.configWifi).then(response => {
                 // context.commit('setConfig', config);
                 return true;
             }).finally(function () {
@@ -203,6 +249,10 @@ export const mutations = {
         state.config = Object.assign({}, state.config, config);
         state.configLoaded = true;
     },
+    setconfigWifi: function (state, config) {
+        state.configWifi = config;
+        state.configWifiLoaded = true;
+    },
     setConfigValue: function (state, { path, value }) {
         var deep_value = function (obj, path) {
             // eslint-disable-next-line no-redeclare
@@ -235,6 +285,9 @@ export const mutations = {
 const getters = {
     config(state) {
         return state.configLoaded ? state.config : false;
+    },
+    configWifi(state) {
+        return state.configWifiLoaded ? state.configWifi : false;
     },
     flights(state) {
         return state.flightsLoaded ? state.flights : false;

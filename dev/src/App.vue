@@ -21,6 +21,7 @@
             <b-nav-item :to="{ name: 'config'}" active-class="active">{{ $t('menu.CONFIG') }}</b-nav-item>
             <b-nav-item :to="{ name: 'ota'}" active-class="active">{{ $t('menu.MAJ') }}</b-nav-item>
             <b-nav-item :to="{ name: 'about'}" active-class="active">{{ $t('menu.ABOUT') }}</b-nav-item>
+            <b-nav-item :to="{ name: 'wifi'}" active-class="active">{{ $t('menu.WIFI') }}</b-nav-item>
             <!-- <b-nav-item :to="{ name: 'home'}" active-class="active">Home</b-nav-item> -->
           </b-navbar-nav>
 
