@@ -44,7 +44,7 @@ export default {
   name: "ConfigField",
   props: {
     // configField: String,
-    value: String,
+    value: [String, Number],
     label: String,
     kind: String,
     inputType: { type: String, default: "text" },
@@ -62,7 +62,6 @@ export default {
   },
   watch: {
     value: function(newVal, oldVal) {
-      console.log('watch')
       // watch it
       if (newVal != oldVal) {
         this.lemodel = this.value;
