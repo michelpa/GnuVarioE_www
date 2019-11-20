@@ -6,7 +6,7 @@
         <div class="bg-default">
           <div class="tree">
             <ul class="mb-1 pl-3 pb-2">
-              <tree-item v-for="t in fileslist" :key="t.key" class="item" :item="t" path=""></tree-item>
+              <tree-item v-for="t in fileslist" :key="t.key" class="item" :item="t" path="/"></tree-item>
             </ul>
           </div>
         </div>
