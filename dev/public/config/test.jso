@@ -8,12 +8,12 @@
         "ALARM_SDCARD": 1,
         "BEEP_GPSFIX": 1,
         "BEEP_FLYBEGIN": 1,
-				"BEEP_VARIOBEGIN": 0,
-				"COMPENSATION_TEMP": -6.0,
-				"COMPENSATION_GPSALTI": -30,
-				"SLEEP_TIMEOUT_MINUTES": 20,
-				"SLEEP_THRESHOLD_CPS": 50,
-				"ALTERNATE_DATA_DURATION": 2000
+        "BEEP_VARIOBEGIN": 0,
+        "COMPENSATION_TEMP": -6.0,
+        "COMPENSATION_GPSALTI": -30,
+        "SLEEP_TIMEOUT_MINUTES": 20,
+        "SLEEP_THRESHOLD_CPS": 50,
+        "ALTERNATE_DATA_DURATION": 2000
     },
     "General": {
         "PILOT_NAME": "Magali",
@@ -33,7 +33,7 @@
         "RATIO_MIN_SPEED": 10.0,
         "RATIO_CLIMB_RATE": 2,
         "SENT_LXNAV_SENTENCE": 1
-   },
+    },
     "Flight start": {
         "FLIGHT_START_MIN_TIMESTAMP": 15000,
         "FLIGHT_START_VARIO_LOW_THRESHOLD": -0.5,

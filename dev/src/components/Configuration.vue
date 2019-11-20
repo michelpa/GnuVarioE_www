@@ -27,31 +27,69 @@
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-12">
-                        <config-field 
-                          v-model="localConfig.general.VARIOMETER_PILOT_NAME"
-                          :label="$t('params.general.VARIOMETER_PILOT_NAME.label')"
-                          :help="$t('params.general.VARIOMETER_PILOT_NAME.help')"
+                        <div class="float-right">
+                          <b-button
+                            v-if="!confVoile"
+                            variant="info"
+                            type="button"
+                            size="sm"
+                            @click="confVoile=!confVoile"
+                          >Configurer mes voiles</b-button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br />
+                        <config-field
+                          v-if="!confVoile"
+                          v-model="localConfig.general.PILOT_NAME"
+                          :label="$t('params.general.PILOT_NAME.label')"
+                          :help="$t('params.general.PILOT_NAME.help')"
+                          input-type="text"
+                        ></config-field>
+
+                        <config-field
+                          v-if="!confVoile"
+                          v-model="localConfig.general.GLIDER.GLIDER_SELECT"
+                          :label="$t('params.general.GLIDER_SELECT.label')"
+                          :help="$t('params.general.GLIDER_SELECT.help')"
+                          kind="select"
+                          :options="gliders"
+                        ></config-field>
+
+                        <config-field
+                          v-if="confVoile"
+                          v-model="localConfig.general.GLIDER.GLIDER_NAME1"
+                          :label="$t('params.general.GLIDER_NAME1.label')"
+                          :help="$t('params.general.GLIDER_NAME1.help')"
                           input-type="text"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.general.VARIOMETER_GLIDER_NAME"
-                          :label="$t('params.general.VARIOMETER_GLIDER_NAME.label')"
-                          :help="$t('params.general.VARIOMETER_GLIDER_NAME.help')"
+                          v-if="confVoile"
+                          v-model="localConfig.general.GLIDER.GLIDER_NAME2"
+                          :label="$t('params.general.GLIDER_NAME2.label')"
+                          :help="$t('params.general.GLIDER_NAME2.help')"
                           input-type="text"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.general.VARIOMETER_TIME_ZONE"
-                          :label="$t('params.general.VARIOMETER_TIME_ZONE.label')"
-                          :help="$t('params.general.VARIOMETER_TIME_ZONE.help')"
+                          v-if="confVoile"
+                          v-model="localConfig.general.GLIDER.GLIDER_NAME3"
+                          :label="$t('params.general.GLIDER_NAME3.label')"
+                          :help="$t('params.general.GLIDER_NAME3.help')"
+                          input-type="text"
+                        ></config-field>
+                        <config-field
+                          v-if="confVoile"
+                          v-model="localConfig.general.GLIDER.GLIDER_NAME4"
+                          :label="$t('params.general.GLIDER_NAME4.label')"
+                          :help="$t('params.general.GLIDER_NAME4.help')"
+                          input-type="text"
+                        ></config-field>
+                        <config-field
+                          v-if="!confVoile"
+                          v-model="localConfig.general.TIME_ZONE"
+                          :label="$t('params.general.TIME_ZONE.label')"
+                          :help="$t('params.general.TIME_ZONE.help')"
                           kind="select"
                           :options="fuseaux"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.general.VARIOMETER_BEEP_VOLUME"
-                          :label="$t('params.general.VARIOMETER_BEEP_VOLUME.label')"
-                          :help="$t('params.general.VARIOMETER_BEEP_VOLUME.help')"
-                          kind="select"
-                          :options="volumes"
                         ></config-field>
                       </div>
                       <b-button variant="success" block type="submit">Sauver</b-button>
@@ -66,27 +104,27 @@
                     <div class="row">
                       <div class="col-md-4">
                         <config-field
-                          v-model="localConfig.vario.VARIOMETER_SINKING_THRESHOLD"
-                          :label="$t('params.vario.VARIOMETER_SINKING_THRESHOLD.label')"
-                          :help="$t('params.vario.VARIOMETER_SINKING_THRESHOLD.help')"
+                          v-model="localConfig.vario.SINKING_THRESHOLD"
+                          :label="$t('params.vario.SINKING_THRESHOLD.label')"
+                          :help="$t('params.vario.SINKING_THRESHOLD.help')"
                           input-type="range"
                           :min="-10"
                           :max="0"
                           :step="0.1"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.vario.VARIOMETER_CLIMBING_THRESHOLD"
-                          :label="$t('params.vario.VARIOMETER_CLIMBING_THRESHOLD.label')"
-                          :help="$t('params.vario.VARIOMETER_CLIMBING_THRESHOLD.help')"
+                          v-model="localConfig.vario.CLIMBING_THRESHOLD"
+                          :label="$t('params.vario.CLIMBING_THRESHOLD.label')"
+                          :help="$t('params.vario.CLIMBING_THRESHOLD.help')"
                           input-type="range"
                           :min="0"
                           :max="10"
                           :step="0.1"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.vario.VARIOMETER_NEAR_CLIMBING_SENSITIVITY"
-                          :label="$t('params.vario.VARIOMETER_NEAR_CLIMBING_SENSITIVITY.label')"
-                          :help="$t('params.vario.VARIOMETER_NEAR_CLIMBING_SENSITIVITY.help')"
+                          v-model="localConfig.vario.NEAR_CLIMBING_SENSITIVITY"
+                          :label="$t('params.vario.NEAR_CLIMBING_SENSITIVITY.label')"
+                          :help="$t('params.vario.NEAR_CLIMBING_SENSITIVITY.help')"
                           input-type="range"
                           :min="0"
                           :max="1"
@@ -95,62 +133,83 @@
                       </div>
                       <div class="col-md-4">
                         <config-field
-                          v-model="localConfig.vario.VARIOMETER_ENABLE_NEAR_CLIMBING_ALARM"
-                          :label="$t('params.vario.VARIOMETER_ENABLE_NEAR_CLIMBING_ALARM.label')"
-                          :help="$t('params.vario.VARIOMETER_ENABLE_NEAR_CLIMBING_ALARM.help')"
+                          v-model="localConfig.vario.ENABLE_NEAR_CLIMBING_ALARM"
+                          :label="$t('params.vario.ENABLE_NEAR_CLIMBING_ALARM.label')"
+                          :help="$t('params.vario.ENABLE_NEAR_CLIMBING_ALARM.help')"
                           kind="checkbox"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.vario.VARIOMETER_ENABLE_NEAR_CLIMBING_BEEP"
-                          :label="$t('params.vario.VARIOMETER_ENABLE_NEAR_CLIMBING_BEEP.label')"
-                          :help="$t('params.vario.VARIOMETER_ENABLE_NEAR_CLIMBING_BEEP.help')"
+                          v-model="localConfig.vario.ENABLE_NEAR_CLIMBING_BEEP"
+                          :label="$t('params.vario.ENABLE_NEAR_CLIMBING_BEEP.label')"
+                          :help="$t('params.vario.ENABLE_NEAR_CLIMBING_BEEP.help')"
                           kind="checkbox"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.vario.VARIOMETER_DISPLAY_INTEGRATED_CLIMB_RATE"
-                          :label="$t('params.integration.VARIOMETER_DISPLAY_INTEGRATED_CLIMB_RATE.label')"
-                          :help="$t('params.integration.VARIOMETER_DISPLAY_INTEGRATED_CLIMB_RATE.help')"
+                          v-model="localConfig.vario.DISPLAY_INTEGRATED_CLIMB_RATE"
+                          :label="$t('params.vario.DISPLAY_INTEGRATED_CLIMB_RATE.label')"
+                          :help="$t('params.vario.DISPLAY_INTEGRATED_CLIMB_RATE.help')"
                           kind="checkbox"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.vario.RATIO_CLIMB_RATE"
+                          :label="$t('params.vario.RATIO_CLIMB_RATE.label')"
+                          :help="$t('params.vario.RATIO_CLIMB_RATE.help')"
+                          kind="select"
+                          :options="[{value: '1', text: 'Affichage de la finesse'}, { value: '2', text: 'Affichage du taux de chute moyen' }, { value: '3', text: 'Affichage des 2 informations en alternance dans la zone à droite de l’affiche du vario' }]"
                         ></config-field>
                       </div>
                       <div class="col-md-4">
-                        <config-field  v-if="mode == 'expert'"
-                          v-model="localConfig.vario.SETTINGS_CLIMB_PERIOD_COUNT"
-                          :label="$t('params.integration.SETTINGS_CLIMB_PERIOD_COUNT.label')"
-                          :help="$t('params.integration.SETTINGS_CLIMB_PERIOD_COUNT.help')"
+                        <config-field
+                          v-if="mode == 'expert'"
+                          v-model="localConfig.vario.CLIMB_PERIOD_COUNT"
+                          :label="$t('params.vario.CLIMB_PERIOD_COUNT.label')"
+                          :help="$t('params.vario.CLIMB_PERIOD_COUNT.help')"
                           input-type="number"
                         ></config-field>
-                        <config-field  v-if="mode == 'expert'"
+                        <config-field
+                          v-if="mode == 'expert'"
                           v-model="localConfig.vario.SETTINGS_GLIDE_RATIO_PERIOD_COUNT"
-                          :label="$t('params.integration.SETTINGS_GLIDE_RATIO_PERIOD_COUNT.label')"
-                          :help="$t('params.integration.SETTINGS_GLIDE_RATIO_PERIOD_COUNT.help')"
+                          :label="$t('params.vario.SETTINGS_GLIDE_RATIO_PERIOD_COUNT.label')"
+                          :help="$t('params.vario.SETTINGS_GLIDE_RATIO_PERIOD_COUNT.help')"
                           input-type="number"
                         ></config-field>
-                        <config-field  v-if="mode == 'expert'"
+                        <config-field
+                          v-if="mode == 'expert'"
                           v-model="localConfig.vario.RATIO_MAX_VALUE"
-                          :label="$t('params.integration.RATIO_MAX_VALUE.label')"
-                          :help="$t('params.integration.RATIO_MAX_VALUE.help')"
+                          :label="$t('params.vario.RATIO_MAX_VALUE.label')"
+                          :help="$t('params.vario.RATIO_MAX_VALUE.help')"
                           input-type="number"
                         ></config-field>
-                        <config-field  v-if="mode == 'expert'"
+                        <config-field
+                          v-if="mode == 'expert'"
                           v-model="localConfig.vario.RATIO_MIN_SPEED"
-                          :label="$t('params.integration.RATIO_MIN_SPEED.label')"
-                          :help="$t('params.integration.RATIO_MIN_SPEED.help')"
+                          :label="$t('params.vario.RATIO_MIN_SPEED.label')"
+                          :help="$t('params.vario.RATIO_MIN_SPEED.help')"
                           input-type="number"
+                        ></config-field>
+
+                        <config-field
+                          v-if="mode == 'expert'"
+                          v-model="localConfig.vario.SENT_LXNAV_SENTENCE"
+                          :label="$t('params.vario.SENT_LXNAV_SENTENCE.label')"
+                          :help="$t('params.vario.SENT_LXNAV_SENTENCE.help')"
+                          kind="select"
+                          :options="[{value: '0', text: 'LK8000'}, { value: '1', text: 'LXNAV' }]"
                         ></config-field>
                       </div>
                       <b-button variant="success" block type="submit">Sauver</b-button>
                     </div>
                   </b-form>
                 </b-card>
-                <p>{{config.Vavariorio}}</p>
+                <p>{{config.vario}}</p>
               </b-tab>
               <b-tab title="Début du vol">
                 <b-card header="Paramètres Départ Vol" header-tag="header" title>
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-12">
-                        <config-field  v-if="mode == 'expert'"
+                        <config-field
+                          v-if="mode == 'expert'"
                           v-model="localConfig.flightstart.FLIGHT_START_MIN_TIMESTAMP"
                           :label="$t('params.vol.FLIGHT_START_MIN_TIMESTAMP.label')"
                           :help="$t('params.vol.FLIGHT_START_MIN_TIMESTAMP.help')"
@@ -185,138 +244,6 @@
                 </b-card>
                 <p>{{config.flightstart}}</p>
               </b-tab>
-              <b-tab title="Calibration" v-if="mode == 'expert'">
-                <b-card header="Paramètres Calibration" header-tag="header" title>
-                  <b-form @submit="onSaveConfig">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <h4>Gyroscope</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_00"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_00.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_00.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_01"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_01.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_01.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_02"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_02.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_02.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_03"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_03.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_03.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_04"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_04.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_04.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_05"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_05.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_05.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_06"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_06.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_06.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_07"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_07.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_07.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_08"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_08.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_08.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_09"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_09.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_09.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_10"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_10.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_10.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_GYRO_CAL_BIAS_11"
-                          :label="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_11.label')"
-                          :help="$t('params.calibration.VERTACCEL_GYRO_CAL_BIAS_11.help')"
-                        ></config-field>
-                      </div>
-                      <div class="col-md-4">
-                        <h4>Accéléromètre</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_ACCEL_CAL_BIAS_00"
-                          :label="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_00.label')"
-                          :help="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_00.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_ACCEL_CAL_BIAS_01"
-                          :label="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_01.label')"
-                          :help="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_01.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_ACCEL_CAL_BIAS_02"
-                          :label="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_02.label')"
-                          :help="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_02.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_ACCEL_CAL_SCALE"
-                          :label="$t('params.calibration.VERTACCEL_ACCEL_CAL_SCALE.label')"
-                          :help="$t('params.calibration.VERTACCEL_ACCEL_CAL_SCALE.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_ACCEL_CAL_BIAS_MULTIPLIER"
-                          :label="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_MULTIPLIER.label')"
-                          :help="$t('params.calibration.VERTACCEL_ACCEL_CAL_BIAS_MULTIPLIER.help')"
-                        ></config-field>
-                      </div>
-                      <div class="col-md-4">
-                        <h4>Magnétomètre</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_MAG_CAL_BIAS_MULTIPLIER"
-                          :label="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_MULTIPLIER.label')"
-                          :help="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_MULTIPLIER.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_MAG_CAL_BIAS_00"
-                          :label="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_00.label')"
-                          :help="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_00.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_MAG_CAL_BIAS_01"
-                          :label="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_01.label')"
-                          :help="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_01.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_MAG_CAL_BIAS_02"
-                          :label="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_02.label')"
-                          :help="$t('params.calibration.VERTACCEL_MAG_CAL_BIAS_02.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.calibration.VERTACCEL_MAG_CAL_PROJ_SCALE"
-                          :label="$t('params.calibration.VERTACCEL_MAG_CAL_PROJ_SCALE.label')"
-                          :help="$t('params.calibration.VERTACCEL_MAG_CAL_PROJ_SCALE.help')"
-                        ></config-field>
-                      </div>
-                      <b-button variant="success" block type="submit">Sauver</b-button>
-                    </div>
-                  </b-form>
-                </b-card>
-                <p>{{config.calibration}}</p>
-              </b-tab>
               <b-tab title="Système">
                 <b-card header="Paramètres Système" header-tag="header" title>
                   <b-form @submit="onSaveConfig">
@@ -324,125 +251,69 @@
                       <div class="col-md-4">
                         <config-field
                           v-model="localConfig.systeme.BT_ENABLE"
-                          :label="$t('params.bluetooth.BT_ENABLE.label')"
-                          :help="$t('params.bluetooth.BT_ENABLE.help')"
+                          :label="$t('params.systeme.BT_ENABLE.label')"
+                          :help="$t('params.systeme.BT_ENABLE.help')"
                           kind="checkbox"
                         ></config-field>
                         <config-field
                           v-model="localConfig.systeme.NO_RECORD"
-                          :label="$t('params.vol.NO_RECORD.label')"
-                          :help="$t('params.vol.NO_RECORD.help')"
+                          :label="$t('params.systeme.NO_RECORD.label')"
+                          :help="$t('params.systeme.NO_RECORD.help')"
                           kind="checkbox"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.systeme.RATIO_CLIMB_RATE"
-                          :label="$t('params.integration.RATIO_CLIMB_RATE.label')"
-                          :help="$t('params.integration.RATIO_CLIMB_RATE.help')"
-                          kind="select"
-                          :options="[{value: '1', text: 'Affichage de la finesse'}, { value: '2', text: 'Affichage du taux de chute moyen' }, { value: '3', text: 'Affichage des 2 informations en alternance dans la zone à droite de l’affiche du vario' }]"
-                        ></config-field>
-                      </div>
-                      <div class="col-md-4">
-                        <config-field  v-if="mode == 'expert'"
-                          v-model="localConfig.systeme.VARIOMETER_SENT_LXNAV_SENTENCE"
-                          :label="$t('params.bluetooth.VARIOMETER_SENT_LXNAV_SENTENCE.label')"
-                          :help="$t('params.bluetooth.VARIOMETER_SENT_LXNAV_SENTENCE.help')"
-                          kind="select"
-                          :options="[{value: '0', text: 'LK8000'}, { value: '1', text: 'LXNAV' }]"
                         ></config-field>
                         <config-field
                           v-model="localConfig.systeme.ALARM_SDCARD"
-                          :label="$t('params.alarme.ALARM_SDCARD.label')"
-                          :help="$t('params.alarme.ALARM_SDCARD.help')"
+                          :label="$t('params.systeme.ALARM_SDCARD.label')"
+                          :help="$t('params.systeme.ALARM_SDCARD.help')"
                           kind="checkbox"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.systeme.ALARM_GPSFIX"
-                          :label="$t('params.alarme.ALARM_GPSFIX.label')"
-                          :help="$t('params.alarme.ALARM_GPSFIX.help')"
+                          v-model="localConfig.systeme.BEEP_GPSFIX"
+                          :label="$t('params.systeme.BEEP_GPSFIX.label')"
+                          :help="$t('params.systeme.BEEP_GPSFIX.help')"
+                          kind="checkbox"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.systeme.BEEP_VARIOBEGIN"
+                          :label="$t('params.systeme.BEEP_VARIOBEGIN.label')"
+                          :help="$t('params.systeme.BEEP_VARIOBEGIN.help')"
                           kind="checkbox"
                         ></config-field>
                       </div>
                       <div class="col-md-4">
                         <config-field
-                          v-model="localConfig.systeme.ALARM_FLYBEGIN"
-                          :label="$t('params.alarme.ALARM_FLYBEGIN.label')"
-                          :help="$t('params.alarme.ALARM_FLYBEGIN.help')"
-                          kind="checkbox"
+                          v-model="localConfig.systeme.COMPENSATION_TEMP"
+                          :label="$t('params.systeme.COMPENSATION_TEMP.label')"
+                          :help="$t('params.systeme.COMPENSATION_TEMP.help')"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.systeme.COMPENSATION_GPSALTI"
+                          :label="$t('params.systeme.COMPENSATION_GPSALTI.label')"
+                          :help="$t('params.systeme.COMPENSATION_GPSALTI.help')"
+                        ></config-field>
+                      </div>
+                      <div class="col-md-4">
+                        <config-field
+                          v-model="localConfig.systeme.SLEEP_TIMEOUT_MINUTES"
+                          :label="$t('params.systeme.SLEEP_TIMEOUT_MINUTES.label')"
+                          :help="$t('params.systeme.SLEEP_TIMEOUT_MINUTES.help')"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.systeme.SLEEP_THRESHOLD_CPS"
+                          :label="$t('params.systeme.SLEEP_THRESHOLD_CPS.label')"
+                          :help="$t('params.systeme.SLEEP_THRESHOLD_CPS.help')"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.systeme.MULTIDISPLAY_DURATION"
+                          :label="$t('params.systeme.MULTIDISPLAY_DURATION.label')"
+                          :help="$t('params.systeme.MULTIDISPLAY_DURATION.help')"
+                          input-type="number"
                         ></config-field>
                       </div>
                       <b-button variant="success" block type="submit">Sauver</b-button>
                     </div>
                   </b-form>
                   <p>{{config.systeme}}</p>
-                </b-card>
-              </b-tab>
-              <b-tab title="WiFi">
-                <b-card header="Paramètres Wifi" header-tag="header" title>
-                  <b-form @submit="onSaveConfig">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <h4>WIFI 1</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.wifi.wifi_1.SSID"
-                          :label="$t('params.wifi.SSID_1.label')"
-                          :help="$t('params.wifi.SSID_1.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.wifi.wifi_1.PASSWORD"
-                          :label="$t('params.wifi.PASSWORD_1.label')"
-                          :help="$t('params.wifi.PASSWORD_1.help')"
-                        ></config-field>
-                      </div>
-                      <div class="col-md-3">
-                        <h4>WIFI 2</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.wifi.wifi_2.SSID"
-                          :label="$t('params.wifi.SSID_2.label')"
-                          :help="$t('params.wifi.SSID_2.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.wifi.wifi_2.PASSWORD"
-                          :label="$t('params.wifi.PASSWORD_2.label')"
-                          :help="$t('params.wifi.PASSWORD_2.help')"
-                        ></config-field>
-                      </div>
-                      <div class="col-md-3">
-                        <h4>WIFI 3</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.wifi.wifi_3.SSID"
-                          :label="$t('params.wifi.SSID_3.label')"
-                          :help="$t('params.wifi.SSID_3.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.wifi.wifi_3.PASSWORD"
-                          :label="$t('params.wifi.PASSWORD_3.label')"
-                          :help="$t('params.wifi.PASSWORD_3.help')"
-                        ></config-field>
-                      </div>
-                      <div class="col-md-3">
-                        <h4>WIFI 4</h4>
-                        <br />
-                        <config-field
-                          v-model="localConfig.wifi.wifi_4.SSID"
-                          :label="$t('params.wifi.SSID_4.label')"
-                          :help="$t('params.wifi.SSID_4.help')"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.wifi.wifi_4.PASSWORD"
-                          :label="$t('params.wifi.PASSWORD_4.label')"
-                          :help="$t('params.wifi.PASSWORD-4.help')"
-                        ></config-field>
-                      </div>
-
-                      <b-button variant="success" block type="submit">Sauver</b-button>
-                    </div>
-                  </b-form>
-                  <p>{{config.wifi}}</p>
-                  <!-- <p>{{config}}</p> -->
                 </b-card>
               </b-tab>
               <b-tab title="TESTS">
@@ -473,12 +344,11 @@ import ConfigField from "./ConfigField";
 export default {
   name: "Configuration",
   components: { ConfigField },
-  props: {
-    msg: String
-  },
+  props: {},
   data: function() {
     return {
       mode: "normal",
+      confVoile: false,
       fuseaux: [
         { value: "-12", text: "-12" },
         { value: "-11", text: "-11" },
@@ -525,6 +395,7 @@ export default {
   },
   methods: {
     onSaveConfig: function() {
+      this.confVoile = false;
       store.commit("setConfig", this.localConfig);
       let self = this;
       store.dispatch("saveConfig").then(
@@ -561,6 +432,14 @@ export default {
     ...mapGetters(["config"]),
     localConfig: function() {
       return JSON.parse(JSON.stringify(this.config));
+    },
+    gliders: function() {
+      return [
+        { value: 0, text: this.localConfig.general.GLIDER.GLIDER_NAME1 },
+        { value: 1, text: this.localConfig.general.GLIDER.GLIDER_NAME2 },
+        { value: 2, text: this.localConfig.general.GLIDER.GLIDER_NAME3 },
+        { value: 3, text: this.localConfig.general.GLIDER.GLIDER_NAME4 }
+      ];
     }
   },
   mounted: function() {}

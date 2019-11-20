@@ -1,68 +1,242 @@
 [
-  {
-    "type": "directory",
-    "name": "/",
-    "contents": [
-      {
-        "type": "file",
-        "name": "SETTINGS.TXT"
-      },
-      {
-        "type": "directory",
+    {
+        "type": "dir",
         "name": "VOLS",
+        "size": "na",
         "contents": [
-          {
-            "type": "file",
-            "name": "19103100.IGC"
-          },
-          {
-            "type": "file",
-            "name": "19102900.IGC"
-          },
-          {
-            "type": "file",
-            "name": "19102901.IGC"
-          },
-          {
-            "type": "file",
-            "name": "19102902.IGC"
-          }
+            {
+                "type": "file",
+                "name": "19022402.IGC",
+                "size": "12.500 KB"
+            },
+            {
+                "type": "dir",
+                "name": "AAA",
+                "size": "na",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "19022402.IGC",
+                        "size": "12.500 KB"
+                    }
+                ]
+            },
+            {
+                "type": "dir",
+                "name": "BBB",
+                "size": "na",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "19022402.IGC",
+                        "size": "12.500 KB"
+                    }
+                ]
+            },
+            {
+                "type": "dir",
+                "name": "CCC",
+                "size": "na",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "19022402.IGC",
+                        "size": "12.500 KB"
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "type": "directory",
+    },
+    {
+        "type": "dir",
         "name": "WWW",
+        "size": "na",
         "contents": [
-          {
-            "type": "file",
-            "name": "FAVI.ICO"
-          },
-          {
-            "type": "file",
-            "name": "INDEX.HTM"
-          },
-          {
-            "type": "file",
-            "name": "INDEXB.JS"
-          },
-          {
-            "type": "file",
-            "name": "INDEXB~1.MAP"
-          }
+            {
+                "type": "file",
+                "name": "INDEX.HTM",
+                "size": "8.491 KB"
+            },
+            {
+                "type": "file",
+                "name": "INDEX37C.JS",
+                "size": "222.082 KB"
+            },
+            {
+                "type": "file",
+                "name": "INDEX3~1.MAP",
+                "size": "640.787 KB"
+            }
         ]
-      },
-      {
+    },
+    {
         "type": "file",
-        "name": "FAVI.ICO"
-      },
-      {
+        "name": "FR~1.JSO",
+        "size": "8.921 KB"
+    },
+    {
         "type": "file",
-        "name": "FR5758~1.JSO"
-      },
-      {
+        "name": "RECORD00.CAL",
+        "size": "883 B"
+    },
+    {
         "type": "file",
-        "name": "PARAMS.JSO"
-      }
-    ]
-  }
+        "name": "SETTINGS.TXT",
+        "size": "5.062 KB"
+    },
+    {
+        "type": "file",
+        "name": "WIFI.CFG",
+        "size": "221 B"
+    },
+    {
+        "type": "dir",
+        "name": "TRASH-~1",
+        "size": "na",
+        "contents": [
+            {
+                "type": "dir",
+                "name": "INFO",
+                "size": "na",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "INDEXH~1.TRA",
+                        "size": "65 B"
+                    },
+                    {
+                        "type": "file",
+                        "name": "INDEX3~1.TRA",
+                        "size": "67 B"
+                    },
+                    {
+                        "type": "file",
+                        "name": "INDEX3~2.TRA",
+                        "size": "71 B"
+                    },
+                    {
+                        "type": "file",
+                        "name": "190224~1.TRA",
+                        "size": "83 B"
+                    }
+                ]
+            },
+            {
+                "type": "dir",
+                "name": "FILES",
+                "size": "na",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "INDEX.HTM",
+                        "size": "8.491 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "INDEX35C.JS",
+                        "size": "221.735 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "INDEX3~1.MAP",
+                        "size": "640.792 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "190224~1.IGC",
+                        "size": "12.500 KB"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "file",
+        "name": "PARAMS.JSO",
+        "size": "1.987 KB"
+    },
+    {
+        "type": "dir",
+        "name": "VOLS2",
+        "size": "na",
+        "contents": [
+            {
+                "type": "file",
+                "name": "19022402.IGC",
+                "size": "12.500 KB"
+            },
+            {
+                "type": "file",
+                "name": "FLIGHTS.JSO",
+                "size": "144 B"
+            },
+            {
+                "type": "file",
+                "name": "PARAMS.JSO",
+                "size": "1.219 KB"
+            },
+            {
+                "type": "file",
+                "name": "TEST.JSO",
+                "size": "1.763 KB"
+            },
+            {
+                "type": "file",
+                "name": "TREE.JSO",
+                "size": "1.224 KB"
+            },
+            {
+                "type": "file",
+                "name": "VARIOCAL.CFG",
+                "size": "833 B"
+            },
+            {
+                "type": "file",
+                "name": "WIFI.CFG",
+                "size": "242 B"
+            },
+            {
+                "type": "dir",
+                "name": "EE",
+                "size": "na",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "19022402.IGC",
+                        "size": "12.500 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "FLIGHTS.JSO",
+                        "size": "144 B"
+                    },
+                    {
+                        "type": "file",
+                        "name": "PARAMS.JSO",
+                        "size": "1.219 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "TEST.JSO",
+                        "size": "1.763 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "TREE.JSO",
+                        "size": "1.224 KB"
+                    },
+                    {
+                        "type": "file",
+                        "name": "VARIOCAL.CFG",
+                        "size": "833 B"
+                    },
+                    {
+                        "type": "file",
+                        "name": "WIFI.CFG",
+                        "size": "242 B"
+                    }
+                ]
+            }
+        ]
+    }
 ]
