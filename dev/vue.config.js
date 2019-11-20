@@ -75,7 +75,7 @@ module.exports = {
             'vuei18n': 'VueI18n',
             'clickconfirm': 'clickConfirm',
             'apex': 'Apex',
-            'apexchart': 'VueApexCharts'
+            'apexchart': 'VueApexCharts',
         }
     },
     css: {
