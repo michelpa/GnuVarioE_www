@@ -1,18 +1,5 @@
 import { parseIGC } from '../lib/parseigc.js'
-
-function waitFor(conditionFunction) {
-    const poll = resolve => {
-        if (conditionFunction()) {
-            resolve();
-        } else {
-            setTimeout(function () {
-                poll(resolve);
-            }, 30);
-        }
-    };
-
-    return new Promise(poll);
-}
+import { waitFor, triFichiers } from '../lib/helper.js'
 
 const env = process.env;
 
@@ -102,12 +89,16 @@ export const actions = {
             return context.state.isLoading === false
         }).then(function () {
             context.commit('setLoadingState', true);
-            //recomposition du fichier
 
-
+            var config = {
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                responseType: 'text'
+            };
 
             // eslint-disable-next-line
-            return axios.post(url, context.state.configWifi).then(response => {
+            return axios.post(url, context.state.configWifi, config).then(response => {
                 // context.commit('setConfig', config);
                 return true;
             }).finally(function () {
@@ -218,7 +209,9 @@ export const actions = {
         }).then(function () {
             context.commit('setLoadingState', true);
             axios.get(url, axiosConfig).then(response => {
-                context.commit('setFiles', response.data);
+                let tree = response.data;
+                triFichiers(tree);
+                context.commit('setFiles', tree);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -236,6 +229,49 @@ export const actions = {
         }).then(function () {
             context.commit('setLoadingState', true);
             return axios.get(url, axiosConfig).then(response => {
+                return response;
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    uploadFile: function (context, filename) {
+
+
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+
+            var config = {
+                headers: {
+                    'Content-Type': 'application/octet-stream'
+                },
+                responseType: 'text'
+            };
+
+            // eslint-disable-next-line
+            return axios.post(url, context.state.configWifi, config).then(response => {
+                // context.commit('setConfig', config);
+                return true;
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    deleteFile: function (context, filename) {
+        // let param = encodeURIComponent('?path=/vols/' + filename);
+        let url = "/file?path=" + filename;
+        if (env.NODE_ENV == "development") {
+            url = "/index.htm";
+        }
+
+        let axiosConfig = {}
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            return axios.delete(url, axiosConfig).then(response => {
                 return response;
             }).finally(function () {
                 context.commit('setLoadingState', false);

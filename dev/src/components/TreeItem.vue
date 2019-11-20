@@ -27,14 +27,14 @@
         </span>
         <span v-if="isFolder">
           &nbsp;
-          <button
+          <!-- <button
             class="btn btn-sm btn-info"
             @click="uploadToSD(f)"
             v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
             title="Télécharger"
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
-          </button>
+          </button> -->
         </span> &nbsp;
         <click-confirm
           placement="bottom"
@@ -94,16 +94,14 @@ export default {
     makeFolder: function() {
       return;
     },
-    downloadFromSD: function(f) {
-      alert("soon");
-      console.log(this.fullFilename);
+    downloadFromSD: function() {
       let self = this;
-      store.dispatch("downloadFile", f).then(
+      store.dispatch("downloadFile", this.fullFilename).then(
         response => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", f);
+          link.setAttribute("download", self.item.name);
           document.body.appendChild(link);
           link.click();
         },
@@ -120,14 +118,93 @@ export default {
     },
     uploadToSD: function() {
       alert("soon");
+      // if (!this.file) {
+      //   this.error = true;
+      //   return;
+      // }
+      // this.error = false;
+
+      // let formData = new FormData();
+      // formData.append("data", this.file, "update.bin");
+
+      // let self = this;
+      // var config = {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data"
+      //   },
+      //   onUploadProgress: function(progressEvent) {
+      //     self.percentCompleted = Math.round(
+      //       (progressEvent.loaded * 100) / progressEvent.total
+      //     );
+      //   }
+      // };
+
+      // this.uploading = true;
+
+      // axios
+      //   .post("/upload", formData, config)
+      //   .then(function() {
+      //     self.uploading = false;
+      //     self.$bvToast.toast(
+      //       `Le fichier a été correctement téléchargée sur le vario. Il va maintenant être redémarré pour terminer la mise à jour`,
+      //       {
+      //         title: "Mise à jour OTA",
+      //         toaster: "b-toaster-top-right",
+      //         solid: true,
+      //         variant: "success"
+      //       }
+      //     );
+      //   })
+      //   .catch(function() {
+      //     self.uploading = false;
+      //     self.$bvToast.toast(
+      //       `Echec du téléchargement du fichier, la mise à jour est abandonnée.`,
+      //       {
+      //         title: "Mise à jour OTA",
+      //         toaster: "b-toaster-top-right",
+      //         solid: true,
+      //         variant: "danger"
+      //       }
+      //     );
+      //   });
+      // return;
     },
     deleteFromSD: function() {
-      alert("soon");
+      //confirmation
+      let self = this;
+      store.dispatch("deleteFile", self.fullFilename).then(
+        // eslint-disable-next-line
+        response => {
+          store.dispatch("loadSDFiles");
+          let typeF = "Fichier";
+          if (self.isFolder) {
+            typeF = "Dossier";
+          }
+          self.$bvToast.toast(
+            typeF + " " + self.fullFilename + " supprimée de la carte SD.",
+            {
+              title: "SD",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success"
+            }
+          );
+        },
+        // eslint-disable-next-line
+        error => {
+          self.$bvToast.toast("Echec de la suppression du " + typeF, {
+            title: "SD",
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "danger"
+          });
+        }
+      );
     }
   },
   computed: {
     isFolder: function() {
-      return this.item.type == "directory";
+      return this.item.type == "dir";
     },
     fullFilename: function() {
       return this.path + this.item.name;
