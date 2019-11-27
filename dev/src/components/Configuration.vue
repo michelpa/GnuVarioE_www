@@ -96,7 +96,7 @@
                     </div>
                   </b-form>
                 </b-card>
-                <p>{{config.general}}</p>
+                <!-- <p>{{config.general}}</p> -->
               </b-tab>
               <b-tab title="Vario">
                 <b-card header="Paramètres Vario" header-tag="header" title>
@@ -201,7 +201,7 @@
                     </div>
                   </b-form>
                 </b-card>
-                <p>{{config.vario}}</p>
+                <!-- <p>{{config.vario}}</p> -->
               </b-tab>
               <b-tab title="Début du vol">
                 <b-card header="Paramètres Départ Vol" header-tag="header" title>
@@ -214,25 +214,31 @@
                           :label="$t('params.vol.FLIGHT_START_MIN_TIMESTAMP.label')"
                           :help="$t('params.vol.FLIGHT_START_MIN_TIMESTAMP.help')"
                           input-type="number"
+                          :step="0.1"
                         ></config-field>
                         <config-field
                           v-model="localConfig.flightstart.FLIGHT_START_VARIO_LOW_THRESHOLD"
                           :label="$t('params.vol.FLIGHT_START_VARIO_LOW_THRESHOLD.label')"
                           :help="$t('params.vol.FLIGHT_START_VARIO_LOW_THRESHOLD.help')"
+                          input-type="number"
+                          :step="0.1"
                         ></config-field>
                         <config-field
                           v-model="localConfig.flightstart.FLIGHT_START_VARIO_HIGH_THRESHOLD"
                           :label="$t('params.vol.FLIGHT_START_VARIO_HIGH_THRESHOLD.label')"
                           :help="$t('params.vol.FLIGHT_START_VARIO_HIGH_THRESHOLD.help')"
+                          input-type="number"
+                          :step="0.1"
                         ></config-field>
                         <config-field
                           v-model="localConfig.flightstart.FLIGHT_START_MIN_SPEED"
                           :label="$t('params.vol.FLIGHT_START_MIN_SPEED.label')"
                           :help="$t('params.vol.FLIGHT_START_MIN_SPEED.help')"
                           input-type="number"
+                          :step="0.1"
                         ></config-field>
                         <config-field
-                          v-model="localConfig.flightstart.VARIOMETER_RECORD_WHEN_FLIGHT_START"
+                          v-model="localConfig.flightstart.RECORD_WHEN_FLIGHT_START"
                           :label="$t('params.vol.VARIOMETER_RECORD_WHEN_FLIGHT_START.label')"
                           :help="$t('params.vol.VARIOMETER_RECORD_WHEN_FLIGHT_START.help')"
                           kind="checkbox"
@@ -242,7 +248,7 @@
                     </div>
                   </b-form>
                 </b-card>
-                <p>{{config.flightstart}}</p>
+                <!-- <p>{{config.flightstart}}</p> -->
               </b-tab>
               <b-tab title="Système">
                 <b-card header="Paramètres Système" header-tag="header" title>
@@ -285,11 +291,14 @@
                           v-model="localConfig.systeme.COMPENSATION_TEMP"
                           :label="$t('params.systeme.COMPENSATION_TEMP.label')"
                           :help="$t('params.systeme.COMPENSATION_TEMP.help')"
+                          input-type="number"
+                          :step="0.1"
                         ></config-field>
                         <config-field
                           v-model="localConfig.systeme.COMPENSATION_GPSALTI"
                           :label="$t('params.systeme.COMPENSATION_GPSALTI.label')"
                           :help="$t('params.systeme.COMPENSATION_GPSALTI.help')"
+                          input-type="number"
                         ></config-field>
                       </div>
                       <div class="col-md-4">
@@ -297,11 +306,14 @@
                           v-model="localConfig.systeme.SLEEP_TIMEOUT_MINUTES"
                           :label="$t('params.systeme.SLEEP_TIMEOUT_MINUTES.label')"
                           :help="$t('params.systeme.SLEEP_TIMEOUT_MINUTES.help')"
+                          input-type="number"
                         ></config-field>
                         <config-field
                           v-model="localConfig.systeme.SLEEP_THRESHOLD_CPS"
                           :label="$t('params.systeme.SLEEP_THRESHOLD_CPS.label')"
                           :help="$t('params.systeme.SLEEP_THRESHOLD_CPS.help')"
+                          input-type="number"
+                          :step="0.1"
                         ></config-field>
                         <config-field
                           v-model="localConfig.systeme.MULTIDISPLAY_DURATION"
@@ -313,13 +325,13 @@
                       <b-button variant="success" block type="submit">Sauver</b-button>
                     </div>
                   </b-form>
-                  <p>{{config.systeme}}</p>
+                  <!-- <p>{{config.systeme}}</p> -->
                 </b-card>
               </b-tab>
-              <b-tab title="TESTS">
+              <!-- <b-tab title="TESTS">
                 <p>{{config}}</p>
                 <b-link :to="{ name: 'screen'}">Ecran</b-link>
-              </b-tab>
+              </b-tab>-->
               <template v-slot:tabs-end>
                 <b-nav-item href="#" @click="reload">
                   <span class="text-success">

@@ -35,6 +35,7 @@
       :max="max"
       :step="step"
     ></b-form-input>
+    <b-form-invalid-feedback :state="isLenghtOK">30 caractères maximum</b-form-invalid-feedback>
     <div v-if="step" class="mt-2 text-muted small">valeur: {{lemodel}}</div>
   </b-form-group>
 </template>
@@ -57,7 +58,8 @@ export default {
   data: function() {
     return {
       lemodel: this.value,
-      guid: "a" + Math.round(new Date().getTime())
+      guid: "a" + Math.round(new Date().getTime()),
+      isLenghtOK: true
     };
   },
   watch: {
@@ -81,6 +83,12 @@ export default {
       } else {
         // this.$emit("input", this.$refs.monchamp.localValue);
         // this.currentval = this.$refs.monchamp.localValue;
+        if (this.lemodel.length > 30) {
+          this.isLenghtOK = false;
+        } else {
+          this.isLenghtOK = true;
+        }
+
         this.$emit("input", this.lemodel);
       }
     }
@@ -110,14 +118,6 @@ export default {
         return this.value;
       }
     }
-  },
-  beforeMount: function() {
-    // this.guid = ([1e7] + 1e3 + 4e3 + 8e3 + 1e11).replace(/[018]/g, c =>
-    //   (
-    //     c ^
-    //     (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    //   ).toString(16)
-    // );
   }
 };
 </script>

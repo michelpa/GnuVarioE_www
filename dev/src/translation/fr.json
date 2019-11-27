@@ -58,8 +58,8 @@
                 "help": "(en minutes)"
             },
             "SLEEP_THRESHOLD_CPS": {
-                "label": "LIBELLE_A_DEFINIR",
-                "help": ""
+                "label": "seuil de sommeil en m/s",
+                "help": "seuil de mise en veille si  vario ne dépasse pas + ou - 'seuil de sommeil'  pendant au moins 'temps avant mise en veille'"
             },
             "MULTIDISPLAY_DURATION": {
                 "label": "Temps de l'affichage alternatif des champs de données",
