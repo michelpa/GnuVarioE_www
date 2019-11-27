@@ -3,15 +3,14 @@
     <div class="offset-md-3 col-md-6">
       <br />
       <b-card header="Mise à jour OTA" header-tag="header">
-        <div class="bg-default ">
-          <b-form @submit="onSubmitFirmware" @reset="onResetFirmware" >
+        <div class="bg-default">
+          <b-form @submit="onSubmitFirmware" @reset="onResetFirmware">
             <b-form-group
               id="input-group-firmware"
               label-cols-sm="12"
               label="Veuillez sélectionner le fichier du firmware à envoyer sur le vario:"
               label-for="input-firmware"
               description="Habituellement, il s'agit d'un fichier au format .bin"
-             
             >
               <b-form-file id="input-firmware" v-model="file" :state="Boolean(file)" plain></b-form-file>
               <b-form-invalid-feedback
@@ -36,8 +35,6 @@
   </div>
 </template>
 
-
-
 <script>
 export default {
   name: "OTA",
@@ -52,6 +49,7 @@ export default {
       error: false
     };
   },
+
   methods: {
     onSubmitFirmware: function() {
       if (!this.file) {
