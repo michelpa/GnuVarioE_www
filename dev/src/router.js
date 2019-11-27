@@ -4,7 +4,7 @@ import Home from './components/Home.vue'
 import About from './components/About.vue'
 import MesVols from './components/MesVols.vue'
 import Configuration from './components/Configuration.vue'
-import ScreenConfigurator from './components/ScreenConfigurator.vue'
+// import ScreenConfigurator from './components/ScreenConfigurator.vue'
 import SD from './components/SD.vue'
 import OTA from './components/OTA.vue'
 import Wifi from './components/Wifi.vue'
@@ -34,11 +34,12 @@ export default new VueRouter({
       path: '/config',
       name: 'config',
       component: Configuration
-    }, {
-      path: '/config/screen',
-      name: 'screen',
-      component: ScreenConfigurator
     },
+    //  {
+    //   path: '/config/screen',
+    //   name: 'screen',
+    //   component: ScreenConfigurator
+    // },
     {
       path: '/ota',
       name: 'ota',

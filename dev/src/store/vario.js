@@ -53,7 +53,6 @@ export const actions = {
             context.commit('setLoadingState', true);
             // eslint-disable-next-line
             return axios.post(url, context.state.config).then(response => {
-                // context.commit('setConfig', config);
                 return true;
             }).finally(function () {
                 context.commit('setLoadingState', false);
@@ -101,7 +100,6 @@ export const actions = {
 
             // eslint-disable-next-line
             return axios.post(url, context.state.configWifi, config).then(response => {
-                // context.commit('setConfig', config);
                 return true;
             }).finally(function () {
                 context.commit('setLoadingState', false);
@@ -141,7 +139,6 @@ export const actions = {
         });
     },
     downloadFlight: function (context, filename) {
-        // let param = encodeURIComponent('?path=/vols/' + filename);
         let url = "/file?path=/vols/" + filename;
         if (env.NODE_ENV == "development") {
             url = "/19022402.IGC";
@@ -160,7 +157,6 @@ export const actions = {
         });
     },
     deleteFlight: function (context, filename) {
-        // let param = encodeURIComponent('?path=/vols/' + filename);
         let url = "/file?path=/vols/" + filename;
         if (env.NODE_ENV == "development") {
             url = "/index.htm";
@@ -179,7 +175,6 @@ export const actions = {
         });
     },
     infoFlight: function (context, filename) {
-        // let param = encodeURIComponent('?path=/vols/' + filename);
         let url = "/file?path=/vols/" + filename;
         if (env.NODE_ENV == "development") {
             url = "/19022402.IGC";
@@ -225,7 +220,6 @@ export const actions = {
         });
     },
     downloadFile: function (context, filename) {
-        // let param = encodeURIComponent('?path=/vols/' + filename);
         let url = "/file?path=" + filename;
         if (env.NODE_ENV == "development") {
             url = "/19022402.IGC";
@@ -279,7 +273,6 @@ export const actions = {
         });
     },
     deleteFile: function (context, filename) {
-        // let param = encodeURIComponent('?path=/vols/' + filename);
         let url = "/file?path=" + filename;
         if (env.NODE_ENV == "development") {
             url = "/index.htm";
