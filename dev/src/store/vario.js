@@ -1,5 +1,5 @@
 import { parseIGC } from '../lib/parseigc.js'
-import { waitFor, triFichiers } from '../lib/helper.js'
+import { waitFor, triFichiers, triParNomInverse } from '../lib/helper.js'
 
 const env = process.env;
 
@@ -13,6 +13,7 @@ const initialState = {
     fileslistLoaded: false,
     fileslist: false,
     isLoading: false,
+    uploadPct: 0
 };
 
 export const state = Object.assign({}, initialState);
@@ -21,7 +22,8 @@ export const actions = {
     loadConfig: function (context) {
         let url = "/params";
         if (env.NODE_ENV == "development") {
-            url = "config/params.jso";
+            //url = "config/params.jso";
+            url = "http://192.168.1.70/params";
         }
 
         let axiosConfig = {
@@ -124,7 +126,11 @@ export const actions = {
             context.commit('setLoadingState', true);
             axios.get(url, axiosConfig).then(response => {
                 let d = response.data;
+                triParNomInverse(d);
                 let traceFiles;
+                d = d.filter(function (e) {
+                    return e.type == "file";
+                });
                 traceFiles = d.map(f => {
                     return f.name.substring(f.name.lastIndexOf("/") + 1);
                 });
@@ -196,7 +202,8 @@ export const actions = {
     loadSDFiles: function (context) {
         let url = "/list";
         if (env.NODE_ENV == "development") {
-            url = "config/tree.jso";
+            //url = "config/tree.jso";
+            url = "http://192.168.1.70/list";
         }
 
         let axiosConfig = {
@@ -235,26 +242,38 @@ export const actions = {
             });
         });
     },
-    uploadFile: function (context, filename) {
-
-
+    uploadFile: function (context, formData) {
+        let url = "/upload";
+        if (env.NODE_ENV == "development") {
+            url = "http://192.168.1.70/upload";
+        }
+        context.commit('setUploadpct', 0);
         return waitFor(function () {
-            return context.state.isLoading === false
+            return (context.state.isLoading === false);
         }).then(function () {
             context.commit('setLoadingState', true);
 
             var config = {
                 headers: {
-                    'Content-Type': 'application/octet-stream'
+                    "Content-Type": "multipart/form-data"
                 },
-                responseType: 'text'
+                onUploadProgress: function (progressEvent) {
+                    let pct = Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    );
+                    context.commit('setUploadpct', pct);
+                }
             };
 
-            // eslint-disable-next-line
-            return axios.post(url, context.state.configWifi, config).then(response => {
-                // context.commit('setConfig', config);
-                return true;
+            return axios.post(url, formData, config).then(response => {
+                // console.log(response);
+                return response;
+            }).catch(function (error) {
+                // handle error
+                // console.log('err', error.response);
+                return error.response;
             }).finally(function () {
+                context.commit('setUploadpct', 0);
                 context.commit('setLoadingState', false);
             });
         });
@@ -315,6 +334,9 @@ export const mutations = {
         state.fileslist = Object.assign({}, state.fileslist, fileslist);
         state.fileslistLoaded = true;
     },
+    setUploadpct: function (state, pct) {
+        state.uploadPct = pct;
+    }
 
 }
 
@@ -333,6 +355,9 @@ const getters = {
     },
     isLoading(state) {
         return state.isLoading;
+    },
+    uploadPct(state) {
+        return state.uploadPct;
     }
 }
 

@@ -6,25 +6,37 @@
         <div class="bg-default">
           <div class="tree">
             <ul class="mb-1 pl-3 pb-2">
-              <tree-item v-for="t in fileslist" :key="t.key" class="item" :item="t" path="/"></tree-item>
+              <tree-item
+                v-for="t in fileslist"
+                :key="t.key"
+                class="item"
+                :item="t"
+                path=""
+                v-on:uploadAsked="askUpload"
+              ></tree-item>
             </ul>
           </div>
         </div>
       </b-card>
+      <upload :show="showUpload" :uploadPath="uploadPath" @uploadClosed="showUpload=false"></upload>
     </div>
   </div>
 </template>
 
 <script>
 import TreeItem from "./TreeItem";
+import Upload from "./Upload";
 import { mapGetters } from "vuex";
 import store from "@/store";
 export default {
   name: "SD",
-  components: { TreeItem },
+  components: { TreeItem, Upload },
   props: {},
   data: function() {
-    return {};
+    return {
+      showUpload: false,
+      uploadPath: ""
+    };
   },
   methods: {
     guid() {
@@ -34,6 +46,10 @@ export default {
           (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
         ).toString(16)
       );
+    },
+    askUpload(path) {
+      this.uploadPath = path;
+      this.showUpload = true;
     }
   },
   computed: {

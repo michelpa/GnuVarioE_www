@@ -1,19 +1,15 @@
 <template>
   <li class>
-    <div :class="{bold: isFolder}" @click="toggle" @dblclick="makeFolder">
+    <div :class="{bold: isFolder}" @dblclick="makeFolder">
       <i
         class="text-secondary fa"
         :class="{ 'fa-folder': (isFolder && !isOpen), 'fa-folder-open': (isFolder && isOpen), 'fa-file': (!isFolder) }"
       ></i>
       &nbsp;
-      <a href="javascript:void(0)" v-if="isFolder">
-        {{ item.name }}
-        <!-- --{{ basePath }}-- -->
-      </a>
-      <span v-else>
-        {{ item.name }}
-        <!-- --{{ fullFilename }}-- -->
-      </span>
+      <!-- --{{ fullFilename }}--
+      --{{ basePath }}-- -->
+      <a href="javascript:void(0)" v-if="isFolder" @click="toggle">{{ item.name }}</a>
+      <span v-else>{{ item.name }}</span>
       <div class="btns">
         <span v-if="!isFolder">
           <button
@@ -27,14 +23,14 @@
         </span>
         <span v-if="isFolder">
           &nbsp;
-          <!-- <button
+          <button
             class="btn btn-sm btn-info"
-            @click="uploadToSD(f)"
+            @click="uploadToSD()"
             v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
             title="Télécharger"
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
-          </button> -->
+          </button>
         </span> &nbsp;
         <click-confirm
           placement="bottom"
@@ -56,6 +52,7 @@
     </div>
     <ul v-show="isOpen" v-if="isFolder" class>
       <tree-item
+        v-on:uploadAsked="uploadAskedChild"
         class="item"
         v-for="(child, index) in item.contents"
         :key="index"
@@ -116,8 +113,12 @@ export default {
         }
       );
     },
+    uploadAskedChild: function(path) {
+      this.$emit("uploadAsked", path);
+    },
     uploadToSD: function() {
-      alert("soon");
+      this.$emit("uploadAsked", this.basePath);
+      // alert("soon");
       // if (!this.file) {
       //   this.error = true;
       //   return;

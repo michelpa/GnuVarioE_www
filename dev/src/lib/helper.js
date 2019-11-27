@@ -5,7 +5,7 @@ export function waitFor(conditionFunction) {
         } else {
             setTimeout(function () {
                 poll(resolve);
-            }, 30);
+            }, 50);
         }
     };
 
@@ -22,11 +22,18 @@ export function triFichiers(tab) {
     triParType(tab);
 }
 
+export function triParNomInverse(tab) {
+    tab.sort(function (a, b) {
+        return b.name.localeCompare(a.name);
+    });
+}
+
 function triParNom(tab) {
     tab.sort(function (a, b) {
         return a.name.localeCompare(b.name);
     });
 }
+
 
 function triParType(tab) {
     tab.sort(function (a, b) {
