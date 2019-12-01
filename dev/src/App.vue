@@ -1,7 +1,7 @@
 <template>
   <div id="monapp">
     <div class="container-fluid">
-      <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar toggleable="lg" :type="type" :variant="variant">
         <b-navbar-brand href="#">
           <a class="navbar-brand mr-auto" href="#">
             <div class="logo" id="my-logo" v-html="monlogo"></div>
@@ -36,6 +36,19 @@
               <b-dropdown-item @click="changeLocale('fr')">FR</b-dropdown-item>
               <b-dropdown-item @click="changeLocale('en')">EN</b-dropdown-item>
             </b-nav-item-dropdown>
+            <b-nav-item-dropdown :text="'Thème : ' + themeHelper.theme" right>
+              <b-dropdown-item
+                v-for="(href, name) of themes"
+                @click="changeTheme(name)"
+                :key="name"
+              >{{ name }}</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <b-nav-item-dropdown :text="'Variant: ' + variant" right>
+              <b-dropdown-item v-for="v in tabVariant" @click="changeVariant(v)" :key="v">{{ v }}</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <b-nav-item-dropdown :text="'Type: ' + type" right>
+              <b-dropdown-item v-for="v in tabType" @click="changeType(v)" :key="v">{{ v }}</b-dropdown-item>
+            </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -48,6 +61,8 @@
       <!-- component matched by the route will render here -->
       <router-view :class="{ 'loading': isLoading }"></router-view>
     </div>
+
+    <!-- <span>Selected: {{ themeHelper.theme }}</span> -->
     <footer class="footer fixed-bottom">
       <div class="container">
         <span class="text-muted">GNUVario : The open source and open hardware variometer</span>
@@ -61,13 +76,73 @@
 import store from "@/store";
 import { logo } from "@/lib/logo";
 import { mapGetters } from "vuex";
+import { ThemeHelper } from "@/lib/themeHelper";
 export default {
   name: "App",
 
   data: function() {
     return {
       monlogo: logo,
-      env: process.env
+      env: process.env,
+      tabVariant: [
+        "primary",
+        "success",
+        "info",
+        "warning",
+        "danger",
+        "dark",
+        "light"
+      ],
+      tabType: ["light", "dark"],
+      variant: "info",
+      type: "dark",
+      themes: {
+        Default:
+          "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css",
+        Cerulean:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cerulean/bootstrap.min.css",
+        Cosmo:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cosmo/bootstrap.min.css",
+        Cyborg:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cyborg/bootstrap.min.css",
+        Darkly:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css",
+        Flaty:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css",
+        Journal:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css",
+        Litera:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.min.css",
+        Lumen:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css",
+        LUX:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css",
+        Materia:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/materia/bootstrap.min.css",
+        Minty:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css",
+        Pulse:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/pulse/bootstrap.min.css",
+        Sandstone:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css",
+        Simplex:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/simplex/bootstrap.min.css",
+        Sketchy:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css",
+        Slate:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/slate/bootstrap.min.css",
+        Solar:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/solar/bootstrap.min.css",
+        Spacelab:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/spacelab/bootstrap.min.css",
+        Supehero:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css",
+        United:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/united/bootstrap.min.css",
+        Yeti:
+          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/yeti/bootstrap.min.css"
+      },
+      themeHelper: new ThemeHelper()
     };
   },
   computed: {
@@ -76,6 +151,15 @@ export default {
   methods: {
     changeLocale: function(l) {
       this.$i18n.locale = l;
+    },
+    changeTheme: function(name) {
+      this.themeHelper.theme = name;
+    },
+    changeVariant: function(v) {
+      this.variant = v;
+    },
+    changeType: function(t) {
+      this.type = t;
     }
   },
   created: function() {
@@ -84,6 +168,14 @@ export default {
         //next();
       });
     }, 100);
+    let added = Object.keys(this.themes).map(name => {
+      return this.themeHelper.add(name, this.themes[name]);
+    });
+
+    Promise.all(added).then(sheets => {
+      this.loading = false;
+      this.themeHelper.theme = "Default";
+    });
   }
 };
 </script>
@@ -91,7 +183,7 @@ export default {
 
 <style>
 #monapp {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  /* font-family: "Avenir", Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

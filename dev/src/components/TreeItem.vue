@@ -9,7 +9,7 @@
       <!-- --{{ fullFilename }}--
       --{{ basePath }}-- -->
       <a href="javascript:void(0)" v-if="isFolder" @click="toggle">{{ item.name }}</a>
-      <span v-else>{{ item.name }}</span>
+      <span v-else>{{ item.name }} &nbsp; <em><small>({{ item.size }})</small></em></span>
       <div class="btns">
         <span v-if="!isFolder">
           <button
