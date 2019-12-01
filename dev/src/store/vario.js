@@ -130,7 +130,7 @@ export const actions = {
                     return e.type == "file";
                 });
                 traceFiles = d.map(f => {
-                    return f.name.substring(f.name.lastIndexOf("/") + 1);
+                    return { name: f.name.substring(f.name.lastIndexOf("/") + 1), size: f.size };
                 });
                 context.commit('setFlights', traceFiles);
             }).finally(function () {

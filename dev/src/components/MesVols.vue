@@ -18,11 +18,16 @@
                   </thead>
                   <tbody>
                     <tr v-for="f in flights" :key="f">
-                      <td>{{f}}</td>
+                      <td>
+                        {{ f.name }} &nbsp;
+                        <em>
+                          <small>({{ f.size }})</small>
+                        </em>
+                      </td>
                       <td class="btns">
                         <button
                           class="btn btn-sm btn-success"
-                          @click="downloadFromSD(f)"
+                          @click="downloadFromSD(f.name)"
                           v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
                           title="Télécharger"
                         >
@@ -37,7 +42,7 @@
                         >
                           <button
                             class="btn btn-sm btn-danger"
-                            @click="deleteFromSD(f)"
+                            @click="deleteFromSD(f.name)"
                             v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
                             title="Supprimer"
                           >
@@ -46,12 +51,12 @@
                         </click-confirm>&nbsp;
                         <button
                           class="btn btn-sm btn-info"
-                          @click="flightInfo(f)"
+                          @click="flightInfo(f.name)"
                           v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
                           title="Info"
                         >
                           <i class="fa fa-info-circle"></i>
-                          <i class="fa fa-arrow-right" v-show="(currentF == f)"></i>
+                          <i class="fa fa-arrow-right" v-show="(currentF == f.name)"></i>
                         </button>
                       </td>
                     </tr>
@@ -109,9 +114,6 @@ export default {
     };
   },
   methods: {
-    encode: function(uri) {
-      return encodeURI(uri);
-    },
     downloadFromSD: function(f) {
       let self = this;
       store.dispatch("downloadFlight", f).then(
