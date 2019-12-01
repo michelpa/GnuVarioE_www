@@ -8,7 +8,7 @@
           <b-card header="Points d'accés" header-tag="header" title>
             <b-form @submit="onSaveConfig">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <b-form-group
                     label-cols-sm="6"
                     label-cols-lg="6"
@@ -21,34 +21,12 @@
                   <b-form-group
                     label-cols-sm="6"
                     label-cols-lg="6"
-                    :label="$t('params.wifi.PASSWORD_1.label')"
-                    label-for="PASSWORD_1"
-                    :description="$t('params.wifi.PASSWORD_1.help')"
-                  >
-                    <b-form-input id="PASSWORD_1" v-model="conf.PASSWORD_1" type="text"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-3">
-                  <b-form-group
-                    label-cols-sm="6"
-                    label-cols-lg="6"
                     :label="$t('params.wifi.SSID_2.label')"
                     label-for="SSID_2"
                     :description="$t('params.wifi.SSID_2.help')"
                   >
                     <b-form-input id="SSID_2" v-model="conf.SSID_2" type="text"></b-form-input>
                   </b-form-group>
-                  <b-form-group
-                    label-cols-sm="6"
-                    label-cols-lg="6"
-                    :label="$t('params.wifi.PASSWORD_2.label')"
-                    label-for="PASSWORD_2"
-                    :description="$t('params.wifi.PASSWORD_2.help')"
-                  >
-                    <b-form-input id="PASSWORD_2" v-model="conf.PASSWORD_2" type="text"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-3">
                   <b-form-group
                     label-cols-sm="6"
                     label-cols-lg="6"
@@ -61,22 +39,40 @@
                   <b-form-group
                     label-cols-sm="6"
                     label-cols-lg="6"
-                    :label="$t('params.wifi.PASSWORD_3.label')"
-                    label-for="PASSWORD_3"
-                    :description="$t('params.wifi.PASSWORD_3.help')"
-                  >
-                    <b-form-input id="PASSWORD_3" v-model="conf.PASSWORD_3" type="text"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-3">
-                  <b-form-group
-                    label-cols-sm="6"
-                    label-cols-lg="6"
                     :label="$t('params.wifi.SSID_4.label')"
                     label-for="SSID_4"
                     :description="$t('params.wifi.SSID_4.help')"
                   >
                     <b-form-input id="SSID_4" v-model="conf.SSID_4" type="text"></b-form-input>
+                  </b-form-group>
+                </div>
+                <div class="col-md-6">
+                  <b-form-group
+                    label-cols-sm="6"
+                    label-cols-lg="6"
+                    :label="$t('params.wifi.PASSWORD_1.label')"
+                    label-for="PASSWORD_1"
+                    :description="$t('params.wifi.PASSWORD_1.help')"
+                  >
+                    <b-form-input id="PASSWORD_1" v-model="conf.PASSWORD_1" type="text"></b-form-input>
+                  </b-form-group>
+                  <b-form-group
+                    label-cols-sm="6"
+                    label-cols-lg="6"
+                    :label="$t('params.wifi.PASSWORD_2.label')"
+                    label-for="PASSWORD_2"
+                    :description="$t('params.wifi.PASSWORD_2.help')"
+                  >
+                    <b-form-input id="PASSWORD_2" v-model="conf.PASSWORD_2" type="text"></b-form-input>
+                  </b-form-group>
+                  <b-form-group
+                    label-cols-sm="6"
+                    label-cols-lg="6"
+                    :label="$t('params.wifi.PASSWORD_3.label')"
+                    label-for="PASSWORD_3"
+                    :description="$t('params.wifi.PASSWORD_3.help')"
+                  >
+                    <b-form-input id="PASSWORD_3" v-model="conf.PASSWORD_3" type="text"></b-form-input>
                   </b-form-group>
                   <b-form-group
                     label-cols-sm="6"
