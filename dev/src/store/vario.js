@@ -16,6 +16,8 @@ const initialState = {
     uploadPct: 0
 };
 
+const baseUrl = 'http://192.168.1.78';
+
 export const state = Object.assign({}, initialState);
 
 export const actions = {
@@ -23,7 +25,7 @@ export const actions = {
         let url = "/params";
         if (env.NODE_ENV == "development") {
             //url = "config/params.jso";
-            url = "http://192.168.1.70/params";
+            url = baseUrl + "/params";
         }
 
         let axiosConfig = {
@@ -109,7 +111,8 @@ export const actions = {
     loadFlights: function (context) {
         let url = "/flights";
         if (env.NODE_ENV == "development") {
-            url = "config/flights.jso";
+            //url = "config/flights.jso";
+            url = baseUrl + "/flights";
         }
 
         let axiosConfig = {
@@ -133,6 +136,8 @@ export const actions = {
                     return { name: f.name.substring(f.name.lastIndexOf("/") + 1), size: f.size };
                 });
                 context.commit('setFlights', traceFiles);
+            }).catch(function (error) {
+                console.log('What happened? ' + error.response.data);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -198,7 +203,7 @@ export const actions = {
         let url = "/list";
         if (env.NODE_ENV == "development") {
             //url = "config/tree.jso";
-            url = "http://192.168.1.70/list";
+            url = "http://192.168.1.78/list";
         }
 
         let axiosConfig = {
@@ -214,6 +219,10 @@ export const actions = {
                 let tree = response.data;
                 triFichiers(tree);
                 context.commit('setFiles', tree);
+            }).catch(function (error) {
+                // handle error
+                //console.log('err', error);
+                //return error.response;
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -239,7 +248,7 @@ export const actions = {
     uploadFile: function (context, formData) {
         let url = "/upload";
         if (env.NODE_ENV == "development") {
-            url = "http://192.168.1.70/upload";
+            url = baseUrl + "/upload";
         }
         context.commit('setUploadpct', 0);
         return waitFor(function () {
