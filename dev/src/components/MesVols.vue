@@ -17,7 +17,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="f in flights" :key="f">
+                    <tr v-for="f in flights" :key="f.name">
                       <td>
                         {{ f.name }} &nbsp;
                         <em>
