@@ -83,7 +83,7 @@ export default {
       this.nbEncoursUpload = 0;
       this.files.forEach((f, x) => {
         this.nbEncoursUpload++;
-        let filenameWithPath = self.uploadPath + "/" + f.name;
+        let filenameWithPath = self.uploadPath + f.name;
         let formData = new FormData();
         formData.append("data", f, filenameWithPath);
         this.uploading = true;
@@ -108,12 +108,15 @@ export default {
             error => {
               self.removeFile(f);
               self.endOneFileUpload();
-              self.$bvToast.toast(`Echec du téléchargement du fichier  ${f.name}.`, {
-                title: "SD",
-                toaster: "b-toaster-top-right",
-                solid: true,
-                variant: "danger"
-              });
+              self.$bvToast.toast(
+                `Echec du téléchargement du fichier  ${f.name}.`,
+                {
+                  title: "SD",
+                  toaster: "b-toaster-top-right",
+                  solid: true,
+                  variant: "danger"
+                }
+              );
             }
           );
         }, 100);

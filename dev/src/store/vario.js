@@ -136,8 +136,9 @@ export const actions = {
                     return { name: f.name.substring(f.name.lastIndexOf("/") + 1), size: f.size };
                 });
                 context.commit('setFlights', traceFiles);
+                // eslint-disable-next-line no-unused-vars
             }).catch(function (error) {
-                console.log('What happened? ' + error.response.data);
+                //console.log('What happened? ' + error.response.data);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -219,6 +220,7 @@ export const actions = {
                 let tree = response.data;
                 triFichiers(tree);
                 context.commit('setFiles', tree);
+                // eslint-disable-next-line no-unused-vars
             }).catch(function (error) {
                 // handle error
                 //console.log('err', error);

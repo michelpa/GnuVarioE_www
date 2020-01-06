@@ -32,10 +32,15 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
+            <!-- 
+            <b-nav-item @click="showTheme=true">Thème</b-nav-item>
+             -->
+             
             <b-nav-item-dropdown :text="$i18n.locale" right>
               <b-dropdown-item @click="changeLocale('fr')">FR</b-dropdown-item>
               <b-dropdown-item @click="changeLocale('en')">EN</b-dropdown-item>
             </b-nav-item-dropdown>
+            <!--
             <b-nav-item-dropdown :text="'Thème : ' + themeHelper.theme" right>
               <b-dropdown-item
                 v-for="(href, name) of themes"
@@ -49,10 +54,13 @@
             <b-nav-item-dropdown :text="'Type: ' + type" right>
               <b-dropdown-item v-for="v in tabType" @click="changeType(v)" :key="v">{{ v }}</b-dropdown-item>
             </b-nav-item-dropdown>
+             -->
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-
+      <!-- 
+      <theme :show="showTheme" @themeClosed="showTheme=false"></theme>
+       -->
       <div class="wait" v-show="isLoading">
         <div class="spinner-border text-info" role="status">
           <span class="sr-only">Loading...</span>
@@ -77,9 +85,10 @@ import store from "@/store";
 import { logo } from "@/lib/logo";
 import { mapGetters } from "vuex";
 import { ThemeHelper } from "@/lib/themeHelper";
+import Theme from "./components/Theme";
 export default {
   name: "App",
-
+  components: { Theme },
   data: function() {
     return {
       monlogo: logo,
@@ -96,6 +105,7 @@ export default {
       tabType: ["light", "dark"],
       variant: "info",
       type: "dark",
+      showTheme: false,
       themes: {
         Default:
           "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css",
