@@ -7,6 +7,7 @@
         "NO_RECORD": "0",
         "ALARM_SDCARD": "1",
         "BEEP_GPSFIX": 1,
+        "BEEP_FLYBEGIN": 1,
         "BEEP_VARIOBEGIN": 0,
         "COMPENSATION_TEMP": -6.0,
         "COMPENSATION_GPSALTI": -30,

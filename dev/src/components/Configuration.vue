@@ -255,6 +255,12 @@
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-4">
+                           <config-field
+                          v-model="localConfig.systeme.BEEP_FLYBEGIN"
+                          :label="$t('params.systeme.BEEP_FLYBEGIN.label')"
+                          :help="$t('params.systeme.BEEP_FLYBEGIN.help')"
+                          kind="checkbox"
+                        ></config-field>
                         <config-field
                           v-model="localConfig.systeme.BT_ENABLE"
                           :label="$t('params.systeme.BT_ENABLE.label')"
