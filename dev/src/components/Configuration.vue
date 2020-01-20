@@ -255,7 +255,7 @@
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-4">
-                           <config-field
+                        <config-field
                           v-model="localConfig.systeme.BEEP_FLYBEGIN"
                           :label="$t('params.systeme.BEEP_FLYBEGIN.label')"
                           :help="$t('params.systeme.BEEP_FLYBEGIN.help')"
@@ -308,6 +308,15 @@
                         ></config-field>
                       </div>
                       <div class="col-md-4">
+                        <config-field
+                          v-model="localConfig.systeme.DISPLAY_STAT_DURATION"
+                          :label="$t('params.systeme.DISPLAY_STAT_DURATION.label')"
+                          :help="$t('params.systeme.DISPLAY_STAT_DURATION.help')"
+                          input-type="range"
+                          :min="1"
+                          :max="10"
+                          :step="1"
+                        ></config-field>
                         <config-field
                           v-model="localConfig.systeme.SLEEP_TIMEOUT_MINUTES"
                           :label="$t('params.systeme.SLEEP_TIMEOUT_MINUTES.label')"

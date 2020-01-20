@@ -64,6 +64,10 @@
             "MULTIDISPLAY_DURATION": {
                 "label": "Temps de l'affichage alternatif des champs de données",
                 "help": "(en milliseconde)"
+            },
+            "DISPLAY_STAT_DURATION": {
+                "label": "Temps de l'affichage de la page de stat",
+                "help": "(en seconde)"
             }
         },
         "general": {
