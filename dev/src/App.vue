@@ -182,6 +182,7 @@ export default {
       return this.themeHelper.add(name, this.themes[name]);
     });
 
+    // eslint-disable-next-line no-unused-vars
     Promise.all(added).then(sheets => {
       this.loading = false;
       this.themeHelper.theme = "Default";
