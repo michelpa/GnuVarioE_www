@@ -6,66 +6,77 @@
         <h1>{{ $t('flights.FLIGHTS_LIST') }}</h1>
         <br />
         <div class="row">
-          <div class="col-md-6" :class="{'offset-md-3': (igc == null)}">
+          <div class :class="[(igc == null) ? 'col-md-6 offset-md-3': 'col-md-4']">
             <b-card :header="$t('flights.FLIGHTS_FILES')" header-tag="header">
               <div class="bg-default">
-                <table class="table table-bordered table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th>{{ $t('flights.FLIGHTS_FILENAME') }}</th>
-                      <th class="act">{{ $t('flights.FLIGHTS_ACTION') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="f in flights" :key="f.name">
-                      <td>
-                        {{ f.name }} &nbsp;
-                        <em>
-                          <small>({{ f.size }})</small>
-                        </em>
-                      </td>
-                      <td class="btns">
-                        <button
-                          class="btn btn-sm btn-success"
-                          @click="downloadFromSD(f.name)"
-                          v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
-                          title="Télécharger"
-                        >
-                          <i class="fa fa-arrow-alt-circle-down"></i>
-                        </button>&nbsp;
-                        <click-confirm
-                          placement="bottom"
-                          button-size="sm"
-                          yes-class="btn btn-success"
-                          no-class="btn btn-danger"
-                          :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
-                        >
-                          <button
-                            class="btn btn-sm btn-danger"
-                            @click="deleteFromSD(f.name)"
-                            v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
-                            title="Supprimer"
-                          >
-                            <i class="fa fa-trash-alt"></i>
-                          </button>
-                        </click-confirm>&nbsp;
-                        <button
-                          class="btn btn-sm btn-info"
-                          @click="flightInfo(f.name)"
-                          v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
-                          title="Info"
-                        >
-                          <i class="fa fa-info-circle"></i>
-                          <i class="fa fa-arrow-right" v-show="(currentF == f.name)"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div role="tablist">
+                  <b-card no-body class="mb-1" v-for="(data , day) in flightsPerDays" :key="day">
+                    <b-card-header header-tag="header" class="p-1" role="tab">
+                      <b-button block href="#" v-b-toggle="day" variant="info">{{ day }}</b-button>
+                    </b-card-header>
+                    <b-collapse :id="day" accordion="my-accordion" role="tabpanel">
+                      <b-card-body>
+                        <table class="table table-bordered table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th>{{ $t('flights.FLIGHTS_FILENAME') }}</th>
+                              <th class="act">{{ $t('flights.FLIGHTS_ACTION') }}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="f in data.flights" :key="f.name" >
+                              <td>
+                                {{ f.name }} &nbsp;
+                                <em>
+                                  <small>({{ f.size }})</small>
+                                </em>
+                              </td>
+                              <td class="btns">
+                                <button
+                                  class="btn btn-sm btn-success"
+                                  @click="downloadFromSD(f.name)"
+                                  v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                  title="Télécharger"
+                                >
+                                  <i class="fa fa-arrow-alt-circle-down"></i>
+                                </button>&nbsp;
+                                <click-confirm
+                                  placement="bottom"
+                                  button-size="sm"
+                                  yes-class="btn btn-success"
+                                  no-class="btn btn-danger"
+                                  :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
+                                >
+                                  <button
+                                    class="btn btn-sm btn-danger"
+                                    @click="deleteFromSD(f.name)"
+                                    v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                    title="Supprimer"
+                                  >
+                                    <i class="fa fa-trash-alt"></i>
+                                  </button>
+                                </click-confirm>&nbsp;
+                                <button
+                                  class="btn btn-sm btn-info"
+                                  @click="flightInfo(f.name)"
+                                  v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
+                                  title="Info"
+                                >
+                                  <i class="fa fa-info-circle"></i>
+                                  <i class="fa fa-arrow-right" v-show="(currentF == f.name)"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </b-card-body>
+                    </b-collapse>
+                  </b-card>
+                </div>
               </div>
             </b-card>
           </div>
-          <div id="infozone" class="col-md-6 animated fadeIn" v-if="igc != null">
+          <div id="infozone" class="col-md-8 animated fadeIn" v-if="igc != null">
             <div class="alert alert-info">
               <button class="btn btn-sm btn-info close-info" @click="closeInfo">
                 <i class="fa fa-window-close"></i>
@@ -110,10 +121,14 @@ export default {
       env: process.env,
       traceFiles: [],
       currentF: null,
-      igc: null
+      igc: null,
+      days: {}
     };
   },
   methods: {
+    toggleDay: function(day) {
+      this.flightsPerDays = day;
+    },
     downloadFromSD: function(f) {
       let self = this;
       store.dispatch("downloadFlight", f).then(
@@ -200,6 +215,22 @@ export default {
   },
   computed: {
     ...mapGetters(["flights", "isLoading"]),
+    flightsPerDays: function() {
+      let lDays = {};
+      Object.values(this.flights).forEach(function(f) {
+        var day = f.name.substring(0, 6);
+        let d = moment(day + "+0000", "YYMMDDZ")
+          .utc()
+          .format("dddd DD/MM/YYYY");
+        if (!lDays[d]) {
+          lDays[d] = { isVisible: false, flights: [] };
+        }
+        lDays[d].isVisible = false;
+        lDays[d].flights.push(f);
+      });
+
+      return lDays;
+    },
     flightDuration: function() {
       if (!this.igc) {
         return null;
