@@ -146,9 +146,15 @@ export const actions = {
     },
     downloadFlight: function (context, filename) {
         let url = "/file?path=/vols/" + filename;
+
         if (env.NODE_ENV == "development") {
-            url = "/19022402.IGC";
+            //url = "config/flights.jso";
+            url = baseUrl + url;
         }
+
+        // if (env.NODE_ENV == "development") {
+        //     url = "/19022402.IGC";
+        // }
 
         let axiosConfig = {}
         return waitFor(function () {
@@ -182,9 +188,15 @@ export const actions = {
     },
     infoFlight: function (context, filename) {
         let url = "/file?path=/vols/" + filename;
+
         if (env.NODE_ENV == "development") {
-            url = "/19022402.IGC";
+            url = "config/20010500_concat.IGC";
+            // url = baseUrl + url;
         }
+
+        // if (env.NODE_ENV == "development") {
+        //     url = "/19022402.IGC";
+        // }
 
         let axiosConfig = {}
         return waitFor(function () {
