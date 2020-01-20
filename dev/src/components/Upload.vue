@@ -41,7 +41,7 @@ export default {
   name: "UPLOAD",
   props: {
     show: { type: Boolean, default: false },
-    uploadPath: { type: String, default: false }
+    uploadPath: { type: String }
   },
   data: function() {
     return {
@@ -63,7 +63,7 @@ export default {
     ...mapGetters(["uploadPct"])
   },
   methods: {
-    showModal: function(path) {
+    showModal: function() {
       this.$bvModal.show("modal-upload");
     },
     endOneFileUpload: function() {
@@ -81,6 +81,7 @@ export default {
       bvModalEvt.preventDefault();
       let self = this;
       this.nbEncoursUpload = 0;
+      // eslint-disable-next-line no-unused-vars
       this.files.forEach((f, x) => {
         this.nbEncoursUpload++;
         let filenameWithPath = self.uploadPath + f.name;
