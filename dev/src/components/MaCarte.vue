@@ -188,9 +188,10 @@ export default {
 
     let self = this;
 
-    this.polyline = L.polyline(this.igc.latLong, { color: "#17A2B8" }).addTo(
-      this.macarte
-    );
+    this.polyline = L.polyline(this.igc.latLong, {
+      color: "#138496",
+      weight: 1
+    }).addTo(this.macarte);
 
     //zoom the map to the polyline
     this.macarte.fitBounds(this.polyline.getBounds());
