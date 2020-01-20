@@ -7,9 +7,14 @@
       ></i>
       &nbsp;
       <!-- --{{ fullFilename }}--
-      --{{ basePath }}-- -->
+      --{{ basePath }}---->
       <a href="javascript:void(0)" v-if="isFolder" @click="toggle">{{ item.name }}</a>
-      <span v-else>{{ item.name }} &nbsp; <em><small>({{ item.size }})</small></em></span>
+      <span v-else>
+        {{ item.name }} &nbsp;
+        <em>
+          <small>({{ item.size }})</small>
+        </em>
+      </span>
       <div class="btns">
         <span v-if="!isFolder">
           <button
@@ -21,7 +26,8 @@
             <i class="fa fa-arrow-alt-circle-down"></i>
           </button>
         </span>
-        <span v-if="isFolder">
+
+        <!-- <span v-if="isFolder">
           &nbsp;
           <button
             class="btn btn-sm btn-info"
@@ -31,7 +37,7 @@
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
           </button>
-        </span> &nbsp;
+        </span> &nbsp;-->
         <click-confirm
           placement="bottom"
           button-size="sm"
@@ -193,7 +199,7 @@ export default {
         },
         // eslint-disable-next-line
         error => {
-          self.$bvToast.toast("Echec de la suppression du " + typeF, {
+          self.$bvToast.toast("Echec de la suppression", {
             title: "SD",
             toaster: "b-toaster-top-right",
             solid: true,
