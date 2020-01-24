@@ -34,13 +34,15 @@ export const actions = {
             }
         };
 
-        waitFor(function () {
+        return waitFor(function () {
             return context.state.isLoading === false
         }).then(function () {
             context.commit('setLoadingState', true);
-            axios.get(url, axiosConfig).then(response => {
+            return axios.get(url, axiosConfig).then(response => {
                 let config = response.data;
                 context.commit('setConfig', config);
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -56,6 +58,8 @@ export const actions = {
             // eslint-disable-next-line
             return axios.post(url, context.state.config).then(response => {
                 return true;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -80,6 +84,8 @@ export const actions = {
             return axios.get(url, axiosConfig).then(response => {
                 let config = response.data;
                 context.commit('setconfigWifi', config);
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -103,6 +109,8 @@ export const actions = {
             // eslint-disable-next-line
             return axios.post(url, context.state.configWifi, config).then(response => {
                 return true;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -112,7 +120,7 @@ export const actions = {
         let url = "/flights";
         if (env.NODE_ENV == "development") {
             //url = "config/flights.jso";
-            url = baseUrl + "/flights";
+            url = baseUrl + url;
         }
 
         let axiosConfig = {
@@ -121,11 +129,11 @@ export const actions = {
             }
         };
 
-        waitFor(function () {
+        return waitFor(function () {
             return context.state.isLoading === false
         }).then(function () {
             context.commit('setLoadingState', true);
-            axios.get(url, axiosConfig).then(response => {
+            return axios.get(url, axiosConfig).then(response => {
                 let d = response.data;
                 triParNomInverse(d);
                 let traceFiles;
@@ -138,7 +146,7 @@ export const actions = {
                 context.commit('setFlights', traceFiles);
                 // eslint-disable-next-line no-unused-vars
             }).catch(function (error) {
-                //console.log('What happened? ' + error.response.data);
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -163,6 +171,8 @@ export const actions = {
             context.commit('setLoadingState', true);
             return axios.get(url, axiosConfig).then(response => {
                 return response;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -181,6 +191,8 @@ export const actions = {
             context.commit('setLoadingState', true);
             return axios.delete(url, axiosConfig).then(response => {
                 return response;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -207,6 +219,8 @@ export const actions = {
                 const data = response.data;
                 const igc = parseIGC(data);
                 return igc;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -224,19 +238,17 @@ export const actions = {
                 "Content-Type": "application/json"
             }
         };
-        waitFor(function () {
+        return waitFor(function () {
             return context.state.isLoading === false
         }).then(function () {
             context.commit('setLoadingState', true);
-            axios.get(url, axiosConfig).then(response => {
+            return axios.get(url, axiosConfig).then(response => {
                 let tree = response.data;
                 triFichiers(tree);
                 context.commit('setFiles', tree);
                 // eslint-disable-next-line no-unused-vars
             }).catch(function (error) {
-                // handle error
-                //console.log('err', error);
-                //return error.response;
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -254,6 +266,8 @@ export const actions = {
             context.commit('setLoadingState', true);
             return axios.get(url, axiosConfig).then(response => {
                 return response;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
@@ -286,9 +300,7 @@ export const actions = {
                 // console.log(response);
                 return response;
             }).catch(function (error) {
-                // handle error
-                // console.log('err', error.response);
-                return error.response;
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setUploadpct', 0);
                 context.commit('setLoadingState', false);
@@ -308,6 +320,8 @@ export const actions = {
             context.commit('setLoadingState', true);
             return axios.delete(url, axiosConfig).then(response => {
                 return response;
+            }).catch(function (error) {
+                return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
             });
