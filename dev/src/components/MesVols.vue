@@ -10,66 +10,78 @@
             <b-card :header="$t('flights.FLIGHTS_FILES')" header-tag="header">
               <div class="bg-default">
                 <div role="tablist">
-                  <b-card no-body class="mb-1" v-for="(data , day) in flightsPerDays" :key="day">
+                  <b-card no-body class="mb-1" v-for="(datamonth, month) in flightsMonth" :key="month">
                     <b-card-header header-tag="header" class="p-1" role="tab">
-                      <b-button block href="#" v-b-toggle="day" variant="info">{{ day }}</b-button>
+                      <b-button block href="#" v-b-toggle="month" variant="primary">{{ month }}</b-button>
                     </b-card-header>
-                    <b-collapse :id="day" accordion="my-accordion" role="tabpanel">
-                      <b-card-body>
-                        <table class="table table-bordered table-striped table-hover">
-                          <thead>
-                            <tr>
-                              <th>{{ $t('flights.FLIGHTS_FILENAME') }}</th>
-                              <th class="act">{{ $t('flights.FLIGHTS_ACTION') }}</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr v-for="f in data.flights" :key="f.name" >
-                              <td>
-                                {{ f.name }} &nbsp;
-                                <em>
-                                  <small>({{ f.size }})</small>
-                                </em>
-                              </td>
-                              <td class="btns">
-                                <button
-                                  class="btn btn-sm btn-success"
-                                  @click="downloadFromSD(f.name)"
-                                  v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
-                                  title="Télécharger"
-                                >
-                                  <i class="fa fa-arrow-alt-circle-down"></i>
-                                </button>&nbsp;
-                                <click-confirm
-                                  placement="bottom"
-                                  button-size="sm"
-                                  yes-class="btn btn-success"
-                                  no-class="btn btn-danger"
-                                  :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
-                                >
-                                  <button
-                                    class="btn btn-sm btn-danger"
-                                    @click="deleteFromSD(f.name)"
-                                    v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
-                                    title="Supprimer"
-                                  >
-                                    <i class="fa fa-trash-alt"></i>
-                                  </button>
-                                </click-confirm>&nbsp;
-                                <button
-                                  class="btn btn-sm btn-info"
-                                  @click="flightInfo(f.name)"
-                                  v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
-                                  title="Info"
-                                >
-                                  <i class="fa fa-info-circle"></i>
-                                  <i class="fa fa-arrow-right" v-show="(currentF == f.name)"></i>
-                                </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </b-card-body>
+                    <b-collapse :id="month" accordion="my-accordion-month" role="tabpanel">
+                      <b-card
+                        no-body
+                        class="mb-1"
+                        v-for="(data , day) in datamonth.days"
+                        :key="day"
+                      >
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                          <b-button block href="#" v-b-toggle="day" variant="info">{{ day }}</b-button>
+                        </b-card-header>
+                        <b-collapse :id="day" accordion="my-accordion-day" role="tabpanel">
+                          <b-card-body>
+                            <table class="table table-bordered table-striped table-hover">
+                              <thead>
+                                <tr>
+                                  <th>{{ $t('flights.FLIGHTS_FILENAME') }}</th>
+                                  <th class="act">{{ $t('flights.FLIGHTS_ACTION') }}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr v-for="f in data.flights" :key="f.name">
+                                  <td>
+                                    {{ f.name }} &nbsp;
+                                    <em>
+                                      <small>({{ f.size }})</small>
+                                    </em>
+                                  </td>
+                                  <td class="btns">
+                                    <button
+                                      class="btn btn-sm btn-success"
+                                      @click="downloadFromSD(f.name)"
+                                      v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                      title="Télécharger"
+                                    >
+                                      <i class="fa fa-arrow-alt-circle-down"></i>
+                                    </button>&nbsp;
+                                    <click-confirm
+                                      placement="bottom"
+                                      button-size="sm"
+                                      yes-class="btn btn-success"
+                                      no-class="btn btn-danger"
+                                      :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
+                                    >
+                                      <button
+                                        class="btn btn-sm btn-danger"
+                                        @click="deleteFromSD(f.name)"
+                                        v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                        title="Supprimer"
+                                      >
+                                        <i class="fa fa-trash-alt"></i>
+                                      </button>
+                                    </click-confirm>&nbsp;
+                                    <button
+                                      class="btn btn-sm btn-info"
+                                      @click="flightInfo(f.name)"
+                                      v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
+                                      title="Info"
+                                    >
+                                      <i class="fa fa-info-circle"></i>
+                                      <i class="fa fa-arrow-right" v-show="(currentF == f.name)"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </b-card-body>
+                        </b-collapse>
+                      </b-card>
                     </b-collapse>
                   </b-card>
                 </div>
@@ -81,7 +93,7 @@
               <button class="btn btn-sm btn-info close-info" @click="closeInfo">
                 <i class="fa fa-window-close"></i>
               </button>
-              <ma-carte :igc="igc"></ma-carte>
+              <ma-carte :igc="igc" :altMax="altMax" :altMin="altMin"></ma-carte>
               <table class="table table-striped table-sm table-responsive text-left">
                 <tr>
                   <th>Vol du {{flightDate}}</th>
@@ -223,13 +235,36 @@ export default {
           .utc()
           .format("dddd DD/MM/YYYY");
         if (!lDays[d]) {
-          lDays[d] = { isVisible: false, flights: [] };
+          lDays[d] = {  flights: [] };
         }
-        lDays[d].isVisible = false;
+        
         lDays[d].flights.push(f);
       });
 
       return lDays;
+    },
+    flightsMonth: function() {
+      let lMonth = {};
+      Object.values(this.flights).forEach(function(f) {
+        var day = f.name.substring(0, 6);
+        let m = moment(day + "+0000", "YYMMDDZ")
+          .utc()
+          .format("MM/YYYY");
+        if (!lMonth[m]) {
+          lMonth[m] = { days: {} };
+        }
+        let currentsDays =  lMonth[m].days;
+        let d = moment(day + "+0000", "YYMMDDZ")
+          .utc()
+          .format("dddd DD/MM/YYYY");
+        if (!currentsDays[d]) {
+          currentsDays[d] = {  flights: [] };
+        }
+        currentsDays[d] .flights.push(f);
+        lMonth[m].days = currentsDays;
+      });
+
+      return lMonth;
     },
     flightDuration: function() {
       if (!this.igc) {
@@ -273,10 +308,21 @@ export default {
     },
     altMax: function() {
       return Math.max.apply(null, this.igc.gpsAltitude);
+    },
+    altMin: function() {
+      return Math.min.apply(null, this.igc.gpsAltitude);
     }
   },
   mounted: function() {
-    store.dispatch("loadFlights");
+    let self = this;
+    store.dispatch("loadFlights").catch(error => {
+      self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
+        title: "Mon vol",
+        toaster: "b-toaster-top-right",
+        solid: true,
+        variant: "danger"
+      });
+    });
   }
 };
 </script>

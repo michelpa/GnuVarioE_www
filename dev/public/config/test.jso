@@ -12,7 +12,7 @@
         "COMPENSATION_TEMP": -6.0,
         "COMPENSATION_GPSALTI": -30,
         "SLEEP_TIMEOUT_MINUTES": 20,
-        "SLEEP_THRESHOLD_CPS": 50,
+        "SLEEP_THRESHOLD_CPS": 0.5,
         "ALTERNATE_DATA_DURATION": 2000
     },
     "General": {

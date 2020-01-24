@@ -55,7 +55,8 @@
       "VueScrollTo": true,
       "L": true,
       "ApexCharts": true,
-      "VueApexCharts": true
+      "VueApexCharts": true,
+      "VueColor": true
     }
   },
   "postcss": {

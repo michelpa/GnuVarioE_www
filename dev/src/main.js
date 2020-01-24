@@ -24,6 +24,7 @@ import './css/custom.scss'
 // eslint-disable-next-line no-undef
 Vue.component('click-confirm', clickConfirm.component);
 Vue.component('apexchart', VueApexCharts)
+Vue.component('vue-color', VueColor)
 
 import { languages } from './translation/index.js'
 import { defaultLocale } from './translation/index.js'
