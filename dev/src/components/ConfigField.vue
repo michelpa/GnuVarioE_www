@@ -83,13 +83,16 @@ export default {
       } else {
         // this.$emit("input", this.$refs.monchamp.localValue);
         // this.currentval = this.$refs.monchamp.localValue;
-        if (this.lemodel.length > 30) {
+        if (this.inputType != "number" && this.lemodel.length > 30) {
           this.isLenghtOK = false;
         } else {
           this.isLenghtOK = true;
         }
-
-        this.$emit("input", this.lemodel);
+        if (this.inputType == "number") {
+          this.$emit("input", parseFloat(this.lemodel));
+        } else {
+          this.$emit("input", this.lemodel);
+        }
       }
     }
   },
