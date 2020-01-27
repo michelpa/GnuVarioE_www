@@ -6,8 +6,8 @@
         :class="{ 'fa-folder': (isFolder && !isOpen), 'fa-folder-open': (isFolder && isOpen), 'fa-file': (!isFolder) }"
       ></i>
       &nbsp;
-      <!-- --{{ fullFilename }}--
-      --{{ basePath }}---->
+      <!--       --{{ fullFilename }}-- -->
+      <!--      --{{ basePath }}---->
       <a href="javascript:void(0)" v-if="isFolder" @click="toggle">{{ item.name }}</a>
       <span v-else>
         {{ item.name }} &nbsp;
@@ -27,7 +27,7 @@
           </button>
         </span>
 
-        <!-- <span v-if="isFolder">
+        <span v-if="isFolder">
           &nbsp;
           <button
             class="btn btn-sm btn-info"
@@ -37,7 +37,7 @@
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
           </button>
-        </span> &nbsp;-->
+        </span> &nbsp;
         <click-confirm
           placement="bottom"
           button-size="sm"
@@ -47,7 +47,7 @@
         >
           <button
             class="btn btn-sm btn-danger"
-            @click="deleteFromSD(f)"
+            @click="deleteFromSD()"
             v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
             title="Supprimer"
           >
