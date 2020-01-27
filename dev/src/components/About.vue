@@ -10,7 +10,11 @@
               <!-- The open source and open hardware variometer.
               <br />-->
 
-              <em class="small" v-if="config.gnuvarioe">version : {{ config.gnuvarioe.version }}</em>
+              <em class="small" v-if="firmwareVersion">
+                Type {{ firmwareVersion.Firmware.type }}
+                <br />
+                Version: {{ firmwareVersion.Firmware.version + '.' + firmwareVersion.Firmware.subversion }} + '.' + firmwareVersion.Firmware.betaversion }}
+              </em>
             </p>
             <!-- <p>{{ $t('home.hello') }}</p> -->
           </div>
@@ -74,6 +78,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { logo } from "@/lib/logo";
+import store from "@/store";
 export default {
   name: "About",
   props: {
@@ -85,7 +90,23 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["config"])
+    ...mapGetters(["config", "firmwareVersion"]),
+    versionFull: function() {
+      let v = "";
+      if (this.firmwareVersion) {
+        v =
+          this.firmwareVersion.Firmware.version +
+          "." +
+          this.firmwareVersion.Firmware.subversion;
+        if (this.firmwareVersion.Firmware.betaversion > 0) {
+          v = v + "b";
+        }
+      }
+      return v;
+    }
+  },
+  mounted: function() {
+    store.dispatch("loadFirmwareVersion");
   }
 };
 </script>

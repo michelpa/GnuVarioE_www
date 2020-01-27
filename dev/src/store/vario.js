@@ -13,7 +13,8 @@ const initialState = {
     fileslistLoaded: false,
     fileslist: false,
     isLoading: false,
-    uploadPct: 0
+    uploadPct: 0,
+    firmwareVersion: ''
 };
 
 const baseUrl = 'http://192.168.1.78';
@@ -308,9 +309,9 @@ export const actions = {
         });
     },
     deleteFile: function (context, filename) {
-        let url = "/file?path=" + filename;
+        let url = encodeURI("/file?path=" + filename);
         if (env.NODE_ENV == "development") {
-            url = "/index.htm";
+            url =  baseUrl + url;
         }
 
         let axiosConfig = {}
@@ -327,6 +328,30 @@ export const actions = {
             });
         });
     },
+    loadFirmwareVersion: function (context) {
+        let url = "/firmwareversion";
+        if (env.NODE_ENV == "development") {
+            url = baseUrl + url;
+        }
+        let axiosConfig = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            return axios.get(url, axiosConfig).then(response => {
+                context.commit('setFirmwareVersion', response.data);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+
 }
 
 export const mutations = {
@@ -366,7 +391,10 @@ export const mutations = {
     },
     setUploadpct: function (state, pct) {
         state.uploadPct = pct;
-    }
+    },
+    setFirmwareVersion: function (state, v) {
+        state.firmwareVersion = v;
+    },
 
 }
 
@@ -388,7 +416,10 @@ const getters = {
     },
     uploadPct(state) {
         return state.uploadPct;
-    }
+    },
+    firmwareVersion(state) {
+        return state.firmwareVersion;
+    },
 }
 
 export default {
