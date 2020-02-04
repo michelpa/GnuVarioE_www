@@ -5,18 +5,19 @@
         <h1>A propos</h1>
         <section class="jumbotron text-center">
           <div class="container">
-            <!-- <h1 class="jumbotron-heading text-info">GNU Vario</h1> -->
-            <p class="lead text-muted">
-              <!-- The open source and open hardware variometer.
-              <br />-->
-
-              <em class="small" v-if="firmwareVersion">
-                Type {{ firmwareVersion.Firmware.type }}
-                <br />
-                Version: {{ firmwareVersion.Firmware.version + '.' + firmwareVersion.Firmware.subversion }} + '.' + firmwareVersion.Firmware.betaversion }}
-              </em>
-            </p>
-            <!-- <p>{{ $t('home.hello') }}</p> -->
+            <div class="row">
+              <div class="col-md-12">
+                <p class="lead text-muted">
+                  <!-- The open source and open hardware variometer.
+                  <br />-->
+                  <em class="small" v-if="firmwareVersion">
+                    Version courante: {{ versionFull }}
+                    <br />
+                    Type: {{ firmwareVersion.Firmware.type }}
+                  </em>
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -89,18 +90,19 @@ export default {
       logo: logo
     };
   },
+  methods: {},
   computed: {
     ...mapGetters(["config", "firmwareVersion"]),
     versionFull: function() {
       let v = "";
-      if (this.firmwareVersion) {
+      if (this.firmwareVersion && this.firmwareVersion.Firmware) {
         v =
           this.firmwareVersion.Firmware.version +
           "." +
-          this.firmwareVersion.Firmware.subversion;
-        if (this.firmwareVersion.Firmware.betaversion > 0) {
-          v = v + "b";
-        }
+          this.firmwareVersion.Firmware.subversion +
+          (this.firmwareVersion.Firmware.betaversion > 0
+            ? "b" + this.firmwareVersion.Firmware.betaversion
+            : "");
       }
       return v;
     }

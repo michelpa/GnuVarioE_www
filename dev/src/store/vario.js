@@ -311,7 +311,7 @@ export const actions = {
     deleteFile: function (context, filename) {
         let url = encodeURI("/file?path=" + filename);
         if (env.NODE_ENV == "development") {
-            url =  baseUrl + url;
+            url = baseUrl + url;
         }
 
         let axiosConfig = {}
@@ -351,7 +351,28 @@ export const actions = {
             });
         });
     },
+    upgradeFirmware: function (context, beta) {
+        let url = "/upgradeweb?beta=" + beta;
+        if (env.NODE_ENV == "development") {
+            url = baseUrl + url;
+        }
+        let axiosConfig = {
 
+        };
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            // eslint-disable-next-line no-unused-vars
+            return axios.get(url, axiosConfig).then(response => {
+                return true;
+            }).catch(function (error) {
+                return Promise.reject(error);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    }
 }
 
 export const mutations = {

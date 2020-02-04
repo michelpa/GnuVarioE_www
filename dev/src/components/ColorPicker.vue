@@ -13,7 +13,7 @@
         :style="'background-color: ' + colorValue"
         @click="togglePicker()"
       ></span>
-      <chrome-picker :value="colors" @input="updateFromPicker" v-if="displayPicker" disableAlpha="true" />
+      <chrome-picker :value="colors" @input="updateFromPicker" v-if="displayPicker" :disableAlpha="true" />
     </span>
   </div>
 </template>
