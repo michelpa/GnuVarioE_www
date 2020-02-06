@@ -203,8 +203,8 @@ export const actions = {
         let url = "/file?path=/vols/" + filename;
 
         if (env.NODE_ENV == "development") {
-            url = "config/20010500_concat.IGC";
-            // url = baseUrl + url;
+           // url = "config/20010500_concat.IGC";
+             url = baseUrl + url;
         }
 
         // if (env.NODE_ENV == "development") {

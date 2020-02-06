@@ -10,7 +10,12 @@
             <b-card :header="$t('flights.FLIGHTS_FILES')" header-tag="header">
               <div class="bg-default">
                 <div role="tablist">
-                  <b-card no-body class="mb-1" v-for="(datamonth, month) in flightsMonth" :key="month">
+                  <b-card
+                    no-body
+                    class="mb-1"
+                    v-for="(datamonth, month) in flightsMonth"
+                    :key="month"
+                  >
                     <b-card-header header-tag="header" class="p-1" role="tab">
                       <b-button block href="#" v-b-toggle="month" variant="primary">{{ month }}</b-button>
                     </b-card-header>
@@ -211,7 +216,8 @@ export default {
         },
         // eslint-disable-next-line
         error => {
-          self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
+          let msg = error.message;
+          self.$bvToast.toast(`Echec du téléchargement du fichier. ${msg}`, {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
@@ -235,9 +241,9 @@ export default {
           .utc()
           .format("dddd DD/MM/YYYY");
         if (!lDays[d]) {
-          lDays[d] = {  flights: [] };
+          lDays[d] = { flights: [] };
         }
-        
+
         lDays[d].flights.push(f);
       });
 
@@ -253,14 +259,14 @@ export default {
         if (!lMonth[m]) {
           lMonth[m] = { days: {} };
         }
-        let currentsDays =  lMonth[m].days;
+        let currentsDays = lMonth[m].days;
         let d = moment(day + "+0000", "YYMMDDZ")
           .utc()
           .format("dddd DD/MM/YYYY");
         if (!currentsDays[d]) {
-          currentsDays[d] = {  flights: [] };
+          currentsDays[d] = { flights: [] };
         }
-        currentsDays[d] .flights.push(f);
+        currentsDays[d].flights.push(f);
         lMonth[m].days = currentsDays;
       });
 
