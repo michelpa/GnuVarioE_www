@@ -68,6 +68,10 @@
             "DISPLAY_STAT_DURATION": {
                 "label": "Temps de l'affichage de la page de stat",
                 "help": "(en seconde)"
+            },
+            "URL_UPDATE": {
+                "label": "URL de mise à jour",
+                "help": "par défaut http://gnuvario-e.yj.fr/update/firmware.json"
             }
         },
         "general": {

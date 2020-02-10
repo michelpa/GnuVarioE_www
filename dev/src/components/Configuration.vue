@@ -306,6 +306,12 @@
                           :help="$t('params.systeme.COMPENSATION_GPSALTI.help')"
                           input-type="number"
                         ></config-field>
+                        <config-field
+                          v-model="localConfig.systeme.URL_UPDATE"
+                          :label="$t('params.systeme.URL_UPDATE.label')"
+                          :help="$t('params.systeme.URL_UPDATE.help')"
+                          input-type="text"
+                        ></config-field>
                       </div>
                       <div class="col-md-4">
                         <config-field
