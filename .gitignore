@@ -27,3 +27,5 @@ src/*.c
 src/*.h
 src/*.ino
 output.js
+
+.unotes/unotes_meta.json
