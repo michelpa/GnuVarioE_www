@@ -255,7 +255,7 @@ export default {
         var day = f.name.substring(0, 6);
         let m = moment(day + "+0000", "YYMMDDZ")
           .utc()
-          .format("MM/YYYY");
+          .format("MMMM YYYY");
         if (!lMonth[m]) {
           lMonth[m] = { days: {} };
         }
