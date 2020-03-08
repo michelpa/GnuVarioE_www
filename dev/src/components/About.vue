@@ -42,6 +42,10 @@
               <p>Contributeurs principaux par ordre alphabétique</p>
               <b-list-group>
                 <b-list-group-item variant="dark">
+                  <span class="text-monospace">JeromeV</span>
+                  <em class="small">- Développeur (AGL)</em>
+                </b-list-group-item>
+                <b-list-group-item variant="dark">
                   <span class="text-monospace">jpg63</span>
                   <em class="small">- Développeur</em>
                 </b-list-group-item>
