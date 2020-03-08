@@ -17,7 +17,7 @@ const initialState = {
     firmwareVersion: ''
 };
 
-const baseUrl = 'http://192.168.1.78';
+const baseUrl = 'http://192.168.1.80';
 
 export const state = Object.assign({}, initialState);
 
@@ -231,7 +231,7 @@ export const actions = {
         let url = "/list";
         if (env.NODE_ENV == "development") {
             //url = "config/tree.jso";
-            url = "http://192.168.1.78/list";
+            url = baseUrl + url;
         }
 
         let axiosConfig = {
