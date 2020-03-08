@@ -51,6 +51,7 @@ export default {
     inputType: { type: String, default: "text" },
     help: { type: String, default: "" },
     options: Array,
+    maxLength: Number,
     min: { type: Number, default: null },
     max: { type: Number, default: null },
     step: { type: Number, default: null }
@@ -83,7 +84,11 @@ export default {
       } else {
         // this.$emit("input", this.$refs.monchamp.localValue);
         // this.currentval = this.$refs.monchamp.localValue;
-        if (this.inputType != "number" && this.lemodel.length > 30) {
+        var lml = 30;
+        if (this.maxLength) {
+          lml = this.maxLength;
+        }
+        if (this.inputType != "number" && this.lemodel.length > lml) {
           this.isLenghtOK = false;
         } else {
           this.isLenghtOK = true;
