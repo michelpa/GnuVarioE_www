@@ -133,6 +133,12 @@
                       </div>
                       <div class="col-md-4">
                         <config-field
+                          v-model="localConfig.vario.VARIOMETER_ENABLE_AGL"
+                          :label="$t('params.vario.VARIOMETER_ENABLE_AGL.label')"
+                          :help="$t('params.vario.VARIOMETER_ENABLE_AGL.help')"
+                          kind="checkbox"
+                        ></config-field>
+                        <config-field
                           v-model="localConfig.vario.ENABLE_NEAR_CLIMBING_ALARM"
                           :label="$t('params.vario.ENABLE_NEAR_CLIMBING_ALARM.label')"
                           :help="$t('params.vario.ENABLE_NEAR_CLIMBING_ALARM.help')"
@@ -310,6 +316,7 @@
                           v-model="localConfig.systeme.URL_UPDATE"
                           :label="$t('params.systeme.URL_UPDATE.label')"
                           :help="$t('params.systeme.URL_UPDATE.help')"
+                          maxlength="50"
                           input-type="text"
                         ></config-field>
                       </div>

@@ -71,7 +71,7 @@
             },
             "URL_UPDATE": {
                 "label": "URL de mise à jour",
-                "help": "par défaut http://gnuvario-e.yj.fr/update/firmware.json"
+                "help": "par défaut http://gnuvario-e.yj.fr/webupdate/checkversion"
             }
         },
         "general": {
@@ -156,6 +156,10 @@
             "SENT_LXNAV_SENTENCE": {
                 "label": "Type de trame BT",
                 "help": "0=LK8000, 1=LXNAV"
+            },
+            "VARIOMETER_ENABLE_AGL": {
+                "label": "Affichage de l'altitude AGL",
+                "help": "Nécessite la présence des fichiers d'élévation sur la carte SD"
             }
         },
         "vol": {
