@@ -4,7 +4,7 @@ module.exports = {
     //     config.output.filename = '[name][hash:2].js';
     //     config.output.chunkFilename = 'js/chk[hash:5].js';
     // },
-    baseUrl: process.env.NODE_ENV === 'production'
+    publicPath: process.env.NODE_ENV === 'production'
         ? '/'
         : '/',
     pages: {
