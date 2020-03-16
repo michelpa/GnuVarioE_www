@@ -17,7 +17,12 @@
                     :key="month"
                   >
                     <b-card-header header-tag="header" class="p-1" role="tab">
-                      <b-button block href="#" v-b-toggle="month" variant="primary">{{ month }}</b-button>
+                      <b-button
+                        block
+                        href="#"
+                        v-b-toggle="month"
+                        variant="primary"
+                      >{{ month }} ({{ getNbFlightForMonth(datamonth) }} {{'vol' | pluralize(getNbFlightForMonth(datamonth))}})</b-button>
                     </b-card-header>
                     <b-collapse :id="month" accordion="my-accordion-month" role="tabpanel">
                       <b-card
@@ -27,7 +32,7 @@
                         :key="day"
                       >
                         <b-card-header header-tag="header" class="p-1" role="tab">
-                          <b-button block href="#" v-b-toggle="day" variant="info">{{ day }}</b-button>
+                          <b-button block href="#" v-b-toggle="day" variant="info">{{ day }} ({{data.flights.length}} {{'vol' | pluralize(data.flights.length)}})</b-button>
                         </b-card-header>
                         <b-collapse :id="day" accordion="my-accordion-day" role="tabpanel">
                           <b-card-body>
@@ -229,6 +234,14 @@ export default {
     closeInfo: function() {
       this.igc = null;
       this.currentF = null;
+    },
+    getNbFlightForMonth: function(datamonth) {
+      let nb = 0;
+      const values = Object.values(datamonth.days);
+      for (var i = 0; i < values.length; i++) {
+        nb += values[i].flights.length;
+      }
+      return nb;
     }
   },
   computed: {
