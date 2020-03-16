@@ -54,7 +54,7 @@
                     label-for="PASSWORD_1"
                     :description="$t('params.wifi.PASSWORD_1.help')"
                   >
-                    <b-form-input id="PASSWORD_1" v-model="conf.PASSWORD_1" type="text"></b-form-input>
+                    <b-form-input id="PASSWORD_1" v-model="conf.PASSWORD_1" type="password"></b-form-input>
                   </b-form-group>
                   <b-form-group
                     label-cols-sm="6"
@@ -63,7 +63,7 @@
                     label-for="PASSWORD_2"
                     :description="$t('params.wifi.PASSWORD_2.help')"
                   >
-                    <b-form-input id="PASSWORD_2" v-model="conf.PASSWORD_2" type="text"></b-form-input>
+                    <b-form-input id="PASSWORD_2" v-model="conf.PASSWORD_2" type="password"></b-form-input>
                   </b-form-group>
                   <b-form-group
                     label-cols-sm="6"
@@ -72,7 +72,7 @@
                     label-for="PASSWORD_3"
                     :description="$t('params.wifi.PASSWORD_3.help')"
                   >
-                    <b-form-input id="PASSWORD_3" v-model="conf.PASSWORD_3" type="text"></b-form-input>
+                    <b-form-input id="PASSWORD_3" v-model="conf.PASSWORD_3" type="password"></b-form-input>
                   </b-form-group>
                   <b-form-group
                     label-cols-sm="6"
@@ -81,7 +81,7 @@
                     label-for="PASSWORD_4"
                     :description="$t('params.wifi.PASSWORD_4.help')"
                   >
-                    <b-form-input id="PASSWORD_4" v-model="conf.PASSWORD_4" type="text"></b-form-input>
+                    <b-form-input id="PASSWORD_4" v-model="conf.PASSWORD_4" type="password"></b-form-input>
                   </b-form-group>
                 </div>
               </div>
