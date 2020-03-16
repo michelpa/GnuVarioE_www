@@ -41,6 +41,9 @@ var i18n = new VueI18n({
 
 Vue.config.productionTip = false
 
+Vue.filter('pluralize', (word, amount) => (amount > 1 || amount === 0) ? `${word}s` : word)
+
+
 new Vue({
   i18n,
   router,
