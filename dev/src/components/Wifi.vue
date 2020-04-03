@@ -2,10 +2,10 @@
   <div>
     <div v-if="!conf">La configuration n'est pas encore chargée!</div>
     <div v-else class="configpage">
-      <h3>Configuration WiFi</h3>
+      <h3>{{ $t('wifi.CONF_LIB') }}</h3>
       <div class="row">
         <div class="col-md-12">
-          <b-card header="Points d'accés" header-tag="header" title>
+          <b-card :header="$t('wifi.AP')" header-tag="header" title>
             <b-form @submit="onSaveConfig">
               <div class="row">
                 <div class="col-md-6">
@@ -85,7 +85,7 @@
                   </b-form-group>
                 </div>
               </div>
-              <b-button variant="success" block type="submit">Sauver</b-button>
+              <b-button variant="success" block type="submit">{{ $t('global.save') }}</b-button>
             </b-form>
           </b-card>
         </div>

@@ -13,7 +13,7 @@
               unchecked-value="normal"
             >Mode expert</b-form-checkbox>
           </div>
-          <h3>Paramétrage</h3>
+          <h3>{{ $t('params.PARAM') }}</h3>
 
           <b-card no-body>
             <b-tabs
@@ -22,8 +22,8 @@
               fill
               active-nav-item-class="font-weight-bold text-uppercase text-info"
             >
-              <b-tab title="Général">
-                <b-card header="Paramètres Généraux" header-tag="header" title>
+              <b-tab :title="$t('params.general.TITLE')">
+                <b-card :header="$t('params.general.SUBTITLE')" header-tag="header" title>
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-12">
@@ -34,7 +34,7 @@
                             type="button"
                             size="sm"
                             @click="confVoile=!confVoile"
-                          >Configurer mes voiles</b-button>
+                          >{{ $t('params.systeme.MANAGE_WINGS') }}</b-button>
                         </div>
                         <div class="clearfix"></div>
                         <br />
@@ -92,14 +92,14 @@
                           :options="fuseaux"
                         ></config-field>
                       </div>
-                      <b-button variant="success" block type="submit">Sauver</b-button>
+                      <b-button variant="success" block type="submit">{{ $t('global.save') }}</b-button>
                     </div>
                   </b-form>
                 </b-card>
                 <!-- <p>{{config.general}}</p> -->
               </b-tab>
-              <b-tab title="Vario">
-                <b-card header="Paramètres Vario" header-tag="header" title>
+              <b-tab :title="$t('params.vario.TITLE')">
+                <b-card :header="$t('params.vario.SUBTITLE')" header-tag="header" title>
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-4">
@@ -203,14 +203,14 @@
                           :options="[{value: '0', text: 'LK8000'}, { value: '1', text: 'LXNAV' }]"
                         ></config-field>
                       </div>
-                      <b-button variant="success" block type="submit">Sauver</b-button>
+                      <b-button variant="success" block type="submit">{{ $t('global.save') }}</b-button>
                     </div>
                   </b-form>
                 </b-card>
                 <!-- <p>{{config.vario}}</p> -->
               </b-tab>
-              <b-tab title="Début du vol">
-                <b-card header="Paramètres Départ Vol" header-tag="header" title>
+              <b-tab :title="$t('params.vol.TITLE')">
+                <b-card :header="$t('params.vol.SUBTITLE')" header-tag="header" title>
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-12">
@@ -250,14 +250,14 @@
                           kind="checkbox"
                         ></config-field>
                       </div>
-                      <b-button variant="success" block type="submit">Sauver</b-button>
+                      <b-button variant="success" block type="submit">{{ $t('global.save') }}</b-button>
                     </div>
                   </b-form>
                 </b-card>
                 <!-- <p>{{config.flightstart}}</p> -->
               </b-tab>
-              <b-tab title="Système">
-                <b-card header="Paramètres Système" header-tag="header" title>
+              <b-tab :title="$t('params.systeme.TITLE')">
+                <b-card :header="$t('params.systeme.SUBTITLE')" header-tag="header" title>
                   <b-form @submit="onSaveConfig">
                     <div class="row">
                       <div class="col-md-4">
@@ -350,7 +350,7 @@
                           input-type="number"
                         ></config-field>
                       </div>
-                      <b-button variant="success" block type="submit">Sauver</b-button>
+                      <b-button variant="success" block type="submit">{{ $t('global.save') }}</b-button>
                     </div>
                   </b-form>
                   <!-- <p>{{config.systeme}}</p> -->
@@ -364,7 +364,7 @@
                 <b-nav-item href="#" @click="reload">
                   <span class="text-success">
                     <i class="fa fa-sync-alt"></i>
-                    Recharger
+                    {{ $t('global.reload') }}
                   </span>
                 </b-nav-item>
               </template>

@@ -1,21 +1,31 @@
 <template>
   <div>
-    <div class="col-md-12">
-      <div class="row">
-        <div class="form-row form-group">
-          <label class="col-sm-5 col-form-label">Couleur du tracé</label>
-          <div class="col-sm-4">
-            <color-picker :color="colorTrait" v-model="colorTrait" />
+    <b-modal
+      id="modal-reglage"
+      @ok="doSaveReglage"
+      ref="modal"
+      :title="$t('flights.MAP_SETTINGS')"
+      cancel-title="OK"
+      cancel-variant="info"
+      :ok-title="$t('global.save')"
+    >
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-row form-group">
+            <label class="col-sm-5 col-form-label">{{ $t('flights.TRACE_COLOR') }}</label>
+            <div class="col-sm-4">
+              <color-picker :color="colorTrait" v-model="colorTrait" />
+            </div>
           </div>
-        </div>
-        <div class="form-row form-group">
-          <label class="col-sm-5 col-form-label">Epaisseur du tracé</label>
-          <div class="col-sm-4">
-            <b-form-input v-model="epaisseurTrait" type="number" step="1"></b-form-input>
+          <div class="form-row form-group">
+            <label class="col-sm-5 col-form-label">{{ $t('flights.TRACE_WIDTH') }}</label>
+            <div class="col-sm-4">
+              <b-form-input v-model="epaisseurTrait" type="number" step="1"></b-form-input>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </b-modal>
     <div id="mapid"></div>
     <div id="altchart">
       <apexchart width="100%" height="100%" type="area" :options="chartsOptions" :series="series"></apexchart>
@@ -26,6 +36,8 @@
 
 <script>
 import ColorPicker from "./ColorPicker";
+import { mapGetters } from "vuex";
+import store from "@/store";
 const smooth = require("../lib/smooth.js");
 export default {
   name: "MaCarte",
@@ -44,8 +56,6 @@ export default {
       polyline: null,
       series: [],
       marker: null,
-      colorTrait: "#138496",
-      epaisseurTrait: 1,
       options: {
         chart: {
           id: "vuechart-example",
@@ -122,6 +132,34 @@ export default {
     };
   },
   methods: {
+    showModalReglage: function() {
+      this.$bvModal.show("modal-reglage");
+    },
+    doSaveReglage: function() {
+      let self = this;
+      store.dispatch("saveConfigWeb").then(
+        // eslint-disable-next-line
+        response => {
+          store.dispatch("loadConfigWeb");
+          self.$bvToast.toast("Préférences sauvegardées sur la carte SD.", {
+            title: "Préférences",
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "success"
+          });
+        },
+        // eslint-disable-next-line
+        error => {
+          self.$bvToast.toast(`Echec de la sauvegarde des préférences.`, {
+            title: "Préférences",
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "danger"
+          });
+        }
+      );
+      return;
+    },
     setMidx: function(idx) {
       this.midx = idx;
     },
@@ -139,6 +177,31 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["configWeb"]),
+    epaisseurTrait: {
+      get() {
+        return this.configWeb.map.trace.epaisseur;
+      },
+      set(value) {
+        store.commit("updateConfigWeb", {
+          property: "map.trace.epaisseur",
+          with: value
+        });
+        this.drawPolyline();
+      }
+    },
+    colorTrait: {
+      get() {
+        return this.configWeb.map.trace.color;
+      },
+      set(value) {
+        store.commit("updateConfigWeb", {
+          property: "map.trace.color",
+          with: value
+        });
+        this.drawPolyline();
+      }
+    },
     chartsOptions: function() {
       let self = this;
       self.options.chart.events = {
@@ -192,17 +255,7 @@ export default {
           this.marker.setLatLng(this.igc.latLong[0]);
         }
       }
-    },
-    colorTrait(val) {
-      if (val) {
-        this.drawPolyline();
-      }
-    },
-    epaisseurTrait(val) {
-      if (val) {
-        this.drawPolyline();
-      }
-    },
+    }
   },
   mounted() {
     var OpenTopoMap = L.tileLayer(
@@ -243,7 +296,7 @@ export default {
     );
 
     // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-    this.macarte = L.map("mapid", { layers: [OpenStreetMap] });
+    this.macarte = L.map("mapid", { layers: [GeoportailFrance_orthos] });
 
     var baseMaps = {
       OpenStreetMap: OpenStreetMap,
@@ -263,6 +316,24 @@ export default {
 
     this.marker = L.marker(this.igc.latLong[0]);
     this.marker.addTo(this.macarte);
+
+    var MyCustomAction = L.Toolbar2.Action.extend({
+      options: {
+        toolbarIcon: {
+          html: '<i class="fas fa-cogs" style="color:#666"></i>',
+          tooltip: "Réglages"
+        }
+      },
+
+      addHooks: function() {
+        self.showModalReglage();
+      }
+    });
+
+    new L.Toolbar2.Control({
+      position: "bottomleft",
+      actions: [MyCustomAction]
+    }).addTo(this.macarte);
 
     //les données pour le graph altitude
     let da = self.igc.gpsAltitude.map((a, i) => [
@@ -344,5 +415,11 @@ function deg2rad(deg) {
 }
 .form-row {
   color: #212529;
+}
+</style>
+
+<style >
+.current-color {
+  border: 1px solid #ccc;
 }
 </style>

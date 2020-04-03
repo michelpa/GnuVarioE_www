@@ -2,242 +2,214 @@
     "home": {
         "hello": "Bonjour"
     },
+    "global": {
+        "save": "Save",
+        "reload": "Reload"
+    },
     "menu": {
         "FLIGHTS": "My flights",
         "SD": "SD card",
         "CONFIG": "Configuration",
         "MAJ": "Update",
-        "ABOUT": "About"
+        "ABOUT": "About",
+        "WIFI": "Wifi"
     },
     "flights": {
         "FLIGHTS_LIST": "My flights list",
         "FLIGHTS_FILES": "IGC files on vario SD card",
         "FLIGHTS_FILENAME": "Filename",
-        "FLIGHTS_ACTION": "Actions"
+        "FLIGHTS_ACTION": "Actions",
+        "FLIGHTS": "flight",
+        "FLIGHT_OF": "Flight date",
+        "FLIGHT_DURATION": "Flight duration",
+        "FLIGHT_START": "Flight start",
+        "FLIGHT_END": "Flight end",
+        "FLIGHT_ALT_START": "Start height",
+        "FLIGHT_ALT_END": "End height",
+        "FLIGHT_ALT_MAX": "Max height",
+        "MAP_SETTINGS": "Map settings",
+        "TRACE_COLOR": "Trace color",
+        "TRACE_WIDTH": "Trace width"
+    },
+    "wifi": {
+        "CONF_LIB": "WIFI configuration",
+        "AP": "Access point"
     },
     "sd": {
         "SD_CONTENT": "SD card content"
     },
     "params": {
-        "general": {
-            "VARIOMETER_PILOT_NAME": {
-                "label": "Nom du pilote",
-                "help": ""
-            },
-            "VARIOMETER_GLIDER_NAME": {
-                "label": "Nom de la voile",
-                "help": ""
-            },
-            "VARIOMETER_TIME_ZONE": {
-                "label": "Fuseau horaire",
-                "help": "Définit la zone horaire UTC - Pour la France (+2) en été, (+1) en hiver"
-            },
-            "VARIOMETER_BEEP_VOLUME": {
-                "label": "Volume",
-                "help": "Volume des bips, valeur entre 0 et 10, 10 étant le volume maximum"
-            }
-        },
-        "vario": {
-            "VARIOMETER_SINKING_THRESHOLD": {
-                "label": "Seuil de déclenchement des dégueulantes",
-                "help": ""
-            },
-            "VARIOMETER_CLIMBING_THRESHOLD": {
-                "label": "Seuil de déclenchement des ascendances",
-                "help": ""
-            },
-            "VARIOMETER_NEAR_CLIMBING_SENSITIVITY": {
-                "label": "VARIOMETER_NEAR_CLIMBING_SENSITIVITY",
-                "help": ""
-            },
-            "VARIOMETER_ENABLE_NEAR_CLIMBING_ALARM": {
-                "label": "Alarme quand on entre ou on sort d'une zone d'ascendance",
-                "help": ""
-            },
-            "VARIOMETER_ENABLE_NEAR_CLIMBING_BEEP": {
-                "label": "Bip de zerotage",
-                "help": ""
-            }
-        },
-        "vol": {
-            "FLIGHT_START_MIN_TIMESTAMP": {
-                "label": "Temps minimum depuis l'allumage avant déclenchement de l'enregistrement du vol en miliseconde",
-                "help": ""
-            },
-            "FLIGHT_START_VARIO_LOW_THRESHOLD": {
-                "label": "Seuil de déclenchement de début du vol VZ min",
-                "help": ""
-            },
-            "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
-                "label": "Seuil de déclenchement de début du vol VZ max",
-                "help": ""
-            },
-            "FLIGHT_START_MIN_SPEED": {
-                "label": "Seuil de déclenchement de début du vol - vitesse mini",
-                "help": ""
-            },
-            "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
-                "label": "Début de l'enregistrement après déclenchement de début du vol",
+        "PARAM" : "Settings",
+        "systeme": {
+            "TITLE" : "System",
+            "SUBTITLE": "System settings",
+            "MANAGE_WINGS":"Manage my wings",
+            "BT_ENABLE": {
+                "label": "Bluetooth activation",
                 "help": ""
             },
             "NO_RECORD": {
-                "label": "Désactiver l'enregistrement sur la sdcard",
+                "label": "SDcard recording disable",
                 "help": ""
+            },
+            "ALARM_SDCARD": {
+                "label": "SDCARD non-presence alarm",
+                "help": ""
+            },
+            "BEEP_GPSFIX": {
+                "label": "Beep at fixed GPS",
+                "help": ""
+            },
+            "BEEP_VARIOBEGIN": {
+                "label": "Beep at vario start",
+                "help": ""
+            },
+            "BEEP_FLYBEGIN": {
+                "label": "Beep at the flight start",
+                "help": "Beep as soon as flight recording start"
+            },
+            "COMPENSATION_TEMP": {
+                "label": "Temperature compensation",
+                "help": ""
+            },
+            "COMPENSATION_GPSALTI": {
+                "label": "GPS altitude compensation",
+                "help": ""
+            },
+            "SLEEP_TIMEOUT_MINUTES": {
+                "label": "Time before deep sleep",
+                "help": "(in minutes)"
+            },
+            "SLEEP_THRESHOLD_CPS": {
+                "label": "Deep sleep threshold (m/s)",
+                "help": "Deep sleep threshold value if instrument does not exceed +/- this value during the \"Time before deep sleep\" (EG 0.5m/s)"
+            },
+            "MULTIDISPLAY_DURATION": {
+                "label": "Data fields alternative display duration",
+                "help": "(millisecond)"
+            },
+            "DISPLAY_STAT_DURATION": {
+                "label": "Statistic page display duration",
+                "help": "(second)"
+            },
+            "URL_UPDATE": {
+                "label": "URL de mise à jour",
+                "help": "par défaut http://gnuvario-e.yj.fr/webupdate/checkversion"
             }
         },
-        "integration": {
-            "VARIOMETER_DISPLAY_INTEGRATED_CLIMB_RATE": {
-                "label": "Affiche le vario intégré",
+        "general": {
+            "TITLE" : "Main",
+            "SUBTITLE": "Main settings",
+            "PILOT_NAME": {
+                "label": "Pilot name",
+                "help": ""
+            },
+            "GLIDER_NAME": {
+                "label": "Wing",
+                "help": ""
+            },
+            "GLIDER_SELECT": {
+                "label": "Wing used",
+                "help": ""
+            },
+            "GLIDER_NAME1": {
+                "label": "Wing 1",
+                "help": ""
+            },
+            "GLIDER_NAME2": {
+                "label": "Wing 2",
+                "help": ""
+            },
+            "GLIDER_NAME3": {
+                "label": "Wing 3",
+                "help": ""
+            },
+            "GLIDER_NAME4": {
+                "label": "Wing 4",
+                "help": ""
+            },
+            "TIME_ZONE": {
+                "label": "Time zone",
+                "help": "Defines the UTC time zone: France(+2) in summer (+1) in winter"
+            }
+        },
+        "vario": {
+            "TITLE" : "Vario",
+            "SUBTITLE" : "Vario settings",
+            "SINKING_THRESHOLD": {
+                "label": "Triggering sinking threshold",
+                "help": ""
+            },
+            "CLIMBING_THRESHOLD": {
+                "label": "Triggering climbing threshold",
+                "help": ""
+            },
+            "NEAR_CLIMBING_SENSITIVITY": {
+                "label": "Near climbing sensitivity",
+                "help": ""
+            },
+            "ENABLE_NEAR_CLIMBING_ALARM": {
+                "label": "Alarm when entering or leaving a lifting zone",
+                "help": ""
+            },
+            "ENABLE_NEAR_CLIMBING_BEEP": {
+                "label": "Thermal sniffer beep",
+                "help": ""
+            },
+            "DISPLAY_INTEGRATED_CLIMB_RATE": {
+                "label": "Displays the integrated climb rate",
                 "help": "Display integrated climb rate or instantaneous values if disabled. If enabled set the integration time in ms. ! Climb rate integration time must not be more than glide ratio one !"
             },
-            "RATIO_CLIMB_RATE": {
-                "label": "Affichage finesse, taux de chute ou les 2",
-                "help": "1 finesse, 2 taux de chute, 3 les 2 valeurs alternativements"
-            },
-            "SETTINGS_CLIMB_PERIOD_COUNT": {
-                "label": "Période d'integration du taux de chute",
-                "help": "en seconde"
+            "CLIMB_PERIOD_COUNT": {
+                "label": "Integration period of climb rate",
+                "help": "second"
             },
             "SETTINGS_GLIDE_RATIO_PERIOD_COUNT": {
-                "label": "Période d'integration de la finesse",
-                "help": "en seconde"
+                "label": "Integration period of glide ratio",
+                "help": "second"
             },
             "RATIO_MAX_VALUE": {
-                "label": "Nombre de valeur d'integration dans le calcul de la finesse",
+                "label": "Number of integration values ​​in the glide ratio calculation",
                 "help": ""
             },
             "RATIO_MIN_SPEED": {
-                "label": "Vitesse minimal prise en compte pour la finesse",
+                "label": "Minimum speed taken into account for glide ratio",
                 "help": ""
-            }
-        },
-        "bluetooth": {
-            "VARIOMETER_SENT_LXNAV_SENTENCE": {
-                "label": "Type de trame BT",
+            },
+            "RATIO_CLIMB_RATE": {
+                "label": "Display glide ratio, sink rate or the both",
+                "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively"
+            },
+            "SENT_LXNAV_SENTENCE": {
+                "label": "Bluetooth frame type",
                 "help": "0=LK8000, 1=LXNAV"
             },
-            "BT_ENABLE": {
-                "label": "Activation du BT",
-                "help": ""
+            "VARIOMETER_ENABLE_AGL": {
+                "label": "AGL display",
+                "help": "Requires elevation files on SD card"
             }
         },
-        "alarme": {
-            "ALARM_SDCARD": {
-                "label": "Alarme de non présence de la SDCARD",
+        "vol": {
+            "TITLE" : "Flight start",
+            "SUBTITLE" : "Flight start settings",
+            "FLIGHT_START_MIN_TIMESTAMP": {
+                "label": "Minimum time since start before flight recording in millisecond",
                 "help": ""
             },
-            "ALARM_GPSFIX": {
-                "label": "Bip au Fixe du GPS",
+            "FLIGHT_START_VARIO_LOW_THRESHOLD": {
+                "label": "Flight start trigger VZ min",
                 "help": ""
             },
-            "ALARM_FLYBEGIN": {
-                "label": "Bip au début du vol",
-                "help": "Bip dès que l'enregistrement du vol commence"
-            },
-            "ALARM_VARIOBEGIN": {
-                "label": "Bip au démarrage du vario",
-                "help": ""
-            }
-        },
-        "calibration": {
-            "VERTACCEL_GYRO_CAL_BIAS_00": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_00",
+            "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
+                "label": "Flight start trigger threshold VZ max",
                 "help": ""
             },
-            "VERTACCEL_GYRO_CAL_BIAS_01": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_01",
+            "FLIGHT_START_MIN_SPEED": {
+                "label": "Flight start trigger threshold - minimum speed",
                 "help": ""
             },
-            "VERTACCEL_GYRO_CAL_BIAS_02": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_02",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_03": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_03",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_04": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_04",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_05": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_05",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_06": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_06",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_07": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_07",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_08": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_08",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_09": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_09",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_10": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_10",
-                "help": ""
-            },
-            "VERTACCEL_GYRO_CAL_BIAS_11": {
-                "label": "VERTACCEL_GYRO_CAL_BIAS_11",
-                "help": ""
-            },
-            "VERTACCEL_ACCEL_CAL_BIAS_00": {
-                "label": "VERTACCEL_ACCEL_CAL_BIAS_00",
-                "help": ""
-            },
-            "VERTACCEL_ACCEL_CAL_BIAS_01": {
-                "label": "VERTACCEL_ACCEL_CAL_BIAS_01",
-                "help": ""
-            },
-            "VERTACCEL_ACCEL_CAL_BIAS_02": {
-                "label": "VERTACCEL_ACCEL_CAL_BIAS_02",
-                "help": ""
-            },
-            "VERTACCEL_ACCEL_CAL_SCALE": {
-                "label": "VERTACCEL_ACCEL_CAL_SCALE",
-                "help": ""
-            },
-            "VERTACCEL_MAG_CAL_BIAS_00": {
-                "label": "VERTACCEL_MAG_CAL_BIAS_00",
-                "help": ""
-            },
-            "VERTACCEL_MAG_CAL_BIAS_01": {
-                "label": "VERTACCEL_MAG_CAL_BIAS_01",
-                "help": ""
-            },
-            "VERTACCEL_MAG_CAL_BIAS_02": {
-                "label": "VERTACCEL_MAG_CAL_BIAS_02",
-                "help": ""
-            },
-            "VERTACCEL_MAG_CAL_PROJ_SCALE": {
-                "label": "VERTACCEL_MAG_CAL_PROJ_SCALE",
-                "help": ""
-            },
-            "VERTACCEL_ACCEL_CAL_BIAS_MULTIPLIER": {
-                "label": "VERTACCEL_ACCEL_CAL_BIAS_MULTIPLIER",
-                "help": ""
-            },
-            "VERTACCEL_MAG_CAL_BIAS_MULTIPLIER": {
-                "label": "VERTACCEL_MAG_CAL_BIAS_MULTIPLIER",
-                "help": ""
-            }
-        },
-        "temperature": {
-            "COMPENSATION_TEMP": {
-                "label": "Compensation de la température",
-                "help": ""
-            }
-        },
-        "altitude": {
-            "COMPENSATION_GPSALTI": {
-                "label": "Compensation de l'altitude GPS",
+            "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
+                "label": "Start of recording after start of flight",
                 "help": ""
             }
         },
@@ -247,7 +219,7 @@
                 "help": ""
             },
             "PASSWORD_1": {
-                "label": "Mot de passe 1",
+                "label": "Password 1",
                 "help": ""
             },
             "SSID_2": {
@@ -255,7 +227,7 @@
                 "help": ""
             },
             "PASSWORD_2": {
-                "label": "Mot de passe 2",
+                "label": "Password 2",
                 "help": ""
             },
             "SSID_3": {
@@ -263,7 +235,7 @@
                 "help": ""
             },
             "PASSWORD_3": {
-                "label": "Mot de passe 3",
+                "label": "Password 3",
                 "help": ""
             },
             "SSID_4": {
@@ -271,7 +243,7 @@
                 "help": ""
             },
             "PASSWORD_4": {
-                "label": "Mot de passe 4",
+                "label": "Password 4",
                 "help": ""
             }
         }

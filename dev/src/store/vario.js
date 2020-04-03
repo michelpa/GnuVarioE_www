@@ -1,13 +1,16 @@
 import { parseIGC } from '../lib/parseigc.js'
 import { waitFor, triFichiers, triParNomInverse } from '../lib/helper.js'
+import { preferences } from '../preferences.js'
 
 const env = process.env;
 
 const initialState = {
     configLoaded: false,
     config: false,
-    configWifi: false,
+    configWebLoaded: false,
+    configWeb: preferences,
     configWifiLoaded: false,
+    configWifi: false,
     flightsLoaded: false,
     flights: false,
     fileslistLoaded: false,
@@ -57,7 +60,54 @@ export const actions = {
         }).then(function () {
             context.commit('setLoadingState', true);
             // eslint-disable-next-line
-            return axios.post(url, context.state.config).then(response => {
+            return axios.post(url, context.state.config).then(_response => {
+                return true;
+            }).catch(function (error) {
+                return Promise.reject(error);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    loadConfigWeb: function (context) {
+        let url = "/webconfig";
+        if (env.NODE_ENV == "development") {
+            //url = "config/params.jso";
+            url = baseUrl + "/webconfig";
+        }
+
+        let axiosConfig = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            return axios.get(url, axiosConfig).then(response => {
+                let configWeb = {
+                    ...context.state.configWeb,
+                    ...response.data,
+                };
+                context.commit('setConfigWeb', configWeb);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    saveConfigWeb: function (context) {
+        let url = "/webconfig";
+
+        return waitFor(function () {
+            return context.state.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            // eslint-disable-next-line
+            return axios.post(url, context.state.configWeb).then(_response => {
                 return true;
             }).catch(function (error) {
                 return Promise.reject(error);
@@ -203,8 +253,8 @@ export const actions = {
         let url = "/file?path=/vols/" + filename;
 
         if (env.NODE_ENV == "development") {
-           // url = "config/20010500_concat.IGC";
-             url = baseUrl + url;
+            // url = "config/20010500_concat.IGC";
+            url = baseUrl + url;
         }
 
         // if (env.NODE_ENV == "development") {
@@ -380,24 +430,30 @@ export const mutations = {
         state.config = Object.assign({}, state.config, config);
         state.configLoaded = true;
     },
+    setConfigWeb: function (state, config) {
+        state.configWeb = Object.assign({}, state.configWeb, config);
+        state.configWebLoaded = true;
+    },
+    updateConfigWeb: function (state, payload) {
+        var apply = function (data, mods) {
+            for (var path in mods) {
+                var k = data;
+                var steps = path.split('.');
+                var last = steps.pop();
+                steps.forEach(e => (k[e] = k[e] || {}) && (k = k[e]));
+                k[last] = mods[path];
+            }
+            return data;
+        }
+
+        var modsStr = "{\"" + payload.property + "\":\"" + payload.with + "\"}";
+        var mods = JSON.parse(modsStr);
+        let ob = apply(state.configWeb, mods);
+        state.configWeb = Object.assign({}, state.configWeb, ob);
+    },
     setconfigWifi: function (state, config) {
         state.configWifi = config;
         state.configWifiLoaded = true;
-    },
-    setConfigValue: function (state, { path, value }) {
-        var deep_value = function (obj, path) {
-            // eslint-disable-next-line no-redeclare
-            for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
-                obj = obj[path[i]];
-            }
-            return obj;
-        };
-
-        let ob = deep_value(state.config, path);
-
-        ob = Object.assign({}, ob, value);
-
-        state.config = Object.assign({}, state.config, ob);
     },
     setFlights: function (state, flights) {
         state.flights = Object.assign({}, state.flights, flights);
@@ -423,6 +479,9 @@ const getters = {
     config(state) {
         return state.configLoaded ? state.config : false;
     },
+    configWeb(state) {
+        return state.configWebLoaded ? state.configWeb : false;
+    },
     configWifi(state) {
         return state.configWifiLoaded ? state.configWifi : false;
     },
@@ -441,6 +500,18 @@ const getters = {
     firmwareVersion(state) {
         return state.firmwareVersion;
     },
+    themeName(state) {
+        return state.configWeb.theme.name;
+    },
+    themeVariant(state) {
+        return state.configWeb.theme.variant;
+    },
+    themeType(state) {
+        return state.configWeb.theme.type;
+    },
+    lang(state) {
+        return state.configWeb.language;
+    }
 }
 
 export default {

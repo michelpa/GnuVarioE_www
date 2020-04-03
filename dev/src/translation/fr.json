@@ -2,6 +2,10 @@
     "home": {
         "hello": "Bonjour"
     },
+    "global": {
+        "save": "Sauvegarder",
+        "reload": "Recharger"
+    },
     "menu": {
         "FLIGHTS": "Mes vols",
         "SD": "Carte SD",
@@ -14,13 +18,32 @@
         "FLIGHTS_LIST": "Liste de mes vols",
         "FLIGHTS_FILES": "Fichiers IGC présents sur la carte SD du vario",
         "FLIGHTS_FILENAME": "Nom du fichier",
-        "FLIGHTS_ACTION": "Actions"
+        "FLIGHTS_ACTION": "Actions",
+        "FLIGHTS": "vol",
+        "FLIGHT_OF": "Vol du",
+        "FLIGHT_DURATION": "Durée du vol",
+        "FLIGHT_START": "Début du vol",
+        "FLIGHT_END": "Fin du vol",
+        "FLIGHT_ALT_START": "Altitude de départ",
+        "FLIGHT_ALT_END": "Altitude de fin",
+        "FLIGHT_ALT_MAX": "Altitude max",
+        "MAP_SETTINGS": "Réglages carte",
+        "TRACE_COLOR": "Couleur du tracé",
+        "TRACE_WIDTH": "Epaisseur du tracé"
+    },
+    "wifi": {
+        "CONF_LIB": "Configuration WiFi",
+        "AP": "Points d'accés"
     },
     "sd": {
         "SD_CONTENT": "Contenu de la carte SD"
     },
     "params": {
+        "PARAM" : "Paramétrage",
         "systeme": {
+            "TITLE" : "Système",
+            "SUBTITLE": "Paramètres système",
+            "MANAGE_WINGS":"Configurer mes voiles",
             "BT_ENABLE": {
                 "label": "Activation du BT",
                 "help": ""
@@ -75,6 +98,8 @@
             }
         },
         "general": {
+            "TITLE" : "Général",
+            "SUBTITLE": "Paramètres Généraux",
             "PILOT_NAME": {
                 "label": "Nom du pilote",
                 "help": ""
@@ -109,6 +134,8 @@
             }
         },
         "vario": {
+            "TITLE" : "Vario",
+            "SUBTITLE" : "Paramètres vario",
             "SINKING_THRESHOLD": {
                 "label": "Seuil de déclenchement des dégueulantes",
                 "help": ""
@@ -163,6 +190,8 @@
             }
         },
         "vol": {
+            "TITLE" : "Début du vol",
+            "SUBTITLE" : "Paramètres départ vol",
             "FLIGHT_START_MIN_TIMESTAMP": {
                 "label": "Temps minimum depuis l'allumage avant déclenchement de l'enregistrement du vol en miliseconde",
                 "help": ""

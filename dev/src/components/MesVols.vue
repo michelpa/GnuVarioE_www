@@ -22,7 +22,7 @@
                         href="#"
                         v-b-toggle="month"
                         variant="primary"
-                      >{{ month }} ({{ getNbFlightForMonth(datamonth) }} {{'vol' | pluralize(getNbFlightForMonth(datamonth))}})</b-button>
+                      >{{ month }} ({{ getNbFlightForMonth(datamonth) }} {{ $t('flights.FLIGHTS') | pluralize(getNbFlightForMonth(datamonth))}})</b-button>
                     </b-card-header>
                     <b-collapse :id="month" accordion="my-accordion-month" role="tabpanel">
                       <b-card
@@ -32,7 +32,12 @@
                         :key="day"
                       >
                         <b-card-header header-tag="header" class="p-1" role="tab">
-                          <b-button block href="#" v-b-toggle="day" variant="info">{{ day }} ({{data.flights.length}} {{'vol' | pluralize(data.flights.length)}})</b-button>
+                          <b-button
+                            block
+                            href="#"
+                            v-b-toggle="day"
+                            variant="info"
+                          >{{ day }} ({{data.flights.length}} {{ $t('flights.FLIGHTS') | pluralize(data.flights.length)}})</b-button>
                         </b-card-header>
                         <b-collapse :id="day" accordion="my-accordion-day" role="tabpanel">
                           <b-card-body>
@@ -106,15 +111,15 @@
               <ma-carte :igc="igc" :altMax="altMax" :altMin="altMin"></ma-carte>
               <table class="table table-striped table-sm table-responsive text-left">
                 <tr>
-                  <th>Vol du {{flightDate}}</th>
-                  <td>Début du vol: {{flightStart}}</td>
-                  <td>Altitude de départ: {{altStart}}m</td>
-                  <td>Altitude max: {{altMax}}m</td>
+                  <th>{{ $t('flights.FLIGHT_OF') }} {{flightDate}}</th>
+                  <td>{{ $t('flights.FLIGHT_START') }}: {{flightStart}}</td>
+                  <td>{{ $t('flights.FLIGHT_ALT_START') }}: {{altStart}}m</td>
+                  <td>{{ $t('flights.FLIGHT_ALT_MAX') }}: {{altMax}}m</td>
                 </tr>
                 <tr>
-                  <td>Durée du vol: {{flightDuration}}</td>
-                  <td>Fin du vol: {{flightStop}}</td>
-                  <td>Altitude de fin: {{altStop}}m</td>
+                  <td>{{ $t('flights.FLIGHT_DURATION') }}: {{flightDuration}}</td>
+                  <td>{{ $t('flights.FLIGHT_END') }}: {{flightStop}}</td>
+                  <td>{{ $t('flights.FLIGHT_ALT_END') }}: {{altStop}}m</td>
                   <td>&nbsp;</td>
                 </tr>
               </table>
@@ -266,9 +271,10 @@ export default {
       let lMonth = {};
       Object.values(this.flights).forEach(function(f) {
         var day = f.name.substring(0, 6);
-        let m = moment(day + "+0000", "YYMMDDZ")
-          .utc()
-          .format("MMMM YYYY");
+        let m = moment(day + "+0000", "YYMMDDZ").utc();
+        m = m.format("MMMM YYYY");
+
+        console.log(m);
         if (!lMonth[m]) {
           lMonth[m] = { days: {} };
         }

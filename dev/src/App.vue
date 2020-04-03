@@ -1,7 +1,7 @@
 <template>
   <div id="monapp">
     <div class="container-fluid">
-      <b-navbar toggleable="lg" :type="type" :variant="variant">
+      <b-navbar toggleable="lg" :type="themeType" :variant="themeVariant">
         <b-navbar-brand href="#">
           <a class="navbar-brand mr-auto" href="#">
             <div class="logo" id="my-logo" v-html="monlogo"></div>
@@ -32,35 +32,11 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
-            <!-- 
-            <b-nav-item @click="showTheme=true">Thème</b-nav-item>
-             -->
-             
-            <b-nav-item-dropdown :text="$i18n.locale" right>
-              <b-dropdown-item @click="changeLocale('fr')">FR</b-dropdown-item>
-              <b-dropdown-item @click="changeLocale('en')">EN</b-dropdown-item>
-            </b-nav-item-dropdown>
-            <!--
-            <b-nav-item-dropdown :text="'Thème : ' + themeHelper.theme" right>
-              <b-dropdown-item
-                v-for="(href, name) of themes"
-                @click="changeTheme(name)"
-                :key="name"
-              >{{ name }}</b-dropdown-item>
-            </b-nav-item-dropdown>
-            <b-nav-item-dropdown :text="'Variant: ' + variant" right>
-              <b-dropdown-item v-for="v in tabVariant" @click="changeVariant(v)" :key="v">{{ v }}</b-dropdown-item>
-            </b-nav-item-dropdown>
-            <b-nav-item-dropdown :text="'Type: ' + type" right>
-              <b-dropdown-item v-for="v in tabType" @click="changeType(v)" :key="v">{{ v }}</b-dropdown-item>
-            </b-nav-item-dropdown>
-             -->
+            <b-nav-item @click="showPopupPref=true"><i class="fa fa-cog"></i> Préférences</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-      <!-- 
-      <theme :show="showTheme" @themeClosed="showTheme=false"></theme>
-       -->
+      <theme :show="showPopupPref" @themeClosed="showPopupPref=false" :themeHelper="themeHelper"></theme>
       <div class="wait" v-show="isLoading">
         <div class="spinner-border text-info" role="status">
           <span class="sr-only">Loading...</span>
@@ -93,84 +69,39 @@ export default {
     return {
       monlogo: logo,
       env: process.env,
-      tabVariant: [
-        "primary",
-        "success",
-        "info",
-        "warning",
-        "danger",
-        "dark",
-        "light"
-      ],
-      tabType: ["light", "dark"],
       variant: "info",
       type: "dark",
-      showTheme: false,
-      themes: {
-        Default:
-          "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css",
-        Cerulean:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cerulean/bootstrap.min.css",
-        Cosmo:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cosmo/bootstrap.min.css",
-        Cyborg:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cyborg/bootstrap.min.css",
-        Darkly:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css",
-        Flaty:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css",
-        Journal:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css",
-        Litera:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.min.css",
-        Lumen:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css",
-        LUX:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css",
-        Materia:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/materia/bootstrap.min.css",
-        Minty:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css",
-        Pulse:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/pulse/bootstrap.min.css",
-        Sandstone:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css",
-        Simplex:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/simplex/bootstrap.min.css",
-        Sketchy:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css",
-        Slate:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/slate/bootstrap.min.css",
-        Solar:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/solar/bootstrap.min.css",
-        Spacelab:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/spacelab/bootstrap.min.css",
-        Supehero:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/superhero/bootstrap.min.css",
-        United:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/united/bootstrap.min.css",
-        Yeti:
-          "https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/yeti/bootstrap.min.css"
-      },
+      showPopupPref: false,
       themeHelper: new ThemeHelper()
     };
   },
   computed: {
-    ...mapGetters(["isLoading"])
+    ...mapGetters(["isLoading", "themeName", "themeVariant", "themeType"])
   },
-  methods: {
-    changeLocale: function(l) {
-      this.$i18n.locale = l;
-    },
-    changeTheme: function(name) {
-      this.themeHelper.theme = name;
-    },
-    changeVariant: function(v) {
-      this.variant = v;
-    },
-    changeType: function(t) {
-      this.type = t;
+  methods: {},
+  watch: {
+    themeName: function(newtheme, oldtheme) {
+      if (newtheme != oldtheme) {
+        // eslint-disable-next-line no-unused-vars
+        let added = this.themeHelper.addNewTheme(newtheme).then(sheets => {
+          this.loading = false;
+          this.themeHelper.theme = newtheme;
+        });
+      }
     }
+  },
+  mounted: function() {
+    // eslint-disable-next-line no-unused-vars
+    let added = this.themeHelper.addNewTheme(this.themeName).then(sheets => {
+      this.loading = false;
+      this.themeHelper.theme = this.themeName;
+    });
+    store.watch(
+      state => state.lang,
+      function(oldValue, newValue) {
+        this.$i18n.locale = newValue;
+      }
+    );
   },
   created: function() {
     window.setTimeout(function() {
@@ -178,15 +109,21 @@ export default {
         //next();
       });
     }, 100);
-    let added = Object.keys(this.themes).map(name => {
-      return this.themeHelper.add(name, this.themes[name]);
-    });
+    window.setTimeout(function() {
+      Promise.all([store.dispatch("loadConfigWeb")]).then(() => {
+        //next();
+      });
+    }, 300);
 
-    // eslint-disable-next-line no-unused-vars
-    Promise.all(added).then(sheets => {
-      this.loading = false;
-      this.themeHelper.theme = "Default";
-    });
+    // let added = Object.keys(this.themes).map(name => {
+    //   return this.themeHelper.add(name, this.themes[name]);
+    // });
+
+    // // eslint-disable-next-line no-unused-vars
+    // Promise.all(added).then(sheets => {
+    //   this.loading = false;
+    //   this.themeHelper.theme = "Default";
+    // });
   }
 };
 </script>

@@ -28,8 +28,8 @@ Vue.component('vue-color', VueColor)
 
 import { languages } from './translation/index.js'
 import { defaultLocale } from './translation/index.js'
-require('./lib/momentfr.js');
-
+// require('./lib/momentfr.js');
+// require('./lib/momenten.js');
 const messages = Object.assign(languages)
 
 // eslint-disable-next-line no-undef
@@ -42,6 +42,7 @@ var i18n = new VueI18n({
 Vue.config.productionTip = false
 
 Vue.filter('pluralize', (word, amount) => (amount > 1 || amount === 0) ? `${word}s` : word)
+
 
 
 new Vue({
