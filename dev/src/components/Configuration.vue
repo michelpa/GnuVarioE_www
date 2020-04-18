@@ -130,6 +130,30 @@
                           :max="1"
                           :step="0.1"
                         ></config-field>
+                         <config-field
+                          v-model="localConfig.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION"
+                          :label="$t('params.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION.label')"
+                          :help="$t('params.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION.help')"
+                          input-type="range"
+                          :min="3.0"
+                          :max="6.00"
+                          :step="0.01"
+                        ></config-field>
+                         <config-field
+                          v-model="localConfig.vario.VARIOMETER_INTEGRATED_CLIMB_RATE"
+                          :label="$t('params.vario.VARIOMETER_INTEGRATED_CLIMB_RATE.label')"
+                          :help="$t('params.vario.VARIOMETER_INTEGRATED_CLIMB_RATE.help')"
+                          kind="checkbox"
+                        ></config-field>
+                         <config-field
+                          v-model="localConfig.vario.SETTINGS_VARIO_PERIOD_COUNT"
+                          :label="$t('params.vario.SETTINGS_VARIO_PERIOD_COUNT.label')"
+                          :help="$t('params.vario.SETTINGS_VARIO_PERIOD_COUNT.help')"
+                          input-type="range"
+                          :min="0"
+                          :max="40"
+                          :step="1"
+                        ></config-field>
                       </div>
                       <div class="col-md-4">
                         <config-field
@@ -300,6 +324,20 @@
                       </div>
                       <div class="col-md-4">
                         <config-field
+                          v-model="localConfig.systeme.LANGUAGE"
+                          :label="$t('params.systeme.LANGUAGE.label')"
+                          :help="$t('params.systeme.LANGUAGE.help')"
+                           kind="select"
+                          :options="languages"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.systeme.URL_UPDATE"
+                          :label="$t('params.systeme.URL_UPDATE.label')"
+                          :help="$t('params.systeme.URL_UPDATE.help')"
+                          maxlength="50"
+                          input-type="text"
+                        ></config-field>
+                        <config-field
                           v-model="localConfig.systeme.COMPENSATION_TEMP"
                           :label="$t('params.systeme.COMPENSATION_TEMP.label')"
                           :help="$t('params.systeme.COMPENSATION_TEMP.help')"
@@ -311,13 +349,6 @@
                           :label="$t('params.systeme.COMPENSATION_GPSALTI.label')"
                           :help="$t('params.systeme.COMPENSATION_GPSALTI.help')"
                           input-type="number"
-                        ></config-field>
-                        <config-field
-                          v-model="localConfig.systeme.URL_UPDATE"
-                          :label="$t('params.systeme.URL_UPDATE.label')"
-                          :help="$t('params.systeme.URL_UPDATE.help')"
-                          maxlength="50"
-                          input-type="text"
                         ></config-field>
                       </div>
                       <div class="col-md-4">
@@ -430,6 +461,10 @@ export default {
         { value: "8", text: "8" },
         { value: "9", text: "9" },
         { value: "10", text: "10" }
+      ],
+      languages : [
+        {value : 0, text:"Français"},
+        {value : 1, text:"English"},
       ]
     };
   },

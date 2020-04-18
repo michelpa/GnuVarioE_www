@@ -102,6 +102,10 @@
             "URL_UPDATE": {
                 "label": "URL for update",
                 "help": "by default http://gnuvario-e.yj.fr/webupdate/checkversion"
+            },
+            "LANGUAGE": {
+                "label": "Vario language",
+                "help": ""
             }
         },
         "general": {
@@ -194,6 +198,18 @@
             "VARIOMETER_ENABLE_AGL": {
                 "label": "AGL display",
                 "help": "Requires elevation files on SD card"
+            },
+            "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
+                "label": "Kalman filter settings",
+                "help": "This parameter  directly influences the kalman filter (value between 3.00 and 6.00)"
+            },
+            "VARIOMETER_INTEGRATED_CLIMB_RATE": {
+                "label": "Vario integration",
+                "help": ""
+            },
+            "SETTINGS_VARIO_PERIOD_COUNT": {
+                "label": "Integration period",
+                "help": " between 0 and 40 (Integration period by 50ms step between 0 and 2s"
             }
         },
         "vol": {

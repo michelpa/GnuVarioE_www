@@ -10,7 +10,6 @@
         "FLIGHTS": "Mes vols",
         "SD": "Carte SD",
         "CONFIG": "Configuration",
-
         "MAJ": "Mise à jour",
         "ABOUT": "A propos",
         "WIFI": "Wifi",
@@ -103,6 +102,10 @@
             "URL_UPDATE": {
                 "label": "URL de mise à jour",
                 "help": "par défaut http://gnuvario-e.yj.fr/webupdate/checkversion"
+            },
+            "LANGUAGE": {
+                "label": "Langue du vario",
+                "help": ""
             }
         },
         "general": {
@@ -195,6 +198,18 @@
             "VARIOMETER_ENABLE_AGL": {
                 "label": "Affichage de l'altitude AGL",
                 "help": "Nécessite la présence des fichiers d'élévation sur la carte SD"
+            },
+            "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
+                "label": "Réglage du filtre kalman",
+                "help": "Ce paramètre joue directement sur le filtre de kalman (valeur comprise entre 3.00 et 6.00)"
+            },
+            "VARIOMETER_INTEGRATED_CLIMB_RATE": {
+                "label": "Intégration du vario",
+                "help": ""
+            },
+            "SETTINGS_VARIO_PERIOD_COUNT": {
+                "label": "Période d'intégration",
+                "help": " entre 0 et 40 correspond à la période d'intégration par pas de 50ms entre 0 et 2s"
             }
         },
         "vol": {
