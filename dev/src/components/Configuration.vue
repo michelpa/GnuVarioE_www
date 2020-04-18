@@ -11,7 +11,7 @@
               name="checkbox-1"
               value="expert"
               unchecked-value="normal"
-            >Mode expert</b-form-checkbox>
+            >{{ $t('params.MODE_EXPERT' ) }}</b-form-checkbox>
           </div>
           <h3>{{ $t('params.PARAM') }}</h3>
 

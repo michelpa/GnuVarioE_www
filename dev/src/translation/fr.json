@@ -10,9 +10,11 @@
         "FLIGHTS": "Mes vols",
         "SD": "Carte SD",
         "CONFIG": "Configuration",
+
         "MAJ": "Mise à jour",
         "ABOUT": "A propos",
-        "WIFI": "Wifi"
+        "WIFI": "Wifi",
+        "SETTINGS": "Paramètres"
     },
     "flights": {
         "FLIGHTS_LIST": "Liste de mes vols",
@@ -38,12 +40,18 @@
     "sd": {
         "SD_CONTENT": "Contenu de la carte SD"
     },
+    "about": {
+        "ABOUT": "A propos",
+        "CURRENT": "Version courante",
+        "CONTRIBUTOR": "Contributeurs principaux par ordre alphabétique"
+    },
     "params": {
-        "PARAM" : "Paramétrage",
+        "PARAM": "Paramétrage",
+        "MODE_EXPERT": "Mode expert",
         "systeme": {
-            "TITLE" : "Système",
+            "TITLE": "Système",
             "SUBTITLE": "Paramètres système",
-            "MANAGE_WINGS":"Configurer mes voiles",
+            "MANAGE_WINGS": "Configurer mes voiles",
             "BT_ENABLE": {
                 "label": "Activation du BT",
                 "help": ""
@@ -98,7 +106,7 @@
             }
         },
         "general": {
-            "TITLE" : "Général",
+            "TITLE": "Général",
             "SUBTITLE": "Paramètres Généraux",
             "PILOT_NAME": {
                 "label": "Nom du pilote",
@@ -134,8 +142,8 @@
             }
         },
         "vario": {
-            "TITLE" : "Vario",
-            "SUBTITLE" : "Paramètres vario",
+            "TITLE": "Vario",
+            "SUBTITLE": "Paramètres vario",
             "SINKING_THRESHOLD": {
                 "label": "Seuil de déclenchement des dégueulantes",
                 "help": ""
@@ -190,8 +198,8 @@
             }
         },
         "vol": {
-            "TITLE" : "Début du vol",
-            "SUBTITLE" : "Paramètres départ vol",
+            "TITLE": "Début du vol",
+            "SUBTITLE": "Paramètres départ vol",
             "FLIGHT_START_MIN_TIMESTAMP": {
                 "label": "Temps minimum depuis l'allumage avant déclenchement de l'enregistrement du vol en miliseconde",
                 "help": ""

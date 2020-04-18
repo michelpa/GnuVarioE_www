@@ -44,7 +44,9 @@
                   <br />
                   <b-button variant="warning" type="button" @click="maj(1)">Mettre à jour</b-button>
                 </div>
-                <em class v-else> <br />Aucune version béta disponible</em>
+                <em class v-else>
+                  <br />Aucune version béta disponible
+                </em>
               </div>
               <div class="col-md-6">
                 <div v-if="firmwareVersion[keyStable]">
@@ -206,10 +208,26 @@ export default {
       return v;
     },
     keyBeta: function() {
-      return "Gnuvario" + this.firmwareVersion.Firmware.type + "b";
+      let v = "";
+      if (
+        this.firmwareVersion &&
+        this.firmwareVersion.Firmware &&
+        this.firmwareVersion.Firmware.type
+      ) {
+        v = "Gnuvario" + this.firmwareVersion.Firmware.type + "b";
+      }
+      return v;
     },
     keyStable: function() {
-      return "Gnuvario" + this.firmwareVersion.Firmware.type;
+      let v = "";
+      if (
+        this.firmwareVersion &&
+        this.firmwareVersion.Firmware &&
+        this.firmwareVersion.Firmware.type
+      ) {
+        v = "Gnuvario" + this.firmwareVersion.Firmware.type;
+      }
+      return v;
     }
   },
   mounted: function() {

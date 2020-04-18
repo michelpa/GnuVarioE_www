@@ -49,7 +49,7 @@ import { mapGetters } from "vuex";
 // eslint-disable-next-line no-unused-vars
 import store from "@/store";
 export default {
-  name: "Theme",
+  name: "Pref",
   props: {
     show: { type: Boolean, default: false },
     themeHelper: { type: Object, default: null }

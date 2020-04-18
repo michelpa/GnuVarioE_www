@@ -32,11 +32,14 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
-            <b-nav-item @click="showPopupPref=true"><i class="fa fa-cog"></i> Préférences</b-nav-item>
+            <b-nav-item @click="showPopupPref=true">
+              <i class="fa fa-cog"></i>
+              {{ $t('menu.SETTINGS') }}
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-      <theme :show="showPopupPref" @themeClosed="showPopupPref=false" :themeHelper="themeHelper"></theme>
+      <pref :show="showPopupPref" @themeClosed="showPopupPref=false" :themeHelper="themeHelper"></pref>
       <div class="wait" v-show="isLoading">
         <div class="spinner-border text-info" role="status">
           <span class="sr-only">Loading...</span>
@@ -61,10 +64,10 @@ import store from "@/store";
 import { logo } from "@/lib/logo";
 import { mapGetters } from "vuex";
 import { ThemeHelper } from "@/lib/themeHelper";
-import Theme from "./components/Theme";
+import Pref from "./components/Pref";
 export default {
   name: "App",
-  components: { Theme },
+  components: { Pref },
   data: function() {
     return {
       monlogo: logo,
@@ -76,7 +79,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isLoading", "themeName", "themeVariant", "themeType"])
+    ...mapGetters([
+      "isLoading",
+      "themeName",
+      "themeVariant",
+      "themeType",
+      "lang"
+    ])
   },
   methods: {},
   watch: {
@@ -88,6 +97,11 @@ export default {
           this.themeHelper.theme = newtheme;
         });
       }
+    },
+    lang: function(newValue, oldValue) {
+      if (oldValue != newValue) {
+        this.$i18n.locale = newValue;
+      }
     }
   },
   mounted: function() {
@@ -96,12 +110,6 @@ export default {
       this.loading = false;
       this.themeHelper.theme = this.themeName;
     });
-    store.watch(
-      state => state.lang,
-      function(oldValue, newValue) {
-        this.$i18n.locale = newValue;
-      }
-    );
   },
   created: function() {
     window.setTimeout(function() {
@@ -114,16 +122,6 @@ export default {
         //next();
       });
     }, 300);
-
-    // let added = Object.keys(this.themes).map(name => {
-    //   return this.themeHelper.add(name, this.themes[name]);
-    // });
-
-    // // eslint-disable-next-line no-unused-vars
-    // Promise.all(added).then(sheets => {
-    //   this.loading = false;
-    //   this.themeHelper.theme = "Default";
-    // });
   }
 };
 </script>

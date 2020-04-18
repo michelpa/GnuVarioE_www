@@ -274,7 +274,7 @@ export default {
         let m = moment(day + "+0000", "YYMMDDZ").utc();
         m = m.format("MMMM YYYY");
 
-        console.log(m);
+        // console.log(m);
         if (!lMonth[m]) {
           lMonth[m] = { days: {} };
         }

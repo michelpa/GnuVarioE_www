@@ -12,7 +12,8 @@
         "CONFIG": "Configuration",
         "MAJ": "Update",
         "ABOUT": "About",
-        "WIFI": "Wifi"
+        "WIFI": "Wifi",
+        "SETTINGS": "Settings"
     },
     "flights": {
         "FLIGHTS_LIST": "My flights list",
@@ -38,12 +39,18 @@
     "sd": {
         "SD_CONTENT": "SD card content"
     },
+    "about": {
+        "ABOUT": "About",
+        "CURRENT": "Current version",
+        "CONTRIBUTOR": "Main contributors (alphabeticaly)"
+    },
     "params": {
-        "PARAM" : "Settings",
+        "PARAM": "Settings",
+        "MODE_EXPERT": "Mode expert",
         "systeme": {
-            "TITLE" : "System",
-            "SUBTITLE": "System settings",
-            "MANAGE_WINGS":"Manage my wings",
+            "TITLE": "System",
+            "SUBTITLE": "Expert mode",
+            "MANAGE_WINGS": "Manage my wings",
             "BT_ENABLE": {
                 "label": "Bluetooth activation",
                 "help": ""
@@ -93,12 +100,12 @@
                 "help": "(second)"
             },
             "URL_UPDATE": {
-                "label": "URL de mise à jour",
-                "help": "par défaut http://gnuvario-e.yj.fr/webupdate/checkversion"
+                "label": "URL for update",
+                "help": "by default http://gnuvario-e.yj.fr/webupdate/checkversion"
             }
         },
         "general": {
-            "TITLE" : "Main",
+            "TITLE": "Main",
             "SUBTITLE": "Main settings",
             "PILOT_NAME": {
                 "label": "Pilot name",
@@ -134,8 +141,8 @@
             }
         },
         "vario": {
-            "TITLE" : "Vario",
-            "SUBTITLE" : "Vario settings",
+            "TITLE": "Vario",
+            "SUBTITLE": "Vario settings",
             "SINKING_THRESHOLD": {
                 "label": "Triggering sinking threshold",
                 "help": ""
@@ -190,8 +197,8 @@
             }
         },
         "vol": {
-            "TITLE" : "Flight start",
-            "SUBTITLE" : "Flight start settings",
+            "TITLE": "Flight start",
+            "SUBTITLE": "Flight start settings",
             "FLIGHT_START_MIN_TIMESTAMP": {
                 "label": "Minimum time since start before flight recording in millisecond",
                 "help": ""
