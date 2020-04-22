@@ -61,7 +61,7 @@ export default {
     }
   },
   mounted: function() {
-    store.dispatch("loadSDFiles");
+    store.dispatch("loadSDFiles", "/");
   }
 };
 </script>

@@ -70,7 +70,7 @@ export default {
       this.nbEncoursUpload--;
       if (this.nbEncoursUpload == 0) {
         this.uploading = false;
-        store.dispatch("loadSDFiles");
+        store.dispatch("loadSDFiles", this.uploadPath);
         this.$nextTick(() => {
           this.$refs.modal.hide();
         });

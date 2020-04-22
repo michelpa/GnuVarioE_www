@@ -92,6 +92,9 @@ export default {
     toggle: function() {
       if (this.isFolder) {
         this.isOpen = !this.isOpen;
+        if (this.isOpen) {
+          store.dispatch("loadSDFiles", this.basePath);
+        }
       }
     },
     makeFolder: function() {
@@ -182,7 +185,7 @@ export default {
       store.dispatch("deleteFile", self.fullFilename).then(
         // eslint-disable-next-line
         response => {
-          store.dispatch("loadSDFiles");
+          store.dispatch("loadSDFiles", this.basePath);
           let typeF = "Fichier";
           if (self.isFolder) {
             typeF = "Dossier";

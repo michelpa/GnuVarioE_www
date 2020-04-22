@@ -12,6 +12,23 @@ export function waitFor(conditionFunction) {
     return new Promise(poll);
 }
 
+export function updateTreeContent(object, pathArray, replace) {
+    Object.keys(object).forEach(function (k) {
+        if (object[k] && typeof object[k] === 'object') {
+            return updateTreeContent(object[k], pathArray, replace)
+        }
+        var currentPath = pathArray[0];
+        if (object["type"] == "dir" && k == "name" && object[k] === currentPath) {
+            if (pathArray.length == 1) {
+                object["contents"] = replace[0]["contents"]
+            } else {
+                pathArray.shift();
+                return updateTreeContent(object[k], pathArray, replace)
+            }
+        }
+    });
+}
+
 export function triFichiers(tab) {
     tab.forEach(function (el) {
         if (el.type == 'dir' && el.contents.length) {

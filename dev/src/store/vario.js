@@ -1,5 +1,5 @@
 import { parseIGC } from '../lib/parseigc.js'
-import { waitFor, triFichiers, triParNomInverse } from '../lib/helper.js'
+import { waitFor, triFichiers, triParNomInverse, updateTreeContent } from '../lib/helper.js'
 import { preferences } from '../preferences.js'
 
 const env = process.env;
@@ -277,8 +277,11 @@ export const actions = {
             });
         });
     },
-    loadSDFiles: function (context) {
+    loadSDFiles: function (context, path) {
         let url = "/list";
+        if (path) {
+            url = url + "?dir=" + path + "&norecursive=true";
+        }
         if (env.NODE_ENV == "development") {
             //url = "config/tree.jso";
             url = baseUrl + url;
@@ -289,6 +292,7 @@ export const actions = {
                 "Content-Type": "application/json"
             }
         };
+
         return waitFor(function () {
             return context.state.isLoading === false
         }).then(function () {
@@ -296,7 +300,7 @@ export const actions = {
             return axios.get(url, axiosConfig).then(response => {
                 let tree = response.data;
                 triFichiers(tree);
-                context.commit('setFiles', tree);
+                context.commit('setFiles', { fileslist: tree, path: path });
                 // eslint-disable-next-line no-unused-vars
             }).catch(function (error) {
                 return Promise.reject(error);
@@ -462,8 +466,22 @@ export const mutations = {
     setLoadingState: function (state, isLoading) {
         state.isLoading = isLoading;
     },
-    setFiles: function (state, fileslist) {
-        state.fileslist = Object.assign({}, state.fileslist, fileslist);
+    setFiles: function (state, { fileslist, path }) {
+       
+        if (state.fileslist) {
+            //on doit juste remplacer un morceau de l'arbre
+            var newTree = {};
+            let dirs = path.split('/').filter(function (el) {
+                return el != "";
+            });
+            dirs.unshift('/');
+            var subPart = state.fileslist[0];
+            newTree = subPart;
+            updateTreeContent(newTree, dirs, fileslist);
+        } else {
+            state.fileslist = Object.assign({}, state.fileslist, fileslist);
+        }
+
         state.fileslistLoaded = true;
     },
     setUploadpct: function (state, pct) {
@@ -520,3 +538,5 @@ export default {
     mutations,
     getters
 };
+
+
