@@ -39,27 +39,27 @@
               <h6 class="mb-0">GNU Vario</h6>
             </template>
             <b-card-text>
-              <p> {{ $t('about.CONTRIBUTOR' ) }}</p>
+              <p>{{ $t('about.CONTRIBUTOR' ) }}</p>
               <b-list-group>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">JeromeV</span>
-                  <em class="small">- Développeur (AGL)</em>
+                  <em class="small">- {{ $t('global.DEVELOPPER') }} (AGL)</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">jpg63</span>
-                  <em class="small">- Développeur</em>
+                  <em class="small">- {{ $t('global.DEVELOPPER') }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">pixyz</span>
-                  <em class="small">- Développeur web</em>
+                  <em class="small">- {{ $t('global.DEVELOPPER') }} web</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">prunkdump</span>
-                  <em class="small">- Développeur</em>
+                  <em class="small">- {{ $t('global.DEVELOPPER') }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">ratamuse</span>
-                  <em class="small">- PCB / Développeur</em>
+                  <em class="small">- PCB / {{ $t('global.DEVELOPPER') }}</em>
                 </b-list-group-item>
               </b-list-group>
             </b-card-text>

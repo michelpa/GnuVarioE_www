@@ -1,274 +1,276 @@
 {
-    "home": {
-        "hello": "Bonjour"
+  "home": {
+    "hello": "Bonjour"
+  },
+  "global": {
+    "save": "Sauvegarder",
+    "reload": "Recharger",
+    "DEVELOPPER": "Développeur"
+  },
+  "menu": {
+    "FLIGHTS": "Mes vols",
+    "SD": "Carte SD",
+    "CONFIG": "Configuration",
+    "MAJ": "Mise à jour",
+    "ABOUT": "A propos",
+    "WIFI": "Wifi",
+    "SETTINGS": "Paramètres"
+  },
+  "flights": {
+    "FLIGHTS_WAIT": "Le chargement des vols n'est pas terminé!",
+    "FLIGHTS_LIST": "Liste de mes vols",
+    "FLIGHTS_FILES": "Fichiers IGC présents sur la carte SD du vario",
+    "FLIGHTS_FILENAME": "Nom du fichier",
+    "FLIGHTS_ACTION": "Actions",
+    "FLIGHTS": "vol",
+    "FLIGHT_OF": "Vol du",
+    "FLIGHT_DURATION": "Durée du vol",
+    "FLIGHT_START": "Début du vol",
+    "FLIGHT_END": "Fin du vol",
+    "FLIGHT_ALT_START": "Altitude de départ",
+    "FLIGHT_ALT_END": "Altitude de fin",
+    "FLIGHT_ALT_MAX": "Altitude max",
+    "MAP_SETTINGS": "Réglages carte",
+    "TRACE_COLOR": "Couleur du tracé",
+    "TRACE_WIDTH": "Epaisseur du tracé"
+  },
+  "wifi": {
+    "CONF_LIB": "Configuration WiFi",
+    "AP": "Points d'accés"
+  },
+  "sd": {
+    "SD_CONTENT": "Contenu de la carte SD"
+  },
+  "about": {
+    "ABOUT": "A propos",
+    "CURRENT": "Version courante",
+    "CONTRIBUTOR": "Contributeurs principaux par ordre alphabétique"
+  },
+  "params": {
+    "PARAM": "Paramétrage",
+    "MODE_EXPERT": "Mode expert",
+    "systeme": {
+      "TITLE": "Système",
+      "SUBTITLE": "Paramètres système",
+      "MANAGE_WINGS": "Configurer mes voiles",
+      "BT_ENABLE": {
+        "label": "Activation du BT",
+        "help": ""
+      },
+      "NO_RECORD": {
+        "label": "Désactiver l'enregistrement sur la sdcard",
+        "help": ""
+      },
+      "ALARM_SDCARD": {
+        "label": "Alarme de non présence de la SDCARD",
+        "help": ""
+      },
+      "BEEP_GPSFIX": {
+        "label": "Bip au Fixe du GPS",
+        "help": ""
+      },
+      "BEEP_VARIOBEGIN": {
+        "label": "Bip au démarrage du vario",
+        "help": ""
+      },
+      "BEEP_FLYBEGIN": {
+        "label": "Bip au démarrage du vol",
+        "help": ""
+      },
+      "COMPENSATION_TEMP": {
+        "label": "Compensation de la température",
+        "help": "(en degré)"
+      },
+      "COMPENSATION_GPSALTI": {
+        "label": "Compensation de l'altitude GPS",
+        "help": "(en mètre)"
+      },
+      "SLEEP_TIMEOUT_MINUTES": {
+        "label": "Temps avant mise en veille",
+        "help": "(en minutes)"
+      },
+      "SLEEP_THRESHOLD_CPS": {
+        "label": "Seuil de sommeil en m/s",
+        "help": "seuil de mise en veille si  vario ne dépasse pas + ou - 'seuil de sommeil'  pendant au moins 'temps avant mise en veille' (ex 0.5)"
+      },
+      "MULTIDISPLAY_DURATION": {
+        "label": "Temps de l'affichage alternatif des champs de données",
+        "help": "(en milliseconde)"
+      },
+      "DISPLAY_STAT_DURATION": {
+        "label": "Temps de l'affichage de la page de stat",
+        "help": "(en seconde)"
+      },
+      "URL_UPDATE": {
+        "label": "URL de mise à jour",
+        "help": "par défaut http://gnuvario-e.yj.fr/webupdate/checkversion"
+      },
+      "LANGUAGE": {
+        "label": "Langue du vario",
+        "help": ""
+      }
     },
-    "global": {
-        "save": "Sauvegarder",
-        "reload": "Recharger"
+    "general": {
+      "TITLE": "Général",
+      "SUBTITLE": "Paramètres Généraux",
+      "PILOT_NAME": {
+        "label": "Nom du pilote",
+        "help": ""
+      },
+      "GLIDER_NAME": {
+        "label": "Nom de la voile",
+        "help": ""
+      },
+      "GLIDER_SELECT": {
+        "label": "Nom de la voile sélectionnée",
+        "help": ""
+      },
+      "GLIDER_NAME1": {
+        "label": "Nom de la voile 1",
+        "help": ""
+      },
+      "GLIDER_NAME2": {
+        "label": "Nom de la voile 2",
+        "help": ""
+      },
+      "GLIDER_NAME3": {
+        "label": "Nom de la voile 3",
+        "help": ""
+      },
+      "GLIDER_NAME4": {
+        "label": "Nom de la voile 4",
+        "help": ""
+      },
+      "TIME_ZONE": {
+        "label": "Fuseau horaire",
+        "help": "Définit la zone horaire UTC - Pour la France (+2) en été, (+1) en hiver"
+      }
     },
-    "menu": {
-        "FLIGHTS": "Mes vols",
-        "SD": "Carte SD",
-        "CONFIG": "Configuration",
-        "MAJ": "Mise à jour",
-        "ABOUT": "A propos",
-        "WIFI": "Wifi",
-        "SETTINGS": "Paramètres"
+    "vario": {
+      "TITLE": "Vario",
+      "SUBTITLE": "Paramètres vario",
+      "SINKING_THRESHOLD": {
+        "label": "Seuil de déclenchement des dégueulantes",
+        "help": ""
+      },
+      "CLIMBING_THRESHOLD": {
+        "label": "Seuil de déclenchement du zérotage",
+        "help": ""
+      },
+      "NEAR_CLIMBING_SENSITIVITY": {
+        "label": "Sensibilité avant déclenchement des ascendances",
+        "help": ""
+      },
+      "ENABLE_NEAR_CLIMBING_ALARM": {
+        "label": "Alarme quand on entre ou on sort d'une zone d'ascendance",
+        "help": ""
+      },
+      "ENABLE_NEAR_CLIMBING_BEEP": {
+        "label": "Bip de zerotage",
+        "help": ""
+      },
+      "DISPLAY_INTEGRATED_CLIMB_RATE": {
+        "label": "Affiche le vario intégré",
+        "help": ""
+      },
+      "CLIMB_PERIOD_COUNT": {
+        "label": "Période d'integration du taux de chute",
+        "help": "en seconde"
+      },
+      "SETTINGS_GLIDE_RATIO_PERIOD_COUNT": {
+        "label": "Période d'integration de la finesse",
+        "help": "en seconde"
+      },
+      "RATIO_MAX_VALUE": {
+        "label": "Nombre de valeur d'integration dans le calcul de la finesse",
+        "help": ""
+      },
+      "RATIO_MIN_SPEED": {
+        "label": "Vitesse minimal prise en compte pour la finesse",
+        "help": ""
+      },
+      "RATIO_CLIMB_RATE": {
+        "label": "Affichage finesse, taux de chute ou les 2",
+        "help": "1 finesse, 2 taux de chute, 3 les 2 valeurs alternativements"
+      },
+      "SENT_LXNAV_SENTENCE": {
+        "label": "Type de trame BT",
+        "help": "0=LK8000, 1=LXNAV"
+      },
+      "VARIOMETER_ENABLE_AGL": {
+        "label": "Affichage de l'altitude AGL",
+        "help": "Nécessite la présence des fichiers d'élévation sur la carte SD"
+      },
+      "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
+        "label": "Réglage du filtre kalman",
+        "help": "Ce paramètre joue directement sur le filtre de kalman (valeur comprise entre 0.3 et 0.6)"
+      },
+      "VARIOMETER_INTEGRATED_CLIMB_RATE": {
+        "label": "Intégration du vario",
+        "help": ""
+      },
+      "SETTINGS_VARIO_PERIOD_COUNT": {
+        "label": "Période d'intégration",
+        "help": " entre 0 et 40 correspond à la période d'intégration par pas de 50ms entre 0 et 2s"
+      }
     },
-    "flights": {
-        "FLIGHTS_LIST": "Liste de mes vols",
-        "FLIGHTS_FILES": "Fichiers IGC présents sur la carte SD du vario",
-        "FLIGHTS_FILENAME": "Nom du fichier",
-        "FLIGHTS_ACTION": "Actions",
-        "FLIGHTS": "vol",
-        "FLIGHT_OF": "Vol du",
-        "FLIGHT_DURATION": "Durée du vol",
-        "FLIGHT_START": "Début du vol",
-        "FLIGHT_END": "Fin du vol",
-        "FLIGHT_ALT_START": "Altitude de départ",
-        "FLIGHT_ALT_END": "Altitude de fin",
-        "FLIGHT_ALT_MAX": "Altitude max",
-        "MAP_SETTINGS": "Réglages carte",
-        "TRACE_COLOR": "Couleur du tracé",
-        "TRACE_WIDTH": "Epaisseur du tracé"
+    "vol": {
+      "TITLE": "Début du vol",
+      "SUBTITLE": "Paramètres départ vol",
+      "FLIGHT_START_MIN_TIMESTAMP": {
+        "label": "Temps minimum depuis l'allumage avant déclenchement de l'enregistrement du vol en miliseconde",
+        "help": ""
+      },
+      "FLIGHT_START_VARIO_LOW_THRESHOLD": {
+        "label": "Seuil de déclenchement de début du vol VZ min",
+        "help": ""
+      },
+      "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
+        "label": "Seuil de déclenchement de début du vol VZ max",
+        "help": ""
+      },
+      "FLIGHT_START_MIN_SPEED": {
+        "label": "Seuil de déclenchement de début du vol - vitesse mini",
+        "help": ""
+      },
+      "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
+        "label": "Début de l'enregistrement après déclenchement de début du vol",
+        "help": ""
+      }
     },
     "wifi": {
-        "CONF_LIB": "Configuration WiFi",
-        "AP": "Points d'accés"
-    },
-    "sd": {
-        "SD_CONTENT": "Contenu de la carte SD"
-    },
-    "about": {
-        "ABOUT": "A propos",
-        "CURRENT": "Version courante",
-        "CONTRIBUTOR": "Contributeurs principaux par ordre alphabétique"
-    },
-    "params": {
-        "PARAM": "Paramétrage",
-        "MODE_EXPERT": "Mode expert",
-        "systeme": {
-            "TITLE": "Système",
-            "SUBTITLE": "Paramètres système",
-            "MANAGE_WINGS": "Configurer mes voiles",
-            "BT_ENABLE": {
-                "label": "Activation du BT",
-                "help": ""
-            },
-            "NO_RECORD": {
-                "label": "Désactiver l'enregistrement sur la sdcard",
-                "help": ""
-            },
-            "ALARM_SDCARD": {
-                "label": "Alarme de non présence de la SDCARD",
-                "help": ""
-            },
-            "BEEP_GPSFIX": {
-                "label": "Bip au Fixe du GPS",
-                "help": ""
-            },
-            "BEEP_VARIOBEGIN": {
-                "label": "Bip au démarrage du vario",
-                "help": ""
-            },
-            "BEEP_FLYBEGIN": {
-                "label": "Bip au démarrage du vol",
-                "help": ""
-            },
-            "COMPENSATION_TEMP": {
-                "label": "Compensation de la température",
-                "help": "(en degré)"
-            },
-            "COMPENSATION_GPSALTI": {
-                "label": "Compensation de l'altitude GPS",
-                "help": "(en mètre)"
-            },
-            "SLEEP_TIMEOUT_MINUTES": {
-                "label": "Temps avant mise en veille",
-                "help": "(en minutes)"
-            },
-            "SLEEP_THRESHOLD_CPS": {
-                "label": "Seuil de sommeil en m/s",
-                "help": "seuil de mise en veille si  vario ne dépasse pas + ou - 'seuil de sommeil'  pendant au moins 'temps avant mise en veille' (ex 0.5)"
-            },
-            "MULTIDISPLAY_DURATION": {
-                "label": "Temps de l'affichage alternatif des champs de données",
-                "help": "(en milliseconde)"
-            },
-            "DISPLAY_STAT_DURATION": {
-                "label": "Temps de l'affichage de la page de stat",
-                "help": "(en seconde)"
-            },
-            "URL_UPDATE": {
-                "label": "URL de mise à jour",
-                "help": "par défaut http://gnuvario-e.yj.fr/webupdate/checkversion"
-            },
-            "LANGUAGE": {
-                "label": "Langue du vario",
-                "help": ""
-            }
-        },
-        "general": {
-            "TITLE": "Général",
-            "SUBTITLE": "Paramètres Généraux",
-            "PILOT_NAME": {
-                "label": "Nom du pilote",
-                "help": ""
-            },
-            "GLIDER_NAME": {
-                "label": "Nom de la voile",
-                "help": ""
-            },
-            "GLIDER_SELECT": {
-                "label": "Nom de la voile sélectionnée",
-                "help": ""
-            },
-            "GLIDER_NAME1": {
-                "label": "Nom de la voile 1",
-                "help": ""
-            },
-            "GLIDER_NAME2": {
-                "label": "Nom de la voile 2",
-                "help": ""
-            },
-            "GLIDER_NAME3": {
-                "label": "Nom de la voile 3",
-                "help": ""
-            },
-            "GLIDER_NAME4": {
-                "label": "Nom de la voile 4",
-                "help": ""
-            },
-            "TIME_ZONE": {
-                "label": "Fuseau horaire",
-                "help": "Définit la zone horaire UTC - Pour la France (+2) en été, (+1) en hiver"
-            }
-        },
-        "vario": {
-            "TITLE": "Vario",
-            "SUBTITLE": "Paramètres vario",
-            "SINKING_THRESHOLD": {
-                "label": "Seuil de déclenchement des dégueulantes",
-                "help": ""
-            },
-            "CLIMBING_THRESHOLD": {
-                "label": "Seuil de déclenchement du zérotage",
-                "help": ""
-            },
-            "NEAR_CLIMBING_SENSITIVITY": {
-                "label": "Sensibilité avant déclenchement des ascendances",
-                "help": ""
-            },
-            "ENABLE_NEAR_CLIMBING_ALARM": {
-                "label": "Alarme quand on entre ou on sort d'une zone d'ascendance",
-                "help": ""
-            },
-            "ENABLE_NEAR_CLIMBING_BEEP": {
-                "label": "Bip de zerotage",
-                "help": ""
-            },
-            "DISPLAY_INTEGRATED_CLIMB_RATE": {
-                "label": "Affiche le vario intégré",
-                "help": ""
-            },
-            "CLIMB_PERIOD_COUNT": {
-                "label": "Période d'integration du taux de chute",
-                "help": "en seconde"
-            },
-            "SETTINGS_GLIDE_RATIO_PERIOD_COUNT": {
-                "label": "Période d'integration de la finesse",
-                "help": "en seconde"
-            },
-            "RATIO_MAX_VALUE": {
-                "label": "Nombre de valeur d'integration dans le calcul de la finesse",
-                "help": ""
-            },
-            "RATIO_MIN_SPEED": {
-                "label": "Vitesse minimal prise en compte pour la finesse",
-                "help": ""
-            },
-            "RATIO_CLIMB_RATE": {
-                "label": "Affichage finesse, taux de chute ou les 2",
-                "help": "1 finesse, 2 taux de chute, 3 les 2 valeurs alternativements"
-            },
-            "SENT_LXNAV_SENTENCE": {
-                "label": "Type de trame BT",
-                "help": "0=LK8000, 1=LXNAV"
-            },
-            "VARIOMETER_ENABLE_AGL": {
-                "label": "Affichage de l'altitude AGL",
-                "help": "Nécessite la présence des fichiers d'élévation sur la carte SD"
-            },
-            "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
-                "label": "Réglage du filtre kalman",
-                "help": "Ce paramètre joue directement sur le filtre de kalman (valeur comprise entre 3.00 et 6.00)"
-            },
-            "VARIOMETER_INTEGRATED_CLIMB_RATE": {
-                "label": "Intégration du vario",
-                "help": ""
-            },
-            "SETTINGS_VARIO_PERIOD_COUNT": {
-                "label": "Période d'intégration",
-                "help": " entre 0 et 40 correspond à la période d'intégration par pas de 50ms entre 0 et 2s"
-            }
-        },
-        "vol": {
-            "TITLE": "Début du vol",
-            "SUBTITLE": "Paramètres départ vol",
-            "FLIGHT_START_MIN_TIMESTAMP": {
-                "label": "Temps minimum depuis l'allumage avant déclenchement de l'enregistrement du vol en miliseconde",
-                "help": ""
-            },
-            "FLIGHT_START_VARIO_LOW_THRESHOLD": {
-                "label": "Seuil de déclenchement de début du vol VZ min",
-                "help": ""
-            },
-            "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
-                "label": "Seuil de déclenchement de début du vol VZ max",
-                "help": ""
-            },
-            "FLIGHT_START_MIN_SPEED": {
-                "label": "Seuil de déclenchement de début du vol - vitesse mini",
-                "help": ""
-            },
-            "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
-                "label": "Début de l'enregistrement après déclenchement de début du vol",
-                "help": ""
-            }
-        },
-        "wifi": {
-            "SSID_1": {
-                "label": "SSID 1",
-                "help": ""
-            },
-            "PASSWORD_1": {
-                "label": "Mot de passe 1",
-                "help": ""
-            },
-            "SSID_2": {
-                "label": "SSID 2",
-                "help": ""
-            },
-            "PASSWORD_2": {
-                "label": "Mot de passe 2",
-                "help": ""
-            },
-            "SSID_3": {
-                "label": "SSID 3",
-                "help": ""
-            },
-            "PASSWORD_3": {
-                "label": "Mot de passe 3",
-                "help": ""
-            },
-            "SSID_4": {
-                "label": "SSID 4",
-                "help": ""
-            },
-            "PASSWORD_4": {
-                "label": "Mot de passe 4",
-                "help": ""
-            }
-        }
+      "SSID_1": {
+        "label": "SSID 1",
+        "help": ""
+      },
+      "PASSWORD_1": {
+        "label": "Mot de passe 1",
+        "help": ""
+      },
+      "SSID_2": {
+        "label": "SSID 2",
+        "help": ""
+      },
+      "PASSWORD_2": {
+        "label": "Mot de passe 2",
+        "help": ""
+      },
+      "SSID_3": {
+        "label": "SSID 3",
+        "help": ""
+      },
+      "PASSWORD_3": {
+        "label": "Mot de passe 3",
+        "help": ""
+      },
+      "SSID_4": {
+        "label": "SSID 4",
+        "help": ""
+      },
+      "PASSWORD_4": {
+        "label": "Mot de passe 4",
+        "help": ""
+      }
     }
+  }
 }

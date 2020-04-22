@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!flights">Le chargement des vols n'est pas terminé!</div>
+    <div v-if="!flights">{{ $t('flights.FLIGHTS_WAIT') }}</div>
     <div v-else class="row">
       <div class="col-md-12">
         <h1>{{ $t('flights.FLIGHTS_LIST') }}</h1>
