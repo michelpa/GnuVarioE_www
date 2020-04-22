@@ -135,8 +135,8 @@
                           :label="$t('params.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION.label')"
                           :help="$t('params.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION.help')"
                           input-type="range"
-                          :min="3.0"
-                          :max="6.00"
+                          :min="0.3"
+                          :max="0.6"
                           :step="0.01"
                         ></config-field>
                          <config-field
