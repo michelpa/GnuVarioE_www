@@ -1,6 +1,13 @@
 <template>
   <li class>
     <div :class="{bold: isFolder}" @dblclick="makeFolder">
+      <span v-if="isFolder" class="text-secondary cross">
+        <i
+          class="fa"
+          :class="{ 'fa-plus-square': (isFolder && !isOpen), 'fa-minus-square': (isFolder && isOpen) }"
+        ></i>
+        &nbsp;
+      </span>
       <i
         class="text-secondary fa"
         :class="{ 'fa-folder': (isFolder && !isOpen), 'fa-folder-open': (isFolder && isOpen), 'fa-file': (!isFolder) }"
@@ -302,5 +309,11 @@ export default {
   display: inline;
   padding: 0.1rem 0.2rem;
   font-size: 0.65rem;
+}
+.cross {
+  position: relative;
+  margin-left: -5px;
+  width: 20px;
+  display: inline-block;
 }
 </style>
