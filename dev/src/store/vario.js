@@ -1,5 +1,5 @@
 import { parseIGC } from '../lib/parseigc.js'
-import { waitFor, triFichiers, triParNomInverse, updateTreeContent } from '../lib/helper.js'
+import { waitFor, triFichiers, triParNomInverse, updateTreeContent } from '../lib/helperStore.js'
 import { preferences } from '../preferences.js'
 
 const env = process.env;

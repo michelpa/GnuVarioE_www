@@ -1,22 +1,21 @@
 <template>
   <li class>
     <div :class="{bold: isFolder}" @dblclick="makeFolder">
-      <span v-if="isFolder" class="text-secondary cross">
-        <i
-          class="fa"
-          :class="{ 'fa-plus-square': (isFolder && !isOpen), 'fa-minus-square': (isFolder && isOpen) }"
-        ></i>
-        &nbsp;
+      <span v-if="isFolder" class="text-secondary">
+        <a href="javascript:void(0)" @click="toggle">
+          <i class="text-secondary cross fa" :class="{ 'fa-plus-square': (!isOpen), 'fa-minus-square': (isOpen) }"></i>
+          &nbsp;
+          <i
+            class="text-secondary fa"
+            :class="{ 'fa-folder': (!isOpen), 'fa-folder-open': ( isOpen) }"
+          ></i>
+          &nbsp;
+          {{ item.name }}
+        </a>
       </span>
-      <i
-        class="text-secondary fa"
-        :class="{ 'fa-folder': (isFolder && !isOpen), 'fa-folder-open': (isFolder && isOpen), 'fa-file': (!isFolder) }"
-      ></i>
-      &nbsp;
-      <!--       --{{ fullFilename }}-- -->
-      <!--      --{{ basePath }}---->
-      <a href="javascript:void(0)" v-if="isFolder" @click="toggle">{{ item.name }}</a>
       <span v-else>
+        <i class="text-secondary fa" :class="{ 'fa-file': (!isFolder) }"></i>
+        &nbsp;
         {{ item.name }} &nbsp;
         <em>
           <small>({{ item.size }})</small>
@@ -33,7 +32,6 @@
             <i class="fa fa-arrow-alt-circle-down"></i>
           </button>
         </span>
-
         <span v-if="isFolder">
           &nbsp;
           <button
