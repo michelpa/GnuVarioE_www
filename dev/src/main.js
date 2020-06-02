@@ -26,6 +26,11 @@ Vue.component('click-confirm', clickConfirm.component);
 Vue.component('apexchart', VueApexCharts)
 Vue.component('vue-color', VueColor)
 
+// eslint-disable-next-line no-undef
+Vue.use(vueMoment, {
+  moment
+});
+
 import { languages } from './translation/index.js'
 import { defaultLocale } from './translation/index.js'
 // require('./lib/momentfr.js');
@@ -43,7 +48,9 @@ Vue.config.productionTip = false
 
 Vue.filter('pluralize', (word, amount) => (amount > 1 || amount === 0) ? `${word}s` : word)
 
-
+Vue.filter('secondstohms', function (second) {
+  return new Date(second * 1000).toISOString().substr(11, 8);
+})
 
 new Vue({
   i18n,
@@ -51,3 +58,4 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+

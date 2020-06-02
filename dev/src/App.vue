@@ -110,6 +110,7 @@ export default {
       this.loading = false;
       this.themeHelper.theme = this.themeName;
     });
+    
   },
   created: function() {
     window.setTimeout(function() {

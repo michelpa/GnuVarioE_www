@@ -56,7 +56,8 @@
       "L": true,
       "ApexCharts": true,
       "VueApexCharts": true,
-      "VueColor": true
+      "VueColor": true,
+      "SimpleMapScreenshoter": true
     }
   },
   "postcss": {

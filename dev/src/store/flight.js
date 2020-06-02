@@ -92,11 +92,34 @@ export const actions = {
             });
         });
     },
+    flightToBook: function (context, filename) {
+        let url = "/parseigc?path=/vols/" + filename;
+
+        if (env.NODE_ENV == "development") {
+            // url = "config/20010500_concat.IGC";
+            url = baseUrl + url;
+        }
+
+
+        let axiosConfig = {}
+        return waitFor(function () {
+            return context.rootState.loading.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            // eslint-disable-next-line no-unused-vars
+            return axios.get(url, axiosConfig).then(response => {
+                return true;
+            }).catch(function (error) {
+                return Promise.reject(error);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
     infoFlight: function (context, filename) {
         let url = "/file?path=/vols/" + filename;
 
         if (env.NODE_ENV == "development") {
-            // url = "config/20010500_concat.IGC";
             url = baseUrl + url;
         }
 

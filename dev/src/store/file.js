@@ -14,6 +14,10 @@ export const actions = {
     loadSDFiles: function (context, path) {
         let url = "/list";
         if (path) {
+            console.log(path);
+            if (path.length > 1 && path.slice(-1) == "/") {
+                path = path.slice(0, -1);
+            }
             url = url + "?dir=" + path + "&norecursive=true";
         }
         if (env.NODE_ENV == "development") {
@@ -116,7 +120,7 @@ export const actions = {
             });
         });
     },
-    
+
 }
 
 export const mutations = {

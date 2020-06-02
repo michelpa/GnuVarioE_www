@@ -6,6 +6,7 @@ import wifi from "./wifi";
 import flight from "./flight";
 import file from "./file";
 import firmware from "./firmware";
+import carnet from "./carnet";
 
 // eslint-disable-next-line no-undef
 export default new Vuex.Store({
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         wifi,
         flight,
         file,
-        firmware
+        firmware,
+        carnet
     }
 });

@@ -3,7 +3,10 @@
     <div :class="{bold: isFolder}" @dblclick="makeFolder">
       <span v-if="isFolder" class="text-secondary">
         <a href="javascript:void(0)" @click="toggle">
-          <i class="text-secondary cross fa" :class="{ 'fa-plus-square': (!isOpen), 'fa-minus-square': (isOpen) }"></i>
+          <i
+            class="text-secondary cross fa"
+            :class="{ 'fa-plus-square': (!isOpen), 'fa-minus-square': (isOpen) }"
+          ></i>
           &nbsp;
           <i
             class="text-secondary fa"

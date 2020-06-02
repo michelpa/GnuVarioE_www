@@ -76,7 +76,8 @@ module.exports = {
             'clickconfirm': 'clickConfirm',
             'apex': 'Apex',
             'apexchart': 'VueApexCharts',
-            'vuecolor': "VueColor"
+            'vuecolor': "VueColor",
+            'vueMoment': "vueMoment",
         }
     },
     css: {

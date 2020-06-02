@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <b-modal
@@ -26,32 +27,33 @@
         </div>
       </div>
     </b-modal>
-    <div id="mapidvol" ref="mapidvol"></div>
+    <div id="mapid" ref="mapElement"></div>
     <div id="altchart">
       <apexchart width="100%" height="100%" type="area" :options="chartsOptions" :series="series"></apexchart>
     </div>
-    {{markerLength}} / {{totalLength}} km
+    <div class="text-center mb-2">{{markerLength}} / {{totalLength}} km</div>
+    <div class="clearfix"></div>
   </div>
 </template>
 
 <script>
-import ColorPicker from "./ColorPicker";
+// eslint-disable-next-line no-unused-vars
 import { mapGetters } from "vuex";
+import ColorPicker from "./ColorPicker";
 import store from "@/store";
 const smooth = require("../lib/smooth.js");
 export default {
-  name: "MaCarte",
+  /* eslint-disable no-unused-vars */
+  name: "VisuData",
   components: { ColorPicker },
   props: {
-    igc: Object,
-    altMin: Number,
-    altMax: Number
+    show: { type: Boolean, default: false },
+    igc: { type: Object, default: null },
+    flight: { type: Object, default: null }
   },
   data: function() {
     return {
-      env: process.env,
       macarte: null,
-      currentF: null,
       midx: null,
       polyline: null,
       series: [],
@@ -101,8 +103,8 @@ export default {
         yaxis: [
           {
             forceNiceScale: true,
-            min: this.altMin - 50,
-            max: this.altMax + 50,
+            min: this.flight.min_height - 50,
+            max: this.flight.max_height + 50,
             labels: {
               show: true,
               // eslint-disable-next-line
@@ -163,6 +165,15 @@ export default {
     setMidx: function(idx) {
       this.midx = idx;
     },
+    showModal: function() {
+      this.$bvModal.show("modal-visu");
+    },
+    doCancel: function() {
+      //   store.dispatch("loadConfigWeb");
+    },
+    doHidden: function() {
+      this.$emit("visuClosed");
+    },
     drawPolyline: function() {
       if (this.polyline) {
         this.polyline.remove();
@@ -171,16 +182,17 @@ export default {
         color: this.colorTrait,
         weight: this.epaisseurTrait
       }).addTo(this.macarte);
-
-      // this.polyline;
-      // return p;
     }
   },
   computed: {
     ...mapGetters(["configWeb"]),
     epaisseurTrait: {
       get() {
-        return this.configWeb.map.trace.epaisseur;
+        if (this.configWeb.map != undefined) {
+          return this.configWeb.map.trace.epaisseur;
+        } else {
+          return 1;
+        }
       },
       set(value) {
         store.commit("updateConfigWeb", {
@@ -192,7 +204,11 @@ export default {
     },
     colorTrait: {
       get() {
-        return this.configWeb.map.trace.color;
+        if (this.configWeb.map != undefined) {
+          return this.configWeb.map.trace.color;
+        } else {
+          return "#fff";
+        }
       },
       set(value) {
         store.commit("updateConfigWeb", {
@@ -240,13 +256,18 @@ export default {
           }
           previousPoint = latLng;
         });
-        return Math.round(length, 3) / 1000;
+        return Math.round(length / 10) / 100;
       } else {
         return 0;
       }
     }
   },
   watch: {
+    show: function(newVal, oldVal) {
+      if (newVal && !oldVal) {
+        this.showModal();
+      }
+    },
     midx: function(newidx, oldidx) {
       if (this.marker) {
         if (newidx != oldidx && newidx > 0) {
@@ -295,141 +316,146 @@ export default {
       }
     );
 
-    // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+    //Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
     if (this.macarte) {
       this.macarte.off();
       this.macarte.remove();
     }
-    this.macarte = L.map("mapidvol", { layers: [GeoportailFrance_orthos] });
+    this.macarte = L.map("mapid", {
+      layers: [GeoportailFrance_orthos]
+    });
 
     var baseMaps = {
       OpenStreetMap: OpenStreetMap,
       OpenTopoMap: OpenTopoMap,
       GeoportailFrance: GeoportailFrance_orthos
     };
-
     L.control.layers(baseMaps).addTo(this.macarte);
 
     let self = this;
 
-    this.drawPolyline();
+    this.$root.$on("bv::modal::shown", (bvEvent, modalId) => {
+      if (modalId == "modal-visu") {
+        //this.polyline =
+        self.drawPolyline();
 
-    //zoom the map to the polyline
-    this.macarte.fitBounds(this.polyline.getBounds());
+        //zoom the map to the polyline
+        self.macarte.fitBounds(self.polyline.getBounds());
+        self.marker = L.marker(self.igc.latLong[0]);
+        self.marker.addTo(self.macarte);
 
-    this.marker = L.marker(this.igc.latLong[0]);
-    this.marker.addTo(this.macarte);
+        var MyCustomAction = L.Toolbar2.Action.extend({
+          options: {
+            toolbarIcon: {
+              html: '<i class="fas fa-cogs" style="color:#666"></i>',
+              tooltip: "Réglages"
+            }
+          },
 
-    var MyCustomAction = L.Toolbar2.Action.extend({
-      options: {
-        toolbarIcon: {
-          html: '<i class="fas fa-cogs" style="color:#666"></i>',
-          tooltip: "Réglages"
+          addHooks: function() {
+            self.showModalReglage();
+          }
+        });
+
+        new L.Toolbar2.Control({
+          position: "bottomleft",
+          actions: [MyCustomAction]
+        }).addTo(self.macarte);
+
+        let pluginOptions = {
+          cropImageByInnerWH: true, // crop blank opacity from image borders
+          hidden: false, // hide screen icon
+          domtoimageOptions: { quality: 0.5 }, // see options for dom-to-image
+          position: "topleft", // position of take screen icon
+          screenName: "screen", // string or function
+          //iconUrl: ICON_SVG_BASE64, // screen btn icon base64 or url
+          hideElementsWithSelectors: [".leaflet-control-container"], // by default hide map controls All els must be child of _map._container
+          mimeType: "image/png", // used if format == image,
+          caption: null, // streeng or function, added caption to bottom of screen
+          captionFontSize: 15,
+          captionFont: "Arial",
+          captionColor: "black",
+          captionBgColor: "white",
+          captionOffset: 5
+        };
+
+        self.simpleMapScreenshoter = L.simpleMapScreenshoter(
+          pluginOptions
+        ).addTo(self.macarte);
+        let format = "image"; // 'image' - return base64, 'canvas' - return canvas
+        let overridedPluginOptions = {
+          mimeType: "image/png"
+        };
+
+        // GeoportailFrance_orthos.on("load", function() {
+        //   window.setTimeout(function() {
+        //     self.simpleMapScreenshoter
+        //       .takeScreen(format, overridedPluginOptions)
+        //       // eslint-disable-next-line no-unused-vars
+        //       .then(data => {
+        //         // alert("done");
+        //         // console.log(data);
+        //         imageToDataUri(data, 150, 150);
+        //         // FileSaver.saveAs(blob, 'screen.png')
+        //       })
+        //       .catch(e => {
+        //         console.error(e);
+        //       });
+        //   }, 20);
+        // });
+
+        //les données pour le graph altitude
+        let da = self.igc.pressureAltitude.map((a, i) => [
+          self.igc.recordTime[i].getTime(),
+          a
+        ]);
+
+        //les données pour le graph vitesse
+        let nbVal = self.igc.latLong.length;
+        let speed = [];
+        for (var i = 1; i < nbVal; i++) {
+          var dist = distance(
+            self.igc.latLong[i - 1][0],
+            self.igc.latLong[i - 1][1],
+            self.igc.latLong[i][0],
+            self.igc.latLong[i][1]
+          );
+          var temps =
+            (self.igc.recordTime[i].getTime() -
+              self.igc.recordTime[i - 1].getTime()) /
+            1000 /
+            3600;
+
+          var sp = (dist / temps).toFixed(2);
+
+          speed.push([self.igc.recordTime[i - 1].getTime(), sp]);
         }
-      },
+        speed.push([self.igc.recordTime[nbVal - 1].getTime(), sp]);
+        const windowSize = 2;
+        const getter = item => parseFloat(item[1]);
+        const setter = (item, itemSomoothed) => [
+          item[0],
+          itemSomoothed.toFixed(2)
+        ];
+        const arrSmoothed = smooth(speed, windowSize, getter, setter);
 
-      addHooks: function() {
-        self.showModalReglage();
+        self.series = [
+          {
+            name: "altitude",
+            data: da,
+            type: "area"
+          },
+          {
+            name: "vitesse",
+            data: arrSmoothed
+            //type: "line"
+          }
+        ];
       }
     });
-
-    new L.Toolbar2.Control({
-      position: "bottomleft",
-      actions: [MyCustomAction]
-    }).addTo(this.macarte);
-
-    let pluginOptions = {
-      cropImageByInnerWH: true, // crop blank opacity from image borders
-      hidden: false, // hide screen icon
-      domtoimageOptions: { quality: 0.5 }, // see options for dom-to-image
-      position: "topleft", // position of take screen icon
-      screenName: "screen", // string or function
-      //iconUrl: ICON_SVG_BASE64, // screen btn icon base64 or url
-      hideElementsWithSelectors: [".leaflet-control-container"], // by default hide map controls All els must be child of _map._container
-      mimeType: "image/png", // used if format == image,
-      caption: null, // streeng or function, added caption to bottom of screen
-      captionFontSize: 15,
-      captionFont: "Arial",
-      captionColor: "black",
-      captionBgColor: "white",
-      captionOffset: 5
-    };
-
-    this.simpleMapScreenshoter = L.simpleMapScreenshoter(pluginOptions).addTo(
-      this.macarte
-    );
-    // let format = "image"; // 'image' - return base64, 'canvas' - return canvas
-    // let overridedPluginOptions = {
-    //   mimeType: "image/png"
-    // };
-
-    // GeoportailFrance_orthos.on("load", function() {
-    //   window.setTimeout(function() {
-    //     self.simpleMapScreenshoter
-    //       .takeScreen(format, overridedPluginOptions)
-    //       // eslint-disable-next-line no-unused-vars
-    //       .then(data => {
-    //         // alert("done");
-    //         // console.log(data);
-    //         let w = 320;
-    //         let h =
-    //           self.$refs.mapidvol.clientHeight /
-    //           (self.$refs.mapidvol.clientWidth / w);
-    //         imageToDataUri(data, w, h);
-    //         // FileSaver.saveAs(blob, 'screen.png')
-    //       })
-    //       .catch(e => {
-    //         console.error(e);
-    //       });
-    //   }, 500);
-    // });
-
-    //les données pour le graph altitude
-    let da = self.igc.pressureAltitude.map((a, i) => [
-      self.igc.recordTime[i].getTime(),
-      a
-    ]);
-
-    //les données pour le graph vitesse
-    let nbVal = self.igc.latLong.length;
-    let speed = [];
-    for (var i = 1; i < nbVal; i++) {
-      var dist = distance(
-        self.igc.latLong[i - 1][0],
-        self.igc.latLong[i - 1][1],
-        self.igc.latLong[i][0],
-        self.igc.latLong[i][1]
-      );
-      var temps =
-        (self.igc.recordTime[i].getTime() -
-          self.igc.recordTime[i - 1].getTime()) /
-        1000 /
-        3600;
-
-      var sp = (dist / temps).toFixed(2);
-
-      speed.push([self.igc.recordTime[i - 1].getTime(), sp]);
-    }
-    speed.push([self.igc.recordTime[nbVal - 1].getTime(), sp]);
-    const windowSize = 2;
-    const getter = item => parseFloat(item[1]);
-    const setter = (item, itemSomoothed) => [item[0], itemSomoothed.toFixed(2)];
-    const arrSmoothed = smooth(speed, windowSize, getter, setter);
-
-    this.series = [
-      {
-        name: "altitude",
-        data: da,
-        type: "area"
-      },
-      {
-        name: "vitesse",
-        data: arrSmoothed
-        //type: "line"
-      }
-    ];
   }
 };
+
 function distance(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -480,7 +506,7 @@ function imageToDataUri(datas, wantedWidth, wantedHeight) {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#mapidvol {
+#mapid {
   width: 100%;
   padding-top: 56.25%;
   margin-bottom: 5px;
@@ -498,5 +524,9 @@ function imageToDataUri(datas, wantedWidth, wantedHeight) {
 <style >
 .current-color {
   border: 1px solid #ccc;
+}
+
+.modal-full {
+  max-width: 100% !important;
 }
 </style>
