@@ -1,5 +1,10 @@
  <template>
   <div>
+    <div v-if="bddflights">
+      <portal-print v-model="openpapier" :bddflights="bddflights">
+        <!-- I appear in a new window! -->
+      </portal-print>
+    </div>
     <flightform
       :show="showPopupFlight"
       @flightClosed="showPopupFlight=false"
@@ -21,6 +26,9 @@
           class="text-center"
         >
           <b-card-text class="topstat">{{ bddflights.all.nb_flights }} vols</b-card-text>
+          <b-card-text>
+            <em>Depuis le {{ bddflights.all.min_date | moment('DD/MM/YYYY') }}</em>
+          </b-card-text>
         </b-card>
 
         <b-card
@@ -31,6 +39,9 @@
           class="text-center"
         >
           <b-card-text class="topstat">{{ bddflights.all.duration }}</b-card-text>
+          <b-card-text>
+            <em>Depuis le {{ bddflights.all.min_date | moment('DD/MM/YYYY') }}</em>
+          </b-card-text>
         </b-card>
 
         <b-card
@@ -41,6 +52,9 @@
           class="text-center"
         >
           <b-card-text class="topstat">{{ bddflights.all.sites_id.length }}</b-card-text>
+          <b-card-text>
+            <em>Depuis le {{ bddflights.all.min_date | moment('DD/MM/YYYY') }}</em>
+          </b-card-text>
         </b-card>
       </b-card-group>
       <!-- {{bddflights.data}} -->
@@ -53,7 +67,19 @@
                 <button
                   class="btn btn-primary btn-xs"
                   @click="addFlightFree()"
-                >Ajouter un vol (hors IGC)</button>
+                >Ajouter un vol (hors IGC)</button>&nbsp;&nbsp;
+                <button class="btn btn-primary btn-xs" @click="print()">
+                  <i class="fa fa-print"></i>
+                </button>
+                &nbsp;&nbsp;
+                <button
+                  class="btn btn-primary btn-xs"
+                  @click="loadMore()"
+                  v-if="isLoadMore"
+                >
+                  Charger plus
+                  <i class="fa fa-plus"></i>
+                </button>
               </div>
               <div class="clearfix"></div>
             </b-card-header>
@@ -114,7 +140,7 @@
                       >
                         <b-card
                           no-body
-                          class="mb-1"
+                          class="mb-1 card-day"
                           v-for="dataday in datamonth.days"
                           :key="dataday.day"
                         >
@@ -265,9 +291,10 @@
                                     </div>
                                   </div>
                                   <div class="col-md-3">
-                                    <div class="comments">
-                                      <pre>{{ f.comment }}</pre>
-                                    </div>
+                                    <div
+                                      class="comments"
+                                      v-html="$options.filters.nl2br(f.comment)"
+                                    ></div>
                                   </div>
                                 </div>
                               </div>
@@ -292,24 +319,26 @@
 import { mapGetters } from "vuex";
 import Flightform from "./Flightform";
 import Visu from "./Visu";
+import PortalPrint from "./PortalPrint";
 // eslint-disable-next-line no-unused-vars
 import store from "@/store";
 
 export default {
   name: "Carnet",
-  components: { Flightform, Visu },
+  components: { Flightform, Visu, PortalPrint },
   props: {},
   data: function() {
     return {
       currentFlight: {},
       showPopupFlight: false,
       showPopupVisu: false,
-      currentIgc: null
+      currentIgc: null,
+      openpapier: false
     };
   },
 
   computed: {
-    ...mapGetters(["bddflights"])
+    ...mapGetters(["bddflights", "isLoadMore"])
   },
   methods: {
     edit: function(flight) {
@@ -365,6 +394,12 @@ export default {
           });
         }
       );
+    },
+    print: function() {
+      this.openpapier = true;
+    },
+    loadMore: function() {
+      store.dispatch("loadBddFlights");
     }
   },
   mounted: function() {
@@ -407,5 +442,9 @@ export default {
   border: 1px solid #ccc;
   padding: 5px;
   min-height: 100%;
+  text-align: left;
+}
+.card-day {
+  border-left: 4px solid var(--cyan);
 }
 </style>

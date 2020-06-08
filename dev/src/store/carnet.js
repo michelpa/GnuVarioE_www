@@ -17,7 +17,8 @@ const initialState = {
     sitesLoaded: false,
     sites: {},
     bddflightsLoaded: false,
-    bddflights: {}
+    bddflights: {},
+    offsetFlights: 0
 };
 
 export const state = Object.assign({}, initialState);
@@ -102,6 +103,7 @@ export const actions = {
             //url = "config/params.jso";
             url = baseUrl + url;
         }
+        url = url + "?offset=" + context.state.offsetFlights;
 
         let axiosConfig = {
             headers: {
@@ -115,27 +117,41 @@ export const actions = {
             context.commit('setLoadingState', true);
             return axios.get(url, axiosConfig).then(response => {
                 let data = response.data;
-                let parsed = {};
-                const distinctSites = [...new Set(data.map(d => d.site_id))];
+                let parsed = context.state.bddflights;
+                if (!parsed.all) {
+                    parsed.all = {
+                        "nb_flights": 0,
+                        "duration": "00:00:00",
+                        "sites_id": [],
+                        "data": [],
+                        "min_date": null
+                    };
+                }
+                const distinctSites = [...new Set(data.map(d => d.site_id)), ...parsed.all.sites_id];
                 var index = distinctSites.indexOf(0);
                 if (index > -1) {
                     distinctSites.splice(index, 1);
                 }
-                let dur = "00:00:00";
+                let dur = parsed.all.duration;
                 data.forEach(d => {
                     dur = getTimeInterval(d.start_flight_time, d.end_flight_time, dur);
                 });
+
                 parsed.all = {
-                    "nb_flights": data.length,
+                    "nb_flights": parsed.all.nb_flights + data.length,
                     "duration": dur,
                     "sites_id": distinctSites,
                     "data": []
                 };
 
-                parsed.data = [];
+                if (!parsed.data) {
+                    parsed.data = [];
+                }
+
                 //console.log(parsed.data.filter(function (e) { return Object.prototype.hasOwnProperty.call(e, "2010") }));
                 data.forEach(d => {
                     let m = moment(d.flight_date, "YYYY-MM-DD");
+                    parsed.all.min_date = m;
                     let year = m.year();
                     let month = m.format('MM');
                     //recherche si un element existe pour l'annee sinon création
@@ -335,6 +351,7 @@ export const mutations = {
     setBddFlights(state, data) {
         state.bddflights = Object.assign({}, data);
         state.bddflightsLoaded = true;
+        state.offsetFlights += data.all.nb_flights;
     },
 }
 
@@ -345,6 +362,9 @@ const getters = {
     bddflights(state) {
         return state.bddflightsLoaded ? state.bddflights : false;
     },
+    isLoadMore(state) {
+        return (state.offsetFlights % 10 == 0) ? true : false;
+    }
 }
 
 export default {
