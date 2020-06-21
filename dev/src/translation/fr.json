@@ -212,6 +212,14 @@
       "SETTINGS_VARIO_PERIOD_COUNT": {
         "label": "Période d'intégration",
         "help": " entre 0 et 40 correspond à la période d'intégration par pas de 50ms entre 0 et 2s"
+      },
+      "IGC_SEND_CALIBRATED_ALTITUDE": {
+        "label": "Utilisation de l'altitude calibrée dans les fichiers IGC",
+        "help": ""
+      },
+      "BLUETOOTH_SEND_CALIBRATED_ALTITUDE": {
+        "label": "Envoi de l'altitude calibrée dans les trames bluetooth",
+        "help": ""
       }
     },
     "vol": {
