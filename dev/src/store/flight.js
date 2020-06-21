@@ -46,17 +46,17 @@ export const actions = {
             });
         });
     },
-    downloadFlight: function (context, filename) {
-        let url = "/file?path=/vols/" + filename;
+    downloadFlight: function (context, { filename, parsed }) {
+        let url = "/file?path=/vols/";
+        if (parsed == true) {
+            url = url + "parsed/"
+        }
+        url = url + filename;
 
         if (env.NODE_ENV == "development") {
             //url = "config/flights.jso";
             url = baseUrl + url;
         }
-
-        // if (env.NODE_ENV == "development") {
-        //     url = "/19022402.IGC";
-        // }
 
         let axiosConfig = {}
         return waitFor(function () {
@@ -148,7 +148,8 @@ export const actions = {
 
 export const mutations = {
     setFlights: function (state, flights) {
-        state.flights = Object.assign({}, state.flights, flights);
+        //state.flights = Object.assign({}, state.flights, flights);
+        state.flights = Object.assign({}, flights);
         state.flightsLoaded = true;
     },
 }

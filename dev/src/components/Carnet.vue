@@ -1,6 +1,6 @@
  <template>
   <div>
-    <div v-if="bddflights">
+    <div v-if="bddflights.all">
       <portal-print v-model="openpapier" :bddflights="bddflights">
         <!-- I appear in a new window! -->
       </portal-print>
@@ -16,7 +16,7 @@
       :igc="currentIgc"
       :flight="currentFlight"
     ></visu>
-    <div v-if="bddflights">
+    <div v-if="bddflights.all">
       <b-card-group deck>
         <b-card
           bg-variant="primary"
@@ -212,6 +212,16 @@
                                               <i class="fa fa-info-circle"></i>
                                             </button>
                                             &nbsp;
+                                            <button
+                                              v-if="f.filename"
+                                              class="btn btn-sm btn-success"
+                                              @click="downloadFromSD(f)"
+                                              v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                              title="Télécharger"
+                                            >
+                                              <i class="fa fa-arrow-alt-circle-down"></i>
+                                            </button>
+                                            &nbsp;
                                             <click-confirm
                                               placement="bottom"
                                               button-size="sm"
@@ -373,6 +383,30 @@ export default {
         }
       );
     },
+    downloadFromSD: function(flight) {
+      let self = this;
+      store
+        .dispatch("downloadFlight", { filename: flight.filename, parsed: true })
+        .then(
+          response => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", flight.filename);
+            document.body.appendChild(link);
+            link.click();
+          },
+          // eslint-disable-next-line
+          error => {
+            self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
+              title: "Mon vol",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger"
+            });
+          }
+        );
+    },
     addFlightFree: function() {
       this.currentFlight = {};
       this.showPopupFlight = true;
@@ -382,7 +416,7 @@ export default {
       store.dispatch("deleteFlightParsed", flight).then(
         // eslint-disable-next-line no-unused-vars
         response => {
-          store.dispatch("loadBddFlights");
+          store.dispatch("loadBddFlights", { 'reload': true });
         },
         error => {
           let msg = error.message;
@@ -399,19 +433,22 @@ export default {
       this.openpapier = true;
     },
     loadMore: function() {
-      store.dispatch("loadBddFlights");
+      store.dispatch("loadBddFlights", {});
+    },
+    reset: function() {
+      store.dispatch("loadBddFlights", { 'reload': true });
     }
   },
   mounted: function() {
-    let self = this;
-    store.dispatch("loadBddFlights").catch(error => {
-      self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
-        title: "Mon vol",
-        toaster: "b-toaster-top-right",
-        solid: true,
-        variant: "danger"
-      });
-    });
+    // let self = this;
+    // store.dispatch("loadBddFlights").catch(error => {
+    //   self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
+    //     title: "Mon vol",
+    //     toaster: "b-toaster-top-right",
+    //     solid: true,
+    //     variant: "danger"
+    //   });
+    // });
   }
 };
 </script>
