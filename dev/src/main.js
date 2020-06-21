@@ -60,6 +60,14 @@ Vue.filter('nl2br', function (str, is_xhtml) {
   return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 })
 
+Vue.filter('string2classname', function (name) {
+  return name.replace(/[^a-z0-9]/g, function (s) {
+    var c = s.charCodeAt(0);
+    if (c == 32) return '-';
+    if (c >= 65 && c <= 90) return '_' + s.toLowerCase();
+    return '__' + ('000' + c.toString(16)).slice(-4);
+  });
+})
 
 new Vue({
   i18n,

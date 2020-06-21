@@ -12,84 +12,96 @@
       </h1>
 
       <div v-for="(data) in bddflights.data.slice().reverse()" :key="data.year">
-        <h2>
+        <h2>{{data.year}}</h2>
+        <div class="year-zone">
+          <div
+            v-for="(datamonth) in data.months.slice().reverse()"
+            :key="datamonth.month"
+            class="un-mois"
+          >
+            <h3>
+              {{ [datamonth.month + data.year, "MMYYYY"]| moment('MMMM YYYY') }}
+              <div
+                class="subtitle"
+              >({{ datamonth.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( datamonth.nb_flights)}}, {{ datamonth.duration }}, {{datamonth.sites_id.length }} {{"site"| pluralize( datamonth.sites_id.length)}})</div>
+            </h3>
+            <div
+              v-for="dataday in datamonth.days.slice().reverse()"
+              :key="dataday.day"
+              class="un-jour"
+            >
+              <h4>
+                {{dataday.day | moment('dddd D MMMM')}}
+                <div
+                  class="subtitle"
+                >({{ dataday.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( dataday.nb_flights)}}, {{ dataday.duration }}, {{dataday.sites_id.length }} {{"site"| pluralize( dataday.sites_id.length)}})</div>
+              </h4>
+
+              <div class="un-vol" v-for="f in dataday.flights" :key="f.id">
+                <div class="filename" v-if="f.filename && f.filename != ''">{{ f.filename }}</div>
+                <br />
+                <table class="table table-sm">
+                  <tbody>
+                    <tr>
+                      <td>
+                        Site:
+                        <strong>{{ f.site_lib }}</strong>
+                      </td>
+                      <td>
+                        Pilote:
+                        <strong>{{ f.pilot }}</strong>
+                      </td>
+                      <td>
+                        Voile:
+                        <strong>{{ f.wing }}</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Heure de début
+                        <strong>{{ f.start_flight_time }}</strong>
+                      </td>
+                      <td>
+                        Heure de fin
+                        <strong>{{ f.end_flight_time }}</strong>
+                      </td>
+                      <td>
+                        Durée
+                        <strong>{{ f.duration }}</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Alt. départ / Alt. fin
+                        <strong>{{ f.start_height }}m / {{ f.end_height }}m</strong>
+                      </td>
+                      <td>
+                        Altitude mini
+                        <strong>{{ f.min_height }}m</strong>
+                      </td>
+                      <td>
+                        Altitude maxi
+                        <strong>{{ f.max_height }}m</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div
+                  v-if="f.comment && f.comment != ''"
+                  class="comments"
+                  v-html="$options.filters.nl2br(f.comment)"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="bottom">
           {{data.year}}
           <div
             class="subtitle"
           >({{ data.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( data.nb_flights)}}, {{ data.duration }}, {{data.sites_id.length }} {{"site"| pluralize( data.sites_id.length)}})</div>
         </h2>
-        <div v-for="(datamonth) in data.months.slice().reverse()" :key="datamonth.month" class="un-mois">
-          <h3>
-            {{ [datamonth.month + data.year, "MMYYYY"]| moment('MMMM YYYY') }}
-            <div
-              class="subtitle"
-            >({{ datamonth.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( datamonth.nb_flights)}}, {{ datamonth.duration }}, {{datamonth.sites_id.length }} {{"site"| pluralize( datamonth.sites_id.length)}})</div>
-          </h3>
-          <div v-for="dataday in datamonth.days.slice().reverse()" :key="dataday.day" class="un-jour">
-            <h4>
-              {{dataday.day | moment('dddd D MMMM')}}
-              <div
-                class="subtitle"
-              >({{ dataday.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( dataday.nb_flights)}}, {{ dataday.duration }}, {{dataday.sites_id.length }} {{"site"| pluralize( dataday.sites_id.length)}})</div>
-            </h4>
-          
-            <div class="un-vol" v-for="f in dataday.flights" :key="f.id" >
-              <div class="filename" v-if="f.filename && f.filename != ''">{{ f.filename }}</div>
-              <br />
-              <table class="table table-sm">
-                <tbody>
-                  <tr>
-                    <td>
-                      Site:
-                      <strong>{{ f.site_lib }}</strong>
-                    </td>
-                    <td>
-                      Pilote:
-                      <strong>{{ f.pilot }}</strong>
-                    </td>
-                    <td>
-                      Voile:
-                      <strong>{{ f.wing }}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Heure de début
-                      <strong>{{ f.start_flight_time }}</strong>
-                    </td>
-                    <td>
-                      Heure de fin
-                      <strong>{{ f.end_flight_time }}</strong>
-                    </td>
-                    <td>
-                      Durée
-                      <strong>{{ f.duration }}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Alt. départ / Alt. fin
-                      <strong>{{ f.start_height }}m / {{ f.end_height }}m</strong>
-                    </td>
-                    <td>
-                      Altitude mini
-                      <strong>{{ f.min_height }}m</strong>
-                    </td>
-                    <td>
-                      Altitude maxi
-                      <strong>{{ f.max_height }}m</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div
-                v-if="f.comment && f.comment != ''"
-                class="comments"
-                v-html="$options.filters.nl2br(f.comment)"
-              ></div>
-            </div>
-          </div>
-        </div>
+        <hr>
       </div>
       <slot />
     </section>
@@ -137,25 +149,34 @@ h4 {
 }
 
 h1 { font-size: 160%; text-align: center; margin-bottom: 7pt;}
-h2 { font-size: 135%; border: 1px solid #0088B4; background-color: #eee; }
+h2 { font-size: 135%; border: 1px solid #0088B4; background-color: #eee; margin-bottom: -5px }
+h2.bottom { font-size: 135%; border: 1px dotted #0088B4; background-color: #eee; margin-top: -2px; margin-bottom: 5px;}
 h3 { font-size: 125%;  border-bottom: 1px solid #0088B4 }
 h4 { font-size: 100%;  }
 h5 { font-size: 100%; font-variant: small-caps;}
 h6 { font-size: 90%; font-style: italic; }
 
+hr {
+  color: #0088B4;
+}
+.year-zone {
+  border-left: 2px solid #0088B4;
+  padding-left: 5px;
+}
+
 table {
   width: 100%;
 }
 .un-mois {
-  page-break-inside : avoid;
+  /* page-break-inside : avoid; */
 }
 .un-jour {
-  page-break-inside : avoid;
+  /*page-break-inside : avoid;*/
 }
 .un-vol {
   border: 1px solid #666;
   padding: 1pt;
-  margin-bottom: 5pt;
+  margin: 5pt 0 2pt 0;
   page-break-inside : avoid;
 }
 .filename {
@@ -230,7 +251,6 @@ export default {
       this.windowRef.document.head.appendChild(newStyleEl);
       this.windowRef.addEventListener("beforeunload", this.closePortal);
 
-     
       //console.log(this.$el.children.querySelector("#monElement").clientHeight);
     },
     closePortal() {
