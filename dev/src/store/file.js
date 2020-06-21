@@ -111,8 +111,30 @@ export const actions = {
             return context.rootState.loading.isLoading === false
         }).then(function () {
             context.commit('setLoadingState', true);
+            // eslint-disable-next-line no-unused-vars
             return axios.delete(url, axiosConfig).then(response => {
-                return response;
+                return true;
+            }).catch(function (error) {
+                return Promise.reject(error);
+            }).finally(function () {
+                context.commit('setLoadingState', false);
+            });
+        });
+    },
+    createFolder: function (context, filename) {
+        let url = encodeURI("/create?path=" + filename);
+        if (env.NODE_ENV == "development") {
+            url = baseUrl + url;
+        }
+
+        let axiosConfig = {}
+        return waitFor(function () {
+            return context.rootState.loading.isLoading === false
+        }).then(function () {
+            context.commit('setLoadingState', true);
+            // eslint-disable-next-line no-unused-vars
+            return axios.put(url, axiosConfig).then(response => {
+                return true;
             }).catch(function (error) {
                 return Promise.reject(error);
             }).finally(function () {

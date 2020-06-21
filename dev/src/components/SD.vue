@@ -11,14 +11,16 @@
                 :key="t.key"
                 class="item"
                 :item="t"
-                path=""
+                path
                 v-on:uploadAsked="askUpload"
+                v-on:createAsked="askCreateFolder"
               ></tree-item>
             </ul>
           </div>
         </div>
       </b-card>
       <upload :show="showUpload" :uploadPath="uploadPath" @uploadClosed="showUpload=false"></upload>
+      <create :show="showCreate" :createPath="createPath" @createClosed="showCreate=false"></create>
     </div>
   </div>
 </template>
@@ -26,16 +28,19 @@
 <script>
 import TreeItem from "./TreeItem";
 import Upload from "./Upload";
+import Create from "./Create";
 import { mapGetters } from "vuex";
 import store from "@/store";
 export default {
   name: "SD",
-  components: { TreeItem, Upload },
+  components: { TreeItem, Upload, Create },
   props: {},
   data: function() {
     return {
       showUpload: false,
-      uploadPath: ""
+      uploadPath: "",
+      showCreate: false,
+      createPath: ""
     };
   },
   methods: {
@@ -50,6 +55,10 @@ export default {
     askUpload(path) {
       this.uploadPath = path;
       this.showUpload = true;
+    },
+    askCreateFolder(path) {
+      this.createPath = path;
+      this.showCreate = true;
     }
   },
   computed: {
