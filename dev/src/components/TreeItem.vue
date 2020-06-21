@@ -1,6 +1,6 @@
 <template>
   <li class>
-    <div :class="{bold: isFolder}" @dblclick="makeFolder">
+    <div :class="{bold: isFolder}">
       <span v-if="isFolder" class="text-secondary">
         <a href="javascript:void(0)" @click="toggle">
           <i
@@ -41,9 +41,18 @@
             class="btn btn-sm btn-info"
             @click="uploadToSD()"
             v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
-            title="Télécharger"
+            title="Téléverser"
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
+          </button>
+          &nbsp;
+          <button
+            class="btn btn-sm btn-info"
+            @click="createFolder()"
+            v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+            title="Créer un dossier"
+          >
+            <i class="fa fa-plus"></i>
           </button>
         </span> &nbsp;
         <click-confirm
@@ -67,6 +76,7 @@
     <ul v-show="isOpen" v-if="isFolder" class>
       <tree-item
         v-on:uploadAsked="uploadAskedChild"
+        v-on:createAsked="createAskedChild"
         class="item"
         v-for="(child, index) in item.contents"
         :key="index"
@@ -105,8 +115,8 @@ export default {
         }
       }
     },
-    makeFolder: function() {
-      return;
+    createFolder: function() {
+      this.$emit("createAsked", this.basePath);
     },
     downloadFromSD: function() {
       let self = this;
@@ -132,6 +142,9 @@ export default {
     },
     uploadAskedChild: function(path) {
       this.$emit("uploadAsked", path);
+    },
+    createAskedChild: function(path) {
+      this.$emit("createAsked", path);
     },
     uploadToSD: function() {
       this.$emit("uploadAsked", this.basePath);
@@ -193,7 +206,6 @@ export default {
       store.dispatch("deleteFile", self.fullFilename).then(
         // eslint-disable-next-line
         response => {
-          store.dispatch("loadSDFiles", this.basePath);
           let typeF = "Fichier";
           if (self.isFolder) {
             typeF = "Dossier";
@@ -207,6 +219,7 @@ export default {
               variant: "success"
             }
           );
+          store.dispatch("loadSDFiles", this.path);
         },
         // eslint-disable-next-line
         error => {
