@@ -86,6 +86,9 @@ export default {
         bvModalEvt.preventDefault();
         return;
       }
+      if (this.site.comment == undefined) {
+        this.site.comment = "";
+      }
       store.dispatch("saveSite", this.site).then(
         // eslint-disable-next-line no-unused-vars
         response => {
