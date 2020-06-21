@@ -9,7 +9,7 @@
       title="Vol"
     >
       <div>
-        <div class="row" v-if="flight.filename">
+        <div class="row" v-if="flight.filename && flight.filename != ''">
           <div class="col-md-12">
             <table class="table table-sm">
               <tbody>
@@ -62,7 +62,7 @@
 
         <b-card>
           <b-form @submit.prevent>
-            <div class="row" v-if="!(flight.filename)">
+            <div v-if="!(flight.filename)">
               <b-row class="my-1">
                 <b-col sm="3">
                   <label>Date du vol</label>
@@ -230,6 +230,7 @@ export default {
       let ff = {};
       if (!this.flight.filename) {
         ff = {
+          id: this.flight.id,
           site_id: this.flight.site_id ? this.flight.site_id : null,
           flightDate: this.flight.flight_date ? this.flight.flight_date : "",
           pilot: this.flight.pilot ? this.flight.pilot : "",
@@ -261,7 +262,7 @@ export default {
         // eslint-disable-next-line no-unused-vars
         response => {
           self.show = false;
-          store.dispatch("loadBddFlights");
+          store.dispatch("loadBddFlights", { 'reload': true });
           this.$bvModal.hide("modal-flight");
         },
         // eslint-disable-next-line
