@@ -130,7 +130,7 @@
                           :max="1"
                           :step="0.1"
                         ></config-field>
-                         <config-field
+                        <config-field
                           v-model="localConfig.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION"
                           :label="$t('params.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION.label')"
                           :help="$t('params.vario.ACCELERATION_MEASURE_STANDARD_DEVIATION.help')"
@@ -139,13 +139,13 @@
                           :max="0.6"
                           :step="0.01"
                         ></config-field>
-                         <config-field
+                        <config-field
                           v-model="localConfig.vario.VARIOMETER_INTEGRATED_CLIMB_RATE"
                           :label="$t('params.vario.VARIOMETER_INTEGRATED_CLIMB_RATE.label')"
                           :help="$t('params.vario.VARIOMETER_INTEGRATED_CLIMB_RATE.help')"
                           kind="checkbox"
                         ></config-field>
-                         <config-field
+                        <config-field
                           v-model="localConfig.vario.SETTINGS_VARIO_PERIOD_COUNT"
                           :label="$t('params.vario.SETTINGS_VARIO_PERIOD_COUNT.label')"
                           :help="$t('params.vario.SETTINGS_VARIO_PERIOD_COUNT.help')"
@@ -186,6 +186,18 @@
                           :help="$t('params.vario.RATIO_CLIMB_RATE.help')"
                           kind="select"
                           :options="[{value: '1', text: 'Affichage de la finesse'}, { value: '2', text: 'Affichage du taux de chute moyen' }, { value: '3', text: 'Affichage des 2 informations en alternance dans la zone à droite de l’affiche du vario' }]"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.vario.IGC_SEND_CALIBRATED_ALTITUDE"
+                          :label="$t('params.vario.IGC_SEND_CALIBRATED_ALTITUDE.label')"
+                          :help="$t('params.vario.IGC_SEND_CALIBRATED_ALTITUDE.help')"
+                          kind="checkbox"
+                        ></config-field>
+                        <config-field
+                          v-model="localConfig.vario.BLUETOOTH_SEND_CALIBRATED_ALTITUDE"
+                          :label="$t('params.vario.BLUETOOTH_SEND_CALIBRATED_ALTITUDE.label')"
+                          :help="$t('params.vario.BLUETOOTH_SEND_CALIBRATED_ALTITUDE.help')"
+                          kind="checkbox"
                         ></config-field>
                       </div>
                       <div class="col-md-4">
@@ -327,14 +339,14 @@
                           v-model="localConfig.systeme.LANGUAGE"
                           :label="$t('params.systeme.LANGUAGE.label')"
                           :help="$t('params.systeme.LANGUAGE.help')"
-                           kind="select"
+                          kind="select"
                           :options="languages"
                         ></config-field>
                         <config-field
                           v-model="localConfig.systeme.URL_UPDATE"
                           :label="$t('params.systeme.URL_UPDATE.label')"
                           :help="$t('params.systeme.URL_UPDATE.help')"
-                          maxlength="50"
+                          :maxLength="50"
                           input-type="text"
                         ></config-field>
                         <config-field
@@ -462,14 +474,15 @@ export default {
         { value: "9", text: "9" },
         { value: "10", text: "10" }
       ],
-      languages : [
-        {value : 0, text:"Français"},
-        {value : 1, text:"English"},
+      languages: [
+        { value: 0, text: "Français" },
+        { value: 1, text: "English" }
       ]
     };
   },
   methods: {
-    onSaveConfig: function() {
+    onSaveConfig: function(evt) {
+      evt.preventDefault();
       this.confVoile = false;
       store.commit("setConfig", this.localConfig);
       let self = this;
