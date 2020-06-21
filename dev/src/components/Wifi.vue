@@ -130,7 +130,8 @@ export default {
         self.conf = Object.assign(res, { [key]: match[1] });
       });
     },
-    onSaveConfig: function() {
+    onSaveConfig: function(evt) {
+      evt.preventDefault();
       //recomposition du fichier
       var f = `
 [SSID_1=${this.conf.SSID_1}]
