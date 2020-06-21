@@ -217,7 +217,7 @@ export default {
     },
     downloadFromSD: function(f) {
       let self = this;
-      store.dispatch("downloadFlight", f).then(
+      store.dispatch("downloadFlight", { filename: f }).then(
         response => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
