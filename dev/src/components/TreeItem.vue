@@ -148,57 +148,6 @@ export default {
     },
     uploadToSD: function() {
       this.$emit("uploadAsked", this.basePath);
-      // alert("soon");
-      // if (!this.file) {
-      //   this.error = true;
-      //   return;
-      // }
-      // this.error = false;
-
-      // let formData = new FormData();
-      // formData.append("data", this.file, "update.bin");
-
-      // let self = this;
-      // var config = {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data"
-      //   },
-      //   onUploadProgress: function(progressEvent) {
-      //     self.percentCompleted = Math.round(
-      //       (progressEvent.loaded * 100) / progressEvent.total
-      //     );
-      //   }
-      // };
-
-      // this.uploading = true;
-
-      // axios
-      //   .post("/upload", formData, config)
-      //   .then(function() {
-      //     self.uploading = false;
-      //     self.$bvToast.toast(
-      //       `Le fichier a été correctement téléchargée sur le vario. Il va maintenant être redémarré pour terminer la mise à jour`,
-      //       {
-      //         title: "Mise à jour OTA",
-      //         toaster: "b-toaster-top-right",
-      //         solid: true,
-      //         variant: "success"
-      //       }
-      //     );
-      //   })
-      //   .catch(function() {
-      //     self.uploading = false;
-      //     self.$bvToast.toast(
-      //       `Echec du téléchargement du fichier, la mise à jour est abandonnée.`,
-      //       {
-      //         title: "Mise à jour OTA",
-      //         toaster: "b-toaster-top-right",
-      //         solid: true,
-      //         variant: "danger"
-      //       }
-      //     );
-      //   });
-      // return;
     },
     deleteFromSD: function() {
       //confirmation
