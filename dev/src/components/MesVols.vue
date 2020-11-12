@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
     <div v-if="!flights">{{ $t('flights.FLIGHTS_WAIT') }}</div>
     <div v-else class="row">
@@ -20,7 +20,7 @@
                     <div class="col-md-12">
                       <div
                         class="alert alert-info"
-                      >Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.</div>
+                      >{{ $t('messages.MESVOL_WARNING') }}</div>
                     </div>
                   </div>
                   <div class="row">
