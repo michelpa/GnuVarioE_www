@@ -1,23 +1,23 @@
 <template>
   <li class>
-    <div :class="{bold: isFolder}">
+    <div :class="{ bold: isFolder }">
       <span v-if="isFolder" class="text-secondary">
         <a href="javascript:void(0)" @click="toggle">
           <i
             class="text-secondary cross fa"
-            :class="{ 'fa-plus-square': (!isOpen), 'fa-minus-square': (isOpen) }"
+            :class="{ 'fa-plus-square': !isOpen, 'fa-minus-square': isOpen }"
           ></i>
           &nbsp;
           <i
             class="text-secondary fa"
-            :class="{ 'fa-folder': (!isOpen), 'fa-folder-open': ( isOpen) }"
+            :class="{ 'fa-folder': !isOpen, 'fa-folder-open': isOpen }"
           ></i>
           &nbsp;
           {{ item.name }}
         </a>
       </span>
       <span v-else>
-        <i class="text-secondary fa" :class="{ 'fa-file': (!isFolder) }"></i>
+        <i class="text-secondary fa" :class="{ 'fa-file': !isFolder }"></i>
         &nbsp;
         {{ item.name }} &nbsp;
         <em>
@@ -29,7 +29,7 @@
           <button
             class="btn btn-sm btn-success"
             @click="downloadFromSD(item)"
-            v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+            v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
             title="Télécharger"
           >
             <i class="fa fa-arrow-alt-circle-down"></i>
@@ -40,7 +40,7 @@
           <button
             class="btn btn-sm btn-info"
             @click="uploadToSD()"
-            v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+            v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
             title="Téléverser"
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
@@ -49,18 +49,19 @@
           <button
             class="btn btn-sm btn-info"
             @click="createFolder()"
-            v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+            v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
             title="Créer un dossier"
           >
             <i class="fa fa-plus"></i>
           </button>
-        </span> &nbsp;
+        </span>
+        &nbsp;
         <click-confirm
           placement="bottom"
           button-size="sm"
           yes-class="btn btn-success"
           no-class="btn btn-danger"
-          :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
+          :messages="{ title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non' }"
         >
           <button
             class="btn btn-sm btn-danger"
@@ -81,7 +82,7 @@
         v-for="(child, index) in item.contents"
         :key="index"
         :item="child"
-        :level="level+1"
+        :level="level + 1"
         :path="basePath"
         @make-folder="$emit('make-folder', $event)"
         @add-item="$emit('add-item', $event)"
@@ -99,15 +100,15 @@ export default {
   props: {
     item: Object,
     path: { type: String, default: null },
-    level: { type: Number, default: 1 }
+    level: { type: Number, default: 1 },
   },
-  data: function() {
+  data: function () {
     return {
-      isOpen: this.level < nbLevelOpened
+      isOpen: this.level < nbLevelOpened,
     };
   },
   methods: {
-    toggle: function() {
+    toggle: function () {
       if (this.isFolder) {
         this.isOpen = !this.isOpen;
         if (this.isOpen) {
@@ -115,14 +116,16 @@ export default {
         }
       }
     },
-    createFolder: function() {
+    createFolder: function () {
       this.$emit("createAsked", this.basePath);
     },
-    downloadFromSD: function() {
+    downloadFromSD: function () {
       let self = this;
       store.dispatch("downloadFile", this.fullFilename).then(
-        response => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
+        (response) => {
+          const url = window.URL.createObjectURL(
+            new Blob([response.data], { type: response.data.type })
+          );
           const link = document.createElement("a");
           link.href = url;
           link.setAttribute("download", self.item.name);
@@ -130,31 +133,31 @@ export default {
           link.click();
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
             title: "SD",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    uploadAskedChild: function(path) {
+    uploadAskedChild: function (path) {
       this.$emit("uploadAsked", path);
     },
-    createAskedChild: function(path) {
+    createAskedChild: function (path) {
       this.$emit("createAsked", path);
     },
-    uploadToSD: function() {
+    uploadToSD: function () {
       this.$emit("uploadAsked", this.basePath);
     },
-    deleteFromSD: function() {
+    deleteFromSD: function () {
       //confirmation
       let self = this;
       store.dispatch("deleteFile", self.fullFilename).then(
         // eslint-disable-next-line
-        response => {
+        (response) => {
           let typeF = "Fichier";
           if (self.isFolder) {
             typeF = "Dossier";
@@ -165,37 +168,37 @@ export default {
               title: "SD",
               toaster: "b-toaster-top-right",
               solid: true,
-              variant: "success"
+              variant: "success",
             }
           );
           store.dispatch("loadSDFiles", this.path);
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast("Echec de la suppression", {
             title: "SD",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
-    }
+    },
   },
   computed: {
-    isFolder: function() {
+    isFolder: function () {
       return this.item.type == "dir";
     },
-    fullFilename: function() {
+    fullFilename: function () {
       return this.path + this.item.name;
     },
-    basePath: function() {
+    basePath: function () {
       return this.isFolder && this.path
         ? this.path + this.item.name + "/"
         : this.item.name;
-    }
+    },
   },
-  mounted: function() {}
+  mounted: function () {},
 };
 </script>
 

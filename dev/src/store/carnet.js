@@ -11,6 +11,23 @@ function getTimeInterval(startTime, endTime, addTime) {
     return interval.format("HH:mm:ss");
 }
 
+function compareFlight(a, b) {
+    if (a.flight_date > b.flight_date) {
+        return -1;
+    }
+    if (a.flight_date < b.flight_date) {
+        return 1;
+    }
+
+    if (a.start_flight_time < b.start_flight_time) {
+        return -1;
+    }
+    if (a.start_flight_time > b.start_flight_time) {
+        return 1;
+    }
+    return 0;
+}
+
 const env = process.env;
 
 const initialState = {
@@ -19,7 +36,7 @@ const initialState = {
     bddflightsLoaded: false,
     bddflights: {},
     offsetFlights: 0,
-    limitFlights: 50
+    limitFlights: 10000
 };
 
 export const state = Object.assign({}, initialState);
@@ -162,6 +179,9 @@ export const actions = {
                     if (!parsed.data) {
                         parsed.data = [];
                     }
+
+                    //tri des vols par ordre flight_date DESC, start_flight_time ASC 
+                    data.sort(compareFlight);
 
                     //console.log(parsed.data.filter(function (e) { return Object.prototype.hasOwnProperty.call(e, "2010") }));
                     data.forEach(d => {
