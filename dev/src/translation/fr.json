@@ -283,5 +283,8 @@
         "help": ""
       }
     }
+  },
+  "messages": {
+    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol."
   }
 }

@@ -62,7 +62,7 @@ export default {
       tabVariant: this.themeHelper.themesVariantLst,
       tabType: this.themeHelper.themesTypeLst,
       themes: this.themeHelper.themesLst,
-      langs: { fr: "FR", en: "EN" },
+      langs: { fr: "FR", en: "EN", ru: "RU" },
       langSelected: ""
     };
   },
