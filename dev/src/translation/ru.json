@@ -1,11 +1,20 @@
 {
     "home": {
+<<<<<<< HEAD
       "hello": "Привет"
     },
     "global": {
       "save": "Сохранить",
       "reload": "Перезагрузить",
       "DEVELOPPER": "Разработчик"
+=======
+      "hello": "Bonjour"
+    },
+    "global": {
+      "save": "Save",
+      "reload": "Reload",
+      "DEVELOPPER": "Developer"
+>>>>>>> add ru
     },
     "menu": {
       "FLIGHTS": "Мои полеты",
@@ -17,6 +26,7 @@
       "SETTINGS": "Настройки"
     },
     "flights": {
+<<<<<<< HEAD
       "FLIGHTS_LIST": "Список моих полетов",
       "FLIGHTS_FILES": "IGC файлы на SD карте",
       "FLIGHTS_FILENAME": "Имя файла",
@@ -53,6 +63,40 @@
     "params": {
       "PARAM": "Настройки",
       "MODE_EXPERT": "Расширенные настройки",
+=======
+      "FLIGHTS_LIST": "My flights list",
+      "FLIGHTS_FILES": "IGC files on vario SD card",
+      "FLIGHTS_FILENAME": "Filename",
+      "FLIGHTS_ACTION": "Actions",
+      "FLIGHTS": "flight",
+      "FLIGHT_OF": "Flight date",
+      "FLIGHT_DURATION": "Flight duration",
+      "FLIGHT_START": "Flight start",
+      "FLIGHT_END": "Flight end",
+      "FLIGHT_ALT_START": "Start height",
+      "FLIGHT_ALT_END": "End height",
+      "FLIGHT_ALT_MAX": "Max height",
+      "MAP_SETTINGS": "Map settings",
+      "TRACE_COLOR": "Trace color",
+      "TRACE_WIDTH": "Trace width",
+      "FLIGHTS_WAIT": "Flights loading not finished!"
+    },
+    "wifi": {
+      "CONF_LIB": "WIFI configuration",
+      "AP": "Access point"
+    },
+    "sd": {
+      "SD_CONTENT": "SD card content"
+    },
+    "about": {
+      "ABOUT": "About",
+      "CURRENT": "Current version",
+      "CONTRIBUTOR": "Main contributors (alphabeticaly)"
+    },
+    "params": {
+      "PARAM": "Settings",
+      "MODE_EXPERT": "Mode expert",
+>>>>>>> add ru
       "systeme": {
         "TITLE": "System",
         "SUBTITLE": "Expert mode",
@@ -286,6 +330,7 @@
       }
     },
     "messages": {
+<<<<<<< HEAD
       "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал.",
       "Failed_save_settings": "Не удалось сохранить настройки.",
       "Save_settings": "Настройки сохранены на SD карте.",
@@ -295,6 +340,9 @@
       "Variant": "Вариант",
       "Type": "Тип",
       "Language": "Язык"
+=======
+      "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал."
+>>>>>>> add ru
     }
   }
   

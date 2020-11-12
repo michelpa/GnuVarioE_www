@@ -126,10 +126,14 @@ export default {
       tabType: this.themeHelper.themesTypeLst,
       themes: this.themeHelper.themesLst,
       langs: { fr: "FR", en: "EN", ru: "RU" },
+<<<<<<< HEAD
       langSelected: "",
       pgenabled: false,
       pglogin: "",
       pgpass: "",
+=======
+      langSelected: ""
+>>>>>>> add ru
     };
   },
   watch: {
