@@ -32,41 +32,61 @@
     </div>
     <div class="row">
       <div class="col-md-6 d-flex">
-        <b-card class="flex-fill" header="Mise à jour depuis internet" header-tag="header">
+        <b-card
+          class="flex-fill"
+          header="Mise à jour depuis internet"
+          header-tag="header"
+        >
           <div class="bg-default">
             <div class="row">
               <div class="col-md-6">
                 <div v-if="firmwareVersion[keyBeta]">
-                  <em
-                    class
-                  >Version beta dispo: {{ firmwareVersion[keyBeta].version + '.' + firmwareVersion[keyBeta].subversion + 'b' + firmwareVersion[keyBeta].betaversion }}</em>
+                  <em class
+                    >Version beta dispo:
+                    {{
+                      firmwareVersion[keyBeta].version +
+                      "." +
+                      firmwareVersion[keyBeta].subversion +
+                      "b" +
+                      firmwareVersion[keyBeta].betaversion
+                    }}</em
+                  >
                   <br />
                   <br />
-                  <b-button variant="warning" type="button" @click="maj(1)">Mettre à jour</b-button>
+                  <b-button variant="warning" type="button" @click="maj(1)"
+                    >Mettre à jour</b-button
+                  >
                 </div>
-                <em class v-else>
-                  <br />Aucune version béta disponible
-                </em>
+                <em class v-else> <br />Aucune version béta disponible </em>
               </div>
               <div class="col-md-6">
                 <div v-if="firmwareVersion[keyStable]">
-                  <em
-                    class
-                  >Version stable dispo: {{ firmwareVersion[keyStable].version + '.' + firmwareVersion[keyStable].subversion }}</em>
+                  <em class
+                    >Version stable dispo:
+                    {{
+                      firmwareVersion[keyStable].version +
+                      "." +
+                      firmwareVersion[keyStable].subversion
+                    }}</em
+                  >
                   <br />
                   <br />
-                  <b-button variant="success" type="button" @click="maj(1)">Mettre à jour</b-button>
+                  <b-button variant="success" type="button" @click="maj(1)"
+                    >Mettre à jour</b-button
+                  >
                 </div>
-                <em class v-else>
-                  <br />Aucune version stable disponible
-                </em>
+                <em class v-else> <br />Aucune version stable disponible </em>
               </div>
             </div>
           </div>
         </b-card>
       </div>
       <div class="col-md-6">
-        <b-card class="flex-fill" header="Mise à jour locale" header-tag="header">
+        <b-card
+          class="flex-fill"
+          header="Mise à jour locale"
+          header-tag="header"
+        >
           <div class="bg-default">
             <b-form @submit="onSubmitFirmware" @reset="onResetFirmware">
               <b-form-group
@@ -76,11 +96,16 @@
                 label-for="input-firmware"
                 description="Habituellement, il s'agit d'un fichier au format .bin"
               >
-                <b-form-file id="input-firmware" v-model="file" :state="Boolean(file)" plain></b-form-file>
-                <b-form-invalid-feedback
-                  id="input-file-feedback"
-                  v-show="error"
-                >Vous devez sélectionner un fichier...</b-form-invalid-feedback>
+                <b-form-file
+                  id="input-firmware"
+                  v-model="file"
+                  :state="Boolean(file)"
+                  plain
+                ></b-form-file>
+                <b-form-invalid-feedback id="input-file-feedback" v-show="error"
+                  >Vous devez sélectionner un
+                  fichier...</b-form-invalid-feedback
+                >
                 <br />
                 <b-progress
                   v-show="uploading"
@@ -106,20 +131,20 @@ import store from "@/store";
 export default {
   name: "OTA",
   props: {
-    msg: String
+    msg: String,
   },
-  data: function() {
+  data: function () {
     return {
       file: null,
       percentCompleted: 0,
       uploading: false,
       error: false,
-      majencours: false
+      majencours: false,
     };
   },
 
   methods: {
-    onSubmitFirmware: function() {
+    onSubmitFirmware: function () {
       if (!this.file) {
         this.error = true;
         return;
@@ -132,20 +157,20 @@ export default {
       let self = this;
       var config = {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
         },
-        onUploadProgress: function(progressEvent) {
+        onUploadProgress: function (progressEvent) {
           self.percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
           );
-        }
+        },
       };
 
       this.uploading = true;
 
       axios
         .post("/fupdate", formData, config)
-        .then(function() {
+        .then(function () {
           self.uploading = false;
           self.$bvToast.toast(
             `Le fichier a été correctement téléchargée sur le vario. Il va maintenant être redémarré pour terminer la mise à jour`,
@@ -153,11 +178,11 @@ export default {
               title: "Mise à jour OTA",
               toaster: "b-toaster-top-right",
               solid: true,
-              variant: "success"
+              variant: "success",
             }
           );
         })
-        .catch(function() {
+        .catch(function () {
           self.uploading = false;
           self.$bvToast.toast(
             `Echec du téléchargement du fichier, la mise à jour est abandonnée.`,
@@ -165,36 +190,36 @@ export default {
               title: "Mise à jour OTA",
               toaster: "b-toaster-top-right",
               solid: true,
-              variant: "danger"
+              variant: "danger",
             }
           );
         });
       return;
     },
-    onResetFirmware: function() {
+    onResetFirmware: function () {
       this.file = null;
       return;
     },
-    maj: function(beta) {
+    maj: function (beta) {
       this.majencours = true;
       store.dispatch("upgradeFirmware", beta).then(
         // eslint-disable-next-line
-        response => {},
+        (response) => {},
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(`Echec de la mise à jour.`, {
             title: "A propos",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
-    }
+    },
   },
   computed: {
     ...mapGetters(["config", "firmwareVersion"]),
-    versionFull: function() {
+    versionFull: function () {
       let v = "";
       if (this.firmwareVersion && this.firmwareVersion.Firmware) {
         v =
@@ -207,7 +232,7 @@ export default {
       }
       return v;
     },
-    keyBeta: function() {
+    keyBeta: function () {
       let v = "";
       if (
         this.firmwareVersion &&
@@ -218,7 +243,7 @@ export default {
       }
       return v;
     },
-    keyStable: function() {
+    keyStable: function () {
       let v = "";
       if (
         this.firmwareVersion &&
@@ -228,11 +253,11 @@ export default {
         v = "Gnuvario" + this.firmwareVersion.Firmware.type;
       }
       return v;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     store.dispatch("loadFirmwareVersion");
-  }
+  },
 };
 </script>
 

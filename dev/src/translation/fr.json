@@ -32,7 +32,10 @@
     "FLIGHT_ALT_MAX": "Altitude max",
     "MAP_SETTINGS": "Réglages carte",
     "TRACE_COLOR": "Couleur du tracé",
-    "TRACE_WIDTH": "Epaisseur du tracé"
+    "TRACE_WIDTH": "Epaisseur du tracé",
+    "FLIGHT_NOFLIGHT": "Aucune trace en attente.",
+    "MY_LOGBOOK": "Mon carnet de vols",
+    "MY_SITES": "Mes sites de vols"
   },
   "wifi": {
     "CONF_LIB": "Configuration WiFi",

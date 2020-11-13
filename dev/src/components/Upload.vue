@@ -1,7 +1,13 @@
 <template>
   <div>
-    <b-modal id="modal-upload" @cancel="doCancel" @ok="doUpload" @hidden="doHidden" ref="modal">
-      <template v-slot:modal-title>Upload vers "{{uploadPath}}"</template>
+    <b-modal
+      id="modal-upload"
+      @cancel="doCancel"
+      @ok="doUpload"
+      @hidden="doHidden"
+      ref="modal"
+    >
+      <template v-slot:modal-title>Upload vers "{{ uploadPath }}"</template>
       <div
         @dragleave="onDragLeave"
         @dragover="onDragOver"
@@ -9,11 +15,26 @@
         class="dropzone"
         :class="[drag ? 'bg-info' : 'dropzoneout', 'dropzone']"
       >
-        <div v-if="!drag" style="display: table-cell; vertical-align: middle; text-align:center">
+        <div
+          v-if="!drag"
+          style="
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+          "
+        >
           <div v-if="files.length == 0">
-            <span class="alert alert-info">Déposer les fichiers à uploader ici</span>
+            <span class="alert alert-info"
+              >Déposer les fichiers à uploader ici</span
+            >
           </div>
-          <b-progress v-show="uploading" :value="uploadPct" :max="100" show-progress animated></b-progress>
+          <b-progress
+            v-show="uploading"
+            :value="uploadPct"
+            :max="100"
+            show-progress
+            animated
+          ></b-progress>
           <b-list-group v-if="files.length > 0">
             <b-list-group-item v-for="file in files" :key="file.name">
               {{ file.name }}
@@ -30,6 +51,8 @@
         </div>
         <div class="clearfix"></div>
       </div>
+      <p><br><em>Ou utiliser le bouton ci dessous:</em></p>
+      <b-form-file v-model="files" class="mt-3" multiple plain></b-form-file>
     </b-modal>
   </div>
 </template>
@@ -41,32 +64,32 @@ export default {
   name: "UPLOAD",
   props: {
     show: { type: Boolean, default: false },
-    uploadPath: { type: String }
+    uploadPath: { type: String },
   },
-  data: function() {
+  data: function () {
     return {
       files: [],
       drag: false,
       percentCompleted: 0,
       uploading: false,
-      nbEncoursUpload: 0
+      nbEncoursUpload: 0,
     };
   },
   watch: {
-    show: function(newVal, oldVal) {
+    show: function (newVal, oldVal) {
       if (newVal && !oldVal) {
         this.showModal();
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(["uploadPct"])
+    ...mapGetters(["uploadPct"]),
   },
   methods: {
-    showModal: function() {
+    showModal: function () {
       this.$bvModal.show("modal-upload");
     },
-    endOneFileUpload: function() {
+    endOneFileUpload: function () {
       this.nbEncoursUpload--;
       if (this.nbEncoursUpload == 0) {
         this.uploading = false;
@@ -76,7 +99,7 @@ export default {
         });
       }
     },
-    doUpload: function(bvModalEvt) {
+    doUpload: function (bvModalEvt) {
       // Prevent modal from closing
       bvModalEvt.preventDefault();
       let self = this;
@@ -89,10 +112,10 @@ export default {
         formData.append("data", f, filenameWithPath);
         this.uploading = true;
 
-        window.setTimeout(function() {
+        window.setTimeout(function () {
           store.dispatch("uploadFile", formData).then(
             // eslint-disable-next-line
-            response => {
+            (response) => {
               self.removeFile(f);
               self.endOneFileUpload();
               self.$bvToast.toast(
@@ -101,12 +124,13 @@ export default {
                   title: "SD",
                   toaster: "b-toaster-top-right",
                   solid: true,
-                  variant: "success"
+                  variant: "success",
                 }
               );
             },
             // eslint-disable-next-line
-            error => {
+            (error) => {
+              console.log(error);
               self.removeFile(f);
               self.endOneFileUpload();
               self.$bvToast.toast(
@@ -115,7 +139,7 @@ export default {
                   title: "SD",
                   toaster: "b-toaster-top-right",
                   solid: true,
-                  variant: "danger"
+                  variant: "danger",
                 }
               );
             }
@@ -123,39 +147,39 @@ export default {
         }, 100);
       });
     },
-    doCancel: function() {
+    doCancel: function () {
       this.files = [];
     },
-    doHidden: function() {
+    doHidden: function () {
       this.files = [];
       this.$emit("uploadClosed");
     },
-    onDragLeave: function(e) {
+    onDragLeave: function (e) {
       e.preventDefault();
       e.stopPropagation();
       this.drag = false;
     },
-    onDragOver: function(e) {
+    onDragOver: function (e) {
       e.preventDefault();
       this.drag = true;
     },
-    onDrop: function(e) {
+    onDrop: function (e) {
       // This prevents browser's default behaviour to render dropped item itself
       e.preventDefault();
       this.drag = false;
       let droppedFiles = e.dataTransfer.files;
       if (!droppedFiles) return;
       // this tip, convert FileList to array, credit: https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-      [...droppedFiles].forEach(f => {
+      [...droppedFiles].forEach((f) => {
         this.files.push(f);
       });
     },
     removeFile(file) {
-      this.files = this.files.filter(f => {
+      this.files = this.files.filter((f) => {
         return f != file;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

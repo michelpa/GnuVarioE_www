@@ -1,5 +1,4 @@
 import loading from "./loading";
-import vario from "./firmware";
 import config from "./config";
 import configweb from "./configweb";
 import wifi from "./wifi";
@@ -12,7 +11,6 @@ import carnet from "./carnet";
 export default new Vuex.Store({
     modules: {
         loading,
-        vario,
         config,
         configweb,
         wifi,

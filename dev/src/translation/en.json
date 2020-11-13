@@ -32,7 +32,10 @@
     "MAP_SETTINGS": "Map settings",
     "TRACE_COLOR": "Trace color",
     "TRACE_WIDTH": "Trace width",
-    "FLIGHTS_WAIT": "Flights loading not finished!"
+    "FLIGHTS_WAIT": "Flights loading not finished!",
+    "FLIGHT_NOFLIGHT": "No flight.",
+    "MY_LOGBOOK": "My logbook",
+    "MY_SITES": "My sites"
   },
   "wifi": {
     "CONF_LIB": "WIFI configuration",

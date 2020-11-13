@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-md-12">
-        <h1>{{ $t('about.ABOUT' ) }}</h1>
+        <h1>{{ $t("about.ABOUT") }}</h1>
         <section class="jumbotron text-center">
           <div class="container">
             <div class="row">
@@ -11,7 +11,7 @@
                   <!-- The open source and open hardware variometer.
                   <br />-->
                   <em class="small" v-if="firmwareVersion">
-                    {{ $t('about.CURRENT' ) }}: {{ versionFull }}
+                    {{ $t("about.CURRENT") }}: {{ versionFull }}
                     <br />
                     Type: {{ firmwareVersion.Firmware.type }}
                   </em>
@@ -23,7 +23,10 @@
       </div>
       <div class="offset-md-1 col-md-2">
         <transition name="fadeRightBig">
-          <div class="img-fluid mx-auto d-block animated bounceInDown" v-html="logo"></div>
+          <div
+            class="img-fluid mx-auto d-block animated bounceInDown"
+            v-html="logo"
+          ></div>
         </transition>
       </div>
       <div class="col-md-6">
@@ -39,27 +42,27 @@
               <h6 class="mb-0">GNU Vario</h6>
             </template>
             <b-card-text>
-              <p>{{ $t('about.CONTRIBUTOR' ) }}</p>
+              <p>{{ $t("about.CONTRIBUTOR") }}</p>
               <b-list-group>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">JeromeV</span>
-                  <em class="small">- {{ $t('global.DEVELOPPER') }} (AGL)</em>
+                  <em class="small">- {{ $t("global.DEVELOPPER") }} (AGL)</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">jpg63</span>
-                  <em class="small">- {{ $t('global.DEVELOPPER') }}</em>
+                  <em class="small">- {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">pixyz</span>
-                  <em class="small">- {{ $t('global.DEVELOPPER') }} web</em>
+                  <em class="small">- {{ $t("global.DEVELOPPER") }} web</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">prunkdump</span>
-                  <em class="small">- {{ $t('global.DEVELOPPER') }}</em>
+                  <em class="small">- {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">ratamuse</span>
-                  <em class="small">- PCB / {{ $t('global.DEVELOPPER') }}</em>
+                  <em class="small">- PCB / {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
               </b-list-group>
             </b-card-text>
@@ -73,7 +76,10 @@
       </div>
       <div class="col-md-2">
         <transition name="fadeRightBig">
-          <div class="img-fluid mx-auto d-block animated bounceInDown" v-html="logo"></div>
+          <div
+            class="img-fluid mx-auto d-block animated bounceInDown"
+            v-html="logo"
+          ></div>
         </transition>
       </div>
     </div>
@@ -87,17 +93,17 @@ import store from "@/store";
 export default {
   name: "About",
   props: {
-    msg: String
+    msg: String,
   },
-  data: function() {
+  data: function () {
     return {
-      logo: logo
+      logo: logo,
     };
   },
   methods: {},
   computed: {
     ...mapGetters(["config", "firmwareVersion"]),
-    versionFull: function() {
+    versionFull: function () {
       let v = "";
       if (this.firmwareVersion && this.firmwareVersion.Firmware) {
         v =
@@ -109,11 +115,11 @@ export default {
             : "");
       }
       return v;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     store.dispatch("loadFirmwareVersion");
-  }
+  },
 };
 </script>
 

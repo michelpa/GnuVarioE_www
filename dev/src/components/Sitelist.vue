@@ -1,6 +1,11 @@
  <template>
   <div>
-    <siteform :show="showPopupSite" @siteClosed="showPopupSite=false" :site="currentSite"></siteform>
+    <siteform
+      :show="showPopupSite"
+      @siteClosed="showPopupSite = false"
+      :site="currentSite"
+      @redrawRequired="redrawMap"
+    ></siteform>
     <div class="row">
       <div class="col-md-12">
         <table class="table table-bordered table-striped table-hover">
@@ -8,11 +13,11 @@
             <tr>
               <th>Libellé</th>
               <th class="act">
-                {{ $t('flights.FLIGHTS_ACTION') }}
+                {{ $t("flights.FLIGHTS_ACTION") }}
                 <button
                   class="btn btn-sm btn-primary float-right"
                   @click="addSite()"
-                  v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                  v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
                   title="Ajouter"
                 >
                   <i class="fa fa-plus"></i>
@@ -27,27 +32,27 @@
                 <button
                   class="btn btn-sm btn-primary"
                   @click="editSite(site)"
-                  v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                  v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
                   title="Editer"
                 >
-                  <i class="fa fa-pen"></i>
-                </button>&nbsp;
+                  <i class="fa fa-pen"></i></button
+                >&nbsp;
                 <click-confirm
                   placement="bottom"
                   button-size="sm"
                   yes-class="btn btn-success"
                   no-class="btn btn-danger"
-                  :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
+                  :messages="{ title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non' }"
                 >
                   <button
                     class="btn btn-sm btn-danger"
                     @click="deleteSite(site)"
-                    v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                    v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
                     title="Supprimer"
                   >
                     <i class="fa fa-trash-alt"></i>
-                  </button>
-                </click-confirm>&nbsp;
+                  </button> </click-confirm
+                >&nbsp;
               </td>
             </tr>
           </tbody>
@@ -72,59 +77,76 @@ export default {
   name: "Sitelist",
   components: { Siteform },
   props: {},
-  data: function() {
+  data: function () {
     return {
       currentSite: {},
       showPopupSite: false,
-      macarte: null
+      macarte: null,
     };
   },
 
   computed: {
-    ...mapGetters(["sites"])
+    ...mapGetters(["sites"]),
   },
   methods: {
-    addSite: function() {
+    addSite: function () {
       this.currentSite = {};
       this.showPopupSite = true;
     },
-    editSite: function(site) {
+    editSite: function (site) {
       this.currentSite = Object.assign({}, site);
       this.showPopupSite = true;
     },
-    deleteSite: function(site) {
+    deleteSite: function (site) {
       let self = this;
       store.dispatch("deleteSite", site.id).then(
         // eslint-disable-next-line
-        response => {
-          store.dispatch("loadSites");
+        (response) => {
+          store
+            .dispatch("loadSites")
+            .then(() => {
+              self.redrawMap();
+            })
+            .catch((error) => {
+              self.$bvToast.toast(
+                `Impossible de charger les sites. (` + error + ")",
+                {
+                  title: "Mon vol",
+                  toaster: "b-toaster-top-right",
+                  solid: true,
+                  variant: "danger",
+                }
+              );
+            });
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           let msg = error.message;
           self.$bvToast.toast(`Echec de la suppression du site. ${msg}`, {
             title: "Site",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    redrawMap: function() {
+    redrawMap: function () {
       var self = this;
-      Vue.nextTick().then(function() {
+      Vue.nextTick().then(function () {
         // DOM updated
         self.drawMap();
       });
     },
-    drawMap: function() {
+    drawMap: function () {
+      var self = this;
+
       var OpenTopoMap = L.tileLayer(
         "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
         {
           maxZoom: 17,
           attribution:
-            'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+            'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
         }
       );
 
@@ -135,7 +157,7 @@ export default {
           attribution:
             'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
           minZoom: 1,
-          maxZoom: 20
+          maxZoom: 20,
         }
       );
 
@@ -146,13 +168,13 @@ export default {
             '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',
           bounds: [
             [-75, -180],
-            [81, 180]
+            [81, 180],
           ],
           minZoom: 2,
           maxZoom: 19,
           apikey: "choisirgeoportail",
           format: "image/jpeg",
-          style: "normal"
+          style: "normal",
         }
       );
 
@@ -163,13 +185,13 @@ export default {
       }
 
       this.macarte = L.map("mapsiteid", {
-        layers: [GeoportailFrance_orthos]
+        layers: [GeoportailFrance_orthos],
       });
 
       var baseMaps = {
         OpenStreetMap: OpenStreetMap,
         OpenTopoMap: OpenTopoMap,
-        GeoportailFrance: GeoportailFrance_orthos
+        GeoportailFrance: GeoportailFrance_orthos,
       };
       L.control.layers(baseMaps).addTo(this.macarte);
 
@@ -180,7 +202,13 @@ export default {
         if (site.lat && site.lon) {
           const m = L.marker([site.lat, site.lon])
             .addTo(this.macarte)
-            .bindPopup(site.lib);
+            .bindPopup(
+              "<h6>" +
+                site.lib +
+                "</h6><em>" +
+                self.$options.filters.nl2br(site.comment) +
+                "</em>"
+            );
           markers.addLayer(m);
         }
       }
@@ -188,27 +216,27 @@ export default {
       //zoom the map to the markers
       markers.addTo(this.macarte);
       this.macarte.fitBounds(markers.getBounds());
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     let self = this;
     store
       .dispatch("loadSites")
       .then(() => {
         // self.drawMap();
       })
-      .catch(error => {
+      .catch((error) => {
         self.$bvToast.toast(
           `Impossible de charger les sites. (` + error + ")",
           {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           }
         );
       });
-  }
+  },
 };
 </script>
 

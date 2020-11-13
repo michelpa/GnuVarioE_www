@@ -15,7 +15,7 @@
               @activate-tab="tabChanged"
             >
               <b-tab title="Mes traces en attente" active>
-                <div v-if="flightsMonth != {}">
+                <div v-if="flightsMonth && Object.entries(flightsMonth).length !== 0">
                   <div class="row">
                     <div class="col-md-12">
                       <div
@@ -165,15 +165,15 @@
                 <div v-else>
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="alert alert-success">Aucune trace en attente.</div>
+                      <div class="alert alert-success">{{ $t('flights.FLIGHT_NOFLIGHT') }}</div>
                     </div>
                   </div>
                 </div>
               </b-tab>
-              <b-tab title="Mon carnet de vols">
+              <b-tab :title="$t('flights.MY_LOGBOOK')">
                 <carnet ref="carnet"></carnet>
               </b-tab>
-              <b-tab title="Mes sites de vols">
+              <b-tab :title="$t('flights.MY_SITES')">
                 <sitelist ref="sitelist"></sitelist>
               </b-tab>
 
@@ -217,7 +217,7 @@ export default {
     },
     downloadFromSD: function(f) {
       let self = this;
-      store.dispatch("downloadFlight", f).then(
+      store.dispatch("downloadFlight", { filename: f }).then(
         response => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");

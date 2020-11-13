@@ -49,10 +49,12 @@ export const actions = {
     },
     downloadFile: function (context, filename) {
         let url = "/file?path=" + filename;
+
         if (env.NODE_ENV == "development") {
-            url = "/19022402.IGC";
+            url = baseUrl + url;
+            //  url = "/19022402.IGC";
         }
-        let axiosConfig = {}
+        let axiosConfig = { responseType: 'blob' }
         return waitFor(function () {
             return context.rootState.loading.isLoading === false
         }).then(function () {
@@ -89,9 +91,12 @@ export const actions = {
                 }
             };
 
+            // eslint-disable-next-line no-unused-vars
             return axios.post(url, formData, config).then(response => {
                 // console.log(response);
-                return response;
+
+                return true;
+                //return response;
             }).catch(function (error) {
                 return Promise.reject(error);
             }).finally(function () {

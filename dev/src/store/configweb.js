@@ -7,7 +7,7 @@ const initialState = {
     configWebLoaded: false,
     configWeb: preferences,
 };
-
+console.log(initialState.configWeb.map);
 export const state = Object.assign({}, initialState);
 
 export const actions = {
