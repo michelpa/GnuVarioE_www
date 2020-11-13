@@ -1,9 +1,9 @@
  <template>
   <div>
-    <div v-if="!flights">{{ $t('flights.FLIGHTS_WAIT') }}</div>
+    <div v-if="!flights">{{ $t("flights.FLIGHTS_WAIT") }}</div>
     <div v-else class="row">
       <div class="col-md-12">
-        <h1>{{ $t('flights.FLIGHTS_LIST') }}</h1>
+        <h1>{{ $t("flights.FLIGHTS_LIST") }}</h1>
         <br />
         <div class="row">
           <div class="col-md-12">
@@ -15,17 +15,29 @@
               @activate-tab="tabChanged"
             >
               <b-tab title="Mes traces en attente" active>
-                <div v-if="flightsMonth && Object.entries(flightsMonth).length !== 0">
+                <div
+                  v-if="
+                    flightsMonth && Object.entries(flightsMonth).length !== 0
+                  "
+                >
                   <div class="row">
                     <div class="col-md-12">
-                      <div
-                        class="alert alert-info"
-                      >{{ $t('messages.MESVOL_WARNING') }}</div>
+                      <div class="alert alert-info">
+                        {{ $t("messages.MESVOL_WARNING") }}
+                      </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class :class="[(igc == null) ? 'col-md-6 offset-md-3': 'col-md-4']">
-                      <b-card :header="$t('flights.FLIGHTS_FILES')" header-tag="header">
+                    <div
+                      class
+                      :class="[
+                        igc == null ? 'col-md-6 offset-md-3' : 'col-md-4',
+                      ]"
+                    >
+                      <b-card
+                        :header="$t('flights.FLIGHTS_FILES')"
+                        header-tag="header"
+                      >
                         <div class="bg-default">
                           <div role="tablist">
                             <b-card
@@ -34,46 +46,79 @@
                               v-for="(datamonth, month) in flightsMonth"
                               :key="month"
                             >
-                              <b-card-header header-tag="header" class="p-1" role="tab">
+                              <b-card-header
+                                header-tag="header"
+                                class="p-1"
+                                role="tab"
+                              >
                                 <b-button
                                   block
                                   v-b-toggle="string2classname(month)"
                                   variant="primary"
-                                >{{ month }} ({{ getNbFlightForMonth(datamonth) }} {{ $t('flights.FLIGHTS') | pluralize(getNbFlightForMonth(datamonth))}})</b-button>
+                                  >{{ month }} ({{
+                                    getNbFlightForMonth(datamonth)
+                                  }}
+                                  {{
+                                    $t("flights.FLIGHTS")
+                                      | pluralize(
+                                        getNbFlightForMonth(datamonth)
+                                      )
+                                  }})</b-button
+                                >
                               </b-card-header>
                               <b-collapse
-                                :id="month|string2classname"
+                                :id="month | string2classname"
                                 accordion="my-accordion-month"
                                 role="tabpanel"
                               >
                                 <b-card
                                   no-body
                                   class="mb-1"
-                                  v-for="(data , day) in datamonth.days"
+                                  v-for="(data, day) in datamonth.days"
                                   :key="day"
                                 >
-                                  <b-card-header header-tag="header" class="p-1" role="tab">
+                                  <b-card-header
+                                    header-tag="header"
+                                    class="p-1"
+                                    role="tab"
+                                  >
                                     <b-button
                                       block
                                       v-b-toggle="string2classname(day)"
                                       variant="info"
-                                    >{{ day }} ({{data.flights.length}} {{ $t('flights.FLIGHTS') | pluralize(data.flights.length)}})</b-button>
+                                      >{{ day }} ({{ data.flights.length }}
+                                      {{
+                                        $t("flights.FLIGHTS")
+                                          | pluralize(data.flights.length)
+                                      }})</b-button
+                                    >
                                   </b-card-header>
                                   <b-collapse
-                                    :id="day|string2classname"
+                                    :id="day | string2classname"
                                     accordion="my-accordion-day"
                                     role="tabpanel"
                                   >
                                     <b-card-body>
-                                      <table class="table table-bordered table-striped table-hover">
+                                      <table
+                                        class="table table-bordered table-striped table-hover"
+                                      >
                                         <thead>
                                           <tr>
-                                            <th>{{ $t('flights.FLIGHTS_FILENAME') }}</th>
-                                            <th class="act">{{ $t('flights.FLIGHTS_ACTION') }}</th>
+                                            <th>
+                                              {{
+                                                $t("flights.FLIGHTS_FILENAME")
+                                              }}
+                                            </th>
+                                            <th class="act">
+                                              {{ $t("flights.FLIGHTS_ACTION") }}
+                                            </th>
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          <tr v-for="f in data.flights" :key="f.name">
+                                          <tr
+                                            v-for="f in data.flights"
+                                            :key="f.name"
+                                          >
                                             <td>
                                               {{ f.name }} &nbsp;
                                               <em>
@@ -82,47 +127,97 @@
                                             </td>
                                             <td class="btns">
                                               <button
+                                                v-if="pgenabled"
+                                                class="btn btn-sm btn-primary"
+                                                @click="
+                                                  flightToParagliding(f.name)
+                                                "
+                                                v-b-tooltip.hover="{
+                                                  delay: {
+                                                    show: 1000,
+                                                    hide: 50,
+                                                  },
+                                                }"
+                                                title="Téléversement vers paraglidinglogbook.com"
+                                              >
+                                                <i
+                                                  class="fa fa-book"
+                                                ></i></button
+                                              >&nbsp;
+                                              <button
                                                 class="btn btn-sm btn-primary"
                                                 @click="flightToBook(f.name)"
-                                                v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
+                                                v-b-tooltip.hover="{
+                                                  delay: {
+                                                    show: 1000,
+                                                    hide: 50,
+                                                  },
+                                                }"
                                                 title="Placer dans mon carnet"
                                               >
-                                                <i class="fa fa-book-open"></i>
-                                              </button>&nbsp;
+                                                <i
+                                                  class="fa fa-book-open"
+                                                ></i></button
+                                              >&nbsp;
                                               <button
                                                 class="btn btn-sm btn-success"
                                                 @click="downloadFromSD(f.name)"
-                                                v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                                v-b-tooltip.hover="{
+                                                  delay: {
+                                                    show: 1000,
+                                                    hide: 50,
+                                                  },
+                                                }"
                                                 title="Télécharger"
                                               >
-                                                <i class="fa fa-arrow-alt-circle-down"></i>
-                                              </button>&nbsp;
+                                                <i
+                                                  class="fa fa-arrow-alt-circle-down"
+                                                ></i></button
+                                              >&nbsp;
                                               <click-confirm
                                                 placement="bottom"
                                                 button-size="sm"
                                                 yes-class="btn btn-success"
                                                 no-class="btn btn-danger"
-                                                :messages="{title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non'}"
+                                                :messages="{
+                                                  title: 'Êtes-vous sûr?',
+                                                  yes: 'Oui',
+                                                  no: 'Non',
+                                                }"
                                               >
                                                 <button
                                                   class="btn btn-sm btn-danger"
                                                   @click="deleteFromSD(f.name)"
-                                                  v-b-tooltip.hover="{delay: { show: 1000, hide: 50 }}"
+                                                  v-b-tooltip.hover="{
+                                                    delay: {
+                                                      show: 1000,
+                                                      hide: 50,
+                                                    },
+                                                  }"
                                                   title="Supprimer"
                                                 >
-                                                  <i class="fa fa-trash-alt"></i>
-                                                </button>
-                                              </click-confirm>&nbsp;
+                                                  <i
+                                                    class="fa fa-trash-alt"
+                                                  ></i>
+                                                </button> </click-confirm
+                                              >&nbsp;
                                               <button
                                                 class="btn btn-sm btn-info"
                                                 @click="flightInfo(f.name)"
-                                                v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
+                                                v-b-tooltip.hover="{
+                                                  delay: {
+                                                    show: 1000,
+                                                    hide: 50,
+                                                  },
+                                                }"
                                                 title="Info"
                                               >
-                                                <i class="fa fa-info-circle"></i>
+                                                <i
+                                                  class="fa fa-info-circle"
+                                                ></i>
                                                 <i
                                                   class="fa fa-arrow-right"
-                                                  v-show="(currentF == f.name)"
+                                                  v-show="currentF == f.name"
                                                 ></i>
                                               </button>
                                             </td>
@@ -138,23 +233,53 @@
                         </div>
                       </b-card>
                     </div>
-                    <div id="infozone" class="col-md-8 animated fadeIn" v-if="igc != null">
+                    <div
+                      id="infozone"
+                      class="col-md-8 animated fadeIn"
+                      v-if="igc != null"
+                    >
                       <div class="alert alert-info">
-                        <button class="btn btn-sm btn-info close-info" @click="closeInfo">
+                        <button
+                          class="btn btn-sm btn-info close-info"
+                          @click="closeInfo"
+                        >
                           <i class="fa fa-window-close"></i>
                         </button>
-                        <ma-carte :igc="igc" :altMax="altMax" :altMin="altMin"></ma-carte>
-                        <table class="table table-striped table-sm table-responsive text-left">
+                        <ma-carte
+                          :igc="igc"
+                          :altMax="altMax"
+                          :altMin="altMin"
+                        ></ma-carte>
+                        <table
+                          class="table table-striped table-sm table-responsive text-left"
+                        >
                           <tr>
-                            <th>{{ $t('flights.FLIGHT_OF') }} {{flightDate}}</th>
-                            <td>{{ $t('flights.FLIGHT_START') }}: {{flightStart}}</td>
-                            <td>{{ $t('flights.FLIGHT_ALT_START') }}: {{altStart}}m</td>
-                            <td>{{ $t('flights.FLIGHT_ALT_MAX') }}: {{altMax}}m</td>
+                            <th>
+                              {{ $t("flights.FLIGHT_OF") }} {{ flightDate }}
+                            </th>
+                            <td>
+                              {{ $t("flights.FLIGHT_START") }}:
+                              {{ flightStart }}
+                            </td>
+                            <td>
+                              {{ $t("flights.FLIGHT_ALT_START") }}:
+                              {{ altStart }}m
+                            </td>
+                            <td>
+                              {{ $t("flights.FLIGHT_ALT_MAX") }}: {{ altMax }}m
+                            </td>
                           </tr>
                           <tr>
-                            <td>{{ $t('flights.FLIGHT_DURATION') }}: {{flightDuration}}</td>
-                            <td>{{ $t('flights.FLIGHT_END') }}: {{flightStop}}</td>
-                            <td>{{ $t('flights.FLIGHT_ALT_END') }}: {{altStop}}m</td>
+                            <td>
+                              {{ $t("flights.FLIGHT_DURATION") }}:
+                              {{ flightDuration }}
+                            </td>
+                            <td>
+                              {{ $t("flights.FLIGHT_END") }}: {{ flightStop }}
+                            </td>
+                            <td>
+                              {{ $t("flights.FLIGHT_ALT_END") }}: {{ altStop }}m
+                            </td>
                             <td>&nbsp;</td>
                           </tr>
                         </table>
@@ -165,7 +290,9 @@
                 <div v-else>
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="alert alert-success">{{ $t('flights.FLIGHT_NOFLIGHT') }}</div>
+                      <div class="alert alert-success">
+                        {{ $t("flights.FLIGHT_NOFLIGHT") }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -199,26 +326,26 @@ export default {
   name: "MesVols",
   components: { MaCarte, Sitelist, Carnet },
   props: {
-    msg: String
+    msg: String,
   },
-  data: function() {
+  data: function () {
     return {
       titre: "Le titre",
       env: process.env,
       traceFiles: [],
       currentF: null,
       igc: null,
-      days: {}
+      days: {},
     };
   },
   methods: {
-    toggleDay: function(day) {
+    toggleDay: function (day) {
       this.flightsPerDays = day;
     },
-    downloadFromSD: function(f) {
+    downloadFromSD: function (f) {
       let self = this;
       store.dispatch("downloadFlight", { filename: f }).then(
-        response => {
+        (response) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
@@ -227,67 +354,76 @@ export default {
           link.click();
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    deleteFromSD: function(f) {
+    deleteFromSD: function (f) {
       //confirmation
       let self = this;
       store.dispatch("deleteFlight", f).then(
         // eslint-disable-next-line
-        response => {
+        (response) => {
           store.dispatch("loadFlights");
           self.$bvToast.toast("Fichier " + f + " supprimée de la carte SD.", {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "success"
+            variant: "success",
           });
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(`Echec de la suppression du fichier.`, {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    flightToBook: function(f) {
+    flightToBook: function (f) {
       let self = this;
       store.dispatch("flightToBook", f).then(
         // eslint-disable-next-line no-unused-vars
-        response => {
+        (response) => {
           self.closeInfo();
           store.dispatch("loadFlights");
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           let msg = error.message;
           self.$bvToast.toast(`Echec de déplacement du vol. ${msg}`, {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    flightInfo: function(f) {
+    flightToParagliding: function (f) {
+      // let self = this;
+      store.dispatch("uploadIgcToParagliding", { filename: f }).then(
+        // eslint-disable-next-line no-unused-vars
+        (response) => {},
+        // eslint-disable-next-line
+        (error) => {}
+      );
+    },
+    flightInfo: function (f) {
       this.igc = null;
       this.currentF = null;
       let self = this;
       store.dispatch("infoFlight", f).then(
-        response => {
+        (response) => {
           this.currentF = f;
           this.igc = response;
           var options = {
@@ -297,29 +433,29 @@ export default {
             force: false,
             cancelable: true,
             x: false,
-            y: true
+            y: true,
           };
-          window.setTimeout(function() {
+          window.setTimeout(function () {
             VueScrollTo.scrollTo("#infozone", 200, options);
           }, 1000);
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           let msg = error.message;
           self.$bvToast.toast(`Echec du téléchargement du fichier. ${msg}`, {
             title: "Mon vol",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    closeInfo: function() {
+    closeInfo: function () {
       this.igc = null;
       this.currentF = null;
     },
-    getNbFlightForMonth: function(datamonth) {
+    getNbFlightForMonth: function (datamonth) {
       let nb = 0;
       const values = Object.values(datamonth.days);
       for (var i = 0; i < values.length; i++) {
@@ -328,28 +464,33 @@ export default {
       return nb;
     },
     // eslint-disable-next-line no-unused-vars
-    tabChanged: function(newTabIndex, prevTabIndex, bvEvent) {
-      if (newTabIndex == 2) {
-        this.$refs.sitelist.redrawMap();
-      }
-      if (newTabIndex == 1) {
-        this.$refs.carnet.reset();
+    tabChanged: function (newTabIndex, prevTabIndex, bvEvent) {
+      switch (newTabIndex) {
+        case 0:
+          store.dispatch("loadFlights");
+          break;
+        case 1:
+          this.$refs.carnet.reset();
+          break;
+        case 2:
+          this.$refs.sitelist.redrawMap();
+          break;
       }
     },
-    string2classname: function(name) {
-      return name.replace(/[^a-z0-9]/g, function(s) {
+    string2classname: function (name) {
+      return name.replace(/[^a-z0-9]/g, function (s) {
         var c = s.charCodeAt(0);
         if (c == 32) return "-";
         if (c >= 65 && c <= 90) return "_" + s.toLowerCase();
         return "__" + ("000" + c.toString(16)).slice(-4);
       });
-    }
+    },
   },
   computed: {
-    ...mapGetters(["flights", "isLoading"]),
-    flightsPerDays: function() {
+    ...mapGetters(["flights", "isLoading", "pg"]),
+    flightsPerDays: function () {
       let lDays = {};
-      Object.values(this.flights).forEach(function(f) {
+      Object.values(this.flights).forEach(function (f) {
         var day = f.name.substring(0, 6);
         let d = moment(day + "+0000", "YYMMDDZ")
           .utc()
@@ -363,9 +504,9 @@ export default {
 
       return lDays;
     },
-    flightsMonth: function() {
+    flightsMonth: function () {
       let lMonth = {};
-      Object.values(this.flights).forEach(function(f) {
+      Object.values(this.flights).forEach(function (f) {
         var day = f.name.substring(0, 6);
         let m = moment(day + "+0000", "YYMMDDZ").utc();
         m = m.format("MMMM YYYY");
@@ -387,7 +528,7 @@ export default {
 
       return lMonth;
     },
-    flightDuration: function() {
+    flightDuration: function () {
       if (!this.igc) {
         return null;
       }
@@ -398,15 +539,15 @@ export default {
       let f = moment.utc(end.diff(start)).format("HH:mm:ss");
       return f;
     },
-    flightStart: function() {
+    flightStart: function () {
       var start = moment(this.igc.recordTime[0]);
       return start.format("HH:mm:ss");
     },
-    flightStop: function() {
+    flightStop: function () {
       var end = moment(this.igc.recordTime.slice(-1).pop());
       return end.format("HH:mm:ss");
     },
-    flightDate: function() {
+    flightDate: function () {
       var start = moment(this.igc.recordTime[0]);
       switch (this.$i18n.locale) {
         case "fr":
@@ -421,30 +562,33 @@ export default {
           return start.format("DD/MM/YYYY");
       }
     },
-    altStart: function() {
+    altStart: function () {
       return this.igc.pressureAltitude[0];
     },
-    altStop: function() {
+    altStop: function () {
       return this.igc.pressureAltitude.slice(-1).pop();
     },
-    altMax: function() {
+    altMax: function () {
       return Math.max.apply(null, this.igc.pressureAltitude);
     },
-    altMin: function() {
+    altMin: function () {
       return Math.min.apply(null, this.igc.pressureAltitude);
-    }
+    },
+    pgenabled: function () {
+      return this.pg.enable && this.pg.login != "" && this.pg.password != "";
+    },
   },
-  mounted: function() {
+  mounted: function () {
     let self = this;
-    store.dispatch("loadFlights").catch(error => {
+    store.dispatch("loadFlights").catch((error) => {
       self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
         title: "Mon vol",
         toaster: "b-toaster-top-right",
         solid: true,
-        variant: "danger"
+        variant: "danger",
       });
     });
-  }
+  },
 };
 </script>
 
