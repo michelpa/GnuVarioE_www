@@ -14,7 +14,7 @@
               active-nav-item-class="font-weight-bold text-uppercase text-info"
               @activate-tab="tabChanged"
             >
-              <b-tab title="Mes traces en attente" active>
+              <b-tab :title="$t('flights.MY_unconfirmed_tracks')" active>
                 <div v-if="flightsMonth && Object.entries(flightsMonth).length !== 0">
                   <div class="row">
                     <div class="col-md-12">

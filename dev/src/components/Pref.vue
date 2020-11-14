@@ -6,32 +6,32 @@
       @ok="doSave"
       @hidden="doHidden"
       ref="modal"
-      title="Préférences"
+      :title="$t('messages.Preferences')"
     >
       <div>
         <b-tabs content-class="mt-3">
-          <b-tab title="Interface" active>
+          <b-tab :title="$t('messages.Interface')" active>
             <b-card>
               <b-form @submit.prevent>
-                <b-form-group id="input-group-1" label="Thème:" label-for="input-2">
+                <b-form-group id="input-group-1" :label="$t('messages.Theme')+':'" label-for="input-2">
                   <b-form-select v-model="themeSelected" :options="themesLibs" @input="changeTheme"></b-form-select>
                 </b-form-group>
-                <b-form-group id="input-group-2" label="Variant:" label-for="input-2">
+                <b-form-group id="input-group-2" :label="$t('messages.Variant')+':'" label-for="input-2">
                   <b-form-select
                     v-model="variantSelected"
                     :options="tabVariant"
                     @input="changeVariant"
                   ></b-form-select>
                 </b-form-group>
-                <b-form-group id="input-group-3" label="Type:" label-for="input-2">
+                <b-form-group id="input-group-3" :label="$t('messages.Type')+':'" label-for="input-2">
                   <b-form-select v-model="typeSelected" :options="tabType" @input="changeType"></b-form-select>
                 </b-form-group>
               </b-form>
             </b-card>
           </b-tab>
-          <b-tab title="Langue">
+          <b-tab :title="$t('messages.Language')">
             <b-card>
-              <b-form-group id="input-group-lang" label="Langue:" label-for="input-3">
+              <b-form-group id="input-group-lang" :label="$t('messages.Language')+':'" label-for="input-3">
                 <b-form-select v-model="langSelected" :options="langs" @input="changeLocale"></b-form-select>
               </b-form-group>
             </b-card>
@@ -131,7 +131,7 @@ export default {
         // eslint-disable-next-line
         response => {
           store.dispatch("loadConfigWeb");
-          self.$bvToast.toast("Préférences sauvegardées sur la carte SD.", {
+          self.$bvToast.toast(this.$i18n.t("messages.Save_settings"), {
             title: "Préférences",
             toaster: "b-toaster-top-right",
             solid: true,
@@ -140,7 +140,7 @@ export default {
         },
         // eslint-disable-next-line
         error => {
-          self.$bvToast.toast(`Echec de la sauvegarde des préférences.`, {
+          self.$bvToast.toast(this.$i18n.t("messages.Failed_save_settings"), {
             title: "Préférences",
             toaster: "b-toaster-top-right",
             solid: true,
