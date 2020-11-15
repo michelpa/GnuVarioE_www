@@ -28,5 +28,7 @@ src/*.h
 src/*.ino
 output.js
 dev/dist
+www/
+paragliding.html
 
 .unotes/unotes_meta.json

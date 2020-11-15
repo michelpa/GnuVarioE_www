@@ -35,7 +35,8 @@
     "FLIGHTS_WAIT": "Flights loading not finished!",
     "FLIGHT_NOFLIGHT": "No flight.",
     "MY_LOGBOOK": "My logbook",
-    "MY_SITES": "My sites"
+    "MY_SITES": "My flight locations",
+    "MY_unconfirmed_tracks": "Unconfirmed tracks"
   },
   "wifi": {
     "CONF_LIB": "WIFI configuration",
@@ -285,6 +286,14 @@
     }
   },
   "messages": {
-    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook."
+    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",
+    "Failed_save_settings": "Failed to save settings.",
+    "Save_settings": "The settings are saved on the SD card.",
+    "Preferences": "Preferences",
+    "Interface": "Interface",
+    "Theme": "Theme",
+    "Variant": "Variant",
+    "Type": "Type",
+    "Language": "Language"
   }
 }

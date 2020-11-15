@@ -7,7 +7,7 @@ const initialState = {
     configWebLoaded: false,
     configWeb: preferences,
 };
-console.log(initialState.configWeb.map);
+
 export const state = Object.assign({}, initialState);
 
 export const actions = {
@@ -104,6 +104,9 @@ const getters = {
     },
     lang(state) {
         return state.configWeb.language;
+    },
+    pg(state) {
+        return state.configWeb.paraglidinglogbook;
     }
 }
 

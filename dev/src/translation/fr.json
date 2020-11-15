@@ -35,7 +35,8 @@
     "TRACE_WIDTH": "Epaisseur du tracé",
     "FLIGHT_NOFLIGHT": "Aucune trace en attente.",
     "MY_LOGBOOK": "Mon carnet de vols",
-    "MY_SITES": "Mes sites de vols"
+    "MY_SITES": "Mes sites de vols",
+    "MY_unconfirmed_tracks": "Mes traces en attente"
   },
   "wifi": {
     "CONF_LIB": "Configuration WiFi",
@@ -285,6 +286,14 @@
     }
   },
   "messages": {
-    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol."
+    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",
+    "Failed_save_settings": "Echec de la sauvegarde des préférences.",
+    "Save_settings": "Préférences sauvegardées sur la carte SD.",
+    "Preferences": "Préférences",
+    "Interface": "Interface",
+    "Theme": "Thème",
+    "Variant": "Variant",
+    "Type": "Type",
+    "Language": "Langue"
   }
 }
