@@ -11,5 +11,10 @@ export const preferences =
         "name": "Default",
         "variant": "info",
         "type": "dark"
-    }
+    },
+    "paraglidinglogbook": {
+        "enable": "false",
+        "login": "",
+        "password": ""
+    },
 }
