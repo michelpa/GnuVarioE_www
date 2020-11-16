@@ -22,15 +22,9 @@
                 >
                   <div class="row">
                     <div class="col-md-12">
-<<<<<<< HEAD
                       <div class="alert alert-info">
                         {{ $t("messages.MESVOL_WARNING") }}
                       </div>
-=======
-                      <div
-                        class="alert alert-info"
-                      >{{ $t('messages.MESVOL_WARNING') }}</div>
->>>>>>> translation to russian and english
                     </div>
                   </div>
                   <div class="row">

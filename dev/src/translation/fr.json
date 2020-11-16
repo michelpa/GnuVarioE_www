@@ -286,7 +286,6 @@
     }
   },
   "messages": {
-<<<<<<< HEAD
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",
     "Failed_save_settings": "Echec de la sauvegarde des préférences.",
     "Save_settings": "Préférences sauvegardées sur la carte SD.",
@@ -296,8 +295,5 @@
     "Variant": "Variant",
     "Type": "Type",
     "Language": "Langue"
-=======
-    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol."
->>>>>>> translation to russian and english
   }
 }

@@ -286,7 +286,6 @@
     }
   },
   "messages": {
-<<<<<<< HEAD
     "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",
     "Failed_save_settings": "Failed to save settings.",
     "Save_settings": "The settings are saved on the SD card.",
@@ -296,8 +295,5 @@
     "Variant": "Variant",
     "Type": "Type",
     "Language": "Language"
-=======
-    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook."
->>>>>>> translation to russian and english
   }
 }
