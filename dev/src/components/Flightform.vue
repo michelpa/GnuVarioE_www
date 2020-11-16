@@ -6,7 +6,7 @@
       @ok="doSave"
       @hidden="doHidden"
       ref="modal"
-      title="Vol"
+      :title="$t('flightform.title')"
     >
       <div>
         <div class="row" v-if="flight.filename && flight.filename != ''">
@@ -14,9 +14,9 @@
             <table class="table table-sm">
               <tbody>
                 <tr>
-                  <td>Pilote</td>
+                  <td>{{ $t("carnet.Pilote") }}</td>
                   <th>{{ flight.pilot }}</th>
-                  <td>Voile</td>
+                  <td>{{ $t("carnet.Voile") }}</td>
                   <th>{{ flight.wing }}</th>
                 </tr>
               </tbody>
@@ -26,15 +26,15 @@
             <table class="table table-sm">
               <tbody>
                 <tr>
-                  <td>Heure de début</td>
+                  <td>{{ $t("carnet.Start_time") }}</td>
                   <th>{{ flight.start_flight_time }}</th>
                 </tr>
                 <tr>
-                  <td>Heure de fin</td>
+                  <td>{{ $t("carnet.End_time") }}</td>
                   <th>{{ flight.end_flight_time }}</th>
                 </tr>
                 <tr>
-                  <td>Durée</td>
+                  <td>{{ $t("carnet.Duration") }}</td>
                   <th>{{ flight.duration }}</th>
                 </tr>
               </tbody>
@@ -44,15 +44,15 @@
             <table class="table table-sm">
               <tbody>
                 <tr>
-                  <td>Alt. départ / Alt. fin</td>
+                  <td>{{ $t("carnet.Alt") }}</td>
                   <th>{{ flight.start_height }} / {{ flight.end_height }}</th>
                 </tr>
                 <tr>
-                  <td>Altitude mini</td>
+                  <td>{{ $t("carnet.Alt_min") }}</td>
                   <th>{{ flight.min_height }}</th>
                 </tr>
                 <tr>
-                  <td>Altitude maxi</td>
+                  <td>{{ $t("carnet.Alt_max") }}</td>
                   <th>{{ flight.max_height }}</th>
                 </tr>
               </tbody>
@@ -163,7 +163,7 @@
             </div>
             <b-row class="my-1">
               <b-col sm="3">
-                <label>Site</label>
+                <label>{{ $t("carnet.Site") }}</label>
               </b-col>
               <b-col sm="9">
                 <b-form-select
@@ -176,7 +176,7 @@
             </b-row>
             <b-row class="my-1">
               <b-col sm="3">
-                <label>Commentaires</label>
+                <label>{{ $t("flightform.Comment") }}</label>
               </b-col>
               <b-col sm="9">
                 <b-form-textarea id="comment" v-model="flight.comment"></b-form-textarea>
@@ -267,7 +267,7 @@ export default {
         },
         // eslint-disable-next-line
         error => {
-          self.$bvToast.toast(`Echec de la sauvegarde du vol.`, {
+          self.$bvToast.toast(this.$i18n.t("flightform.save_failed"), {
             title: "Carnet",
             toaster: "b-toaster-top-right",
             solid: true,

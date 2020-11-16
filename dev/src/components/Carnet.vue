@@ -21,16 +21,16 @@
         <b-card
           bg-variant="primary"
           text-variant="outline-primary"
-          header="Vols"
+          :header="$t('carnet.VOLS')"
           header-tag="h3"
           class="text-center"
         >
           <b-card-text class="topstat"
-            >{{ bddflights.all.nb_flights }} vols</b-card-text
+            >{{ bddflights.all.nb_flights }} {{ $t("flights.FLIGHTS") }}</b-card-text
           >
           <b-card-text>
             <em
-              >Depuis le
+              >{{ $t("carnet.after_date") }}
               {{ bddflights.all.min_date | moment("DD/MM/YYYY") }}</em
             >
           </b-card-text>
@@ -39,7 +39,7 @@
         <b-card
           bg-variant="secondary"
           text-variant="outline-secondary"
-          header="Durée cumulée"
+          :header="$t('carnet.total_duration')"
           header-tag="h3"
           class="text-center"
         >
@@ -48,7 +48,7 @@
           }}</b-card-text>
           <b-card-text>
             <em
-              >Depuis le
+              >{{ $t("carnet.after_date") }}
               {{ bddflights.all.min_date | moment("DD/MM/YYYY") }}</em
             >
           </b-card-text>
@@ -57,7 +57,7 @@
         <b-card
           bg-variant="primary"
           text-variant="outline-primary"
-          header="Sites"
+          :header="$t('carnet.sites')"
           header-tag="h3"
           class="text-center"
         >
@@ -66,7 +66,7 @@
           }}</b-card-text>
           <b-card-text>
             <em
-              >Depuis le
+              >{{ $t("carnet.after_date") }}
               {{ bddflights.all.min_date | moment("DD/MM/YYYY") }}</em
             >
           </b-card-text>
@@ -77,10 +77,10 @@
         <div class="col-md-12">
           <b-card>
             <b-card-header header-tag="header" class="p-1" role="tab">
-              Mes vols du carnet
+              {{ $t("flights.MY_LOGBOOK") }}
               <div class="float-right">
                 <button class="btn btn-primary btn-xs" @click="addFlightFree()">
-                  Ajouter un vol (hors IGC)</button
+                  {{ $t("carnet.add_flight") }}</button
                 >&nbsp;&nbsp;
                 <button class="btn btn-primary btn-xs" @click="print()">
                   <i class="fa fa-print"></i>
@@ -122,7 +122,7 @@
                       ({{ data.nb_flights }}
                       {{ $t("flights.FLIGHTS") | pluralize(data.nb_flights) }},
                       {{ data.duration }}, {{ data.sites_id.length }}
-                      {{ "site" | pluralize(data.sites_id.length) }} )
+                      {{ $t("carnet.site") | pluralize(data.sites_id.length) }} )
                     </b-button>
                   </b-card-header>
                   <b-collapse
@@ -165,7 +165,7 @@
                               | pluralize(datamonth.nb_flights)
                           }}, {{ datamonth.duration }},
                           {{ datamonth.sites_id.length }}
-                          {{ "site" | pluralize(datamonth.sites_id.length) }})
+                          {{ $t("carnet.site")  | pluralize(datamonth.sites_id.length) }})
                         </b-button>
                       </b-card-header>
                       <b-collapse
@@ -207,7 +207,7 @@
                                   | pluralize(dataday.nb_flights)
                               }}, {{ dataday.duration }},
                               {{ dataday.sites_id.length }}
-                              {{ "site" | pluralize(dataday.sites_id.length) }}
+                              {{ $t("carnet.site")  | pluralize(dataday.sites_id.length) }}
                               )
                             </b-button>
                           </b-card-header>
@@ -259,7 +259,7 @@
                                               v-b-tooltip.hover="{
                                                 delay: { show: 1000, hide: 50 },
                                               }"
-                                              title="Editer"
+                                              :title="$t('actions.edit')"
                                             >
                                               <i class="fa fa-pen"></i>
                                             </button>
@@ -281,7 +281,7 @@
                                               v-b-tooltip.hover="{
                                                 delay: { show: 1000, hide: 50 },
                                               }"
-                                              title="Info"
+                                              :title="$t('actions.info')"
                                             >
                                               <i class="fa fa-info-circle"></i>
                                             </button>
@@ -293,7 +293,7 @@
                                               v-b-tooltip.hover="{
                                                 delay: { show: 1000, hide: 50 },
                                               }"
-                                              title="Télécharger"
+                                              :title="$t('actions.download')"
                                             >
                                               <i
                                                 class="fa fa-arrow-alt-circle-down"
@@ -306,9 +306,9 @@
                                               yes-class="btn btn-success"
                                               no-class="btn btn-danger"
                                               :messages="{
-                                                title: 'Êtes-vous sûr?',
-                                                yes: 'Oui',
-                                                no: 'Non',
+                                                title: $t('actions.del_message'), 
+                                                yes: $t('actions.yes'), 
+                                                no: $t('actions.no')
                                               }"
                                             >
                                               <button
@@ -320,7 +320,7 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Supprimer"
+                                                :title="$t('actions.delete')"
                                               >
                                                 <i class="fa fa-trash-alt"></i>
                                               </button>
@@ -335,15 +335,15 @@
                                         <table class="table table-sm">
                                           <tbody>
                                             <tr>
-                                              <td>Site</td>
+                                              <td>{{ $t("carnet.Site") }}</td>
                                               <th>{{ f.site_lib }}</th>
                                             </tr>
                                             <tr>
-                                              <td>Pilote</td>
+                                              <td>{{ $t("carnet.Pilote") }}</td>
                                               <th>{{ f.pilot }}</th>
                                             </tr>
                                             <tr>
-                                              <td>Voile</td>
+                                              <td>{{ $t("carnet.Voile") }}</td>
                                               <th>{{ f.wing }}</th>
                                             </tr>
                                           </tbody>
@@ -353,15 +353,15 @@
                                         <table class="table table-sm">
                                           <tbody>
                                             <tr>
-                                              <td>Heure de début</td>
+                                              <td>{{ $t("carnet.Start_time") }}</td>
                                               <th>{{ f.start_flight_time }}</th>
                                             </tr>
                                             <tr>
-                                              <td>Heure de fin</td>
+                                              <td>{{ $t("carnet.End_time") }}</td>
                                               <th>{{ f.end_flight_time }}</th>
                                             </tr>
                                             <tr>
-                                              <td>Durée</td>
+                                              <td>{{ $t("carnet.Duration") }}</td>
                                               <th>{{ f.duration }}</th>
                                             </tr>
                                           </tbody>
@@ -371,18 +371,18 @@
                                         <table class="table table-sm">
                                           <tbody>
                                             <tr>
-                                              <td>Alt. départ / Alt. fin</td>
+                                              <td>{{ $t("carnet.Alt") }}</td>
                                               <th>
                                                 {{ f.start_height }}m /
                                                 {{ f.end_height }}m
                                               </th>
                                             </tr>
                                             <tr>
-                                              <td>Altitude mini</td>
+                                              <td>{{ $t("carnet.Alt_min") }}</td>
                                               <th>{{ f.min_height }}m</th>
                                             </tr>
                                             <tr>
-                                              <td>Altitude maxi</td>
+                                              <td>{{ $t("carnet.Alt_max") }}</td>
                                               <th>{{ f.max_height }}m</th>
                                             </tr>
                                           </tbody>
@@ -450,8 +450,8 @@ export default {
     },
     flightInfo: function (flight) {
       if (!flight.filename) {
-        self.$bvToast.toast("Pas de trace pour ce vol", {
-          title: "Mon carnet",
+        self.$bvToast.toast(this.$i18n.t("carnet.no_trace"), {
+          title: this.$i18n.t("flights.MY_LOGBOOK"),
           toaster: "b-toaster-top-right",
           solid: true,
           variant: "danger",
@@ -467,8 +467,8 @@ export default {
         (error) => {
           self.showPopupVisu = false;
           let msg = error.message;
-          self.$bvToast.toast(`Echec du téléchargement du fichier. ${msg}`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.download_failed") + ` ${msg}`, {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
@@ -491,8 +491,8 @@ export default {
           },
           // eslint-disable-next-line
           (error) => {
-            self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
-              title: "Mon vol",
+            self.$bvToast.toast(this.$i18n.t("actions.download_failed"), {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
               toaster: "b-toaster-top-right",
               solid: true,
               variant: "danger",
@@ -513,8 +513,8 @@ export default {
         },
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(`Echec de la suppression du vol. ${msg}`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.del_failed_fly") + ` ${msg}`, {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
