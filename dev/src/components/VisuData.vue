@@ -152,7 +152,7 @@ export default {
         },
         // eslint-disable-next-line
         error => {
-          self.$bvToast.toast(`Echec de la sauvegarde des préférences.`, {
+          self.$bvToast.toast(`3Echec de la sauvegarde des préférences.`, {
             title: "Préférences",
             toaster: "b-toaster-top-right",
             solid: true,

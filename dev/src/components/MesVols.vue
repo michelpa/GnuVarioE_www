@@ -14,7 +14,7 @@
               active-nav-item-class="font-weight-bold text-uppercase text-info"
               @activate-tab="tabChanged"
             >
-              <b-tab title="Mes traces en attente" active>
+              <b-tab :title="$t('flights.MY_unconfirmed_tracks')" active>
                 <div
                   v-if="
                     flightsMonth && Object.entries(flightsMonth).length !== 0
@@ -23,7 +23,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="alert alert-info">
-                        {{ $t("messages.MESVOL_WARNING") }}
+                        {{ $t("mesvols.MESVOL_WARNING") }}
                       </div>
                     </div>
                   </div>
@@ -153,7 +153,7 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Placer dans mon carnet"
+                                                :title="$t('actions.TO_LOGBOOK')"
                                               >
                                                 <i
                                                   class="fa fa-book-open"
@@ -168,7 +168,7 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Télécharger"
+                                                :title="$t('actions.download')"
                                               >
                                                 <i
                                                   class="fa fa-arrow-alt-circle-down"
@@ -179,10 +179,10 @@
                                                 button-size="sm"
                                                 yes-class="btn btn-success"
                                                 no-class="btn btn-danger"
-                                                :messages="{
-                                                  title: 'Êtes-vous sûr?',
-                                                  yes: 'Oui',
-                                                  no: 'Non',
+                                                :messages="{ 
+                                                  title: $t('actions.del_message'), 
+                                                  yes: $t('actions.yes'), 
+                                                  no: $t('actions.no')
                                                 }"
                                               >
                                                 <button
@@ -194,7 +194,7 @@
                                                       hide: 50,
                                                     },
                                                   }"
-                                                  title="Supprimer"
+                                                  :title="$t('actions.delete')"
                                                 >
                                                   <i
                                                     class="fa fa-trash-alt"
@@ -210,7 +210,7 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Info"
+                                                :title="$t('actions.info')"
                                               >
                                                 <i
                                                   class="fa fa-info-circle"
@@ -355,8 +355,8 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.download_failed"), {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
@@ -371,8 +371,8 @@ export default {
         // eslint-disable-next-line
         (response) => {
           store.dispatch("loadFlights");
-          self.$bvToast.toast("Fichier " + f + " supprimée de la carte SD.", {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.del_positive1") + f + this.$i18n.t("actions.del_positive2"), {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "success",
@@ -380,8 +380,8 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec de la suppression du fichier.`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.del_failed"), {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
@@ -400,8 +400,8 @@ export default {
         // eslint-disable-next-line
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(`Echec de déplacement du vol. ${msg}`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.to_logbook_failed") + ` ${msg}`, {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
@@ -442,8 +442,8 @@ export default {
         // eslint-disable-next-line
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(`Echec du téléchargement du fichier. ${msg}`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.download_failed") + ` ${msg}`, {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",

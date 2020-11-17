@@ -35,7 +35,8 @@
     "FLIGHTS_WAIT": "Flights loading not finished!",
     "FLIGHT_NOFLIGHT": "No flight.",
     "MY_LOGBOOK": "My logbook",
-    "MY_SITES": "My sites"
+    "MY_SITES": "My flight locations",
+    "MY_unconfirmed_tracks": "Unconfirmed tracks"
   },
   "wifi": {
     "CONF_LIB": "WIFI configuration",
@@ -284,7 +285,71 @@
       }
     }
   },
-  "messages": {
-    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook."
+  "pref": {
+    "Failed_save_settings": "Failed to save settings.",
+    "Save_settings": "The settings are saved on the SD card.",
+    "Preferences": "Preferences",
+    "Interface": "Interface",
+    "Theme": "Theme",
+    "Variant": "Variant",
+    "Type": "Type",
+    "Language": "Language",
+    "active": "Enabled",
+    "login": "Login",
+    "password": "Password"
+  },
+  "mesvols": {
+    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",    
+    "TITLE_MSG_modal": "My flight"
+  },  
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "del_message": "Are you sure?",
+    "yes": "Yes",
+    "no": "No",
+    "TO_LOGBOOK": "Place in my logbook",
+    "download": "Download",
+    "info": "Info",
+    "del_failed": "Failed to delete file.",
+    "del_positive1": "File ",
+    "del_positive2": " deleted from SD card.",
+    "download_failed": "File download failed.",
+    "to_logbook_failed": "Failed to move the flight.",
+    "del_failed_fly": "Failed to delete flight."    
+  },
+  "sitelist": {
+    "name": "Name"
+  },
+  "siteform": {
+    "title": "Site",
+    "description": "Description",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+  },
+  "carnet": {
+    "VOLS": "Flights",
+    "after_date": "After",
+    "total_duration": "Total duration",
+    "sites": "Sites",
+    "add_flight": "Add a flight (without IGC)",
+    "site": "site",
+    "Site": "Site",
+    "Pilote": "Pilot",
+    "Voile": "Wing",
+    "Start_time": "Start time",
+    "End_time": "End time",
+    "Duration": "Duration",
+    "Alt": "Alt. start / Alt. end",
+    "Alt_min": "Altitude mini",
+    "Alt_max": "Altitude maxi",
+
+    "no_trace": "No trace for this flight"
+  },
+  "flightform": {
+    "title": "Flight",
+    "Comment": "Comments",
+    "save_failed": "Failed to save flight."
   }
 }

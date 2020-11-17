@@ -7,7 +7,7 @@
     <section class="sheet padding-10mm" ref="monElement">
       <!-- Write HTML just like a web page -->
       <h1>
-        Mon carnet de vol
+        {{ $t("flights.MY_LOGBOOK") }}
         <button @click="printWindow()" class="btn-print">Imprimer</button>
       </h1>
 
@@ -44,43 +44,43 @@
                   <tbody>
                     <tr>
                       <td>
-                        Site:
+                        {{ $t("carnet.Site") }}
                         <strong>{{ f.site_lib }}</strong>
                       </td>
                       <td>
-                        Pilote:
+                        {{ $t("carnet.Pilote") }}
                         <strong>{{ f.pilot }}</strong>
                       </td>
                       <td>
-                        Voile:
+                        {{ $t("carnet.Voile") }}
                         <strong>{{ f.wing }}</strong>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        Heure de début
+                        {{ $t("carnet.Start_time") }}
                         <strong>{{ f.start_flight_time }}</strong>
                       </td>
                       <td>
-                        Heure de fin
+                        {{ $t("carnet.End_time") }}
                         <strong>{{ f.end_flight_time }}</strong>
                       </td>
                       <td>
-                        Durée
+                        {{ $t("carnet.Duration") }}
                         <strong>{{ f.duration }}</strong>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        Alt. départ / Alt. fin
+                        {{ $t("carnet.Alt") }}
                         <strong>{{ f.start_height }}m / {{ f.end_height }}m</strong>
                       </td>
                       <td>
-                        Altitude mini
+                        {{ $t("carnet.Alt_min") }}
                         <strong>{{ f.min_height }}m</strong>
                       </td>
                       <td>
-                        Altitude maxi
+                        {{ $t("carnet.Alt_max") }}
                         <strong>{{ f.max_height }}m</strong>
                       </td>
                     </tr>

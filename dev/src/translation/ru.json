@@ -1,11 +1,11 @@
 {
     "home": {
-      "hello": "Bonjour"
+      "hello": "Привет"
     },
     "global": {
-      "save": "Save",
-      "reload": "Reload",
-      "DEVELOPPER": "Developer"
+      "save": "Сохранить",
+      "reload": "Перезагрузить",
+      "DEVELOPPER": "Разработчик"
     },
     "menu": {
       "FLIGHTS": "Мои полеты",
@@ -17,38 +17,42 @@
       "SETTINGS": "Настройки"
     },
     "flights": {
-      "FLIGHTS_LIST": "My flights list",
-      "FLIGHTS_FILES": "IGC files on vario SD card",
-      "FLIGHTS_FILENAME": "Filename",
-      "FLIGHTS_ACTION": "Actions",
-      "FLIGHTS": "flight",
-      "FLIGHT_OF": "Flight date",
-      "FLIGHT_DURATION": "Flight duration",
-      "FLIGHT_START": "Flight start",
-      "FLIGHT_END": "Flight end",
-      "FLIGHT_ALT_START": "Start height",
-      "FLIGHT_ALT_END": "End height",
-      "FLIGHT_ALT_MAX": "Max height",
-      "MAP_SETTINGS": "Map settings",
-      "TRACE_COLOR": "Trace color",
-      "TRACE_WIDTH": "Trace width",
-      "FLIGHTS_WAIT": "Flights loading not finished!"
+      "FLIGHTS_LIST": "Список моих полетов",
+      "FLIGHTS_FILES": "IGC файлы на SD карте",
+      "FLIGHTS_FILENAME": "Имя файла",
+      "FLIGHTS_ACTION": "Действия",
+      "FLIGHTS": "полет",
+      "FLIGHT_OF": "Дата полета",
+      "FLIGHT_DURATION": "Продолжительность полета",
+      "FLIGHT_START": "Начало полета",
+      "FLIGHT_END": "Конец полета",
+      "FLIGHT_ALT_START": "Начальная высота",
+      "FLIGHT_ALT_END": "Конечная высота",
+      "FLIGHT_ALT_MAX": "Максимальная высота",
+      "MAP_SETTINGS": "Настройки карты",
+      "TRACE_COLOR": "Цвет трека",
+      "TRACE_WIDTH": "Ширина трека",
+      "FLIGHTS_WAIT": "Загрузка полетов не завершена!",
+      "FLIGHT_NOFLIGHT": "Нет полетов.",
+      "MY_LOGBOOK": "Мой бортовой журнал",
+      "MY_SITES": "Мои места полетов",
+      "MY_unconfirmed_tracks": "Неподтвержденные треки"
     },
     "wifi": {
-      "CONF_LIB": "WIFI configuration",
+      "CONF_LIB": "WIFI конфигурация",
       "AP": "Access point"
     },
     "sd": {
-      "SD_CONTENT": "SD card content"
+      "SD_CONTENT": "Контент на SD карте"
     },
     "about": {
-      "ABOUT": "About",
-      "CURRENT": "Current version",
-      "CONTRIBUTOR": "Main contributors (alphabeticaly)"
+      "ABOUT": "О программе",
+      "CURRENT": "Текущая версия",
+      "CONTRIBUTOR": "Основные участники (в алфавитном порядке)"
     },
     "params": {
-      "PARAM": "Settings",
-      "MODE_EXPERT": "Mode expert",
+      "PARAM": "Настройки",
+      "MODE_EXPERT": "Расширенные настройки",
       "systeme": {
         "TITLE": "System",
         "SUBTITLE": "Expert mode",
@@ -281,8 +285,72 @@
         }
       }
     },
-    "messages": {
-      "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал."
+    "pref": {
+      "Failed_save_settings": "Не удалось сохранить настройки.",
+      "Save_settings": "Настройки сохранены на SD карте.",
+      "Preferences": "Предпочтения",
+      "Interface": "Интерфейс",
+      "Theme": "Тема",
+      "Variant": "Вариант",
+      "Type": "Тип",
+      "Language": "Язык",
+      "active": "Включено",
+      "login": "Имя",
+      "password": "Пароль"
+    },
+    "mesvols": {
+      "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал.",    
+      "TITLE_MSG_modal": "Мой полет"
+    },  
+    "actions": {
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "add": "Добавить",
+      "del_message": "Уверен?",
+      "yes": "Да",
+      "no": "Нет",
+      "TO_LOGBOOK": "Перенести в бортовой журнал",
+      "download": "Скачать",
+      "info": "Просмотреть",
+      "del_failed": "Не удалось удалить файл.",
+      "del_positive1": "Файл ",
+      "del_positive2": " удален с SD-карты.",
+      "download_failed": "Не удалось скачать файл.",
+      "to_logbook_failed": "Не удалось переместить полет.",
+      "del_failed_fly": "Не удалось удалить полет."          
+    },
+    "sitelist": {
+      "name": "Название"
+    },
+    "siteform": {
+      "title": "Место",
+      "description": "Описание",
+      "latitude": "Широта",
+      "longitude": "Долгота"
+    },
+    "carnet": {
+      "VOLS": "Полеты",
+      "after_date": "После",
+      "total_duration": "Суммарная продолжительность",
+      "sites": "Места полетов",
+      "add_flight": "Добавить полет (без IGC)",
+      "site": "локация",
+      "Site": "Локация",
+      "Pilote": "Пилот",
+      "Voile": "Крыло",
+      "Start_time": "Время начала",
+      "End_time": "Время окончания",
+      "Duration": "Продолжительность",
+      "Alt": "Высота. нач./ Высота. кон.",
+      "Alt_min": "Высота мин.",
+      "Alt_max": "Высота макс.",
+
+      "no_trace": "Нет трека этого полета"
+    },
+    "flightform": {
+      "title": "Полет",
+      "Comment": "Комментарий",
+      "save_failed": "Не удалось сохранить полет."
     }
   }
   

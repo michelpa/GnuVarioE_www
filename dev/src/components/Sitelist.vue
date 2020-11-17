@@ -11,14 +11,14 @@
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
-              <th>Libellé</th>
+              <th>{{ $t("sitelist.name") }}</th>
               <th class="act">
                 {{ $t("flights.FLIGHTS_ACTION") }}
                 <button
                   class="btn btn-sm btn-primary float-right"
                   @click="addSite()"
                   v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-                  title="Ajouter"
+                  :title="$t('actions.add')"
                 >
                   <i class="fa fa-plus"></i>
                 </button>
@@ -33,7 +33,7 @@
                   class="btn btn-sm btn-primary"
                   @click="editSite(site)"
                   v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-                  title="Editer"
+                  :title="$t('actions.edit')"
                 >
                   <i class="fa fa-pen"></i></button
                 >&nbsp;
@@ -42,13 +42,13 @@
                   button-size="sm"
                   yes-class="btn btn-success"
                   no-class="btn btn-danger"
-                  :messages="{ title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non' }"
+                  :messages="{ title: $t('actions.del_message'), yes: $t('actions.yes'), no: $t('actions.no') }"
                 >
                   <button
                     class="btn btn-sm btn-danger"
                     @click="deleteSite(site)"
                     v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-                    title="Supprimer"
+                    :title="$t('actions.delete')"
                   >
                     <i class="fa fa-trash-alt"></i>
                   </button> </click-confirm

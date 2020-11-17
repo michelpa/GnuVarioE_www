@@ -6,16 +6,16 @@
       @ok="doSave"
       @hidden="doHidden"
       ref="modal"
-      title="Préférences"
+      :title="$t('pref.Preferences')"
     >
       <div>
         <b-tabs content-class="mt-3">
-          <b-tab title="Interface" active>
+          <b-tab :title="$t('pref.Interface')" active>
             <b-card>
               <b-form @submit.prevent>
                 <b-form-group
                   id="input-group-1"
-                  label="Thème:"
+                  :label="$t('pref.Theme')+':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -26,7 +26,7 @@
                 </b-form-group>
                 <b-form-group
                   id="input-group-2"
-                  label="Variant:"
+                  :label="$t('pref.Variant')+':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -37,7 +37,7 @@
                 </b-form-group>
                 <b-form-group
                   id="input-group-3"
-                  label="Type:"
+                  :label="$t('pref.Type')+':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -49,11 +49,11 @@
               </b-form>
             </b-card>
           </b-tab>
-          <b-tab title="Langue">
+          <b-tab :title="$t('pref.Language')">
             <b-card>
               <b-form-group
                 id="input-group-lang"
-                label="Langue:"
+                :label="$t('pref.Language')+':'"
                 label-for="input-3"
               >
                 <b-form-select
@@ -68,7 +68,7 @@
             <b-card>
               <b-form-group
                 id="input-group-lang"
-                label="Activé:"
+                :label="$t('pref.active')+':'"
                 label-for="input-3"
               >
                 <b-form-checkbox
@@ -78,7 +78,7 @@
               </b-form-group>
               <b-form-group
                 id="input-group-lang"
-                label="Login:"
+                :label="$t('pref.login')+':'"
                 label-for="input-3"
               >
                 <b-form-input
@@ -88,7 +88,7 @@
               </b-form-group>
               <b-form-group
                 id="input-group-lang"
-                label="Mot de passe:"
+                :label="$t('pref.password')+':'"
                 label-for="input-3"
               >
                 <b-form-input
@@ -218,8 +218,8 @@ export default {
         // eslint-disable-next-line
         (response) => {
           store.dispatch("loadConfigWeb");
-          self.$bvToast.toast("Préférences sauvegardées sur la carte SD.", {
-            title: "Préférences",
+          self.$bvToast.toast(this.$i18n.t("pref.Save_settings"), {
+            title: this.$i18n.t("pref.Preferences"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "success",
@@ -227,8 +227,8 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec de la sauvegarde des préférences.`, {
-            title: "Préférences",
+          self.$bvToast.toast(this.$i18n.t("pref.Failed_save_settings"), {
+            title: this.$i18n.t("pref.Preferences"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
