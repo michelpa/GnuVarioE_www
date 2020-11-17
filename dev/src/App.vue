@@ -1,6 +1,6 @@
 <template>
   <div id="monapp">
-    <div class="container-fluid" :key="lang">
+    <div class="container-fluid" >
       <b-navbar toggleable="lg" :type="themeType" :variant="themeVariant">
         <b-navbar-brand href="#">
           <a class="navbar-brand mr-auto" href="#">
@@ -40,11 +40,6 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
-            <b-nav-item-dropdown text="Lang" right @click="changeLocale">
-              <b-dropdown-item  @click="changeLocale('en')">EN</b-dropdown-item>
-              <b-dropdown-item  @click="changeLocale('fr')">FR</b-dropdown-item>
-              <b-dropdown-item  @click="changeLocale('ru')">RU</b-dropdown-item>
-            </b-nav-item-dropdown>
             <b-nav-item @click="showPopupPref = true">
               <i class="fa fa-cog"></i>
               {{ $t("menu.SETTINGS") }}
@@ -62,8 +57,10 @@
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <!-- component matched by the route will render here -->
-      <router-view :class="{ loading: isLoading }"></router-view>
+      <div :key="lang">
+        <!-- component matched by the route will render here -->
+        <router-view :class="{ loading: isLoading }"></router-view>
+      </div>
     </div>
 
     <!-- <span>Selected: {{ themeHelper.theme }}</span> -->
