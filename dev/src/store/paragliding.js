@@ -32,11 +32,10 @@ export const actions = {
                 return axios.get(url, axiosConfig).then(response => {
                     let blob = new Blob([response.data]);
                     let formData = new FormData();
-                    formData.append('userfile', blob);
+                    formData.append('userfile', blob, filename);
                     formData.append('email', pg.login);
                     formData.append('pass', pg.password);
                     formData.append('MAX_FILE_SIZE', '5000000');
-
                     context.dispatch("uploadFileToP", formData).then(
                         // eslint-disable-next-line
                         (response) => {
