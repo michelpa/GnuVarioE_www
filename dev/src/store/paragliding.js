@@ -55,7 +55,7 @@ export const actions = {
         }
     },
     uploadFileToP: function (context, formData) {
-        let url = "https://paraglidinglogbook.com/gnuvario.php";
+        let url = "https://paraglidinglogbook.com/gnuvario/gnuvario.php";
         // if (env.NODE_ENV == "development") {
         //     url = baseUrl + "/upload";
         // }
