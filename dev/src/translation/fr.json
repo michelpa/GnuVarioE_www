@@ -317,6 +317,7 @@
     "del_positive2": " supprimée de la carte SD.",
     "download_failed": "Echec du téléchargement du fichier.",
     "to_logbook_failed": "Echec de déplacement du vol.",
+    "be_patient": "Soyez patient, cela peut prendre du temps...",
     "del_failed_fly": "Echec de la suppression du vol."    
   },
   "sitelist": {
