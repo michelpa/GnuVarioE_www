@@ -153,7 +153,9 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                :title="$t('actions.TO_LOGBOOK')"
+                                                :title="
+                                                  $t('actions.TO_LOGBOOK')
+                                                "
                                               >
                                                 <i
                                                   class="fa fa-book-open"
@@ -179,10 +181,12 @@
                                                 button-size="sm"
                                                 yes-class="btn btn-success"
                                                 no-class="btn btn-danger"
-                                                :messages="{ 
-                                                  title: $t('actions.del_message'), 
-                                                  yes: $t('actions.yes'), 
-                                                  no: $t('actions.no')
+                                                :messages="{
+                                                  title: $t(
+                                                    'actions.del_message'
+                                                  ),
+                                                  yes: $t('actions.yes'),
+                                                  no: $t('actions.no'),
                                                 }"
                                               >
                                                 <button
@@ -371,12 +375,17 @@ export default {
         // eslint-disable-next-line
         (response) => {
           store.dispatch("loadFlights");
-          self.$bvToast.toast(this.$i18n.t("actions.del_positive1") + f + this.$i18n.t("actions.del_positive2"), {
-            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "success",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.del_positive1") +
+              f +
+              this.$i18n.t("actions.del_positive2"),
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success",
+            }
+          );
         },
         // eslint-disable-next-line
         (error) => {
@@ -390,6 +399,14 @@ export default {
       );
     },
     flightToBook: function (f) {
+      this.$bvToast.toast(this.$i18n.t("actions.be_patient"), {
+        title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+        toaster: "b-toaster-top-full",
+        solid: true,
+        variant: "info",
+        "auto-hide-delay": 2000,
+        "auto-hide": true,
+      });
       let self = this;
       store.dispatch("flightToBook", f).then(
         // eslint-disable-next-line no-unused-vars
@@ -400,12 +417,15 @@ export default {
         // eslint-disable-next-line
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(this.$i18n.t("actions.to_logbook_failed") + ` ${msg}`, {
-            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "danger",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.to_logbook_failed") + ` ${msg}`,
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            }
+          );
         }
       );
     },
@@ -442,12 +462,15 @@ export default {
         // eslint-disable-next-line
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(this.$i18n.t("actions.download_failed") + ` ${msg}`, {
-            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "danger",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.download_failed") + ` ${msg}`,
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            }
+          );
         }
       );
     },

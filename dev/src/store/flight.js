@@ -101,7 +101,19 @@ export const actions = {
         }
 
 
-        let axiosConfig = {}
+        let axiosConfig = {
+            onDownloadProgress: function (progressEvent) {
+                const dataChunk = progressEvent.currentTarget.response;
+                // var count = (dataChunk.match(/\./g) || []).length;
+                if (dataChunk.includes('ERROR')) {
+                    throw new Error("Error");
+                }
+                // console.log(count);
+                // console.log(Math.round(
+                //     (progressEvent.loaded * 100) / progressEvent.total
+                // ));
+            },
+        }
         return waitFor(function () {
             return context.rootState.loading.isLoading === false
         }).then(function () {

@@ -79,6 +79,7 @@ export const actions = {
 
             // eslint-disable-next-line no-unused-vars
             return axios.post(url, formData, config).then(response => {
+                alert(response.data)
                 return true;
             }).catch(function (error) {
                 return Promise.reject(error);
