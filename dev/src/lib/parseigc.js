@@ -54,7 +54,7 @@ export function parseIGC(igcFile) {
     // Extracts the flight date from the IGC file.
     function extractDate(igcFile) {
         // Date is recorded as: HFDTEddmmyy (where HFDTE is a literal and dddmmyy are digits).
-        var dateRecord = igcFile.match(/H[FO]DTE([\d]{2})([\d]{2})([\d]{2})/);
+        var dateRecord = igcFile.match(/H[FO]DTE(?:DATE:)([\d]{2})([\d]{2})([\d]{2})/);
         if (dateRecord === null) {
             throw new IGCException('The file does not contain a date header.');
         }
