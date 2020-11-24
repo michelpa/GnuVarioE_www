@@ -1,6 +1,6 @@
 <template>
   <div id="monapp">
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <b-navbar toggleable="lg" :type="themeType" :variant="themeVariant">
         <b-navbar-brand href="#">
           <a class="navbar-brand mr-auto" href="#">
@@ -12,16 +12,24 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item
-              :to="{ name: 'mesvols'}"
-              exact
-              active-class="active"
-            >{{ $t('menu.FLIGHTS') }}</b-nav-item>
-            <b-nav-item :to="{ name: 'sd'}" active-class="active">{{ $t('menu.SD') }}</b-nav-item>
-            <b-nav-item :to="{ name: 'wifi'}" active-class="active">{{ $t('menu.WIFI') }}</b-nav-item>
-            <b-nav-item :to="{ name: 'config'}" active-class="active">{{ $t('menu.CONFIG') }}</b-nav-item>
-            <b-nav-item :to="{ name: 'ota'}" active-class="active">{{ $t('menu.MAJ') }}</b-nav-item>
-            <b-nav-item :to="{ name: 'about'}" active-class="active">{{ $t('menu.ABOUT') }}</b-nav-item>
+            <b-nav-item :to="{ name: 'mesvols' }" exact active-class="active">{{
+              $t("menu.FLIGHTS")
+            }}</b-nav-item>
+            <b-nav-item :to="{ name: 'sd' }" active-class="active">{{
+              $t("menu.SD")
+            }}</b-nav-item>
+            <b-nav-item :to="{ name: 'wifi' }" active-class="active">{{
+              $t("menu.WIFI")
+            }}</b-nav-item>
+            <b-nav-item :to="{ name: 'config' }" active-class="active">{{
+              $t("menu.CONFIG")
+            }}</b-nav-item>
+            <b-nav-item :to="{ name: 'ota' }" active-class="active">{{
+              $t("menu.MAJ")
+            }}</b-nav-item>
+            <b-nav-item :to="{ name: 'about' }" active-class="active">{{
+              $t("menu.ABOUT")
+            }}</b-nav-item>
             <!-- <b-nav-item :to="{ name: 'home'}" active-class="active">Home</b-nav-item> -->
           </b-navbar-nav>
 
@@ -32,27 +40,35 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
-            <b-nav-item @click="showPopupPref=true">
+            <b-nav-item @click="showPopupPref = true">
               <i class="fa fa-cog"></i>
-              {{ $t('menu.SETTINGS') }}
+              {{ $t("menu.SETTINGS") }}
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-      <pref :show="showPopupPref" @themeClosed="showPopupPref=false" :themeHelper="themeHelper"></pref>
+      <pref
+        :show="showPopupPref"
+        @themeClosed="showPopupPref = false"
+        :themeHelper="themeHelper"
+      ></pref>
       <div class="wait" v-show="isLoading">
         <div class="spinner-border text-info" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <!-- component matched by the route will render here -->
-      <router-view :class="{ 'loading': isLoading }"></router-view>
+      <div :key="lang">
+        <!-- component matched by the route will render here -->
+        <router-view :class="{ loading: isLoading }"></router-view>
+      </div>
     </div>
 
     <!-- <span>Selected: {{ themeHelper.theme }}</span> -->
     <footer class="footer fixed-bottom">
       <div class="container">
-        <span class="text-muted">GNUVario : The open source and open hardware variometer</span>
+        <span class="text-muted"
+          >GNUVario : The open source and open hardware variometer</span
+        >
       </div>
     </footer>
   </div>
@@ -68,14 +84,14 @@ import Pref from "./components/Pref";
 export default {
   name: "App",
   components: { Pref },
-  data: function() {
+  data: function () {
     return {
       monlogo: logo,
       env: process.env,
       variant: "info",
       type: "dark",
       showPopupPref: false,
-      themeHelper: new ThemeHelper()
+      themeHelper: new ThemeHelper(),
     };
   },
   computed: {
@@ -84,46 +100,57 @@ export default {
       "themeName",
       "themeVariant",
       "themeType",
-      "lang"
-    ])
+      "lang",
+    ]),
+    // language: function () {
+    //   return this.lang;
+    // },
   },
-  methods: {},
+  methods: {
+    changeLocale: function (locale) {
+      store.commit("updateConfigWeb", {
+        property: "language",
+        with: locale,
+      });
+    },
+  },
   watch: {
-    themeName: function(newtheme, oldtheme) {
+    themeName: function (newtheme, oldtheme) {
       if (newtheme != oldtheme) {
         // eslint-disable-next-line no-unused-vars
-        let added = this.themeHelper.addNewTheme(newtheme).then(sheets => {
+        let added = this.themeHelper.addNewTheme(newtheme).then((sheets) => {
           this.loading = false;
           this.themeHelper.theme = newtheme;
         });
       }
     },
-    lang: function(newValue, oldValue) {
+    lang: function (newValue, oldValue) {
       if (oldValue != newValue) {
         this.$i18n.locale = newValue;
+        this.$moment.locale(newValue);
+        // moment.locale(newValue);
       }
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     // eslint-disable-next-line no-unused-vars
-    let added = this.themeHelper.addNewTheme(this.themeName).then(sheets => {
+    let added = this.themeHelper.addNewTheme(this.themeName).then((sheets) => {
       this.loading = false;
       this.themeHelper.theme = this.themeName;
     });
-    
   },
-  created: function() {
-    window.setTimeout(function() {
+  created: function () {
+    window.setTimeout(function () {
       Promise.all([store.dispatch("loadConfig")]).then(() => {
         //next();
       });
     }, 100);
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       Promise.all([store.dispatch("loadConfigWeb")]).then(() => {
         //next();
       });
     }, 300);
-  }
+  },
 };
 </script>
 

@@ -285,8 +285,7 @@
       }
     }
   },
-  "messages": {
-    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",
+  "pref": {
     "Failed_save_settings": "Echec de la sauvegarde des préférences.",
     "Save_settings": "Préférences sauvegardées sur la carte SD.",
     "Preferences": "Préférences",
@@ -294,6 +293,63 @@
     "Theme": "Thème",
     "Variant": "Variant",
     "Type": "Type",
-    "Language": "Langue"
+    "Language": "Langue",
+    "active": "Activé",
+    "login": "Login",
+    "password": "Mot de passe"
+  },
+  "mesvols": {
+    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",    
+    "TITLE_MSG_modal": "Mon vol"
+  },
+  "actions": {
+    "edit": "Editer",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "del_message": "Êtes-vous sûr?",
+    "yes": "Oui",
+    "no": "Non",
+    "TO_LOGBOOK": "Placer dans mon carnet",
+    "download": "Télécharger",
+    "info": "Info",
+    "del_failed": "Echec de la suppression du fichier.",
+    "del_positive1": "Fichier ",
+    "del_positive2": " supprimée de la carte SD.",
+    "download_failed": "Echec du téléchargement du fichier.",
+    "to_logbook_failed": "Echec de déplacement du vol.",
+    "be_patient": "Soyez patient, cela peut prendre du temps...",
+    "del_failed_fly": "Echec de la suppression du vol."    
+  },
+  "sitelist": {
+    "name": "Libellé"
+  },
+  "siteform": {
+    "title": "Site",
+    "description": "Description",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+  },
+  "carnet": {
+    "VOLS": "Vols",
+    "after_date": "Depuis le",
+    "total_duration": "Durée cumulée",
+    "sites": "Sites",
+    "add_flight": "Ajouter un vol (hors IGC)",
+    "site": "site",
+    "Site": "Site",
+    "Pilote": "Pilote",
+    "Voile": "Voile",
+    "Start_time": "Heure de début",
+    "End_time": "Heure de fin",
+    "Duration": "Durée",
+    "Alt": "Alt. départ / Alt. fin",
+    "Alt_min": "Altitude mini",
+    "Alt_max": "Altitude maxi",    
+    "no_trace": "Pas de trace pour ce vol"
+  },
+  "flightform": {
+    "title": "Vol",
+    "Comment": "Commentaires",
+    "save_failed": "Echec de la sauvegarde du vol."
   }
 }

@@ -23,7 +23,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="alert alert-info">
-                        {{ $t("messages.MESVOL_WARNING") }}
+                        {{ $t("mesvols.MESVOL_WARNING") }}
                       </div>
                     </div>
                   </div>
@@ -153,7 +153,9 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Placer dans mon carnet"
+                                                :title="
+                                                  $t('actions.TO_LOGBOOK')
+                                                "
                                               >
                                                 <i
                                                   class="fa fa-book-open"
@@ -168,7 +170,7 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Télécharger"
+                                                :title="$t('actions.download')"
                                               >
                                                 <i
                                                   class="fa fa-arrow-alt-circle-down"
@@ -180,9 +182,11 @@
                                                 yes-class="btn btn-success"
                                                 no-class="btn btn-danger"
                                                 :messages="{
-                                                  title: 'Êtes-vous sûr?',
-                                                  yes: 'Oui',
-                                                  no: 'Non',
+                                                  title: $t(
+                                                    'actions.del_message'
+                                                  ),
+                                                  yes: $t('actions.yes'),
+                                                  no: $t('actions.no'),
                                                 }"
                                               >
                                                 <button
@@ -194,7 +198,7 @@
                                                       hide: 50,
                                                     },
                                                   }"
-                                                  title="Supprimer"
+                                                  :title="$t('actions.delete')"
                                                 >
                                                   <i
                                                     class="fa fa-trash-alt"
@@ -210,7 +214,7 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Info"
+                                                :title="$t('actions.info')"
                                               >
                                                 <i
                                                   class="fa fa-info-circle"
@@ -355,8 +359,8 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.download_failed"), {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
@@ -371,17 +375,22 @@ export default {
         // eslint-disable-next-line
         (response) => {
           store.dispatch("loadFlights");
-          self.$bvToast.toast("Fichier " + f + " supprimée de la carte SD.", {
-            title: "Mon vol",
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "success",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.del_positive1") +
+              f +
+              this.$i18n.t("actions.del_positive2"),
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success",
+            }
+          );
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec de la suppression du fichier.`, {
-            title: "Mon vol",
+          self.$bvToast.toast(this.$i18n.t("actions.del_failed"), {
+            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",
@@ -390,6 +399,14 @@ export default {
       );
     },
     flightToBook: function (f) {
+      this.$bvToast.toast(this.$i18n.t("actions.be_patient"), {
+        title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+        toaster: "b-toaster-top-full",
+        solid: true,
+        variant: "info",
+        "auto-hide-delay": 2000,
+        "auto-hide": true,
+      });
       let self = this;
       store.dispatch("flightToBook", f).then(
         // eslint-disable-next-line no-unused-vars
@@ -400,12 +417,15 @@ export default {
         // eslint-disable-next-line
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(`Echec de déplacement du vol. ${msg}`, {
-            title: "Mon vol",
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "danger",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.to_logbook_failed") + ` ${msg}`,
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            }
+          );
         }
       );
     },
@@ -442,12 +462,15 @@ export default {
         // eslint-disable-next-line
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(`Echec du téléchargement du fichier. ${msg}`, {
-            title: "Mon vol",
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "danger",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.download_failed") + ` ${msg}`,
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            }
+          );
         }
       );
     },

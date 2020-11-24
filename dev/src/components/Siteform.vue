@@ -6,14 +6,14 @@
       @ok="doSave"
       @hidden="doHidden"
       ref="modal"
-      title="Site"
+      :title="$t('siteform.title')"
     >
       <div>
         <b-card>
           <b-form @submit.prevent>
             <b-row class="my-1">
               <b-col sm="3">
-                <label>Libellé</label>
+                <label>{{ $t("sitelist.name") }}</label>
               </b-col>
               <b-col sm="9">
                 <b-form-input
@@ -26,7 +26,7 @@
             </b-row>
             <b-row class="my-1">
               <b-col sm="3">
-                <label>Description</label>
+                <label>{{ $t("siteform.description") }}</label>
               </b-col>
               <b-col sm="9">
                 <b-form-textarea
@@ -37,7 +37,7 @@
             </b-row>
             <b-row class="my-1">
               <b-col sm="3">
-                <label>Latitude</label>
+                <label>{{ $t("siteform.latitude") }}</label>
               </b-col>
               <b-col sm="9">
                 <b-form-input
@@ -50,7 +50,7 @@
             </b-row>
             <b-row class="my-1">
               <b-col sm="3">
-                <label>Longitude</label>
+                <label>{{ $t("siteform.longitude") }}</label>
               </b-col>
               <b-col sm="9">
                 <b-form-input
