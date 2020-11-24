@@ -32,11 +32,10 @@ export const actions = {
                 return axios.get(url, axiosConfig).then(response => {
                     let blob = new Blob([response.data]);
                     let formData = new FormData();
-                    formData.append('userfile', blob);
+                    formData.append('userfile', blob, filename);
                     formData.append('email', pg.login);
                     formData.append('pass', pg.password);
                     formData.append('MAX_FILE_SIZE', '5000000');
-
                     context.dispatch("uploadFileToP", formData).then(
                         // eslint-disable-next-line
                         (response) => {
@@ -56,7 +55,7 @@ export const actions = {
         }
     },
     uploadFileToP: function (context, formData) {
-        let url = "https://paraglidinglogbook.com/gnuvario.php";
+        let url = "https://paraglidinglogbook.com/gnuvario/gnuvario.php";
         // if (env.NODE_ENV == "development") {
         //     url = baseUrl + "/upload";
         // }
@@ -80,6 +79,7 @@ export const actions = {
 
             // eslint-disable-next-line no-unused-vars
             return axios.post(url, formData, config).then(response => {
+                alert(response.data)
                 return true;
             }).catch(function (error) {
                 return Promise.reject(error);

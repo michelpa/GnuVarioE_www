@@ -125,7 +125,11 @@ export default {
       tabVariant: this.themeHelper.themesVariantLst,
       tabType: this.themeHelper.themesTypeLst,
       themes: this.themeHelper.themesLst,
-      langs: { fr: "FR", en: "EN", ru: "RU" },
+      langs: [
+        { value: "fr", text: "FR" },
+        { value: "en", text: "EN" },
+        { value: "ru", text: "RU" },
+      ],
       langSelected: "",
       pgenabled: false,
       pglogin: "",
@@ -177,8 +181,8 @@ export default {
       });
     },
     changeLocale: function () {
-      this.$i18n.locale = this.langSelected;
-      moment.locale(this.langSelected);
+      // this.$i18n.locale = this.langSelected;
+      // this.$moment.locale(this.langSelected);
       store.commit("updateConfigWeb", {
         property: "language",
         with: this.langSelected,

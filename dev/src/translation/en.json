@@ -317,6 +317,7 @@
     "del_positive2": " deleted from SD card.",
     "download_failed": "File download failed.",
     "to_logbook_failed": "Failed to move the flight.",
+    "be_patient": "Please be patient, it may take a while...",
     "del_failed_fly": "Failed to delete flight."    
   },
   "sitelist": {

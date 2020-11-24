@@ -26,6 +26,7 @@ Vue.component('click-confirm', clickConfirm.component);
 Vue.component('apexchart', VueApexCharts)
 Vue.component('vue-color', VueColor)
 
+
 // eslint-disable-next-line no-undef
 Vue.use(vueMoment, {
   moment
