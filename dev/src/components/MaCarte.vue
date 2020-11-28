@@ -79,7 +79,7 @@ export default {
         xaxis: {
           type: "datetime",
           title: {
-            text: "Heure"
+            text: this.$i18n.t("mesvols.TIME")
           },
           axisTicks: {
             show: true,
@@ -107,11 +107,11 @@ export default {
               show: true,
               // eslint-disable-next-line
               formatter: function(value, val, index) {
-                return value + "m";
+                return value + " m";
               }
             },
             title: {
-              text: "Altitude"
+              text: this.$i18n.t("mesvols.ALTITUDE")
             }
           },
           {
@@ -120,11 +120,11 @@ export default {
               show: true,
               // eslint-disable-next-line
               formatter: function(value, val, index) {
-                return value + "km/h";
+                return value + " km/h";
               }
             },
             title: {
-              text: "Vitesse"
+              text: this.$i18n.t("mesvols.SPEED")
             }
           }
         ]
@@ -418,12 +418,12 @@ export default {
 
     this.series = [
       {
-        name: "altitude",
+        name: this.$i18n.t("mesvols.ALTITUDE"),
         data: da,
         type: "area"
       },
       {
-        name: "vitesse",
+        name: this.$i18n.t("mesvols.SPEED"),
         data: arrSmoothed
         //type: "line"
       }
