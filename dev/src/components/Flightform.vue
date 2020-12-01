@@ -65,32 +65,42 @@
             <div v-if="!(flight.filename)">
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Date du vol</label>
+                  <label>{{ $t("flights.FLIGHT_OF") }}</label>
                 </b-col>
                 <b-col sm="9">
-                  <b-form-input v-model="flight.flight_date" placeholder="Date du vol" type="date"></b-form-input>
+                  <b-form-input 
+                    v-model="flight.flight_date" 
+                    placeholder="Date du vol" 
+                    type="date"
+                  ></b-form-input>
                 </b-col>
               </b-row>
 
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Pilote</label>
+                  <label>{{ $t("carnet.Pilote") }}</label>
                 </b-col>
                 <b-col sm="9">
-                  <b-form-input v-model="flight.pilot" placeholder="Nom du pilote"></b-form-input>
+                  <b-form-input 
+                    v-model="flight.pilot" 
+                    :placeholder="$t('carnet.Pilote_name')"
+                  ></b-form-input>
                 </b-col>
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Aile</label>
+                  <label>{{ $t("carnet.Voile") }}</label>
                 </b-col>
                 <b-col sm="9">
-                  <b-form-input v-model="flight.wing" placeholder="Nom de l'aile"></b-form-input>
+                  <b-form-input 
+                    v-model="flight.wing" 
+                    :placeholder="$t('carnet.Voile_name')"
+                  ></b-form-input>
                 </b-col>
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Heure de début</label>
+                  <label>{{ $t("carnet.Start_time") }}</label>
                 </b-col>
                 <b-col sm="9">
                   <b-form-input
@@ -102,7 +112,7 @@
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Heure de fin</label>
+                  <label>{{ $t("carnet.End_time") }}</label>
                 </b-col>
                 <b-col sm="9">
                   <b-form-input
@@ -114,48 +124,48 @@
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Altitude de départ</label>
+                  <label>{{ $t("carnet.Alt_start") }}</label>
                 </b-col>
                 <b-col sm="9">
                   <b-form-input
                     v-model="flight.start_height"
-                    placeholder="Altitude départ"
+                    :placeholder="$t('carnet.Alt_start')"
                     type="number"
                   ></b-form-input>
                 </b-col>
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Altitude de fin</label>
+                  <label>{{ $t("carnet.Alt_end") }}</label>
                 </b-col>
                 <b-col sm="9">
                   <b-form-input
                     v-model="flight.end_height"
-                    placeholder="Altitude fin"
+                    :placeholder="$t('carnet.Alt_end')"
                     type="number"
                   ></b-form-input>
                 </b-col>
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Altitude mini</label>
+                  <label>{{ $t("carnet.Alt_min") }}</label>
                 </b-col>
                 <b-col sm="9">
                   <b-form-input
                     v-model="flight.min_height"
-                    placeholder="Altitude mini"
+                    :placeholder="$t('carnet.Alt_min')"
                     type="number"
                   ></b-form-input>
                 </b-col>
               </b-row>
               <b-row class="my-1">
                 <b-col sm="3">
-                  <label>Altitude maxi</label>
+                  <label>{{ $t("carnet.Alt_max") }}</label>
                 </b-col>
                 <b-col sm="9">
                   <b-form-input
                     v-model="flight.max_height"
-                    placeholder="Altitude maxi"
+                    :placeholder="$t('carnet.Alt_max')"
                     type="number"
                   ></b-form-input>
                 </b-col>

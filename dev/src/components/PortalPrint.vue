@@ -8,7 +8,7 @@
       <!-- Write HTML just like a web page -->
       <h1>
         {{ $t("flights.MY_LOGBOOK") }}
-        <button @click="printWindow()" class="btn-print">Imprimer</button>
+        <button @click="printWindow()" class="btn-print">{{ $t('actions.print_but') }}</button>
       </h1>
 
       <div v-for="(data) in bddflights.data.slice().reverse()" :key="data.year">
@@ -23,7 +23,7 @@
               {{ [datamonth.month + data.year, "MMYYYY"]| moment('MMMM YYYY') }}
               <div
                 class="subtitle"
-              >({{ datamonth.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( datamonth.nb_flights)}}, {{ datamonth.duration }}, {{datamonth.sites_id.length }} {{"site"| pluralize( datamonth.sites_id.length)}})</div>
+              >({{ datamonth.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( datamonth.nb_flights)}}, {{ datamonth.duration }}, {{datamonth.sites_id.length }} {{ $t("carnet.site") | pluralize( datamonth.sites_id.length)}})</div>
             </h3>
             <div
               v-for="dataday in datamonth.days.slice().reverse()"
@@ -34,7 +34,7 @@
                 {{dataday.day | moment('dddd D MMMM')}}
                 <div
                   class="subtitle"
-                >({{ dataday.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( dataday.nb_flights)}}, {{ dataday.duration }}, {{dataday.sites_id.length }} {{"site"| pluralize( dataday.sites_id.length)}})</div>
+                >({{ dataday.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( dataday.nb_flights)}}, {{ dataday.duration }}, {{dataday.sites_id.length }} {{ $t("carnet.site") | pluralize( dataday.sites_id.length)}})</div>
               </h4>
 
               <div class="un-vol" v-for="f in dataday.flights" :key="f.id">
@@ -99,7 +99,7 @@
           {{data.year}}
           <div
             class="subtitle"
-          >({{ data.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( data.nb_flights)}}, {{ data.duration }}, {{data.sites_id.length }} {{"site"| pluralize( data.sites_id.length)}})</div>
+          >({{ data.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( data.nb_flights)}}, {{ data.duration }}, {{data.sites_id.length }} {{ $t("carnet.site") | pluralize( data.sites_id.length)}})</div>
         </h2>
         <hr>
       </div>
