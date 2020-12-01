@@ -511,6 +511,7 @@ export default {
   },
   computed: {
     ...mapGetters(["flights", "isLoading", "pg"]),
+
     flightsPerDays: function () {
       let lDays = {};
       Object.values(this.flights).forEach(function (f) {
@@ -603,6 +604,7 @@ export default {
   },
   mounted: function () {
     let self = this;
+
     store.dispatch("loadFlights").catch((error) => {
       self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
         title: "Mon vol",
