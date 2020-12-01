@@ -300,7 +300,10 @@
   },
   "mesvols": {
     "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",    
-    "TITLE_MSG_modal": "My flight"
+    "TITLE_MSG_modal": "My flight",
+    "ALTITUDE": "Altitude",
+    "SPEED": "Speed",
+    "TIME": "Time"
   },  
   "actions": {
     "edit": "Edit",
@@ -318,7 +321,8 @@
     "download_failed": "File download failed.",
     "to_logbook_failed": "Failed to move the flight.",
     "be_patient": "Please be patient, it may take a while...",
-    "del_failed_fly": "Failed to delete flight."    
+    "del_failed_fly": "Failed to delete flight.",
+    "print_but": "Print"    
   },
   "sitelist": {
     "name": "Name"
@@ -339,12 +343,16 @@
     "Site": "Site",
     "Pilote": "Pilot",
     "Voile": "Wing",
+    "Pilote_name": "Pilote name",
+    "Voile_name": "Wing name",
     "Start_time": "Start time",
     "End_time": "End time",
     "Duration": "Duration",
     "Alt": "Alt. start / Alt. end",
     "Alt_min": "Altitude mini",
     "Alt_max": "Altitude maxi",
+    "Alt_start": "Altitude start",
+    "Alt_end": "Altitude finish",
 
     "no_trace": "No trace for this flight"
   },

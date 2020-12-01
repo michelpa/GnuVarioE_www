@@ -7,7 +7,7 @@
       @ok="doCancel"
       @hidden="doHidden"
       ref="modal"
-      title="Visu"
+      :title= "$t('mesvols.TITLE_MSG_modal')"
       size="full"
     >
       <visu-data :igc="igc" :flight="flight"></visu-data>
@@ -16,15 +16,15 @@
           <table class="table table-sm">
             <tbody>
               <tr>
-                <td>Site</td>
+                <td>{{ $t("carnet.Site") }}</td>
                 <th>{{ flight.site_lib }}</th>
               </tr>
               <tr>
-                <td>Pilote</td>
+                <td>{{ $t("carnet.Pilote") }}</td>
                 <th>{{ flight.pilot }}</th>
               </tr>
               <tr>
-                <td>Voile</td>
+                <td>{{ $t("carnet.Voile") }}</td>
                 <th>{{ flight.wing }}</th>
               </tr>
             </tbody>
@@ -34,15 +34,15 @@
           <table class="table table-sm">
             <tbody>
               <tr>
-                <td>Heure de début</td>
+                <td>{{ $t("carnet.Start_time") }}</td>
                 <th>{{ flight.start_flight_time }}</th>
               </tr>
               <tr>
-                <td>Heure de fin</td>
+                <td>{{ $t("carnet.End_time") }}</td>
                 <th>{{ flight.end_flight_time }}</th>
               </tr>
               <tr>
-                <td>Durée</td>
+                <td>{{ $t("carnet.Duration") }}</td>
                 <th>{{ flight.duration }}</th>
               </tr>
             </tbody>
@@ -52,15 +52,15 @@
           <table class="table table-sm">
             <tbody>
               <tr>
-                <td>Alt. départ / Alt. fin</td>
+                <td>{{ $t("carnet.Alt") }}</td>
                 <th>{{ flight.start_height }}m / {{ flight.end_height }}m</th>
               </tr>
               <tr>
-                <td>Altitude mini</td>
+                <td>{{ $t("carnet.Alt_min") }}</td>
                 <th>{{ flight.min_height }}m</th>
               </tr>
               <tr>
-                <td>Altitude maxi</td>
+                <td>{{ $t("carnet.Alt_max") }}</td>
                 <th>{{ flight.max_height }}m</th>
               </tr>
             </tbody>
