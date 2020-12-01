@@ -1,8 +1,7 @@
  <template>
   <div>
-    <div v-if="bddflights.all">
-      {{ parsedData }}
-      <portal-print v-model="openpapier" :bddflights="bddflights">
+    <div v-if="parsedData.length > 0">
+      <portal-print v-model="openpapier" :bddflights="parsedData">
         <!-- I appear in a new window! -->
       </portal-print>
     </div>
