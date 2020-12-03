@@ -1,5 +1,5 @@
 
-export const baseUrl = 'http://172.20.10.14';
+export const baseUrl = 'http://192.168.1.70';
 
 export function waitFor(conditionFunction) {
     const poll = resolve => {
@@ -48,15 +48,65 @@ export function triParNomInverse(tab) {
     });
 }
 
-function triParNom(tab) {
+export function triParNom(tab) {
     tab.sort(function (a, b) {
         return a.name.localeCompare(b.name);
     });
 }
 
 
-function triParType(tab) {
+export function triParType(tab) {
     tab.sort(function (a, b) {
         return a.type.localeCompare(b.type);
     });
+}
+
+
+export function sumByKey(value, key) {
+    return _.sumBy(value, key);
+}
+
+export function sumFlightsDuration(flights) {
+    let dur = "00:00:00";
+    flights.forEach((d) => {
+        dur = getTimeInterval(d.start_flight_time, d.end_flight_time, dur);
+    });
+    return dur;
+}
+
+export function sumDuration(data) {
+    let dur = "00:00:00";
+    const start = "00:00:00";
+    data.forEach((d) => {
+        dur = getTimeInterval(start, d.duration, dur);
+    });
+    return dur;
+}
+
+export function getTimeInterval(startTime, endTime, addTime) {
+    var start = moment(startTime, "HH:mm:ss");
+    var end = moment(endTime, "HH:mm:ss");
+    var seconds = end.diff(start, 'seconds');
+    var interval = moment().hour(0).minute(0).second(seconds);
+    var delta = moment.duration(addTime).asSeconds()
+    interval.add(delta, "s");
+    return interval.format("HH:mm:ss");
+}
+
+
+export function compareFlight(a, b) {
+    if (a.flight_date > b.flight_date) {
+        return -1;
+    }
+    if (a.flight_date < b.flight_date) {
+        return 1;
+    }
+
+    if (a.start_flight_time < b.start_flight_time) {
+        return -1;
+    }
+    if (a.start_flight_time > b.start_flight_time) {
+        return 1;
+    }
+    return 0;
 }

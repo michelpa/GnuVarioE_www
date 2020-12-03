@@ -122,7 +122,7 @@ module.exports = {
             'apex': 'Apex',
             'apexchart': 'VueApexCharts',
             'vuecolor': "VueColor",
-            'vueMoment': "vueMoment",
+            'vueMoment': "vueMoment"
         }
     },
     css: {

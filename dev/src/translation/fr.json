@@ -300,7 +300,10 @@
   },
   "mesvols": {
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",    
-    "TITLE_MSG_modal": "Mon vol"
+    "TITLE_MSG_modal": "Mon vol",
+    "ALTITUDE": "Altitude",
+    "SPEED": "Vitesse",
+    "TIME": "Heure"
   },
   "actions": {
     "edit": "Editer",
@@ -318,7 +321,8 @@
     "download_failed": "Echec du téléchargement du fichier.",
     "to_logbook_failed": "Echec de déplacement du vol.",
     "be_patient": "Soyez patient, cela peut prendre du temps...",
-    "del_failed_fly": "Echec de la suppression du vol."    
+    "del_failed_fly": "Echec de la suppression du vol.",
+    "print_but": "Imprimer"        
   },
   "sitelist": {
     "name": "Libellé"
@@ -339,12 +343,16 @@
     "Site": "Site",
     "Pilote": "Pilote",
     "Voile": "Voile",
+    "Pilote_name": "Nom du pilote",
+    "Voile_name": "Nom de l'aile",
     "Start_time": "Heure de début",
     "End_time": "Heure de fin",
     "Duration": "Durée",
     "Alt": "Alt. départ / Alt. fin",
     "Alt_min": "Altitude mini",
-    "Alt_max": "Altitude maxi",    
+    "Alt_max": "Altitude maxi",
+    "Alt_start": "Altitude de départ",
+    "Alt_end": "Altitude de fin",    
     "no_trace": "Pas de trace pour ce vol"
   },
   "flightform": {

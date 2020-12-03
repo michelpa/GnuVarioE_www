@@ -254,39 +254,52 @@
                           :altMax="altMax"
                           :altMin="altMin"
                         ></ma-carte>
-                        <table
-                          class="table table-striped table-sm table-responsive text-left"
-                        >
-                          <tr>
-                            <th>
-                              {{ $t("flights.FLIGHT_OF") }} {{ flightDate }}
-                            </th>
-                            <td>
-                              {{ $t("flights.FLIGHT_START") }}:
-                              {{ flightStart }}
-                            </td>
-                            <td>
-                              {{ $t("flights.FLIGHT_ALT_START") }}:
-                              {{ altStart }}m
-                            </td>
-                            <td>
-                              {{ $t("flights.FLIGHT_ALT_MAX") }}: {{ altMax }}m
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              {{ $t("flights.FLIGHT_DURATION") }}:
-                              {{ flightDuration }}
-                            </td>
-                            <td>
-                              {{ $t("flights.FLIGHT_END") }}: {{ flightStop }}
-                            </td>
-                            <td>
-                              {{ $t("flights.FLIGHT_ALT_END") }}: {{ altStop }}m
-                            </td>
-                            <td>&nbsp;</td>
-                          </tr>
-                        </table>
+                        <div class="row">
+                          <div class="col-md-5">                                      
+                            <table class="table table-sm text-left">
+                              <tbody>
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_OF") }}</td>
+                                  <th>{{ flightDate }}</th>
+                                </tr>
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_START") }}:</td>
+                                  <th>{{ flightStart }}</th>
+                                </tr>
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_END") }}:</td>
+                                  <th>{{ flightStop }}</th>
+                                </tr>
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_DURATION") }}:</td>
+                                  <th>{{ flightDuration }}</th>
+                                </tr>                                            
+                              </tbody>
+                            </table>
+                          </div>                                      
+                          <div class="col-md-4">                                      
+                            <table class="table table-sm text-left">
+                              <tbody>
+                                <tr>
+                                  <td>_</td>
+                                  <th></th>
+                                </tr>                                            
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_ALT_START") }}:</td>
+                                  <th>{{ altStart }} m</th>
+                                </tr>
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_ALT_END") }}:</td>
+                                  <th>{{ altStop }} m</th>
+                                </tr>
+                                <tr>
+                                  <td>{{ $t("flights.FLIGHT_ALT_MAX") }}:</td>
+                                  <th>{{ altMax }} m</th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>                                    
                       </div>
                     </div>
                   </div>
@@ -511,6 +524,7 @@ export default {
   },
   computed: {
     ...mapGetters(["flights", "isLoading", "pg"]),
+
     flightsPerDays: function () {
       let lDays = {};
       Object.values(this.flights).forEach(function (f) {
@@ -603,6 +617,7 @@ export default {
   },
   mounted: function () {
     let self = this;
+
     store.dispatch("loadFlights").catch((error) => {
       self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
         title: "Mon vol",

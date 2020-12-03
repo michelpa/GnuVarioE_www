@@ -1,112 +1,132 @@
 <template>
-<html>
-  <head></head>
-  <body class="A4" v-if="openpapier">
-    <!-- Each sheet element should have the class "sheet" -->
-    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    <section class="sheet padding-10mm" ref="monElement">
-      <!-- Write HTML just like a web page -->
-      <h1>
-        {{ $t("flights.MY_LOGBOOK") }}
-        <button @click="printWindow()" class="btn-print">Imprimer</button>
-      </h1>
-
-      <div v-for="(data) in bddflights.data.slice().reverse()" :key="data.year">
-        <h2>{{data.year}}</h2>
-        <div class="year-zone">
-          <div
-            v-for="(datamonth) in data.months.slice().reverse()"
-            :key="datamonth.month"
-            class="un-mois"
-          >
-            <h3>
-              {{ [datamonth.month + data.year, "MMYYYY"]| moment('MMMM YYYY') }}
-              <div
-                class="subtitle"
-              >({{ datamonth.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( datamonth.nb_flights)}}, {{ datamonth.duration }}, {{datamonth.sites_id.length }} {{"site"| pluralize( datamonth.sites_id.length)}})</div>
-            </h3>
+  <html>
+    <head></head>
+    <body class="A4" v-if="openpapier">
+      <!-- Each sheet element should have the class "sheet" -->
+      <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+      <section class="sheet padding-10mm" ref="monElement">
+        <!-- Write HTML just like a web page -->
+        <h1>
+          <!-- {{ $t("flights.MY_LOGBOOK") }} -->
+          <button @click="printWindow()" class="btn-print">
+            {{ $t("actions.print_but") }}
+          </button>
+        </h1>
+        <div v-for="data in bddflights.slice().reverse()" :key="data.year">
+          <h2>{{ data.year }}</h2>
+          <div class="year-zone">
             <div
-              v-for="dataday in datamonth.days.slice().reverse()"
-              :key="dataday.day"
-              class="un-jour"
+              v-for="datamonth in data.months.slice().reverse()"
+              :key="datamonth.month"
+              class="un-mois"
             >
-              <h4>
-                {{dataday.day | moment('dddd D MMMM')}}
-                <div
-                  class="subtitle"
-                >({{ dataday.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( dataday.nb_flights)}}, {{ dataday.duration }}, {{dataday.sites_id.length }} {{"site"| pluralize( dataday.sites_id.length)}})</div>
-              </h4>
+              <h3>
+                {{
+                  [datamonth.month, "YYYY-MM"] | moment("MMMM YYYY")
+                }}
+                <div class="subtitle">
+                  ({{ datamonth.nb_flights }}
+                  {{ $t("flights.FLIGHTS") | pluralize(datamonth.nb_flights) }},
+                  {{ datamonth.duration }}, {{ datamonth.sites_id.length }}
+                  {{
+                    $t("carnet.site") | pluralize(datamonth.sites_id.length)
+                  }})
+                </div>
+              </h3>
+              <div
+                v-for="dataday in datamonth.days.slice().reverse()"
+                :key="dataday.day"
+                class="un-jour"
+              >
+                <h4>
+                  {{ dataday.day | moment("dddd D MMMM") }}
+                  <div class="subtitle">
+                    ({{ dataday.nb_flights }}
+                    {{ $t("flights.FLIGHTS") | pluralize(dataday.nb_flights) }},
+                    {{ dataday.duration }}, {{ dataday.sites_id.length }}
+                    {{
+                      $t("carnet.site") | pluralize(dataday.sites_id.length)
+                    }})
+                  </div>
+                </h4>
 
-              <div class="un-vol" v-for="f in dataday.flights" :key="f.id">
-                <div class="filename" v-if="f.filename && f.filename != ''">{{ f.filename }}</div>
-                <br />
-                <table class="table table-sm">
-                  <tbody>
-                    <tr>
-                      <td>
-                        {{ $t("carnet.Site") }}
-                        <strong>{{ f.site_lib }}</strong>
-                      </td>
-                      <td>
-                        {{ $t("carnet.Pilote") }}
-                        <strong>{{ f.pilot }}</strong>
-                      </td>
-                      <td>
-                        {{ $t("carnet.Voile") }}
-                        <strong>{{ f.wing }}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        {{ $t("carnet.Start_time") }}
-                        <strong>{{ f.start_flight_time }}</strong>
-                      </td>
-                      <td>
-                        {{ $t("carnet.End_time") }}
-                        <strong>{{ f.end_flight_time }}</strong>
-                      </td>
-                      <td>
-                        {{ $t("carnet.Duration") }}
-                        <strong>{{ f.duration }}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        {{ $t("carnet.Alt") }}
-                        <strong>{{ f.start_height }}m / {{ f.end_height }}m</strong>
-                      </td>
-                      <td>
-                        {{ $t("carnet.Alt_min") }}
-                        <strong>{{ f.min_height }}m</strong>
-                      </td>
-                      <td>
-                        {{ $t("carnet.Alt_max") }}
-                        <strong>{{ f.max_height }}m</strong>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div
-                  v-if="f.comment && f.comment != ''"
-                  class="comments"
-                  v-html="$options.filters.nl2br(f.comment)"
-                ></div>
+                <div class="un-vol" v-for="f in dataday.flights" :key="f.id">
+                  <div class="filename" v-if="f.filename && f.filename != ''">
+                    {{ f.filename }}
+                  </div>
+                  <br />
+                  <table class="table table-sm">
+                    <tbody>
+                      <tr>
+                        <td>
+                          {{ $t("carnet.Site") }}
+                          <strong>{{ f.site_lib }}</strong>
+                        </td>
+                        <td>
+                          {{ $t("carnet.Pilote") }}
+                          <strong>{{ f.pilot }}</strong>
+                        </td>
+                        <td>
+                          {{ $t("carnet.Voile") }}
+                          <strong>{{ f.wing }}</strong>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{ $t("carnet.Start_time") }}
+                          <strong>{{ f.start_flight_time }}</strong>
+                        </td>
+                        <td>
+                          {{ $t("carnet.End_time") }}
+                          <strong>{{ f.end_flight_time }}</strong>
+                        </td>
+                        <td>
+                          {{ $t("carnet.Duration") }}
+                          <strong>{{ f.duration }}</strong>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{ $t("carnet.Alt") }}
+                          <strong
+                            >{{ f.start_height }}m / {{ f.end_height }}m</strong
+                          >
+                        </td>
+                        <td>
+                          {{ $t("carnet.Alt_min") }}
+                          <strong>{{ f.min_height }}m</strong>
+                        </td>
+                        <td>
+                          {{ $t("carnet.Alt_max") }}
+                          <strong>{{ f.max_height }}m</strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div
+                    v-if="f.comment && f.comment != ''"
+                    class="comments"
+                    v-html="$options.filters.nl2br(f.comment)"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
+          <h2 class="bottom">
+            {{ data.year }}
+            <div class="subtitle">
+              ({{ data.nb_flights }}
+              {{ $t("flights.FLIGHTS") | pluralize(data.nb_flights) }},
+              {{ data.duration }}, {{ data.sites_id.length }}
+              {{ $t("carnet.site") | pluralize(data.sites_id.length) }})
+            </div>
+          </h2>
+          <hr />
         </div>
-        <h2 class="bottom">
-          {{data.year}}
-          <div
-            class="subtitle"
-          >({{ data.nb_flights }} {{ $t('flights.FLIGHTS') | pluralize( data.nb_flights)}}, {{ data.duration }}, {{data.sites_id.length }} {{"site"| pluralize( data.sites_id.length)}})</div>
-        </h2>
-        <hr>
-      </div>
-      <slot />
-    </section>
-  </body>
-</html>
+        <slot />
+      </section>
+    </body>
+  </html>
 </template>
 
 <script>
@@ -205,21 +225,21 @@ export default {
   name: "PortalPrint",
   model: {
     prop: "openpapier",
-    event: "close"
+    event: "close",
   },
   props: {
     openpapier: {
       type: Boolean,
-      default: false
+      default: false,
     },
     bddflights: {
-      type: Object,
-      default: null
-    }
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {
-      windowRef: null
+      windowRef: null,
     };
   },
   watch: {
@@ -229,7 +249,7 @@ export default {
       } else {
         this.closePortal();
       }
-    }
+    },
   },
   methods: {
     openPortal() {
@@ -260,10 +280,10 @@ export default {
         this.$emit("close");
       }
     },
-    printWindow: function() {
+    printWindow: function () {
       //  console.log(this.$refs.monElement.clientHeight);
       this.windowRef.print();
-    }
+    },
   },
   mounted() {
     if (this.open) {
@@ -274,7 +294,7 @@ export default {
     if (this.windowRef) {
       this.closePortal();
     }
-  }
+  },
 };
 </script>
 <style scoped>
