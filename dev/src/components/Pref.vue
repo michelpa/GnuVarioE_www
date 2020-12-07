@@ -15,7 +15,7 @@
               <b-form @submit.prevent>
                 <b-form-group
                   id="input-group-1"
-                  :label="$t('pref.Theme')+':'"
+                  :label="$t('pref.Theme') + ':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -26,7 +26,7 @@
                 </b-form-group>
                 <b-form-group
                   id="input-group-2"
-                  :label="$t('pref.Variant')+':'"
+                  :label="$t('pref.Variant') + ':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -37,7 +37,7 @@
                 </b-form-group>
                 <b-form-group
                   id="input-group-3"
-                  :label="$t('pref.Type')+':'"
+                  :label="$t('pref.Type') + ':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -53,7 +53,7 @@
             <b-card>
               <b-form-group
                 id="input-group-lang"
-                :label="$t('pref.Language')+':'"
+                :label="$t('pref.Language') + ':'"
                 label-for="input-3"
               >
                 <b-form-select
@@ -67,8 +67,8 @@
           <b-tab title="Paraglidinglogbook.com">
             <b-card>
               <b-form-group
-                id="input-group-lang"
-                :label="$t('pref.active')+':'"
+                id="input-group-pg1"
+                :label="$t('pref.pgactive') + ':'"
                 label-for="input-3"
               >
                 <b-form-checkbox
@@ -77,8 +77,8 @@
                 ></b-form-checkbox>
               </b-form-group>
               <b-form-group
-                id="input-group-lang"
-                :label="$t('pref.login')+':'"
+                id="input-group-pg2"
+                :label="$t('pref.pglogin') + ':'"
                 label-for="input-3"
               >
                 <b-form-input
@@ -87,8 +87,8 @@
                 ></b-form-input>
               </b-form-group>
               <b-form-group
-                id="input-group-lang"
-                :label="$t('pref.password')+':'"
+                id="input-group-pg3"
+                :label="$t('pref.pgpassword') + ':'"
                 label-for="input-3"
               >
                 <b-form-input
@@ -99,6 +99,7 @@
               </b-form-group>
             </b-card>
           </b-tab>
+        
         </b-tabs>
         <div class="clearfix"></div>
       </div>
@@ -134,6 +135,8 @@ export default {
       pgenabled: false,
       pglogin: "",
       pgpass: "",
+      dropboxenabled: false,
+      dropboxcode: "",
     };
   },
   watch: {
@@ -200,6 +203,16 @@ export default {
       store.commit("updateConfigWeb", {
         property: "paraglidinglogbook.password",
         with: this.pgpass,
+      });
+    },
+    changeDropbox: function () {
+      store.commit("updateConfigWeb", {
+        property: "dropbox.enable",
+        with: this.dropboxenabled,
+      });
+      store.commit("updateConfigWeb", {
+        property: "dropbox.code",
+        with: this.dropboxcode,
       });
     },
     showModal: function () {
