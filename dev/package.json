@@ -59,7 +59,8 @@
       "ApexCharts": true,
       "VueApexCharts": true,
       "VueColor": true,
-      "SimpleMapScreenshoter": true
+      "SimpleMapScreenshoter": true,
+      "_": true
     }
   },
   "postcss": {

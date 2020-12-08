@@ -1,7 +1,7 @@
  <template>
   <div>
-    <div v-if="bddflights.all">
-      <portal-print v-model="openpapier" :bddflights="bddflights">
+    <div v-if="parsedData.length > 0">
+      <portal-print v-model="openpapier" :bddflights="parsedData">
         <!-- I appear in a new window! -->
       </portal-print>
     </div>
@@ -16,22 +16,22 @@
       :igc="currentIgc"
       :flight="currentFlight"
     ></visu>
-    <div v-if="bddflights.all">
+    <div v-if="nbFlights > 0">
       <b-card-group deck>
         <b-card
           bg-variant="primary"
-          text-variant="outline-primary"
+          text-variant="white"
           :header="$t('carnet.VOLS')"
           header-tag="h3"
           class="text-center"
         >
           <b-card-text class="topstat"
-            >{{ bddflights.all.nb_flights }} {{ $t("flights.FLIGHTS") }}</b-card-text
-          >
+            >{{ nbFlights }} {{ $t("flights.FLIGHTS") | pluralize(nbFlights) }}
+          </b-card-text>
           <b-card-text>
             <em
               >{{ $t("carnet.after_date") }}
-              {{ bddflights.all.min_date | moment("DD/MM/YYYY") }}</em
+              {{ minDate | moment("DD/MM/YYYY") }}</em
             >
           </b-card-text>
         </b-card>
@@ -43,31 +43,27 @@
           header-tag="h3"
           class="text-center"
         >
-          <b-card-text class="topstat">{{
-            bddflights.all.duration
-          }}</b-card-text>
+          <b-card-text class="topstat">{{ totalDuration }}</b-card-text>
           <b-card-text>
             <em
               >{{ $t("carnet.after_date") }}
-              {{ bddflights.all.min_date | moment("DD/MM/YYYY") }}</em
+              {{ minDate | moment("DD/MM/YYYY") }}</em
             >
           </b-card-text>
         </b-card>
 
         <b-card
           bg-variant="primary"
-          text-variant="outline-primary"
+          text-variant="white"
           :header="$t('carnet.sites')"
           header-tag="h3"
           class="text-center"
         >
-          <b-card-text class="topstat">{{
-            bddflights.all.sites_id.length
-          }}</b-card-text>
+          <b-card-text class="topstat">{{ sitesIds.length }}</b-card-text>
           <b-card-text>
             <em
               >{{ $t("carnet.after_date") }}
-              {{ bddflights.all.min_date | moment("DD/MM/YYYY") }}</em
+              {{ minDate | moment("DD/MM/YYYY") }}</em
             >
           </b-card-text>
         </b-card>
@@ -77,7 +73,6 @@
         <div class="col-md-12">
           <b-card>
             <b-card-header header-tag="header" class="p-1" role="tab">
-              {{ $t("flights.MY_LOGBOOK") }}
               <div class="float-right">
                 <button class="btn btn-primary btn-xs" @click="addFlightFree()">
                   {{ $t("carnet.add_flight") }}</button
@@ -95,14 +90,14 @@
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
-              <div class="clearfix"></div>
+              <h3>{{ $t("flights.MY_LOGBOOK") }}</h3>
             </b-card-header>
-            <div class="bg-default">
+            <div class="bg-default" v-if="parsedData.length > 0">
               <div role="tablist">
                 <b-card
                   no-body
                   class="mb-1"
-                  v-for="(data, idxyear) in bddflights.data"
+                  v-for="(data, idxyear) in parsedData"
                   :key="data.year"
                 >
                   <b-card-header header-tag="header" class="p-1" role="tab">
@@ -122,7 +117,8 @@
                       ({{ data.nb_flights }}
                       {{ $t("flights.FLIGHTS") | pluralize(data.nb_flights) }},
                       {{ data.duration }}, {{ data.sites_id.length }}
-                      {{ $t("carnet.site") | pluralize(data.sites_id.length) }} )
+                      {{ $t("carnet.site") | pluralize(data.sites_id.length) }}
+                      )
                     </b-button>
                   </b-card-header>
                   <b-collapse
@@ -156,8 +152,7 @@
                             <i class="fa fa-chevron-right"></i>
                           </span>
                           <strong>{{
-                            [datamonth.month + data.year, "MMYYYY"]
-                              | moment("MMMM YYYY")
+                            [datamonth.month, "YYYY-MM"] | moment("MMMM YYYY")
                           }}</strong>
                           ({{ datamonth.nb_flights }}
                           {{
@@ -165,7 +160,10 @@
                               | pluralize(datamonth.nb_flights)
                           }}, {{ datamonth.duration }},
                           {{ datamonth.sites_id.length }}
-                          {{ $t("carnet.site")  | pluralize(datamonth.sites_id.length) }})
+                          {{
+                            $t("carnet.site")
+                              | pluralize(datamonth.sites_id.length)
+                          }})
                         </b-button>
                       </b-card-header>
                       <b-collapse
@@ -207,7 +205,10 @@
                                   | pluralize(dataday.nb_flights)
                               }}, {{ dataday.duration }},
                               {{ dataday.sites_id.length }}
-                              {{ $t("carnet.site")  | pluralize(dataday.sites_id.length) }}
+                              {{
+                                $t("carnet.site")
+                                  | pluralize(dataday.sites_id.length)
+                              }}
                               )
                             </b-button>
                           </b-card-header>
@@ -306,9 +307,11 @@
                                               yes-class="btn btn-success"
                                               no-class="btn btn-danger"
                                               :messages="{
-                                                title: $t('actions.del_message'), 
-                                                yes: $t('actions.yes'), 
-                                                no: $t('actions.no')
+                                                title: $t(
+                                                  'actions.del_message'
+                                                ),
+                                                yes: $t('actions.yes'),
+                                                no: $t('actions.no'),
                                               }"
                                             >
                                               <button
@@ -353,15 +356,21 @@
                                         <table class="table table-sm">
                                           <tbody>
                                             <tr>
-                                              <td>{{ $t("carnet.Start_time") }}</td>
+                                              <td>
+                                                {{ $t("carnet.Start_time") }}
+                                              </td>
                                               <th>{{ f.start_flight_time }}</th>
                                             </tr>
                                             <tr>
-                                              <td>{{ $t("carnet.End_time") }}</td>
+                                              <td>
+                                                {{ $t("carnet.End_time") }}
+                                              </td>
                                               <th>{{ f.end_flight_time }}</th>
                                             </tr>
                                             <tr>
-                                              <td>{{ $t("carnet.Duration") }}</td>
+                                              <td>
+                                                {{ $t("carnet.Duration") }}
+                                              </td>
                                               <th>{{ f.duration }}</th>
                                             </tr>
                                           </tbody>
@@ -378,11 +387,15 @@
                                               </th>
                                             </tr>
                                             <tr>
-                                              <td>{{ $t("carnet.Alt_min") }}</td>
+                                              <td>
+                                                {{ $t("carnet.Alt_min") }}
+                                              </td>
                                               <th>{{ f.min_height }}m</th>
                                             </tr>
                                             <tr>
-                                              <td>{{ $t("carnet.Alt_max") }}</td>
+                                              <td>
+                                                {{ $t("carnet.Alt_max") }}
+                                              </td>
                                               <th>{{ f.max_height }}m</th>
                                             </tr>
                                           </tbody>
@@ -438,7 +451,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["bddflights", "isLoadMore", "pg"]),
+    ...mapGetters([
+      "bddflights",
+      "isLoadMore",
+      "pg",
+      "nbFlights",
+      "minDate",
+      "totalDuration",
+      "sitesIds",
+      "parsedData",
+    ]),
     pgenabled: function () {
       return this.pg.enable && this.pg.login != "" && this.pg.password != "";
     },
@@ -467,12 +489,15 @@ export default {
         (error) => {
           self.showPopupVisu = false;
           let msg = error.message;
-          self.$bvToast.toast(this.$i18n.t("actions.download_failed") + ` ${msg}`, {
-            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "danger",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.download_failed") + ` ${msg}`,
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            }
+          );
         }
       );
     },
@@ -513,12 +538,15 @@ export default {
         },
         (error) => {
           let msg = error.message;
-          self.$bvToast.toast(this.$i18n.t("actions.del_failed_fly") + ` ${msg}`, {
-            title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
-            toaster: "b-toaster-top-right",
-            solid: true,
-            variant: "danger",
-          });
+          self.$bvToast.toast(
+            this.$i18n.t("actions.del_failed_fly") + ` ${msg}`,
+            {
+              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            }
+          );
         }
       );
     },
@@ -533,12 +561,14 @@ export default {
     },
     flightToParagliding: function (f) {
       // let self = this;
-      store.dispatch("uploadIgcToParagliding", { filename: f , parsed: true}).then(
-        // eslint-disable-next-line no-unused-vars
-        (response) => {},
-        // eslint-disable-next-line
-        (error) => {}
-      );
+      store
+        .dispatch("uploadIgcToParagliding", { filename: f, parsed: true })
+        .then(
+          // eslint-disable-next-line no-unused-vars
+          (response) => {},
+          // eslint-disable-next-line
+          (error) => {}
+        );
     },
   },
   mounted: function () {

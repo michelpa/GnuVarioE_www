@@ -32,10 +32,8 @@ Vue.use(vueMoment, {
   moment
 });
 
-import { languages } from './translation/index.js'
-import { defaultLocale } from './translation/index.js'
-// require('./lib/momentfr.js');
-// require('./lib/momenten.js');
+import { languages, defaultLocale } from './translation/index.js'
+
 const messages = Object.assign(languages)
 
 // eslint-disable-next-line no-undef
