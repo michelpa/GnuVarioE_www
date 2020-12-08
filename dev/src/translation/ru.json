@@ -40,7 +40,9 @@
     },
     "wifi": {
       "CONF_LIB": "WIFI конфигурация",
-      "AP": "Access point"
+      "AP": "Точки доступа",
+      "CONF_SAVE": "Конфигурация WiFi сохранена на SD-карте.",
+      "FAILED_SAVE": "Не удалось сохранить конфигурацию WiFi."
     },
     "sd": {
       "SD_CONTENT": "Контент на SD карте"
@@ -53,10 +55,30 @@
     "params": {
       "PARAM": "Настройки",
       "MODE_EXPERT": "Расширенные настройки",
+      "CONF_SAVE": "Конфигурация сохранена на SD-карте.",
+      "FAILED_SAVE": "Не удалось сохранить конфигурацию.",
+      "ota": {
+        "WARNING1": "Когда обновление начнется, эта страница больше не будет доступна.",
+        "WARNING2": "По окончании обновления вариометр перезапустится ...",
+        "H_FROM_INET": "Обновление через Интернет",
+        "H_FROM_LOCAL": "Локальное обновление",
+        "H_OTA": "OTA обновление",
+        "VERSION_BETA": "Доступна бета версия:",
+        "VERSION_STABLE": "Доступна стабильная версия:",
+        "NO_VERSION_BETA": "Нет доступной бета версии",
+        "NO_VERSION_STABLE": "Нет доступной стабильной версии",
+        "UPDATE": "Обновить",
+        "MESSAGE1": "Выберите файл прошивки для загрузки в вариометр:",
+        "MESSAGE2": "Обычно это файл в формате .bin",
+        "MESSAGE3": "Файл был успешно загружен в вариометр. Теперь он будет перезапущен для завершения обновления.",
+        "UPDATE_ERR1": "Вы должны выбрать файл...",
+        "UPDATE_ERR2": "Не удалось загрузить файл, обновление прервано.",
+        "UPDATE_ERR3": "Не удалось обновить."
+      },
       "systeme": {
-        "TITLE": "System",
-        "SUBTITLE": "Expert mode",
-        "MANAGE_WINGS": "Manage my wings",
+        "TITLE": "Система",
+        "SUBTITLE": "Экспертный режим",
+        "MANAGE_WINGS": "Список моих крыльев",
         "BT_ENABLE": {
           "label": "Bluetooth activation",
           "help": ""
@@ -115,10 +137,10 @@
         }
       },
       "general": {
-        "TITLE": "Main",
-        "SUBTITLE": "Main settings",
+        "TITLE": "Основные",
+        "SUBTITLE": "Основные настройки",
         "PILOT_NAME": {
-          "label": "Pilot name",
+          "label": "Имя пилота",
           "help": ""
         },
         "GLIDER_NAME": {
@@ -126,33 +148,33 @@
           "help": ""
         },
         "GLIDER_SELECT": {
-          "label": "Wing used",
+          "label": "Используемое крыло",
           "help": ""
         },
         "GLIDER_NAME1": {
-          "label": "Wing 1",
+          "label": "Крыло 1",
           "help": ""
         },
         "GLIDER_NAME2": {
-          "label": "Wing 2",
+          "label": "Крыло 2",
           "help": ""
         },
         "GLIDER_NAME3": {
-          "label": "Wing 3",
+          "label": "Крыло 3",
           "help": ""
         },
         "GLIDER_NAME4": {
-          "label": "Wing 4",
+          "label": "Крыло 4",
           "help": ""
         },
         "TIME_ZONE": {
-          "label": "Time zone",
-          "help": "Defines the UTC time zone: France(+2) in summer (+1) in winter"
+          "label": "Часовой пояс",
+          "help": "Определяет часовой пояс UTC: Москва (+3)"
         }
       },
       "vario": {
-        "TITLE": "Vario",
-        "SUBTITLE": "Vario settings",
+        "TITLE": "Вариометр",
+        "SUBTITLE": "Настройки вариометра",
         "SINKING_THRESHOLD": {
           "label": "Triggering sinking threshold",
           "help": ""
@@ -195,7 +217,10 @@
         },
         "RATIO_CLIMB_RATE": {
           "label": "Display glide ratio, sink rate or the both",
-          "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively"
+          "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively",
+          "lable1": "Glide ratio",
+          "lable2": "Sink rate",
+          "lable3": "The both alternatively"
         },
         "SENT_LXNAV_SENTENCE": {
           "label": "Bluetooth frame type",
@@ -227,8 +252,8 @@
         }
       },
       "vol": {
-        "TITLE": "Flight start",
-        "SUBTITLE": "Flight start settings",
+        "TITLE": "Начало полета",
+        "SUBTITLE": "Настройки начала полета",
         "FLIGHT_START_MIN_TIMESTAMP": {
           "label": "Minimum time since start before flight recording in millisecond",
           "help": ""
@@ -314,15 +339,19 @@
       "no": "Нет",
       "TO_LOGBOOK": "Перенести в бортовой журнал",
       "download": "Скачать",
+      "upload": "Загрузить",
+      "create_dir": "Создать папку",
       "info": "Просмотреть",
-      "del_failed": "Не удалось удалить файл.",
+      "del_failed": "Не удалось удалить.",
       "del_positive1": "Файл ",
+      "del_positive11": "Папка ",
       "del_positive2": " удален с SD-карты.",
       "download_failed": "Не удалось скачать файл.",
       "to_logbook_failed": "Не удалось переместить полет.",
       "be_patient": "Пожалуйста, проявите терпение, это может занять некоторое время...",
       "del_failed_fly": "Не удалось удалить полет.",
-      "print_but": "Печатать"        
+      "print_but": "Печатать",
+      "no_conf": "Конфигурация еще не загружена!"          
     },
     "sitelist": {
       "name": "Название"

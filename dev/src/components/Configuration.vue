@@ -185,7 +185,11 @@
                           :label="$t('params.vario.RATIO_CLIMB_RATE.label')"
                           :help="$t('params.vario.RATIO_CLIMB_RATE.help')"
                           kind="select"
-                          :options="[{value: '1', text: 'Affichage de la finesse'}, { value: '2', text: 'Affichage du taux de chute moyen' }, { value: '3', text: 'Affichage des 2 informations en alternance dans la zone à droite de l’affiche du vario' }]"
+                          :options="[
+                            {value: '1', text: $t('params.vario.RATIO_CLIMB_RATE.lable1') },
+                            { value: '2', text: $t('params.vario.RATIO_CLIMB_RATE.lable2') },
+                            { value: '3', text: $t('params.vario.RATIO_CLIMB_RATE.lable3') }
+                          ]"
                         ></config-field>
                         <config-field
                           v-model="localConfig.vario.IGC_SEND_CALIBRATED_ALTITUDE"
@@ -490,7 +494,7 @@ export default {
         // eslint-disable-next-line
         response => {
           store.dispatch("loadConfig");
-          self.$bvToast.toast("Configuration sauvegardé sur la carte SD.", {
+          self.$bvToast.toast(this.$i18n.t("params.CONF_SAVE"), {
             title: "Config",
             toaster: "b-toaster-top-right",
             solid: true,
@@ -499,7 +503,7 @@ export default {
         },
         // eslint-disable-next-line
         error => {
-          self.$bvToast.toast(`Echec de la sauvegarde de la configuration.`, {
+          self.$bvToast.toast(this.$i18n.t("params.FAILED_SAVE"), {
             title: "Config",
             toaster: "b-toaster-top-right",
             solid: true,

@@ -40,7 +40,9 @@
   },
   "wifi": {
     "CONF_LIB": "WIFI configuration",
-    "AP": "Access point"
+    "AP": "Access point",
+    "CONF_SAVE": "WiFi configuration saved on the SD card.",
+    "FAILED_SAVE": "Failed to save WiFi configuration."
   },
   "sd": {
     "SD_CONTENT": "SD card content"
@@ -53,6 +55,26 @@
   "params": {
     "PARAM": "Settings",
     "MODE_EXPERT": "Mode expert",
+    "CONF_SAVE": "Configuration saved on SD card.",
+    "FAILED_SAVE": "Failed to save configuration.",
+    "ota": {
+      "WARNING1": "The update will begin, this page will no longer be accessible.",
+      "WARNING2": "At the end of the update, the vario will restart ...",
+      "H_FROM_INET": "Update from internet",
+      "H_FROM_LOCAL": "Local update",
+      "H_OTA": "OTA update",
+      "VERSION_BETA": "Beta version available:",
+      "VERSION_STABLE": "Stable version available:",
+      "NO_VERSION_BETA": "No beta version available",
+      "NO_VERSION_STABLE": "No stable version available",
+      "UPDATE": "Update",
+      "MESSAGE1": "Please select the firmware file to upload to the vario:",
+      "MESSAGE2": "Usually this is a .bin format file",
+      "MESSAGE3": "The file was successfully uploaded to the vario. It will now be restarted to complete the update.",
+      "UPDATE_ERR1": "You must select a file ...",
+      "UPDATE_ERR2": "Failed to upload file, update aborted.",
+      "UPDATE_ERR3": "Update failed."
+    },
     "systeme": {
       "TITLE": "System",
       "SUBTITLE": "Expert mode",
@@ -195,7 +217,10 @@
       },
       "RATIO_CLIMB_RATE": {
         "label": "Display glide ratio, sink rate or the both",
-        "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively"
+        "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively",
+        "lable1": "Glide ratio",
+        "lable2": "Sink rate",
+        "lable3": "The both alternatively"
       },
       "SENT_LXNAV_SENTENCE": {
         "label": "Bluetooth frame type",
@@ -314,15 +339,19 @@
     "no": "No",
     "TO_LOGBOOK": "Place in my logbook",
     "download": "Download",
+    "upload": "Upload",
+    "create_dir": "Create a folder",
     "info": "Info",
-    "del_failed": "Failed to delete file.",
+    "del_failed": "Failed to delete.",
     "del_positive1": "File ",
+    "del_positive11": "Folder ",
     "del_positive2": " deleted from SD card.",
     "download_failed": "File download failed.",
     "to_logbook_failed": "Failed to move the flight.",
     "be_patient": "Please be patient, it may take a while...",
     "del_failed_fly": "Failed to delete flight.",
-    "print_but": "Print"    
+    "print_but": "Print",
+    "no_conf": "The configuration is not loaded yet!"    
   },
   "sitelist": {
     "name": "Name"
