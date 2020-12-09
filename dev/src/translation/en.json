@@ -175,6 +175,7 @@
     "vario": {
       "TITLE": "Vario",
       "SUBTITLE": "Vario settings",
+      "VALUE": "value",
       "SINKING_THRESHOLD": {
         "label": "Triggering sinking threshold",
         "help": ""

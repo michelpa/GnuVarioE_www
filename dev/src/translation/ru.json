@@ -175,6 +175,7 @@
       "vario": {
         "TITLE": "Вариометр",
         "SUBTITLE": "Настройки вариометра",
+        "VALUE": "значение",
         "SINKING_THRESHOLD": {
           "label": "Triggering sinking threshold",
           "help": ""

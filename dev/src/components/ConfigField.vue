@@ -36,7 +36,7 @@
       :step="step"
     ></b-form-input>
     <b-form-invalid-feedback :state="isLenghtOK">30 caractères maximum</b-form-invalid-feedback>
-    <div v-if="step" class="mt-2 text-muted small">valeur: {{lemodel}}</div>
+    <div v-if="step" class="mt-2 text-muted small">{{ $t( "params.vario.VALUE" ) }}: {{lemodel}}</div>
   </b-form-group>
 </template>
 

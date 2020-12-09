@@ -175,6 +175,7 @@
     "vario": {
       "TITLE": "Vario",
       "SUBTITLE": "Paramètres vario",
+      "VALUE": "valeur",
       "SINKING_THRESHOLD": {
         "label": "Seuil de déclenchement des dégueulantes",
         "help": ""
