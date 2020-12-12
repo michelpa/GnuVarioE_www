@@ -45,23 +45,23 @@
               <p>{{ $t("about.CONTRIBUTOR") }}</p>
               <b-list-group>
                 <b-list-group-item variant="dark">
-                  <span class="text-monospace">JeromeV</span>
+                  <span class="text-monospace">JeromeV</span>&nbsp;
                   <em class="small">- {{ $t("global.DEVELOPPER") }} (AGL)</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
-                  <span class="text-monospace">jpg63</span>
+                  <span class="text-monospace">jpg63</span>&nbsp;
                   <em class="small">- {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
-                  <span class="text-monospace">pixyz</span>
-                  <em class="small">- {{ $t("global.DEVELOPPER") }} web</em>
+                  <span class="text-monospace">pixyz</span>&nbsp;
+                  <em class="small">- {{ $t("global.DEVELOPPER") }} web / {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
-                  <span class="text-monospace">prunkdump</span>
+                  <span class="text-monospace">prunkdump</span>&nbsp;
                   <em class="small">- {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
-                  <span class="text-monospace">ratamuse</span>
+                  <span class="text-monospace">ratamuse</span>&nbsp;
                   <em class="small">- PCB / {{ $t("global.DEVELOPPER") }}</em>
                 </b-list-group-item>
               </b-list-group>

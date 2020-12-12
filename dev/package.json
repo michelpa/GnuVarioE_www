@@ -60,7 +60,9 @@
       "VueApexCharts": true,
       "VueColor": true,
       "SimpleMapScreenshoter": true,
-      "_": true
+      "_": true,
+      "Dropbox": true,
+      "sha256": true
     }
   },
   "postcss": {

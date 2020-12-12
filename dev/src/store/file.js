@@ -21,7 +21,6 @@ export const actions = {
             url = url + "?dir=" + path + "&norecursive=true";
         }
         if (env.NODE_ENV == "development") {
-            //url = "config/tree.jso";
             url = baseUrl + url;
         }
 

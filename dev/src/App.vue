@@ -1,6 +1,6 @@
 <template>
   <div id="monapp">
-    <div class="container-fluid" >
+    <div class="container-fluid">
       <b-navbar toggleable="lg" :type="themeType" :variant="themeVariant">
         <b-navbar-brand href="#">
           <a class="navbar-brand mr-auto" href="#">
@@ -30,6 +30,7 @@
             <b-nav-item :to="{ name: 'about' }" active-class="active">{{
               $t("menu.ABOUT")
             }}</b-nav-item>
+
             <!-- <b-nav-item :to="{ name: 'home'}" active-class="active">Home</b-nav-item> -->
           </b-navbar-nav>
 
@@ -40,6 +41,10 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
+            <b-nav-item @click="saveDBtoDropbox" v-if="dropboxenabled">
+              <i class="fa fa-cog"></i>
+              {{ $t("menu.SAVEDB") }}
+            </b-nav-item>
             <b-nav-item @click="showPopupPref = true">
               <i class="fa fa-cog"></i>
               {{ $t("menu.SETTINGS") }}
@@ -101,7 +106,11 @@ export default {
       "themeVariant",
       "themeType",
       "lang",
+      "dropboxpref",
     ]),
+    dropboxenabled: function () {
+      return this.dropboxpref.enable && this.dropboxpref.token != "";
+    },
     // language: function () {
     //   return this.lang;
     // },
@@ -112,6 +121,16 @@ export default {
         property: "language",
         with: locale,
       });
+    },
+    saveDBtoDropbox: function () {
+      store
+        .dispatch("uploadToDropbox", { filename: "vol.db", type: "DB" })
+        .then(
+          // eslint-disable-next-line no-unused-vars
+          (response) => {},
+          // eslint-disable-next-line
+          (error) => {}
+        );
     },
   },
   watch: {

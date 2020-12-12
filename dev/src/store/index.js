@@ -7,6 +7,7 @@ import file from "./file";
 import firmware from "./firmware";
 import carnet from "./carnet";
 import paragliding from "./paragliding";
+import dropbox from "./dropbox";
 
 // eslint-disable-next-line no-undef
 export default new Vuex.Store({
@@ -19,6 +20,7 @@ export default new Vuex.Store({
         file,
         firmware,
         carnet,
-        paragliding
+        paragliding,
+        dropbox
     }
 });

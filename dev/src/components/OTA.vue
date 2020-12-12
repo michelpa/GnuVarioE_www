@@ -88,7 +88,7 @@
           header-tag="header"
         >
           <div class="bg-default">
-            <b-form @submit="onSubmitFirmware" @reset="onResetFirmware">
+            <b-form @submit.prevent="onSubmitFirmware" @reset="onResetFirmware">
               <b-form-group
                 id="input-group-firmware"
                 label-cols-sm="12"

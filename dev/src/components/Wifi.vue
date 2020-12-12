@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-12">
           <b-card :header="$t('wifi.AP')" header-tag="header" title>
-            <b-form @submit="onSaveConfig">
+            <b-form @submit.prevent="onSaveConfig">
               <div class="row">
                 <div class="col-md-6">
                   <b-form-group
