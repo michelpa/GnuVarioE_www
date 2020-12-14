@@ -294,9 +294,9 @@
     "Variant": "Variant",
     "Type": "Type",
     "Language": "Langue",
-    "active": "Activé",
-    "login": "Login",
-    "password": "Mot de passe"
+    "pgactive": "Activé",
+    "pglogin": "Login",
+    "pgpassword": "Mot de passe"
   },
   "mesvols": {
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",    

@@ -7,6 +7,7 @@
       @hidden="doHidden"
       ref="modal"
       :title="$t('pref.Preferences')"
+      size="xl"
     >
       <div>
         <b-tabs content-class="mt-3">
@@ -15,7 +16,7 @@
               <b-form @submit.prevent>
                 <b-form-group
                   id="input-group-1"
-                  :label="$t('pref.Theme')+':'"
+                  :label="$t('pref.Theme') + ':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -26,7 +27,7 @@
                 </b-form-group>
                 <b-form-group
                   id="input-group-2"
-                  :label="$t('pref.Variant')+':'"
+                  :label="$t('pref.Variant') + ':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -37,7 +38,7 @@
                 </b-form-group>
                 <b-form-group
                   id="input-group-3"
-                  :label="$t('pref.Type')+':'"
+                  :label="$t('pref.Type') + ':'"
                   label-for="input-2"
                 >
                   <b-form-select
@@ -53,7 +54,7 @@
             <b-card>
               <b-form-group
                 id="input-group-lang"
-                :label="$t('pref.Language')+':'"
+                :label="$t('pref.Language') + ':'"
                 label-for="input-3"
               >
                 <b-form-select
@@ -67,8 +68,8 @@
           <b-tab title="Paraglidinglogbook.com">
             <b-card>
               <b-form-group
-                id="input-group-lang"
-                :label="$t('pref.active')+':'"
+                id="input-group-pg1"
+                :label="$t('pref.pgactive') + ':'"
                 label-for="input-3"
               >
                 <b-form-checkbox
@@ -77,8 +78,8 @@
                 ></b-form-checkbox>
               </b-form-group>
               <b-form-group
-                id="input-group-lang"
-                :label="$t('pref.login')+':'"
+                id="input-group-pg2"
+                :label="$t('pref.pglogin') + ':'"
                 label-for="input-3"
               >
                 <b-form-input
@@ -87,8 +88,8 @@
                 ></b-form-input>
               </b-form-group>
               <b-form-group
-                id="input-group-lang"
-                :label="$t('pref.password')+':'"
+                id="input-group-pg3"
+                :label="$t('pref.pgpassword') + ':'"
                 label-for="input-3"
               >
                 <b-form-input
@@ -97,6 +98,80 @@
                   @input="changePg"
                 ></b-form-input>
               </b-form-group>
+            </b-card>
+          </b-tab>
+          <b-tab title="Dropbox">
+            <b-card>
+              <b-form-group
+                id="input-group-db1"
+                :label="$t('pref.dropboxactive') + ':'"
+                label-for="input-3"
+              >
+                <b-form-checkbox
+                  v-model="dropboxenabled"
+                  @input="changeDropbox"
+                ></b-form-checkbox>
+              </b-form-group>
+              <b-form-group
+                id="input-group-db2"
+                :label="$t('pref.dropboxtoken') + ':'"
+                label-for="input-3"
+              >
+                <b-form-input
+                  v-model="dropboxtoken"
+                  @input="changeDropbox"
+                ></b-form-input>
+              </b-form-group>
+              <div class="row">
+                <div class="col-md-12">
+                  <hr />
+                  <h4>Procédure de paramétrage Dropbox</h4>
+                  <p>
+                    La récupération d'un jeton Dropbox s'effectue en deux temps.
+                  </p>
+                  <p>
+                    En cliquant sur "Récupérer un code", une nouvelle fenêtre va
+                    s'ouvrir vous permettant de vous connecter à votre compte
+                    dropbox, accepter les autorisations demandées, et générer un
+                    code.
+                  </p>
+                  <p>
+                    Ce code doit être récupéré puis copier dans la zone code qui
+                    va apparaitre ci-dessous.
+                  </p>
+                  <p>
+                    Vous devez alors cliquer sur "Obtenir un jeton" pour
+                    récupérer le jeton depuis votre compte dropbox. Le jeton
+                    sera automatiquement copié dans le champ prévu à cet effet.
+                  </p>
+                  <p>
+                    Vous pouvez alors sauver les paramètres et recharger la
+                    page.
+                  </p>
+                  <p>Le téléchargement vers votre dropbox est alors activé.</p>
+                </div>
+              </div>
+              <div class="float-right">
+                <button
+                  class="btn btn-primary"
+                  @click="dropboxAuthenticate"
+                  v-if="!showSaisieCode"
+                >
+                  Récupérer un code
+                </button>
+                <div v-if="showSaisieCode">
+                  <b-form-group
+                    id="input-group-db2"
+                    label="Code dropbox"
+                    label-for="input-3"
+                  >
+                    <b-form-input v-model="dropboxCode"></b-form-input>
+                  </b-form-group>
+                  <button class="btn btn-primary" @click="dropboxGetToken">
+                    Obtenir un jeton
+                  </button>
+                </div>
+              </div>
             </b-card>
           </b-tab>
         </b-tabs>
@@ -134,6 +209,10 @@ export default {
       pgenabled: false,
       pglogin: "",
       pgpass: "",
+      dropboxenabled: false,
+      dropboxtoken: "",
+      showSaisieCode: false,
+      dropboxCode: "",
     };
   },
   watch: {
@@ -144,7 +223,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["themeName", "themeVariant", "themeType", "lang", "pg"]),
+    ...mapGetters([
+      "themeName",
+      "themeVariant",
+      "themeType",
+      "lang",
+      "pg",
+      "dropboxpref",
+      "getAuthUrl",
+    ]),
     themesLibs: function () {
       return Object.keys(this.themes);
     },
@@ -202,6 +289,16 @@ export default {
         with: this.pgpass,
       });
     },
+    changeDropbox: function () {
+      store.commit("updateConfigWeb", {
+        property: "dropbox.enable",
+        with: this.dropboxenabled,
+      });
+      store.commit("updateConfigWeb", {
+        property: "dropbox.token",
+        with: this.dropboxtoken,
+      });
+    },
     showModal: function () {
       this.themeSelected = this.themeName;
       this.variantSelected = this.themeVariant;
@@ -210,6 +307,8 @@ export default {
       this.pgenabled = this.pg.enable;
       this.pglogin = this.pg.login;
       this.pgpass = this.pg.password;
+      this.dropboxenabled = this.dropboxpref.enable;
+      this.dropboxtoken = this.dropboxpref.token;
       this.$bvModal.show("modal-theme");
     },
     doSave: function () {
@@ -242,6 +341,40 @@ export default {
     },
     doHidden: function () {
       this.$emit("themeClosed");
+    },
+    dropboxAuthenticate: function () {
+      store.dispatch("getAuthUrl").then(
+        (response) => {
+          window.open(response, "_blank");
+          this.showSaisieCode = true;
+        },
+        // eslint-disable-next-line
+        (error) => {
+          alert(error);
+        }
+      );
+    },
+
+    dropboxGetToken: function () {
+      let self = this;
+      if (this.dropboxCode) {
+        store
+          .dispatch("getDropboxToken", { dropboxCode: this.dropboxCode })
+          .then(
+            (response) => {
+              if (response.access_token) {
+                self.dropboxtoken = response.access_token;
+                self.dropboxenabled = true;
+                self.changeDropbox();
+                self.showSaisieCode = false;
+              }
+            },
+            // eslint-disable-next-line
+            (error) => {
+              alert(error);
+            }
+          );
+      }
     },
   },
 };
