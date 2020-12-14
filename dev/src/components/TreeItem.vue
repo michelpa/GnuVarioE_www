@@ -30,7 +30,7 @@
             class="btn btn-sm btn-success"
             @click="downloadFromSD(item)"
             v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-            title="Télécharger"
+            :title="$t('actions.download')"
           >
             <i class="fa fa-arrow-alt-circle-down"></i>
           </button>
@@ -41,7 +41,7 @@
             class="btn btn-sm btn-info"
             @click="uploadToSD()"
             v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-            title="Téléverser"
+            :title="$t('actions.upload')"
           >
             <i class="fa fa-arrow-alt-circle-up"></i>
           </button>
@@ -50,7 +50,7 @@
             class="btn btn-sm btn-info"
             @click="createFolder()"
             v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-            title="Créer un dossier"
+            :title="$t('actions.create_dir')"
           >
             <i class="fa fa-plus"></i>
           </button>
@@ -61,13 +61,17 @@
           button-size="sm"
           yes-class="btn btn-success"
           no-class="btn btn-danger"
-          :messages="{ title: 'Êtes-vous sûr?', yes: 'Oui', no: 'Non' }"
+          :messages="{ 
+            title: $t('actions.del_message'), 
+            yes: $t('actions.yes'), 
+            no: $t('actions.no'), 
+          }"
         >
           <button
             class="btn btn-sm btn-danger"
             @click="deleteFromSD()"
             v-b-tooltip.hover="{ delay: { show: 1000, hide: 50 } }"
-            title="Supprimer"
+            :title="$t('actions.delete')"
           >
             <i class="fa fa-trash-alt"></i>
           </button>
@@ -134,7 +138,7 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec du téléchargement du fichier.`, {
+          self.$bvToast.toast(this.$i18n.t("actions.download_failed"), {
             title: "SD",
             toaster: "b-toaster-top-right",
             solid: true,
@@ -158,12 +162,12 @@ export default {
       store.dispatch("deleteFile", self.fullFilename).then(
         // eslint-disable-next-line
         (response) => {
-          let typeF = "Fichier";
+          let typeF = this.$i18n.t("actions.del_positive1");
           if (self.isFolder) {
-            typeF = "Dossier";
+            typeF = this.$i18n.t("actions.del_positive11");
           }
           self.$bvToast.toast(
-            typeF + " " + self.fullFilename + " supprimée de la carte SD.",
+            typeF + self.fullFilename + this.$i18n.t("actions.del_positive2"),
             {
               title: "SD",
               toaster: "b-toaster-top-right",
@@ -175,7 +179,7 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast("Echec de la suppression", {
+          self.$bvToast.toast(this.$i18n.t("actions.del_failed"), {
             title: "SD",
             toaster: "b-toaster-top-right",
             solid: true,
