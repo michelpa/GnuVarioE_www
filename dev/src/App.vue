@@ -41,7 +41,7 @@
                 <em>{{ env.NODE_ENV }}</em>
               </span>
             </b-nav-text>
-            <b-nav-item @click="saveDBtoDropbox" v-if="dropboxenabled">
+            <b-nav-item @click="saveDBtoDropbox" v-if="isdropboxenabled">
               <i class="fa fa-cog"></i>
               {{ $t("menu.SAVEDB") }}
             </b-nav-item>
@@ -107,10 +107,9 @@ export default {
       "themeType",
       "lang",
       "dropboxpref",
+      "isdropboxenabled"
     ]),
-    dropboxenabled: function () {
-      return this.dropboxpref.enable && this.dropboxpref.token != "";
-    },
+  
     // language: function () {
     //   return this.lang;
     // },
