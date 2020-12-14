@@ -14,7 +14,8 @@
     "MAJ": "Update",
     "ABOUT": "About",
     "WIFI": "Wifi",
-    "SETTINGS": "Settings"
+    "SETTINGS": "Settings",
+    "SAVEDB": "DB to Dropbox"
   },
   "flights": {
     "FLIGHTS_LIST": "My flights list",
@@ -322,7 +323,16 @@
     "Language": "Language",
     "pgactive": "Enabled",
     "pglogin": "Login",
-    "pgpassword": "Password"
+    "pgpassword": "Password",
+    "dropbox_header": "Dropbox setup procedure",
+    "dropbox_info1": "There are two steps to retrieving a Dropbox token.",
+    "dropbox_info2": "By clicking on \"Get a code\", a new window will open allowing you to connect to your dropbox account, accept the requested authorizations, and generate a code.",
+    "dropbox_info3": "This code must be retrieved then copy into the code area which will appear below.",
+    "dropbox_info4": "You must then click on \"Get a token\" to retrieve the token from your dropbox account. The token will be automatically copied into the field provided for this purpose.",
+    "dropbox_info5": "You can then save the settings and reload the page.",
+    "dropbox_info6": "The upload to your dropbox is then activated.",
+    "button_get_code": "Get a code",
+    "button_get_token": "Get a token"
   },
   "mesvols": {
     "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",    

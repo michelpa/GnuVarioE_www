@@ -14,7 +14,8 @@
     "MAJ": "Mise à jour",
     "ABOUT": "A propos",
     "WIFI": "Wifi",
-    "SETTINGS": "Paramètres"
+    "SETTINGS": "Paramètres",
+    "SAVEDB": "DB to Dropbox"
   },
   "flights": {
     "FLIGHTS_WAIT": "Le chargement des vols n'est pas terminé!",
@@ -322,7 +323,16 @@
     "Language": "Langue",
     "pgactive": "Activé",
     "pglogin": "Login",
-    "pgpassword": "Mot de passe"
+    "pgpassword": "Mot de passe",
+    "dropbox_header": "Procédure de paramétrage Dropbox",
+    "dropbox_info1": "La récupération d'un jeton Dropbox s'effectue en deux temps.",
+    "dropbox_info2": "En cliquant sur \"Récupérer un code\", une nouvelle fenêtre va s'ouvrir vous permettant de vous connecter à votre compte dropbox, accepter les autorisations demandées, et générer un code.",
+    "dropbox_info3": "Ce code doit être récupéré puis copier dans la zone code qui va apparaitre ci-dessous.",
+    "dropbox_info4": "Vous devez alors cliquer sur \"Obtenir un jeton\" pour récupérer le jeton depuis votre compte dropbox. Le jeton sera automatiquement copié dans le champ prévu à cet effet.",
+    "dropbox_info5": "Vous pouvez alors sauver les paramètres et recharger la page.",
+    "dropbox_info6": "Le téléchargement vers votre dropbox est alors activé.",
+    "button_get_code": "Récupérer un code",
+    "button_get_token": "Obtenir un jeton"
   },
   "mesvols": {
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",    
