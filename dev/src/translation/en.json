@@ -320,9 +320,9 @@
     "Variant": "Variant",
     "Type": "Type",
     "Language": "Language",
-    "active": "Enabled",
-    "login": "Login",
-    "password": "Password"
+    "pgactive": "Enabled",
+    "pglogin": "Login",
+    "pgpassword": "Password"
   },
   "mesvols": {
     "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",    

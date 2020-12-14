@@ -17,4 +17,8 @@ export const preferences =
         "login": "",
         "password": ""
     },
+    "dropbox": {
+        "enable": false,
+        "token": ""
+    }
 }

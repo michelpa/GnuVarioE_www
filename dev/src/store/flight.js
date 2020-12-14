@@ -13,7 +13,6 @@ export const actions = {
     loadFlights: function (context) {
         let url = "/flights";
         if (env.NODE_ENV == "development") {
-            //url = "config/flights.jso";
             url = baseUrl + url;
         }
 
@@ -54,7 +53,6 @@ export const actions = {
         url = url + filename;
 
         if (env.NODE_ENV == "development") {
-            //url = "config/flights.jso";
             url = baseUrl + url;
         }
 

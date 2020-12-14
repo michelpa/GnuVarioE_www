@@ -107,6 +107,9 @@ const getters = {
     },
     pg(state) {
         return state.configWeb.paraglidinglogbook;
+    },
+    dropboxpref(state) {
+        return state.configWeb.dropbox;
     }
 }
 

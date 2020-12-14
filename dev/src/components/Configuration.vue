@@ -24,7 +24,7 @@
             >
               <b-tab :title="$t('params.general.TITLE')">
                 <b-card :header="$t('params.general.SUBTITLE')" header-tag="header" title>
-                  <b-form @submit="onSaveConfig">
+                  <b-form @submit.prevent="onSaveConfig">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="float-right">
@@ -100,7 +100,7 @@
               </b-tab>
               <b-tab :title="$t('params.vario.TITLE')">
                 <b-card :header="$t('params.vario.SUBTITLE')" header-tag="header" title>
-                  <b-form @submit="onSaveConfig">
+                  <b-form @submit.prevent="onSaveConfig">
                     <div class="row">
                       <div class="col-md-4">
                         <config-field
@@ -251,7 +251,7 @@
               </b-tab>
               <b-tab :title="$t('params.vol.TITLE')">
                 <b-card :header="$t('params.vol.SUBTITLE')" header-tag="header" title>
-                  <b-form @submit="onSaveConfig">
+                  <b-form @submit.prevent="onSaveConfig">
                     <div class="row">
                       <div class="col-md-12">
                         <config-field
@@ -298,7 +298,7 @@
               </b-tab>
               <b-tab :title="$t('params.systeme.TITLE')">
                 <b-card :header="$t('params.systeme.SUBTITLE')" header-tag="header" title>
-                  <b-form @submit="onSaveConfig">
+                  <b-form @submit.prevent="onSaveConfig">
                     <div class="row">
                       <div class="col-md-4">
                         <config-field

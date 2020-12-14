@@ -127,6 +127,22 @@
                                             </td>
                                             <td class="btns">
                                               <button
+                                                v-if="dropboxenabled"
+                                                class="btn btn-sm btn-primary"
+                                                @click="flightToDropbox(f.name)"
+                                                v-b-tooltip.hover="{
+                                                  delay: {
+                                                    show: 1000,
+                                                    hide: 50,
+                                                  },
+                                                }"
+                                                title="Téléversement vers dropbox"
+                                              >
+                                                <i
+                                                  class="fa fa-dropbox"
+                                                ></i></button
+                                              >&nbsp;
+                                              <button
                                                 v-if="pgenabled"
                                                 class="btn btn-sm btn-primary"
                                                 @click="
@@ -255,7 +271,7 @@
                           :altMin="altMin"
                         ></ma-carte>
                         <div class="row">
-                          <div class="col-md-5">                                      
+                          <div class="col-md-5">
                             <table class="table table-sm text-left">
                               <tbody>
                                 <tr>
@@ -273,17 +289,17 @@
                                 <tr>
                                   <td>{{ $t("flights.FLIGHT_DURATION") }}:</td>
                                   <th>{{ flightDuration }}</th>
-                                </tr>                                            
+                                </tr>
                               </tbody>
                             </table>
-                          </div>                                      
-                          <div class="col-md-4">                                      
+                          </div>
+                          <div class="col-md-4">
                             <table class="table table-sm text-left">
                               <tbody>
                                 <tr>
                                   <td>_</td>
                                   <th></th>
-                                </tr>                                            
+                                </tr>
                                 <tr>
                                   <td>{{ $t("flights.FLIGHT_ALT_START") }}:</td>
                                   <th>{{ altStart }} m</th>
@@ -299,7 +315,7 @@
                               </tbody>
                             </table>
                           </div>
-                        </div>                                    
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -451,6 +467,14 @@ export default {
         (error) => {}
       );
     },
+    flightToDropbox: function (f) {
+      store.dispatch("uploadToDropbox", { filename: f, type: "VOL" }).then(
+        // eslint-disable-next-line no-unused-vars
+        (response) => {},
+        // eslint-disable-next-line
+        (error) => {}
+      );
+    },
     flightInfo: function (f) {
       this.igc = null;
       this.currentF = null;
@@ -523,7 +547,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["flights", "isLoading", "pg"]),
+    ...mapGetters(["flights", "isLoading", "pg", "dropboxpref"]),
 
     flightsPerDays: function () {
       let lDays = {};
@@ -613,6 +637,9 @@ export default {
     },
     pgenabled: function () {
       return this.pg.enable && this.pg.login != "" && this.pg.password != "";
+    },
+    dropboxenabled: function () {
+      return this.dropboxpref.enable && this.dropboxpref.token != "";
     },
   },
   mounted: function () {

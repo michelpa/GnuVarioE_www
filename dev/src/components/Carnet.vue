@@ -239,6 +239,24 @@
                                         <div class="float-right">
                                           <div class="btns">
                                             <button
+                                              v-if="dropboxenabled"
+                                              class="btn btn-sm btn-primary"
+                                              @click="
+                                                flightToDropbox(f.filename)
+                                              "
+                                              v-b-tooltip.hover="{
+                                                delay: {
+                                                  show: 1000,
+                                                  hide: 50,
+                                                },
+                                              }"
+                                              title="Téléversement vers dropbox"
+                                            >
+                                              <i
+                                                class="fa fa-dropbox"
+                                              ></i></button
+                                            >&nbsp;
+                                            <button
                                               v-if="pgenabled"
                                               class="btn btn-sm btn-primary"
                                               @click="
@@ -460,9 +478,13 @@ export default {
       "totalDuration",
       "sitesIds",
       "parsedData",
+      "dropboxpref",
     ]),
     pgenabled: function () {
       return this.pg.enable && this.pg.login != "" && this.pg.password != "";
+    },
+    dropboxenabled: function () {
+      return this.dropboxpref.enable && this.dropboxpref.token != "";
     },
   },
   methods: {
@@ -492,7 +514,7 @@ export default {
           self.$bvToast.toast(
             this.$i18n.t("actions.download_failed") + ` ${msg}`,
             {
-              title: this.$i18n.t("mesvols.TITLE_MSG_modal"),
+              title: this.$i18n.t("mesvols.TITLE_MSG_*"),
               toaster: "b-toaster-top-right",
               solid: true,
               variant: "danger",
@@ -563,6 +585,16 @@ export default {
       // let self = this;
       store
         .dispatch("uploadIgcToParagliding", { filename: f, parsed: true })
+        .then(
+          // eslint-disable-next-line no-unused-vars
+          (response) => {},
+          // eslint-disable-next-line
+          (error) => {}
+        );
+    },
+    flightToDropbox: function (f) {
+      store
+        .dispatch("uploadToDropbox", { filename: f, type: "VOLPARSED" })
         .then(
           // eslint-disable-next-line no-unused-vars
           (response) => {},
