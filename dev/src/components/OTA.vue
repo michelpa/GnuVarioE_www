@@ -4,9 +4,9 @@
       <h3>
         <br />
         <br />
-        <br />La mise à jour va débuter, cette page ne sera plus accessible.
+        <br />{{ $t("params.ota.WARNING1") }}
         <br />
-        <br />A l'issue de la mise à jour, le vario va redémarrer...
+        <br />{{ $t("params.ota.WARNING2") }}
       </h3>
     </div>
     <div class="row">
@@ -19,7 +19,7 @@
                   <!-- The open source and open hardware variometer.
                   <br />-->
                   <em class="small" v-if="firmwareVersion">
-                    Version courante: {{ versionFull }}
+                    {{ $t("about.CURRENT") }}: {{ versionFull }}
                     <br />
                     Type: {{ firmwareVersion.Firmware.type }}
                   </em>
@@ -34,7 +34,7 @@
       <div class="col-md-6 d-flex">
         <b-card
           class="flex-fill"
-          header="Mise à jour depuis internet"
+          :header="$t('params.ota.H_FROM_INET')"
           header-tag="header"
         >
           <div class="bg-default">
@@ -42,7 +42,7 @@
               <div class="col-md-6">
                 <div v-if="firmwareVersion[keyBeta]">
                   <em class
-                    >Version beta dispo:
+                    >{{ $t("params.ota.VERSION_BETA") }}
                     {{
                       firmwareVersion[keyBeta].version +
                       "." +
@@ -54,15 +54,15 @@
                   <br />
                   <br />
                   <b-button variant="warning" type="button" @click="maj(1)"
-                    >Mettre à jour</b-button
+                    >{{ $t("params.ota.UPDATE") }}</b-button
                   >
                 </div>
-                <em class v-else> <br />Aucune version béta disponible </em>
+                <em class v-else> <br />{{ $t("params.ota.NO_VERSION_BETA") }}</em>
               </div>
               <div class="col-md-6">
                 <div v-if="firmwareVersion[keyStable]">
                   <em class
-                    >Version stable dispo:
+                    >{{ $t("params.ota.VERSION_STABLE") }}
                     {{
                       firmwareVersion[keyStable].version +
                       "." +
@@ -72,10 +72,10 @@
                   <br />
                   <br />
                   <b-button variant="success" type="button" @click="maj(1)"
-                    >Mettre à jour</b-button
+                    >{{ $t("params.ota.UPDATE") }}</b-button
                   >
                 </div>
-                <em class v-else> <br />Aucune version stable disponible </em>
+                <em class v-else> <br />{{ $t("params.ota.NO_VERSION_STABLE") }}</em>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
       <div class="col-md-6">
         <b-card
           class="flex-fill"
-          header="Mise à jour locale"
+          :header="$t('params.ota.H_FROM_LOCAL')"
           header-tag="header"
         >
           <div class="bg-default">
@@ -92,9 +92,9 @@
               <b-form-group
                 id="input-group-firmware"
                 label-cols-sm="12"
-                label="Veuillez sélectionner le fichier du firmware à envoyer sur le vario:"
+                :label="$t('params.ota.MESSAGE1')"
                 label-for="input-firmware"
-                description="Habituellement, il s'agit d'un fichier au format .bin"
+                :description="$t('params.ota.MESSAGE2')"
               >
                 <b-form-file
                   id="input-firmware"
@@ -103,8 +103,7 @@
                   plain
                 ></b-form-file>
                 <b-form-invalid-feedback id="input-file-feedback" v-show="error"
-                  >Vous devez sélectionner un
-                  fichier...</b-form-invalid-feedback
+                  >{{ $t("params.ota.UPDATE_ERR1") }}</b-form-invalid-feedback
                 >
                 <br />
                 <b-progress
@@ -116,7 +115,7 @@
                 ></b-progress>
               </b-form-group>
 
-              <b-button variant="primary" type="submit">Envoyer</b-button>
+              <b-button variant="primary" type="submit">{{ $t("params.ota.UPDATE") }}</b-button>
             </b-form>
           </div>
         </b-card>
@@ -172,10 +171,9 @@ export default {
         .post("/fupdate", formData, config)
         .then(function () {
           self.uploading = false;
-          self.$bvToast.toast(
-            `Le fichier a été correctement téléchargée sur le vario. Il va maintenant être redémarré pour terminer la mise à jour`,
+          self.$bvToast.toast(this.$i18n.t("params.ota.MESSAGE3"),
             {
-              title: "Mise à jour OTA",
+              title: this.$i18n.t("params.ota.H_OTA"),
               toaster: "b-toaster-top-right",
               solid: true,
               variant: "success",
@@ -184,10 +182,9 @@ export default {
         })
         .catch(function () {
           self.uploading = false;
-          self.$bvToast.toast(
-            `Echec du téléchargement du fichier, la mise à jour est abandonnée.`,
+          self.$bvToast.toast(this.$i18n.t("params.ota.UPDATE_ERR2"),
             {
-              title: "Mise à jour OTA",
+              title: this.$i18n.t("params.ota.H_OTA"),
               toaster: "b-toaster-top-right",
               solid: true,
               variant: "danger",
@@ -207,8 +204,8 @@ export default {
         (response) => {},
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`Echec de la mise à jour.`, {
-            title: "A propos",
+          self.$bvToast.toast(this.$i18n.t("params.ota.UPDATE_ERR3"), {
+            title: this.$i18n.t("about.ABOUT"),
             toaster: "b-toaster-top-right",
             solid: true,
             variant: "danger",

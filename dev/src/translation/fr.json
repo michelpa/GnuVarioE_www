@@ -14,7 +14,8 @@
     "MAJ": "Mise à jour",
     "ABOUT": "A propos",
     "WIFI": "Wifi",
-    "SETTINGS": "Paramètres"
+    "SETTINGS": "Paramètres",
+    "SAVEDB": "DB to Dropbox"
   },
   "flights": {
     "FLIGHTS_WAIT": "Le chargement des vols n'est pas terminé!",
@@ -40,7 +41,9 @@
   },
   "wifi": {
     "CONF_LIB": "Configuration WiFi",
-    "AP": "Points d'accés"
+    "AP": "Points d'accés",
+    "CONF_SAVE": "Configuration WiFi sauvegardée sur la carte SD.",
+    "FAILED_SAVE": "Echec de la sauvegarde de la configuration WiFi."
   },
   "sd": {
     "SD_CONTENT": "Contenu de la carte SD"
@@ -53,6 +56,26 @@
   "params": {
     "PARAM": "Paramétrage",
     "MODE_EXPERT": "Mode expert",
+    "CONF_SAVE": "Configuration sauvegardé sur la carte SD.",
+    "FAILED_SAVE": "Echec de la sauvegarde de la configuration.",
+    "ota": {
+      "WARNING1": "La mise à jour va débuter, cette page ne sera plus accessible.",
+      "WARNING2": "A l'issue de la mise à jour, le vario va redémarrer...",
+      "H_FROM_INET": "Mise à jour depuis internet",
+      "H_FROM_LOCAL": "Mise à jour locale",
+      "H_OTA": "Mise à jour OTA",
+      "VERSION_BETA": "Version beta dispo:",
+      "VERSION_STABLE": "Version stable dispo:",
+      "NO_VERSION_BETA": "Aucune version béta disponible",
+      "NO_VERSION_STABLE": "Aucune version stable disponible",
+      "UPDATE": "Mettre à jour",
+      "MESSAGE1": "Veuillez sélectionner le fichier du firmware à envoyer sur le vario:",
+      "MESSAGE2": "Habituellement, il s'agit d'un fichier au format .bin",
+      "MESSAGE3": "Le fichier a été correctement téléchargée sur le vario. Il va maintenant être redémarré pour terminer la mise à jour.",
+      "UPDATE_ERR1": "Vous devez sélectionner un fichier...",
+      "UPDATE_ERR2": "Echec du téléchargement du fichier, la mise à jour est abandonnée.",
+      "UPDATE_ERR3": "Echec de la mise à jour."
+    },
     "systeme": {
       "TITLE": "Système",
       "SUBTITLE": "Paramètres système",
@@ -153,6 +176,7 @@
     "vario": {
       "TITLE": "Vario",
       "SUBTITLE": "Paramètres vario",
+      "VALUE": "valeur",
       "SINKING_THRESHOLD": {
         "label": "Seuil de déclenchement des dégueulantes",
         "help": ""
@@ -195,7 +219,10 @@
       },
       "RATIO_CLIMB_RATE": {
         "label": "Affichage finesse, taux de chute ou les 2",
-        "help": "1 finesse, 2 taux de chute, 3 les 2 valeurs alternativements"
+        "help": "1 finesse, 2 taux de chute, 3 les 2 valeurs alternativements",
+        "lable1": "Affichage de la finesse",
+        "lable2": "Affichage du taux de chute moyen",
+        "lable3": "Affichage des 2 informations en alternance dans la zone à droite de l’affiche du vario"
       },
       "SENT_LXNAV_SENTENCE": {
         "label": "Type de trame BT",
@@ -296,7 +323,16 @@
     "Language": "Langue",
     "pgactive": "Activé",
     "pglogin": "Login",
-    "pgpassword": "Mot de passe"
+    "pgpassword": "Mot de passe",
+    "dropbox_header": "Procédure de paramétrage Dropbox",
+    "dropbox_info1": "La récupération d'un jeton Dropbox s'effectue en deux temps.",
+    "dropbox_info2": "En cliquant sur \"Récupérer un code\", une nouvelle fenêtre va s'ouvrir vous permettant de vous connecter à votre compte dropbox, accepter les autorisations demandées, et générer un code.",
+    "dropbox_info3": "Ce code doit être récupéré puis copier dans la zone code qui va apparaitre ci-dessous.",
+    "dropbox_info4": "Vous devez alors cliquer sur \"Obtenir un jeton\" pour récupérer le jeton depuis votre compte dropbox. Le jeton sera automatiquement copié dans le champ prévu à cet effet.",
+    "dropbox_info5": "Vous pouvez alors sauver les paramètres et recharger la page.",
+    "dropbox_info6": "Le téléchargement vers votre dropbox est alors activé.",
+    "button_get_code": "Récupérer un code",
+    "button_get_token": "Obtenir un jeton"
   },
   "mesvols": {
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",    
@@ -314,15 +350,19 @@
     "no": "Non",
     "TO_LOGBOOK": "Placer dans mon carnet",
     "download": "Télécharger",
+    "upload": "Téléverser",
+    "create_dir": "Créer un dossier",
     "info": "Info",
-    "del_failed": "Echec de la suppression du fichier.",
+    "del_failed": "Echec de la suppression.",
     "del_positive1": "Fichier ",
+    "del_positive11": "Dossier ",
     "del_positive2": " supprimée de la carte SD.",
     "download_failed": "Echec du téléchargement du fichier.",
     "to_logbook_failed": "Echec de déplacement du vol.",
     "be_patient": "Soyez patient, cela peut prendre du temps...",
     "del_failed_fly": "Echec de la suppression du vol.",
-    "print_but": "Imprimer"        
+    "print_but": "Imprimer",
+    "no_conf": "La configuration n'est pas encore chargée!"          
   },
   "sitelist": {
     "name": "Libellé"
