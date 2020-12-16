@@ -14,10 +14,9 @@
 
 ### Informations importantes
 
-Le serveur web embarqué est synchrone, ce qui signifie qu'une seule requète peut être traitée à la fois.
+~~Le serveur web embarqué est synchrone, ce qui signifie qu'une seule requète peut être traitée à la fois.
 Cette contrainte oblige à ne pas avoir d'image provenant du serveur ou alors de les inclures directement dans les pages mais pas de ressources basées sur les urls.
-C'est aussi pour ca que l'ensemble des resources css et js (sauf le coeur du programme) utilise des CDN.
+C'est aussi pour ca que l'ensemble des resources css et js (sauf le coeur du programme) utilise des CDN.~~
 
-## TODO
+Le serveur web a été remplacé par un serveur asynchrone.
 
-* [ ] Terminer la gestion des thèmes avec sauvegarde dans un fichier de param

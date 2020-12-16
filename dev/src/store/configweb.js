@@ -110,7 +110,10 @@ const getters = {
     },
     dropboxpref(state) {
         return state.configWeb.dropbox;
-    }
+    },
+    isdropboxenabled(state) {
+        return (state.configWeb.dropbox.enable && state.configWeb.dropbox.token != "");
+    },
 }
 
 export default {

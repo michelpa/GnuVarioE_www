@@ -239,7 +239,7 @@
                                         <div class="float-right">
                                           <div class="btns">
                                             <button
-                                              v-if="dropboxenabled"
+                                              v-if="isdropboxenabled"
                                               class="btn btn-sm btn-primary"
                                               @click="
                                                 flightToDropbox(f.filename)
@@ -479,12 +479,10 @@ export default {
       "sitesIds",
       "parsedData",
       "dropboxpref",
+      "isdropboxenabled",
     ]),
     pgenabled: function () {
       return this.pg.enable && this.pg.login != "" && this.pg.password != "";
-    },
-    dropboxenabled: function () {
-      return this.dropboxpref.enable && this.dropboxpref.token != "";
     },
   },
   methods: {

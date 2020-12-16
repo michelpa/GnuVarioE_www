@@ -127,7 +127,7 @@
                                             </td>
                                             <td class="btns">
                                               <button
-                                                v-if="dropboxenabled"
+                                                v-if="isdropboxenabled"
                                                 class="btn btn-sm btn-primary"
                                                 @click="flightToDropbox(f.name)"
                                                 v-b-tooltip.hover="{
@@ -547,7 +547,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["flights", "isLoading", "pg", "dropboxpref"]),
+    ...mapGetters(["flights", "isLoading", "pg", "dropboxpref","isdropboxenabled"]),
 
     flightsPerDays: function () {
       let lDays = {};
@@ -637,9 +637,6 @@ export default {
     },
     pgenabled: function () {
       return this.pg.enable && this.pg.login != "" && this.pg.password != "";
-    },
-    dropboxenabled: function () {
-      return this.dropboxpref.enable && this.dropboxpref.token != "";
     },
   },
   mounted: function () {
