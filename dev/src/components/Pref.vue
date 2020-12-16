@@ -125,30 +125,25 @@
               <div class="row">
                 <div class="col-md-12">
                   <hr />
-                  <h4>Procédure de paramétrage Dropbox</h4>
+                  <h4>{{ $t("pref.dropbox_header") }}</h4>
                   <p>
-                    La récupération d'un jeton Dropbox s'effectue en deux temps.
+                    {{ $t("pref.dropbox_info1") }}
                   </p>
                   <p>
-                    En cliquant sur "Récupérer un code", une nouvelle fenêtre va
-                    s'ouvrir vous permettant de vous connecter à votre compte
-                    dropbox, accepter les autorisations demandées, et générer un
-                    code.
+                    {{ $t("pref.dropbox_info2") }}
                   </p>
                   <p>
-                    Ce code doit être récupéré puis copier dans la zone code qui
-                    va apparaitre ci-dessous.
+                    {{ $t("pref.dropbox_info3") }}
                   </p>
                   <p>
-                    Vous devez alors cliquer sur "Obtenir un jeton" pour
-                    récupérer le jeton depuis votre compte dropbox. Le jeton
-                    sera automatiquement copié dans le champ prévu à cet effet.
+                    {{ $t("pref.dropbox_info4") }}
                   </p>
                   <p>
-                    Vous pouvez alors sauver les paramètres et recharger la
-                    page.
+                    {{ $t("pref.dropbox_info5") }}
                   </p>
-                  <p>Le téléchargement vers votre dropbox est alors activé.</p>
+                  <p>
+                    {{ $t("pref.dropbox_info6") }}
+                  </p>
                 </div>
               </div>
               <div class="float-right">
@@ -157,18 +152,18 @@
                   @click="dropboxAuthenticate"
                   v-if="!showSaisieCode"
                 >
-                  Récupérer un code
+                  {{ $t("pref.button_get_code") }}
                 </button>
                 <div v-if="showSaisieCode">
                   <b-form-group
                     id="input-group-db2"
-                    label="Code dropbox"
+                    label="Code Dropbox"
                     label-for="input-3"
                   >
                     <b-form-input v-model="dropboxCode"></b-form-input>
                   </b-form-group>
                   <button class="btn btn-primary" @click="dropboxGetToken">
-                    Obtenir un jeton
+                    {{ $t("pref.button_get_token") }}
                   </button>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!conf">La configuration n'est pas encore chargée!</div>
+    <div v-if="!conf">{{ $t('actions.no_conf') }}</div>
     <div v-else class="configpage">
       <h3>{{ $t('wifi.CONF_LIB') }}</h3>
       <div class="row">
@@ -155,7 +155,7 @@ export default {
         response => {
           store.dispatch("loadWifiConfig");
           self.$bvToast.toast(
-            "Configuration WiFi sauvegardée sur la carte SD.",
+            this.$i18n.t("wifi.CONF_SAVE"),
             {
               title: "Config WiFi",
               toaster: "b-toaster-top-right",
@@ -167,7 +167,7 @@ export default {
         // eslint-disable-next-line
         error => {
           self.$bvToast.toast(
-            `Echec de la sauvegarde de la configuration WiFi.`,
+            this.$i18n.t("wifi.FAILED_SAVE"),
             {
               title: "Config WiFi",
               toaster: "b-toaster-top-right",
