@@ -362,7 +362,8 @@
     "be_patient": "Soyez patient, cela peut prendre du temps...",
     "del_failed_fly": "Echec de la suppression du vol.",
     "print_but": "Imprimer",
-    "no_conf": "La configuration n'est pas encore chargée!"          
+    "no_conf": "La configuration n'est pas encore chargée!",
+    "upload_to": "Téléversement vers "       
   },
   "sitelist": {
     "name": "Libellé"

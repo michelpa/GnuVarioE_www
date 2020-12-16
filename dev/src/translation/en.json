@@ -362,7 +362,8 @@
     "be_patient": "Please be patient, it may take a while...",
     "del_failed_fly": "Failed to delete flight.",
     "print_but": "Print",
-    "no_conf": "The configuration is not loaded yet!"    
+    "no_conf": "The configuration is not loaded yet!",
+    "upload_to": "Upload to "  
   },
   "sitelist": {
     "name": "Name"

@@ -136,7 +136,9 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Téléversement vers dropbox"
+                                                :title="
+                                                  $t('actions.upload_to')+'dropbox'
+                                                "
                                               >
                                                 <i
                                                   class="fa fa-dropbox"
@@ -154,7 +156,9 @@
                                                     hide: 50,
                                                   },
                                                 }"
-                                                title="Téléversement vers paraglidinglogbook.com"
+                                                :title="
+                                                  $t('actions.upload_to')+'paraglidinglogbook.com'
+                                                "
                                               >
                                                 <i
                                                   class="fa fa-book"
