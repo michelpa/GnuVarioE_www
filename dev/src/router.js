@@ -1,6 +1,5 @@
 // import Vue from 'vue'
 // import Router from 'vue-router'
-import Home from './components/Home.vue'
 import About from './components/About.vue'
 import MesVols from './components/MesVols.vue'
 import Configuration from './components/Configuration.vue'
@@ -15,10 +14,6 @@ import Wifi from './components/Wifi.vue'
 export default new VueRouter({
   routes: [
     {
-      path: '/home',
-      name: 'home',
-      component: Home
-    }, {
       path: '/',
       name: 'mesvols',
       component: MesVols

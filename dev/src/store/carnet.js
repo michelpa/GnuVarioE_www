@@ -174,7 +174,6 @@ export const actions = {
             url = baseUrl + url;
         }
 
-
         let axiosConfig = {}
         return waitFor(function () {
             return context.rootState.loading.isLoading === false

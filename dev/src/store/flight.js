@@ -133,10 +133,6 @@ export const actions = {
             url = baseUrl + url;
         }
 
-        // if (env.NODE_ENV == "development") {
-        //     url = "/19022402.IGC";
-        // }
-
         let axiosConfig = {}
         return waitFor(function () {
             return context.rootState.loading.isLoading === false
