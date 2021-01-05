@@ -141,7 +141,7 @@
                                                 "
                                               >
                                                 <i
-                                                  class="fa fa-dropbox"
+                                                  class="fab fa-dropbox"
                                                 ></i></button
                                               >&nbsp;
                                               <button
