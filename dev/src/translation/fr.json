@@ -275,6 +275,10 @@
       "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
         "label": "Début de l'enregistrement après déclenchement de début du vol",
         "help": ""
+      },
+      "MUTE_VARIOBEGIN": {
+        "label": "Coupure des bips jusqu'au début du vol",
+        "help": ""
       }
     },
     "wifi": {
@@ -332,10 +336,11 @@
     "dropbox_info5": "Vous pouvez alors sauver les paramètres et recharger la page.",
     "dropbox_info6": "Le téléchargement vers votre dropbox est alors activé.",
     "button_get_code": "Récupérer un code",
-    "button_get_token": "Obtenir un jeton"
+    "button_get_token": "Obtenir un jeton",
+    "perform_calibration": "Lancer la génération du fichier de calibration"
   },
   "mesvols": {
-    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",    
+    "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",
     "TITLE_MSG_modal": "Mon vol",
     "ALTITUDE": "Altitude",
     "SPEED": "Vitesse",
@@ -363,7 +368,7 @@
     "del_failed_fly": "Echec de la suppression du vol.",
     "print_but": "Imprimer",
     "no_conf": "La configuration n'est pas encore chargée!",
-    "upload_to": "Téléversement vers "       
+    "upload_to": "Téléversement vers "
   },
   "sitelist": {
     "name": "Libellé"
@@ -393,7 +398,7 @@
     "Alt_min": "Altitude mini",
     "Alt_max": "Altitude maxi",
     "Alt_start": "Altitude de départ",
-    "Alt_end": "Altitude de fin",    
+    "Alt_end": "Altitude de fin",
     "no_trace": "Pas de trace pour ce vol"
   },
   "flightform": {

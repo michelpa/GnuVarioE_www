@@ -275,6 +275,10 @@
       "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
         "label": "Start of recording after start of flight",
         "help": ""
+      },
+      "MUTE_VARIOBEGIN": {
+        "label": "Mute until start of flight",
+        "help": ""
       }
     },
     "wifi": {
@@ -332,15 +336,16 @@
     "dropbox_info5": "You can save your settings and reload the page.",
     "dropbox_info6": "Uploading to your Dropbox is activated.",
     "button_get_code": "Get a code",
-    "button_get_token": "Get a token"
+    "button_get_token": "Get a token",
+    "perform_calibration": "Process calibration"
   },
   "mesvols": {
-    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",    
+    "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",
     "TITLE_MSG_modal": "My flight",
     "ALTITUDE": "Altitude",
     "SPEED": "Speed",
     "TIME": "Time"
-  },  
+  },
   "actions": {
     "edit": "Edit",
     "delete": "Delete",
@@ -363,7 +368,7 @@
     "del_failed_fly": "Failed to delete flight.",
     "print_but": "Print",
     "no_conf": "The configuration is not loaded yet!",
-    "upload_to": "Upload to "  
+    "upload_to": "Upload to "
   },
   "sitelist": {
     "name": "Name"
@@ -394,7 +399,6 @@
     "Alt_max": "Altitude maxi",
     "Alt_start": "Altitude start",
     "Alt_end": "Altitude finish",
-
     "no_trace": "No trace for this flight"
   },
   "flightform": {
