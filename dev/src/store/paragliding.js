@@ -2,10 +2,7 @@ import { waitFor, baseUrl } from '../lib/helperStore.js'
 
 const env = process.env;
 
-
 const initialState = {};
-
-
 
 export const state = Object.assign({}, initialState);
 
@@ -55,10 +52,7 @@ export const actions = {
     },
     uploadFileToP: function (context, formData) {
         let url = "https://paraglidinglogbook.com/gnuvario/gnuvario.php";
-        // if (env.NODE_ENV == "development") {
-        //     url = baseUrl + "/upload";
-        // }
-        // context.commit('setUploadpct', 0);
+
         return waitFor(function () {
             return context.rootState.loading.isLoading === false
         }).then(function () {
@@ -68,12 +62,6 @@ export const actions = {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
-                // onUploadProgress: function (progressEvent) {
-                //     let pct = Math.round(
-                //         (progressEvent.loaded * 100) / progressEvent.total
-                //     );
-                //     context.commit('setUploadpct', pct);
-                // }
             };
 
             // eslint-disable-next-line no-unused-vars

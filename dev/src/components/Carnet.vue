@@ -251,11 +251,12 @@
                                                 },
                                               }"
                                               :title="
-                                                $t('actions.upload_to')+'dropbox'
+                                                $t('actions.upload_to') +
+                                                'dropbox'
                                               "
                                             >
                                               <i
-                                                class="fa fa-dropbox"
+                                                class="fab fa-dropbox"
                                               ></i></button
                                             >&nbsp;
                                             <button
@@ -271,7 +272,8 @@
                                                 },
                                               }"
                                               :title="
-                                                $t('actions.upload_to')+'paraglidinglogbook.com'
+                                                $t('actions.upload_to') +
+                                                'paraglidinglogbook.com'
                                               "
                                             >
                                               <i class="fa fa-book"></i></button
@@ -287,16 +289,6 @@
                                               <i class="fa fa-pen"></i>
                                             </button>
                                             &nbsp;
-                                            <!-- <button
-                                              class="btn btn-sm btn-primary"
-                                              @click="flightToBook(f.name)"
-                                              v-b-tooltip.hover="{delay:  { show: 1000, hide: 50 } }"
-                                              title="Placer dans mon carnet"
-                                            >
-                                              <i class="fa fa-book-open"></i>
-                                            </button>
-                                            &nbsp;-->
-
                                             <button
                                               v-if="f.filename"
                                               class="btn btn-sm btn-info"
@@ -605,17 +597,7 @@ export default {
         );
     },
   },
-  mounted: function () {
-    // let self = this;
-    // store.dispatch("loadBddFlights").catch(error => {
-    //   self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
-    //     title: "Mon vol",
-    //     toaster: "b-toaster-top-right",
-    //     solid: true,
-    //     variant: "danger"
-    //   });
-    // });
-  },
+  mounted: function () {},
 };
 </script>
 

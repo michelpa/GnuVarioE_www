@@ -42,7 +42,11 @@
                   button-size="sm"
                   yes-class="btn btn-success"
                   no-class="btn btn-danger"
-                  :messages="{ title: $t('actions.del_message'), yes: $t('actions.yes'), no: $t('actions.no') }"
+                  :messages="{
+                    title: $t('actions.del_message'),
+                    yes: $t('actions.yes'),
+                    no: $t('actions.no'),
+                  }"
                 >
                   <button
                     class="btn btn-sm btn-danger"
@@ -202,6 +206,10 @@ export default {
         if (site.lat && site.lon) {
           const m = L.marker([site.lat, site.lon])
             .addTo(this.macarte)
+            .bindTooltip(site.lib, {
+              permanent: true,
+             // direction: "right",
+            })
             .bindPopup(
               "<h6>" +
                 site.lib +
