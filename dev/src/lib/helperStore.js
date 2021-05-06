@@ -1,5 +1,5 @@
 
-export const baseUrl = 'http://192.168.1.93';
+export const baseUrl = 'http://192.168.28.126';
 
 export function waitFor(conditionFunction) {
     const poll = resolve => {

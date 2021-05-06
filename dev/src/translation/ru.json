@@ -277,7 +277,7 @@
           "help": ""
         },
         "MUTE_VARIOBEGIN": {
-          "label": "Mute until start of flight",
+          "label": "Без звука до начала полета",
           "help": ""
         }
       },
