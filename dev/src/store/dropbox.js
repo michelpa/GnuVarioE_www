@@ -16,7 +16,6 @@ export const actions = {
     getAuthUrl(context) {
         if (!context.state.codeVerifier || !context.state.challenge) {
             const verifier = getCodeVerifier();
-            // alert(verifier);
             const challenge = getCodeChallenge(verifier);
             context.commit('setCodes', { verifier: verifier, challenge: challenge });
         }
@@ -30,7 +29,6 @@ export const actions = {
         return url;
     },
     getDropboxToken(context, { dropboxCode }) {
-
         if (dropboxCode) {
             var config = {
                 headers: {
@@ -141,7 +139,6 @@ export const mutations = {
 }
 
 const getters = {
-   
 }
 
 export default {
