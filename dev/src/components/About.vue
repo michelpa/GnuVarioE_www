@@ -54,7 +54,10 @@
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">pixyz</span>&nbsp;
-                  <em class="small">- {{ $t("global.DEVELOPPER") }} web / {{ $t("global.DEVELOPPER") }}</em>
+                  <em class="small">
+                    - {{ $t("global.DEVELOPPER") }} web /
+                    {{ $t("global.DEVELOPPER") }}
+                  </em>
                 </b-list-group-item>
                 <b-list-group-item variant="dark">
                   <span class="text-monospace">prunkdump</span>&nbsp;
@@ -89,7 +92,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { logo } from "@/lib/logo";
-import store from "@/store";
+
 export default {
   name: "About",
   props: {
@@ -98,6 +101,7 @@ export default {
   data: function () {
     return {
       logo: logo,
+      env: process.env,
     };
   },
   methods: {},
@@ -118,7 +122,7 @@ export default {
     },
   },
   mounted: function () {
-    store.dispatch("loadFirmwareVersion");
+    this.$store.dispatch("loadFirmwareVersion");
   },
 };
 </script>

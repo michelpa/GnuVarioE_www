@@ -53,11 +53,13 @@
                   >
                   <br />
                   <br />
-                  <b-button variant="warning" type="button" @click="maj(1)"
-                    >{{ $t("params.ota.UPDATE") }}</b-button
-                  >
+                  <b-button variant="warning" type="button" @click="maj(1)">
+                    {{ $t("params.ota.UPDATE") }}
+                  </b-button>
                 </div>
-                <em class v-else> <br />{{ $t("params.ota.NO_VERSION_BETA") }}</em>
+                <em class v-else>
+                  <br />{{ $t("params.ota.NO_VERSION_BETA") }}
+                </em>
               </div>
               <div class="col-md-6">
                 <div v-if="firmwareVersion[keyStable]">
@@ -71,11 +73,13 @@
                   >
                   <br />
                   <br />
-                  <b-button variant="success" type="button" @click="maj(1)"
-                    >{{ $t("params.ota.UPDATE") }}</b-button
-                  >
+                  <b-button variant="success" type="button" @click="maj(1)">
+                    {{ $t("params.ota.UPDATE") }}
+                  </b-button>
                 </div>
-                <em class v-else> <br />{{ $t("params.ota.NO_VERSION_STABLE") }}</em>
+                <em class v-else>
+                  <br />{{ $t("params.ota.NO_VERSION_STABLE") }}
+                </em>
               </div>
             </div>
           </div>
@@ -102,9 +106,12 @@
                   :state="Boolean(file)"
                   plain
                 ></b-form-file>
-                <b-form-invalid-feedback id="input-file-feedback" v-show="error"
-                  >{{ $t("params.ota.UPDATE_ERR1") }}</b-form-invalid-feedback
+                <b-form-invalid-feedback
+                  id="input-file-feedback"
+                  v-show="error"
                 >
+                  {{ $t("params.ota.UPDATE_ERR1") }}
+                </b-form-invalid-feedback>
                 <br />
                 <b-progress
                   v-show="uploading"
@@ -115,7 +122,9 @@
                 ></b-progress>
               </b-form-group>
 
-              <b-button variant="primary" type="submit">{{ $t("params.ota.UPDATE") }}</b-button>
+              <b-button variant="primary" type="submit">
+                {{ $t("params.ota.UPDATE") }}
+              </b-button>
             </b-form>
           </div>
         </b-card>
@@ -126,7 +135,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import store from "@/store";
+
 export default {
   name: "OTA",
   props: {
@@ -171,25 +180,21 @@ export default {
         .post("/fupdate", formData, config)
         .then(function () {
           self.uploading = false;
-          self.$bvToast.toast(this.$i18n.t("params.ota.MESSAGE3"),
-            {
-              title: this.$i18n.t("params.ota.H_OTA"),
-              toaster: "b-toaster-top-right",
-              solid: true,
-              variant: "success",
-            }
-          );
+          self.$bvToast.toast(this.$i18n.t("params.ota.MESSAGE3"), {
+            title: this.$i18n.t("params.ota.H_OTA"),
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "success",
+          });
         })
         .catch(function () {
           self.uploading = false;
-          self.$bvToast.toast(this.$i18n.t("params.ota.UPDATE_ERR2"),
-            {
-              title: this.$i18n.t("params.ota.H_OTA"),
-              toaster: "b-toaster-top-right",
-              solid: true,
-              variant: "danger",
-            }
-          );
+          self.$bvToast.toast(this.$i18n.t("params.ota.UPDATE_ERR2"), {
+            title: this.$i18n.t("params.ota.H_OTA"),
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "danger",
+          });
         });
       return;
     },
@@ -199,7 +204,7 @@ export default {
     },
     maj: function (beta) {
       this.majencours = true;
-      store.dispatch("upgradeFirmware", beta).then(
+      this.$store.dispatch("upgradeFirmware", beta).then(
         // eslint-disable-next-line
         (response) => {},
         // eslint-disable-next-line
@@ -253,7 +258,7 @@ export default {
     },
   },
   mounted: function () {
-    store.dispatch("loadFirmwareVersion");
+    this.$store.dispatch("loadFirmwareVersion");
   },
 };
 </script>

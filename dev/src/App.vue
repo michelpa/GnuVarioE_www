@@ -49,6 +49,15 @@
               <i class="fa fa-cog"></i>
               {{ $t("menu.SETTINGS") }}
             </b-nav-item>
+            <b-nav-text>
+              <span class="text-secondary">
+                <i id="app-version" class="fa fa-info-circle"> </i>
+                <b-tooltip target="app-version">
+                  {{ $t("menu.WEBAPPVERSION") }}<br />
+                  <strong>{{ env.VUE_APP_VERSION }}</strong>
+                </b-tooltip>
+              </span>
+            </b-nav-text>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -107,9 +116,9 @@ export default {
       "themeType",
       "lang",
       "dropboxpref",
-      "isdropboxenabled"
+      "isdropboxenabled",
     ]),
-  
+
     // language: function () {
     //   return this.lang;
     // },

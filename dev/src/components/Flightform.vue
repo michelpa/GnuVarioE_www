@@ -62,15 +62,15 @@
 
         <b-card>
           <b-form @submit.prevent>
-            <div v-if="!(flight.filename)">
+            <div v-if="!flight.filename">
               <b-row class="my-1">
                 <b-col sm="3">
                   <label>{{ $t("flights.FLIGHT_OF") }}</label>
                 </b-col>
                 <b-col sm="9">
-                  <b-form-input 
-                    v-model="flight.flight_date" 
-                    placeholder="Date du vol" 
+                  <b-form-input
+                    v-model="flight.flight_date"
+                    placeholder="Date du vol"
                     type="date"
                   ></b-form-input>
                 </b-col>
@@ -81,8 +81,8 @@
                   <label>{{ $t("carnet.Pilote") }}</label>
                 </b-col>
                 <b-col sm="9">
-                  <b-form-input 
-                    v-model="flight.pilot" 
+                  <b-form-input
+                    v-model="flight.pilot"
                     :placeholder="$t('carnet.Pilote_name')"
                   ></b-form-input>
                 </b-col>
@@ -92,8 +92,8 @@
                   <label>{{ $t("carnet.Voile") }}</label>
                 </b-col>
                 <b-col sm="9">
-                  <b-form-input 
-                    v-model="flight.wing" 
+                  <b-form-input
+                    v-model="flight.wing"
                     :placeholder="$t('carnet.Voile_name')"
                   ></b-form-input>
                 </b-col>
@@ -189,7 +189,10 @@
                 <label>{{ $t("flightform.Comment") }}</label>
               </b-col>
               <b-col sm="9">
-                <b-form-textarea id="comment" v-model="flight.comment"></b-form-textarea>
+                <b-form-textarea
+                  id="comment"
+                  v-model="flight.comment"
+                ></b-form-textarea>
               </b-col>
             </b-row>
           </b-form>
@@ -202,33 +205,33 @@
 
 <script>
 import { mapGetters } from "vuex";
-import store from "@/store";
+
 export default {
   name: "Flightform",
   props: {
     show: { type: Boolean, default: false },
-    flight: { type: Object, default: null }
+    flight: { type: Object, default: null },
   },
   components: {},
-  data: function() {
+  data: function () {
     return {};
   },
   watch: {
-    show: function(newVal, oldVal) {
+    show: function (newVal, oldVal) {
       if (newVal && !oldVal) {
         this.showModal();
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(["sites"])
+    ...mapGetters(["sites"]),
   },
   methods: {
-    showModal: function() {
+    showModal: function () {
       this.$bvModal.show("modal-flight");
     },
     // eslint-disable-next-line no-unused-vars
-    doSave: function(bvModalEvt) {
+    doSave: function (bvModalEvt) {
       let self = this;
       if (
         this.flight.site_id == undefined &&
@@ -259,42 +262,65 @@ export default {
           startLon: 0,
           endLat: 0,
           endLon: 0,
-          comment: this.flight.comment ? this.flight.comment : ""
+          comment: this.flight.comment ? this.flight.comment : "",
         };
       } else {
         ff = {
           id: this.flight.id,
           site_id: this.flight.site_id,
-          comment: this.flight.comment ? this.flight.comment : ""
+          comment: this.flight.comment ? this.flight.comment : "",
         };
       }
-      store.dispatch("saveFlight", ff).then(
+      let theflight = Object.assign({}, this.flight);
+      this.$store.dispatch("saveFlight", ff).then(
         // eslint-disable-next-line no-unused-vars
-        response => {
-          self.show = false;
-          store.dispatch("loadBddFlights", { 'reload': true });
-          this.$bvModal.hide("modal-flight");
+        (response) => {
+          const d = theflight.flight_date;
+          const splittedDate = d.split("-");
+
+          this.$store
+            .dispatch("logbook/loadFlightsBddShort", {
+              mode: "Y",
+              parcel: "",
+              force: true,
+            })
+            .then(() => {
+              this.$store
+                .dispatch("logbook/loadFlightsBddShort", {
+                  mode: "M",
+                  parcel: splittedDate[0],
+                  force: true,
+                })
+                .then(() => {
+                  this.$store.dispatch("logbook/loadFlightsBdd", {
+                    parcel: splittedDate[0] + splittedDate[1],
+                    force: true,
+                  });
+                });
+            });
+          // self.show = false;
+          self.$bvModal.hide("modal-flight");
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(this.$i18n.t("flightform.save_failed"), {
             title: "Carnet",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
     },
-    doCancel: function() {
-      //   store.dispatch("loadConfigWeb");
+    doCancel: function () {
+      //   this.$store.dispatch("loadConfigWeb");
     },
-    doHidden: function() {
+    doHidden: function () {
       this.$emit("flightClosed");
-    }
+    },
   },
   mounted() {},
-  beforeDestroy() {}
+  beforeDestroy() {},
 };
 </script>
 

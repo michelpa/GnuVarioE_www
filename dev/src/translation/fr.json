@@ -15,7 +15,8 @@
     "ABOUT": "A propos",
     "WIFI": "Wifi",
     "SETTINGS": "Paramètres",
-    "SAVEDB": "DB to Dropbox"
+    "SAVEDB": "DB to Dropbox",
+    "WEBAPPVERSION": "Version appli web:"
   },
   "flights": {
     "FLIGHTS_WAIT": "Le chargement des vols n'est pas terminé!",
@@ -301,7 +302,8 @@
         "\"RECORD00.CAL\" sur un serveur distant pour exécuter les calculs et peut",
         "prendre quelques secondes.",
         "</p>"
-      ]
+      ],
+      "perform_calibration": "Lancer la génération du fichier de calibration"
     },
     "wifi": {
       "SSID_1": {
@@ -358,8 +360,7 @@
     "dropbox_info5": "Vous pouvez alors sauver les paramètres et recharger la page.",
     "dropbox_info6": "Le téléchargement vers votre dropbox est alors activé.",
     "button_get_code": "Récupérer un code",
-    "button_get_token": "Obtenir un jeton",
-    "perform_calibration": "Lancer la génération du fichier de calibration"
+    "button_get_token": "Obtenir un jeton"
   },
   "mesvols": {
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",

@@ -61,10 +61,10 @@
           button-size="sm"
           yes-class="btn btn-success"
           no-class="btn btn-danger"
-          :messages="{ 
-            title: $t('actions.del_message'), 
-            yes: $t('actions.yes'), 
-            no: $t('actions.no'), 
+          :messages="{
+            title: $t('actions.del_message'),
+            yes: $t('actions.yes'),
+            no: $t('actions.no'),
           }"
         >
           <button
@@ -96,8 +96,8 @@
 </template>
 
 <script>
-import store from "@/store";
 let nbLevelOpened = 2;
+
 export default {
   name: "TreeItem",
   components: {},
@@ -116,7 +116,7 @@ export default {
       if (this.isFolder) {
         this.isOpen = !this.isOpen;
         if (this.isOpen) {
-          store.dispatch("loadSDFiles", this.basePath);
+          this.$store.dispatch("loadSDFiles", this.basePath);
         }
       }
     },
@@ -125,7 +125,7 @@ export default {
     },
     downloadFromSD: function () {
       let self = this;
-      store.dispatch("downloadFile", this.fullFilename).then(
+      this.$store.dispatch("downloadFile", this.fullFilename).then(
         (response) => {
           const url = window.URL.createObjectURL(
             new Blob([response.data], { type: response.data.type })
@@ -159,7 +159,7 @@ export default {
     deleteFromSD: function () {
       //confirmation
       let self = this;
-      store.dispatch("deleteFile", self.fullFilename).then(
+      this.$store.dispatch("deleteFile", self.fullFilename).then(
         // eslint-disable-next-line
         (response) => {
           let typeF = this.$i18n.t("actions.del_positive1");
@@ -175,7 +175,7 @@ export default {
               variant: "success",
             }
           );
-          store.dispatch("loadSDFiles", this.path);
+          self.$store.dispatch("loadSDFiles", this.path);
         },
         // eslint-disable-next-line
         (error) => {

@@ -19,8 +19,16 @@
           </div>
         </div>
       </b-card>
-      <upload :show="showUpload" :uploadPath="uploadPath" @uploadClosed="showUpload=false"></upload>
-      <create :show="showCreate" :createPath="createPath" @createClosed="showCreate=false"></create>
+      <upload
+        :show="showUpload"
+        :uploadPath="uploadPath"
+        @uploadClosed="showUpload = false"
+      ></upload>
+      <create
+        :show="showCreate"
+        :createPath="createPath"
+        @createClosed="showCreate = false"
+      ></create>
     </div>
   </div>
 </template>
@@ -30,22 +38,22 @@ import TreeItem from "./TreeItem";
 import Upload from "./Upload";
 import Create from "./Create";
 import { mapGetters } from "vuex";
-import store from "@/store";
+
 export default {
   name: "SD",
   components: { TreeItem, Upload, Create },
   props: {},
-  data: function() {
+  data: function () {
     return {
       showUpload: false,
       uploadPath: "",
       showCreate: false,
-      createPath: ""
+      createPath: "",
     };
   },
   methods: {
     guid() {
-      return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+      return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
         (
           c ^
           (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
@@ -59,19 +67,19 @@ export default {
     askCreateFolder(path) {
       this.createPath = path;
       this.showCreate = true;
-    }
+    },
   },
   computed: {
     ...mapGetters(["fileslist", "isLoading"]),
-    treeWithKey: function() {
-      return this.fileslist.map(t => {
+    treeWithKey: function () {
+      return this.fileslist.map((t) => {
         return { t, key: this.guid() };
       });
-    }
+    },
   },
-  mounted: function() {
-    store.dispatch("loadSDFiles", "/");
-  }
+  mounted: function () {
+    this.$store.dispatch("loadSDFiles", "/");
+  },
 };
 </script>
 

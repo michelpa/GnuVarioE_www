@@ -169,6 +169,13 @@
               </div>
             </b-card>
           </b-tab>
+          <b-tab title="Calibration">
+            <b-card>
+              <button class="btn btn-primary btn-block" @click="calibration()">
+                {{ $t("pref.perform_calibration") }}
+              </button>
+            </b-card>
+          </b-tab>
         </b-tabs>
         <div class="clearfix"></div>
       </div>
@@ -179,8 +186,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapGetters } from "vuex";
-// eslint-disable-next-line no-unused-vars
-import store from "@/store";
+
 export default {
   name: "Pref",
   props: {
@@ -239,7 +245,7 @@ export default {
         (sheets) => {
           this.loading = false;
           this.themeHelper.theme = this.themeSelected;
-          store.commit("updateConfigWeb", {
+          this.$store.commit("updateConfigWeb", {
             property: "theme.name",
             with: this.themeSelected,
           });
@@ -251,13 +257,13 @@ export default {
       );
     },
     changeVariant: function () {
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "theme.variant",
         with: this.variantSelected,
       });
     },
     changeType: function () {
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "theme.type",
         with: this.typeSelected,
       });
@@ -265,31 +271,31 @@ export default {
     changeLocale: function () {
       // this.$i18n.locale = this.langSelected;
       // this.$moment.locale(this.langSelected);
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "language",
         with: this.langSelected,
       });
     },
     changePg: function () {
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "paraglidinglogbook.enable",
         with: this.pgenabled,
       });
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "paraglidinglogbook.login",
         with: this.pglogin,
       });
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "paraglidinglogbook.password",
         with: this.pgpass,
       });
     },
     changeDropbox: function () {
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "dropbox.enable",
         with: this.dropboxenabled,
       });
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "dropbox.token",
         with: this.dropboxtoken,
       });
@@ -308,10 +314,10 @@ export default {
     },
     doSave: function () {
       let self = this;
-      store.dispatch("saveConfigWeb").then(
+      this.$store.dispatch("saveConfigWeb").then(
         // eslint-disable-next-line
         (response) => {
-          store.dispatch("loadConfigWeb");
+          self.$store.dispatch("loadConfigWeb");
           self.$bvToast.toast(this.$i18n.t("pref.Save_settings"), {
             title: this.$i18n.t("pref.Preferences"),
             toaster: "b-toaster-top-right",
@@ -332,13 +338,13 @@ export default {
       return;
     },
     doCancel: function () {
-      store.dispatch("loadConfigWeb");
+      this.$store.dispatch("loadConfigWeb");
     },
     doHidden: function () {
       this.$emit("themeClosed");
     },
     dropboxAuthenticate: function () {
-      store.dispatch("getAuthUrl").then(
+      this.$store.dispatch("getAuthUrl").then(
         (response) => {
           window.open(response, "_blank");
           this.showSaisieCode = true;
@@ -353,7 +359,7 @@ export default {
     dropboxGetToken: function () {
       let self = this;
       if (this.dropboxCode) {
-        store
+        this.$store
           .dispatch("getDropboxToken", { dropboxCode: this.dropboxCode })
           .then(
             (response) => {
@@ -370,6 +376,17 @@ export default {
             }
           );
       }
+    },
+    calibration: function () {
+      let self = this;
+      this.$store.dispatch("uploadToCalibration", {}).then(
+        // eslint-disable-next-line no-unused-vars
+        (response) => {
+          self.$bvModal.hide("modal-theme");
+        },
+        // eslint-disable-next-line
+        (error) => {}
+      );
     },
   },
 };

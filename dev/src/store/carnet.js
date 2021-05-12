@@ -14,7 +14,7 @@ const initialState = {
     bddflights: {},
     bddflightsRaw: [],
     offsetFlights: 0,
-    limitFlights: 10000
+    limitFlights: 10000,
 };
 
 export const state = Object.assign({}, initialState);
@@ -258,7 +258,7 @@ const getters = {
         return state.bddflightsRaw.length;
     },
     minDate: function (state) {
-        if (state.bddflightsRaw) {
+        if (state.bddflightsRaw && state.bddflightsRaw[0]) {
             let m = moment(state.bddflightsRaw[0].flight_date, "YYYY-MM-DD");
             return m;
         } else {

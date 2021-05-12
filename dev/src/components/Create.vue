@@ -1,8 +1,19 @@
 <template>
   <div>
-    <b-modal id="modal-create" @cancel="doCancel" @ok="doCreate" @hidden="doHidden" ref="modal">
-      <template v-slot:modal-title>Création d'un répertoire dans "{{createPath}}"</template>
-      <b-form-input v-model="folderName" placeholder="Entrer le nom du répertoire"></b-form-input>
+    <b-modal
+      id="modal-create"
+      @cancel="doCancel"
+      @ok="doCreate"
+      @hidden="doHidden"
+      ref="modal"
+    >
+      <template v-slot:modal-title>
+        Création d'un répertoire dans "{{ createPath }}"
+      </template>
+      <b-form-input
+        v-model="folderName"
+        placeholder="Entrer le nom du répertoire"
+      ></b-form-input>
       <div class="clearfix"></div>
     </b-modal>
   </div>
@@ -10,73 +21,73 @@
 
 <script>
 import { mapGetters } from "vuex";
-import store from "@/store";
+
 export default {
   name: "Create",
   props: {
     show: { type: Boolean, default: false },
-    createPath: { type: String }
+    createPath: { type: String },
   },
-  data: function() {
+  data: function () {
     return { folderName: "" };
   },
   watch: {
-    show: function(newVal, oldVal) {
+    show: function (newVal, oldVal) {
       if (newVal && !oldVal) {
         this.showModal();
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters([])
+    ...mapGetters([]),
   },
   methods: {
-    showModal: function() {
+    showModal: function () {
       this.$bvModal.show("modal-create");
     },
 
-    doCreate: function(bvModalEvt) {
+    doCreate: function (bvModalEvt) {
       // Prevent modal from closing
       bvModalEvt.preventDefault();
       const newPath = this.createPath + this.folderName;
       var self = this;
-      store.dispatch("createFolder", newPath).then(
+      this.$store.dispatch("createFolder", newPath).then(
         // eslint-disable-next-line
-        response => {
+        (response) => {
           self.$bvToast.toast(
             `Le répertoire  ${self.folderName} a été correctement créée sur le vario.`,
             {
               title: "SD",
               toaster: "b-toaster-top-right",
               solid: true,
-              variant: "success"
+              variant: "success",
             }
           );
-          store.dispatch("loadSDFiles", self.createPath);
+          self.$store.dispatch("loadSDFiles", self.createPath);
           self.$bvModal.hide("modal-create");
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(
             `Echec de création du répertoire ${self.folderName}.`,
             {
               title: "SD",
               toaster: "b-toaster-top-right",
               solid: true,
-              variant: "danger"
+              variant: "danger",
             }
           );
         }
       );
     },
-    doCancel: function() {
+    doCancel: function () {
       this.folderName = "";
     },
-    doHidden: function() {
+    doHidden: function () {
       this.folderName = "";
       this.$emit("createClosed");
-    }
-  }
+    },
+  },
 };
 </script>
 

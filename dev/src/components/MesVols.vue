@@ -14,7 +14,7 @@
               active-nav-item-class="font-weight-bold text-uppercase text-info"
               @activate-tab="tabChanged"
             >
-              <b-tab :title="$t('flights.MY_unconfirmed_tracks')" active>
+              <b-tab :title="$t('flights.MY_unconfirmed_tracks')" :active="Object.entries(flightsMonth).length !== 0">
                 <div
                   v-if="
                     flightsMonth && Object.entries(flightsMonth).length !== 0
@@ -137,7 +137,8 @@
                                                   },
                                                 }"
                                                 :title="
-                                                  $t('actions.upload_to')+'dropbox'
+                                                  $t('actions.upload_to') +
+                                                  'dropbox'
                                                 "
                                               >
                                                 <i
@@ -157,7 +158,8 @@
                                                   },
                                                 }"
                                                 :title="
-                                                  $t('actions.upload_to')+'paraglidinglogbook.com'
+                                                  $t('actions.upload_to') +
+                                                  'paraglidinglogbook.com'
                                                 "
                                               >
                                                 <i
@@ -334,8 +336,9 @@
                   </div>
                 </div>
               </b-tab>
-              <b-tab :title="$t('flights.MY_LOGBOOK')">
-                <carnet ref="carnet"></carnet>
+              <b-tab :title="$t('flights.MY_LOGBOOK')" :active="Object.entries(flightsMonth).length === 0">
+                <log-book></log-book>
+                <!-- <carnet ref="carnet"></carnet> -->
               </b-tab>
               <b-tab :title="$t('flights.MY_SITES')">
                 <sitelist ref="sitelist"></sitelist>
@@ -354,14 +357,18 @@
 
 <script>
 import { mapGetters } from "vuex";
-import store from "@/store";
 import MaCarte from "./MaCarte";
 import Sitelist from "./Sitelist";
-import Carnet from "./Carnet";
+// import Carnet from "./Carnet";
+import LogBook from "./LogBook/LogBook";
 
 export default {
   name: "MesVols",
-  components: { MaCarte, Sitelist, Carnet },
+  components: {
+    MaCarte,
+    Sitelist, // Carnet,
+    LogBook,
+  },
   props: {
     msg: String,
   },
@@ -381,7 +388,7 @@ export default {
     },
     downloadFromSD: function (f) {
       let self = this;
-      store.dispatch("downloadFlight", { filename: f }).then(
+      this.$store.dispatch("downloadFlight", { filename: f }).then(
         (response) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
@@ -404,10 +411,10 @@ export default {
     deleteFromSD: function (f) {
       //confirmation
       let self = this;
-      store.dispatch("deleteFlight", f).then(
+      this.$store.dispatch("deleteFlight", f).then(
         // eslint-disable-next-line
         (response) => {
-          store.dispatch("loadFlights");
+          this.$store.dispatch("loadFlights");
           self.$bvToast.toast(
             this.$i18n.t("actions.del_positive1") +
               f +
@@ -441,11 +448,36 @@ export default {
         "auto-hide": true,
       });
       let self = this;
-      store.dispatch("flightToBook", f).then(
+      this.$store.dispatch("flightToBook", f).then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
+          const fname = f;
+          const y = "20" + fname.substring(0, 2);
+          const m = fname.substring(2, 4);
+
+          this.$store
+            .dispatch("logbook/loadFlightsBddShort", {
+              mode: "Y",
+              parcel: "",
+              force: true,
+            })
+            .then(() => {
+              this.$store
+                .dispatch("logbook/loadFlightsBddShort", {
+                  mode: "M",
+                  parcel: y,
+                  force: true,
+                })
+                .then(() => {
+                  this.$store.dispatch("logbook/loadFlightsBdd", {
+                    parcel: "" + y + m,
+                    force: true,
+                  });
+                });
+            });
           self.closeInfo();
-          store.dispatch("loadFlights");
+
+          // this.$store.dispatch("loadFlights");
         },
         // eslint-disable-next-line
         (error) => {
@@ -464,7 +496,7 @@ export default {
     },
     flightToParagliding: function (f) {
       // let self = this;
-      store.dispatch("uploadIgcToParagliding", { filename: f }).then(
+      this.$store.dispatch("uploadIgcToParagliding", { filename: f }).then(
         // eslint-disable-next-line no-unused-vars
         (response) => {},
         // eslint-disable-next-line
@@ -472,18 +504,20 @@ export default {
       );
     },
     flightToDropbox: function (f) {
-      store.dispatch("uploadToDropbox", { filename: f, type: "VOL" }).then(
-        // eslint-disable-next-line no-unused-vars
-        (response) => {},
-        // eslint-disable-next-line
-        (error) => {}
-      );
+      this.$store
+        .dispatch("uploadToDropbox", { filename: f, type: "VOL" })
+        .then(
+          // eslint-disable-next-line no-unused-vars
+          (response) => {},
+          // eslint-disable-next-line
+          (error) => {}
+        );
     },
     flightInfo: function (f) {
       this.igc = null;
       this.currentF = null;
       let self = this;
-      store.dispatch("infoFlight", f).then(
+      this.$store.dispatch("infoFlight", f).then(
         (response) => {
           this.currentF = f;
           this.igc = response;
@@ -531,10 +565,10 @@ export default {
     tabChanged: function (newTabIndex, prevTabIndex, bvEvent) {
       switch (newTabIndex) {
         case 0:
-          store.dispatch("loadFlights");
+          this.$store.dispatch("loadFlights");
           break;
         case 1:
-          this.$refs.carnet.reset();
+          // this.$refs.carnet.reset();
           break;
         case 2:
           this.$refs.sitelist.redrawMap();
@@ -551,7 +585,19 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["flights", "isLoading", "pg", "dropboxpref","isdropboxenabled"]),
+    ...mapGetters("logbook", {
+      totalFlightNumber: "totalFlightNumber",
+      totalFlightTime: "totalFlightTime",
+      maxYear: "maxYear",
+      years: "years",
+    }),
+    ...mapGetters([
+      "flights",
+      "isLoading",
+      "pg",
+      "dropboxpref",
+      "isdropboxenabled",
+    ]),
 
     flightsPerDays: function () {
       let lDays = {};
@@ -646,7 +692,7 @@ export default {
   mounted: function () {
     let self = this;
 
-    store.dispatch("loadFlights").catch((error) => {
+    this.$store.dispatch("loadFlights").catch((error) => {
       self.$bvToast.toast(`Impossible de charger les vols. (` + error + ")", {
         title: "Mon vol",
         toaster: "b-toaster-top-right",

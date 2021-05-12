@@ -15,7 +15,8 @@
     "ABOUT": "About",
     "WIFI": "Wifi",
     "SETTINGS": "Settings",
-    "SAVEDB": "DB to Dropbox"
+    "SAVEDB": "DB to Dropbox",
+    "WEBAPPVERSION": "WebApp version:"
   },
   "flights": {
     "FLIGHTS_LIST": "My flights list",
@@ -301,7 +302,8 @@
         "\"RECORD00.CAL\" sur un serveur distant pour exécuter les calculs et peut",
         "prendre quelques secondes.",
         "</p>"
-      ]
+      ],
+      "perform_calibration": "Process calibration"
     },
     "wifi": {
       "SSID_1": {
@@ -358,8 +360,7 @@
     "dropbox_info5": "You can save your settings and reload the page.",
     "dropbox_info6": "Uploading to your Dropbox is activated.",
     "button_get_code": "Get a code",
-    "button_get_token": "Get a token",
-    "perform_calibration": "Process calibration"
+    "button_get_token": "Get a token"
   },
   "mesvols": {
     "MESVOL_WARNING": "This area must be empty. To do this, delete the erroneous tracks and send the valid tracks in your logbook.",

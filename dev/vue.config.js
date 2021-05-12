@@ -1,6 +1,8 @@
 const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+process.env.VUE_APP_VERSION = process.env.npm_package_version
+
 module.exports = {
 
     // configureWebpack: (config) => {
@@ -122,7 +124,8 @@ module.exports = {
             'apex': 'Apex',
             'apexchart': 'VueApexCharts',
             'vuecolor': "VueColor",
-            'vueMoment': "vueMoment"
+            'vueMoment': "vueMoment",
+            "vue2filters": "Vue2Filters"
         }
     },
     css: {

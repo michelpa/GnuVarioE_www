@@ -73,8 +73,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapGetters } from "vuex";
-// eslint-disable-next-line no-unused-vars
-import store from "@/store";
+
 export default {
   name: "Siteform",
   props: {
@@ -107,11 +106,11 @@ export default {
       if (this.site.comment == undefined) {
         this.site.comment = "";
       }
-      store.dispatch("saveSite", this.site).then(
+      this.$store.dispatch("saveSite", this.site).then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
           self.show = false;
-          store
+          self.$store
             .dispatch("loadSites")
             .then(() => {
               self.$emit("redrawRequired");
@@ -141,7 +140,7 @@ export default {
       );
     },
     doCancel: function () {
-      //   store.dispatch("loadConfigWeb");
+      //   this.$store.dispatch("loadConfigWeb");
     },
     doHidden: function () {
       this.$emit("siteClosed");

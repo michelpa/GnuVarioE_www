@@ -447,8 +447,6 @@ import { mapGetters } from "vuex";
 import Flightform from "./Flightform";
 import Visu from "./Visu";
 import PortalPrint from "./PortalPrint";
-// eslint-disable-next-line no-unused-vars
-import store from "@/store";
 
 export default {
   name: "Carnet",
@@ -496,7 +494,7 @@ export default {
         });
       }
       let self = this;
-      store.dispatch("infoFlightParsed", flight.filename).then(
+      this.$store.dispatch("infoFlightParsed", flight.filename).then(
         (response) => {
           self.showPopupVisu = true;
           self.currentIgc = response;
@@ -519,7 +517,7 @@ export default {
     },
     downloadFromSD: function (flight) {
       let self = this;
-      store
+      this.$store
         .dispatch("downloadFlight", { filename: flight.filename, parsed: true })
         .then(
           (response) => {
@@ -547,10 +545,10 @@ export default {
     },
     deleteFromBDD: function (flight) {
       let self = this;
-      store.dispatch("deleteFlightParsed", flight).then(
+      this.$store.dispatch("deleteFlightParsed", flight).then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
-          store.dispatch("loadBddFlights", { reload: true });
+          self.$store.dispatch("loadBddFlights", { reload: true });
         },
         (error) => {
           let msg = error.message;
@@ -570,14 +568,14 @@ export default {
       this.openpapier = true;
     },
     loadMore: function () {
-      store.dispatch("loadBddFlights", {});
+      this.$store.dispatch("loadBddFlights", {});
     },
     reset: function () {
-      store.dispatch("loadBddFlights", { reload: true });
+      this.$store.dispatch("loadBddFlights", { reload: true });
     },
     flightToParagliding: function (f) {
       // let self = this;
-      store
+      this.$store
         .dispatch("uploadIgcToParagliding", { filename: f, parsed: true })
         .then(
           // eslint-disable-next-line no-unused-vars
@@ -587,7 +585,7 @@ export default {
         );
     },
     flightToDropbox: function (f) {
-      store
+      this.$store
         .dispatch("uploadToDropbox", { filename: f, type: "VOLPARSED" })
         .then(
           // eslint-disable-next-line no-unused-vars
@@ -602,11 +600,6 @@ export default {
 </script>
 
 <style scoped>
-.collapsed > .when-opened,
-:not(.collapsed) > .when-closed {
-  display: none;
-}
-
 .topstat {
   font-size: 1.5em;
   font-weight: bold;

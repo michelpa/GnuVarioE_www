@@ -74,9 +74,8 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapGetters } from "vuex";
-// eslint-disable-next-line no-unused-vars
-import store from "@/store";
 import Siteform from "./Siteform";
+
 export default {
   name: "Sitelist",
   components: { Siteform },
@@ -103,10 +102,10 @@ export default {
     },
     deleteSite: function (site) {
       let self = this;
-      store.dispatch("deleteSite", site.id).then(
+      this.$store.dispatch("deleteSite", site.id).then(
         // eslint-disable-next-line
         (response) => {
-          store
+          this.$store
             .dispatch("loadSites")
             .then(() => {
               self.redrawMap();
@@ -208,8 +207,10 @@ export default {
             .addTo(this.macarte)
             .bindTooltip(site.lib, {
               permanent: true,
-             // direction: "right",
+              // direction: "top",
+              // opacity: 0.8,
             })
+            .openTooltip()
             .bindPopup(
               "<h6>" +
                 site.lib +
@@ -228,7 +229,7 @@ export default {
   },
   mounted: function () {
     let self = this;
-    store
+    this.$store
       .dispatch("loadSites")
       .then(() => {
         // self.drawMap();
