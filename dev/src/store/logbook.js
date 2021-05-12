@@ -33,20 +33,19 @@ const actions = {
             //url = "config/params.jso";
             url = baseUrl + url;
         }
-        let urlObj = new URL(url);
-        var search_params = urlObj.searchParams;
 
         // add parameters
+        let params = {};
         if (mode) {
-            search_params.set('mode', mode);
+            params.mode = mode
         }
         if (parcel) {
-            search_params.set('parcel', parcel);
+            params.parcel = parcel
         }
-
-        urlObj.search = search_params.toString();
-
-        url = urlObj.toString();
+        const searchParams = new URLSearchParams(params);
+        if (searchParams) {
+            url = url + "?" + searchParams
+        }
 
         let axiosConfig = {
             headers: {
@@ -92,14 +91,15 @@ const actions = {
             url = baseUrl + url;
         }
 
-        let urlObj = new URL(url);
-        var search_params = urlObj.searchParams;
-
+        // add parameters
+        let params = {};
         if (parcel) {
-            search_params.set('parcel', parcel);
+            params.parcel = parcel
         }
-        urlObj.search = search_params.toString();
-        url = urlObj.toString();
+        const searchParams = new URLSearchParams(params);
+        if (searchParams) {
+            url = url + "?" + searchParams
+        }
 
         let axiosConfig = {
             headers: {
