@@ -254,32 +254,267 @@
         "help": ""
       }
     },
-    "vol": {
-      "TITLE": "Начало полета",
-      "SUBTITLE": "Настройки начала полета",
-      "FLIGHT_START_MIN_TIMESTAMP": {
-        "label": "Minimum time since start before flight recording in millisecond",
-        "help": ""
+    "params": {
+      "PARAM": "Настройки",
+      "MODE_EXPERT": "Расширенные настройки",
+      "CONF_SAVE": "Конфигурация сохранена на SD-карте.",
+      "FAILED_SAVE": "Не удалось сохранить конфигурацию.",
+      "ota": {
+        "WARNING1": "Когда обновление начнется, эта страница больше не будет доступна.",
+        "WARNING2": "По окончании обновления вариометр перезапустится ...",
+        "H_FROM_INET": "Обновление через Интернет",
+        "H_FROM_LOCAL": "Локальное обновление",
+        "H_OTA": "OTA обновление",
+        "VERSION_BETA": "Доступна бета версия:",
+        "VERSION_STABLE": "Доступна стабильная версия:",
+        "NO_VERSION_BETA": "Нет доступной бета версии",
+        "NO_VERSION_STABLE": "Нет доступной стабильной версии",
+        "UPDATE": "Обновить",
+        "MESSAGE1": "Выберите файл прошивки для загрузки в вариометр:",
+        "MESSAGE2": "Обычно это файл в формате .bin",
+        "MESSAGE3": "Файл был успешно загружен в вариометр. Теперь он будет перезапущен для завершения обновления.",
+        "UPDATE_ERR1": "Вы должны выбрать файл...",
+        "UPDATE_ERR2": "Не удалось загрузить файл, обновление прервано.",
+        "UPDATE_ERR3": "Не удалось обновить."
       },
-      "FLIGHT_START_VARIO_LOW_THRESHOLD": {
-        "label": "Flight start trigger VZ min",
-        "help": ""
+      "systeme": {
+        "TITLE": "Система",
+        "SUBTITLE": "Экспертный режим",
+        "MANAGE_WINGS": "Список моих крыльев",
+        "BT_ENABLE": {
+          "label": "Bluetooth activation",
+          "help": ""
+        },
+        "NO_RECORD": {
+          "label": "SDcard recording disable",
+          "help": ""
+        },
+        "ALARM_SDCARD": {
+          "label": "SDCARD non-presence alarm",
+          "help": ""
+        },
+        "BEEP_GPSFIX": {
+          "label": "Beep at fixed GPS",
+          "help": ""
+        },
+        "BEEP_VARIOBEGIN": {
+          "label": "Beep at vario start",
+          "help": ""
+        },
+        "BEEP_FLYBEGIN": {
+          "label": "Beep at the flight start",
+          "help": "Beep as soon as flight recording start"
+        },
+        "COMPENSATION_TEMP": {
+          "label": "Temperature compensation",
+          "help": ""
+        },
+        "COMPENSATION_GPSALTI": {
+          "label": "GPS altitude compensation",
+          "help": ""
+        },
+        "SLEEP_TIMEOUT_MINUTES": {
+          "label": "Time before deep sleep",
+          "help": "(in minutes)"
+        },
+        "SLEEP_THRESHOLD_CPS": {
+          "label": "Deep sleep threshold (m/s)",
+          "help": "Deep sleep threshold value if instrument does not exceed +/- this value during the \"Time before deep sleep\" (EG 0.5m/s)"
+        },
+        "MULTIDISPLAY_DURATION": {
+          "label": "Data fields alternative display duration",
+          "help": "(millisecond)"
+        },
+        "DISPLAY_STAT_DURATION": {
+          "label": "Statistic page display duration",
+          "help": "(second)"
+        },
+        "URL_UPDATE": {
+          "label": "URL for update",
+          "help": "by default http://gnuvario-e.yj.fr/webupdate/checkversion"
+        },
+        "LANGUAGE": {
+          "label": "Vario language",
+          "help": ""
+        }
       },
-      "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
-        "label": "Flight start trigger threshold VZ max",
-        "help": ""
+      "general": {
+        "TITLE": "Основные",
+        "SUBTITLE": "Основные настройки",
+        "PILOT_NAME": {
+          "label": "Имя пилота",
+          "help": ""
+        },
+        "GLIDER_NAME": {
+          "label": "Wing",
+          "help": ""
+        },
+        "GLIDER_SELECT": {
+          "label": "Используемое крыло",
+          "help": ""
+        },
+        "GLIDER_NAME1": {
+          "label": "Крыло 1",
+          "help": ""
+        },
+        "GLIDER_NAME2": {
+          "label": "Крыло 2",
+          "help": ""
+        },
+        "GLIDER_NAME3": {
+          "label": "Крыло 3",
+          "help": ""
+        },
+        "GLIDER_NAME4": {
+          "label": "Крыло 4",
+          "help": ""
+        },
+        "TIME_ZONE": {
+          "label": "Часовой пояс",
+          "help": "Определяет часовой пояс UTC: Москва (+3)"
+        }
       },
-      "FLIGHT_START_MIN_SPEED": {
-        "label": "Flight start trigger threshold - minimum speed",
-        "help": ""
+      "vario": {
+        "TITLE": "Вариометр",
+        "SUBTITLE": "Настройки вариометра",
+        "VALUE": "значение",
+        "SINKING_THRESHOLD": {
+          "label": "Triggering sinking threshold",
+          "help": ""
+        },
+        "CLIMBING_THRESHOLD": {
+          "label": "Triggering climbing threshold",
+          "help": ""
+        },
+        "NEAR_CLIMBING_SENSITIVITY": {
+          "label": "Near climbing sensitivity",
+          "help": ""
+        },
+        "ENABLE_NEAR_CLIMBING_ALARM": {
+          "label": "Alarm when entering or leaving a lifting zone",
+          "help": ""
+        },
+        "ENABLE_NEAR_CLIMBING_BEEP": {
+          "label": "Thermal sniffer beep",
+          "help": ""
+        },
+        "DISPLAY_INTEGRATED_CLIMB_RATE": {
+          "label": "Displays the integrated climb rate",
+          "help": "Display integrated climb rate or instantaneous values if disabled. If enabled set the integration time in ms. ! Climb rate integration time must not be more than glide ratio one !"
+        },
+        "CLIMB_PERIOD_COUNT": {
+          "label": "Integration period of climb rate",
+          "help": "second"
+        },
+        "SETTINGS_GLIDE_RATIO_PERIOD_COUNT": {
+          "label": "Integration period of glide ratio",
+          "help": "second"
+        },
+        "RATIO_MAX_VALUE": {
+          "label": "Number of integration values ​​in the glide ratio calculation",
+          "help": ""
+        },
+        "RATIO_MIN_SPEED": {
+          "label": "Minimum speed taken into account for glide ratio",
+          "help": ""
+        },
+        "RATIO_CLIMB_RATE": {
+          "label": "Display glide ratio, sink rate or the both",
+          "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively",
+          "lable1": "Glide ratio",
+          "lable2": "Sink rate",
+          "lable3": "The both alternatively"
+        },
+        "SENT_LXNAV_SENTENCE": {
+          "label": "Bluetooth frame type",
+          "help": "0=LK8000, 1=LXNAV"
+        },
+        "VARIOMETER_ENABLE_AGL": {
+          "label": "AGL display",
+          "help": "Requires elevation files on SD card"
+        },
+        "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
+          "label": "Kalman filter settings",
+          "help": "This parameter  directly influences the kalman filter (value between 0.3 and 0.6)"
+        },
+        "VARIOMETER_INTEGRATED_CLIMB_RATE": {
+          "label": "Vario integration",
+          "help": ""
+        },
+        "SETTINGS_VARIO_PERIOD_COUNT": {
+          "label": "Integration period",
+          "help": " between 0 and 40 (Integration period by 50ms step between 0 and 2s"
+        },
+        "IGC_SEND_CALIBRATED_ALTITUDE": {
+          "label": "Use calibrated altitude in IGC files",
+          "help": ""
+        },
+        "BLUETOOTH_SEND_CALIBRATED_ALTITUDE": {
+          "label": "Use calibrated altitude in bluetooth frames",
+          "help": ""
+        }
       },
-      "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
-        "label": "Start of recording after start of flight",
-        "help": ""
+      "vol": {
+        "TITLE": "Начало полета",
+        "SUBTITLE": "Настройки начала полета",
+        "FLIGHT_START_MIN_TIMESTAMP": {
+          "label": "Minimum time since start before flight recording in millisecond",
+          "help": ""
+        },
+        "FLIGHT_START_VARIO_LOW_THRESHOLD": {
+          "label": "Flight start trigger VZ min",
+          "help": ""
+        },
+        "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
+          "label": "Flight start trigger threshold VZ max",
+          "help": ""
+        },
+        "FLIGHT_START_MIN_SPEED": {
+          "label": "Flight start trigger threshold - minimum speed",
+          "help": ""
+        },
+        "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
+          "label": "Start of recording after start of flight",
+          "help": ""
+        },
+        "MUTE_VARIOBEGIN": {
+          "label": "Без звука до начала полета",
+          "help": ""
+        }
       },
-      "MUTE_VARIOBEGIN": {
-        "label": "Mute until start of flight",
-        "help": ""
+      "wifi": {
+        "SSID_1": {
+          "label": "SSID 1",
+          "help": ""
+        },
+        "PASSWORD_1": {
+          "label": "Password 1",
+          "help": ""
+        },
+        "SSID_2": {
+          "label": "SSID 2",
+          "help": ""
+        },
+        "PASSWORD_2": {
+          "label": "Password 2",
+          "help": ""
+        },
+        "SSID_3": {
+          "label": "SSID 3",
+          "help": ""
+        },
+        "PASSWORD_3": {
+          "label": "Password 3",
+          "help": ""
+        },
+        "SSID_4": {
+          "label": "SSID 4",
+          "help": ""
+        },
+        "PASSWORD_4": {
+          "label": "Password 4",
+          "help": ""
+        }
       }
     },
     "calibrate": {
