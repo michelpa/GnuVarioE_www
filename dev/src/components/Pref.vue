@@ -169,13 +169,6 @@
               </div>
             </b-card>
           </b-tab>
-          <b-tab :title="$t('params.calibrate.TITLE')">
-            <b-card>
-              <button class="btn btn-primary btn-block" @click="calibration()">
-                {{ $t("params.calibrate.perform_calibration") }}
-              </button>
-            </b-card>
-          </b-tab>
         </b-tabs>
         <div class="clearfix"></div>
       </div>
@@ -376,17 +369,6 @@ export default {
             }
           );
       }
-    },
-    calibration: function () {
-      let self = this;
-      this.$store.dispatch("uploadToCalibration", {}).then(
-        // eslint-disable-next-line no-unused-vars
-        (response) => {
-          self.$bvModal.hide("modal-theme");
-        },
-        // eslint-disable-next-line
-        (error) => {}
-      );
     },
   },
 };
