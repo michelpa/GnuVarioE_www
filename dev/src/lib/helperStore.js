@@ -1,5 +1,21 @@
 
+<<<<<<< HEAD
 export const baseUrl = 'http://192.168.28.126';
+=======
+export const baseUrl = 'http://192.168.1.70';
+
+export const convertArrayToObject = (array, key) => {
+    const initialValue = {};
+
+    return array.reduce((obj, item) => {
+        return {
+            ...obj,
+            [item[key]]: item,
+        };
+    }, initialValue);
+};
+
+>>>>>>> 152317d92e58ba486781222a50ee80c5854692ab
 
 export function waitFor(conditionFunction) {
     const poll = resolve => {

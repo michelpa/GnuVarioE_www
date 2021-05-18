@@ -13,15 +13,23 @@
       <div class="col-md-12">
         <div class="row">
           <div class="form-row form-group">
-            <label class="col-sm-5 col-form-label">{{ $t('flights.TRACE_COLOR') }}</label>
+            <label class="col-sm-5 col-form-label">{{
+              $t("flights.TRACE_COLOR")
+            }}</label>
             <div class="col-sm-4">
               <color-picker :color="colorTrait" v-model="colorTrait" />
             </div>
           </div>
           <div class="form-row form-group">
-            <label class="col-sm-5 col-form-label">{{ $t('flights.TRACE_WIDTH') }}</label>
+            <label class="col-sm-5 col-form-label">{{
+              $t("flights.TRACE_WIDTH")
+            }}</label>
             <div class="col-sm-4">
-              <b-form-input v-model="epaisseurTrait" type="number" step="1"></b-form-input>
+              <b-form-input
+                v-model="epaisseurTrait"
+                type="number"
+                step="1"
+              ></b-form-input>
             </div>
           </div>
         </div>
@@ -29,9 +37,17 @@
     </b-modal>
     <div id="mapid" ref="mapElement"></div>
     <div id="altchart">
-      <apexchart width="100%" height="100%" type="area" :options="chartsOptions" :series="series"></apexchart>
+      <apexchart
+        width="100%"
+        height="100%"
+        type="area"
+        :options="chartsOptions"
+        :series="series"
+      ></apexchart>
     </div>
-    <div class="text-center mb-2">{{markerLength}} / {{totalLength}} km</div>
+    <div class="text-center mb-2">
+      {{ markerLength }} / {{ totalLength }} km
+    </div>
     <div class="clearfix"></div>
   </div>
 </template>
@@ -49,9 +65,9 @@ export default {
   props: {
     show: { type: Boolean, default: false },
     igc: { type: Object, default: null },
-    flight: { type: Object, default: null }
+    flight: { type: Object, default: null },
   },
-  data: function() {
+  data: function () {
     return {
       macarte: null,
       midx: null,
@@ -61,27 +77,27 @@ export default {
       options: {
         chart: {
           id: "vuechart-example",
-          type: "line"
+          type: "line",
         },
         fill: {
           type: "solid",
-          opacity: [0.35, 1]
+          opacity: [0.35, 1],
         },
         stroke: {
           show: true,
-          curve: ["smooth", "smooth"],
+          curve: ["smooth", "smooth", "smooth"],
           lineCap: "butt",
           colors: "#17A2B8",
           width: 2,
-          dashArray: 0
+          dashArray: 0,
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         xaxis: {
           type: "datetime",
           title: {
-            text: this.$i18n.t("mesvols.TIME")
+            text: this.$i18n.t("mesvols.TIME"),
           },
           axisTicks: {
             show: true,
@@ -89,16 +105,16 @@ export default {
             color: "#666",
             height: 10,
             offsetX: 0,
-            offsetY: -5
+            offsetY: -5,
           },
 
           labels: {
             show: true,
             // eslint-disable-next-line
-            formatter: function(value, timestamp, index) {
+            formatter: function (value, timestamp, index) {
               return moment(new Date(timestamp)).format("HH:mm:ss");
-            }
-          }
+            },
+          },
         },
         yaxis: [
           {
@@ -108,81 +124,94 @@ export default {
             labels: {
               show: true,
               // eslint-disable-next-line
-              formatter: function(value, val, index) {
+              formatter: function (value, val, index) {
                 return value + " m";
-              }
+              },
             },
             title: {
-              text: this.$i18n.t("mesvols.ALTITUDE")
-            }
+              text: this.$i18n.t("mesvols.ALTITUDE"),
+            },
           },
           {
             opposite: true,
             labels: {
               show: true,
               // eslint-disable-next-line
-              formatter: function(value, val, index) {
+              formatter: function (value, val, index) {
                 return value + " km/h";
-              }
+              },
             },
             title: {
-              text: this.$i18n.t("mesvols.SPEED")
-            }
-          }
-        ]
-      }
+              text: this.$i18n.t("mesvols.SPEED"),
+            },
+          },
+          {
+            // opposite: true,
+            labels: {
+              show: true,
+              // eslint-disable-next-line
+              formatter: function (value, val, index) {
+                return value + " m/s";
+              },
+            },
+            title: {
+              text: this.$i18n.t("mesvols.CLIMBRATE"),
+            },
+          },
+        ],
+      },
     };
   },
   methods: {
-    showModalReglage: function() {
+    showModalReglage: function () {
       this.$bvModal.show("modal-reglage");
     },
-    doSaveReglage: function() {
+    doSaveReglage: function () {
       let self = this;
       store.dispatch("saveConfigWeb").then(
         // eslint-disable-next-line
-        response => {
+        (response) => {
           store.dispatch("loadConfigWeb");
           self.$bvToast.toast("Préférences sauvegardées sur la carte SD.", {
             title: "Préférences",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "success"
+            variant: "success",
           });
         },
         // eslint-disable-next-line
-        error => {
+        (error) => {
           self.$bvToast.toast(`3Echec de la sauvegarde des préférences.`, {
             title: "Préférences",
             toaster: "b-toaster-top-right",
             solid: true,
-            variant: "danger"
+            variant: "danger",
           });
         }
       );
       return;
     },
-    setMidx: function(idx) {
+    setMidx: function (idx) {
       this.midx = idx;
     },
-    showModal: function() {
+    showModal: function () {
       this.$bvModal.show("modal-visu");
     },
-    doCancel: function() {
+    doCancel: function () {
       //   store.dispatch("loadConfigWeb");
     },
-    doHidden: function() {
+    doHidden: function () {
       this.$emit("visuClosed");
     },
-    drawPolyline: function() {
+    drawPolyline: function () {
       if (this.polyline) {
         this.polyline.remove();
       }
       this.polyline = L.polyline(this.igc.latLong, {
         color: this.colorTrait,
-        weight: this.epaisseurTrait
+        weight: this.epaisseurTrait,
       }).addTo(this.macarte);
-    }
+    },
   },
   computed: {
     ...mapGetters(["configWeb"]),
@@ -197,10 +226,10 @@ export default {
       set(value) {
         store.commit("updateConfigWeb", {
           property: "map.trace.epaisseur",
-          with: value
+          with: value,
         });
         this.drawPolyline();
-      }
+      },
     },
     colorTrait: {
       get() {
@@ -213,23 +242,23 @@ export default {
       set(value) {
         store.commit("updateConfigWeb", {
           property: "map.trace.color",
-          with: value
+          with: value,
         });
         this.drawPolyline();
-      }
+      },
     },
-    chartsOptions: function() {
+    chartsOptions: function () {
       let self = this;
       self.options.chart.events = {
-        mouseMove: function(event, chartContext, config) {
+        mouseMove: function (event, chartContext, config) {
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts.
           var index = config.dataPointIndex;
           self.setMidx(index);
-        }
+        },
       };
       return this.options;
     },
-    markerLength: function() {
+    markerLength: function () {
       if (this.polyline) {
         var length = 0;
         var previousPoint;
@@ -245,12 +274,12 @@ export default {
         return 0;
       }
     },
-    totalLength: function() {
+    totalLength: function () {
       if (this.polyline) {
         var length = 0;
         var previousPoint;
 
-        this.polyline.getLatLngs().forEach(function(latLng) {
+        this.polyline.getLatLngs().forEach(function (latLng) {
           if (previousPoint) {
             length += previousPoint.distanceTo(latLng);
           }
@@ -260,15 +289,15 @@ export default {
       } else {
         return 0;
       }
-    }
+    },
   },
   watch: {
-    show: function(newVal, oldVal) {
+    show: function (newVal, oldVal) {
       if (newVal && !oldVal) {
         this.showModal();
       }
     },
-    midx: function(newidx, oldidx) {
+    midx: function (newidx, oldidx) {
       if (this.marker) {
         if (newidx != oldidx && newidx > 0) {
           this.marker.setLatLng(this.igc.latLong[newidx]);
@@ -276,7 +305,7 @@ export default {
           this.marker.setLatLng(this.igc.latLong[0]);
         }
       }
-    }
+    },
   },
   mounted() {
     var OpenTopoMap = L.tileLayer(
@@ -284,7 +313,7 @@ export default {
       {
         maxZoom: 17,
         attribution:
-          'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+          'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
       }
     );
 
@@ -295,7 +324,7 @@ export default {
         attribution:
           'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
         minZoom: 1,
-        maxZoom: 20
+        maxZoom: 20,
       }
     );
 
@@ -306,13 +335,13 @@ export default {
           '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',
         bounds: [
           [-75, -180],
-          [81, 180]
+          [81, 180],
         ],
         minZoom: 2,
         maxZoom: 19,
         apikey: "choisirgeoportail",
         format: "image/jpeg",
-        style: "normal"
+        style: "normal",
       }
     );
 
@@ -322,13 +351,13 @@ export default {
       this.macarte.remove();
     }
     this.macarte = L.map("mapid", {
-      layers: [GeoportailFrance_orthos]
+      layers: [GeoportailFrance_orthos],
     });
 
     var baseMaps = {
       OpenStreetMap: OpenStreetMap,
       OpenTopoMap: OpenTopoMap,
-      GeoportailFrance: GeoportailFrance_orthos
+      GeoportailFrance: GeoportailFrance_orthos,
     };
     L.control.layers(baseMaps).addTo(this.macarte);
 
@@ -348,18 +377,18 @@ export default {
           options: {
             toolbarIcon: {
               html: '<i class="fas fa-cogs" style="color:#666"></i>',
-              tooltip: "Réglages"
-            }
+              tooltip: "Réglages",
+            },
           },
 
-          addHooks: function() {
+          addHooks: function () {
             self.showModalReglage();
-          }
+          },
         });
 
         new L.Toolbar2.Control({
           position: "bottomleft",
-          actions: [MyCustomAction]
+          actions: [MyCustomAction],
         }).addTo(self.macarte);
 
         let pluginOptions = {
@@ -376,7 +405,7 @@ export default {
           captionFont: "Arial",
           captionColor: "black",
           captionBgColor: "white",
-          captionOffset: 5
+          captionOffset: 5,
         };
 
         self.simpleMapScreenshoter = L.simpleMapScreenshoter(
@@ -384,7 +413,7 @@ export default {
         ).addTo(self.macarte);
         let format = "image"; // 'image' - return base64, 'canvas' - return canvas
         let overridedPluginOptions = {
-          mimeType: "image/png"
+          mimeType: "image/png",
         };
 
         // GeoportailFrance_orthos.on("load", function() {
@@ -407,12 +436,14 @@ export default {
         //les données pour le graph altitude
         let da = self.igc.pressureAltitude.map((a, i) => [
           self.igc.recordTime[i].getTime(),
-          a
+          a,
         ]);
 
         //les données pour le graph vitesse
         let nbVal = self.igc.latLong.length;
         let speed = [];
+        let climbRate = [];
+
         for (var i = 1; i < nbVal; i++) {
           var dist = distance(
             self.igc.latLong[i - 1][0],
@@ -420,40 +451,51 @@ export default {
             self.igc.latLong[i][0],
             self.igc.latLong[i][1]
           );
-          var temps =
+          var altDiff =
+            self.igc.pressureAltitude[i] - self.igc.pressureAltitude[i - 1];
+          var interv =
             (self.igc.recordTime[i].getTime() -
               self.igc.recordTime[i - 1].getTime()) /
-            1000 /
-            3600;
+            1000;
+
+          var temps = interv / 3600;
 
           var sp = (dist / temps).toFixed(2);
 
+          var climbRateUnit = altDiff / interv;
+
+          climbRate.push([self.igc.recordTime[i - 1].getTime(), climbRateUnit]);
           speed.push([self.igc.recordTime[i - 1].getTime(), sp]);
         }
         speed.push([self.igc.recordTime[nbVal - 1].getTime(), sp]);
         const windowSize = 2;
-        const getter = item => parseFloat(item[1]);
+        const getter = (item) => parseFloat(item[1]);
         const setter = (item, itemSomoothed) => [
           item[0],
-          itemSomoothed.toFixed(2)
+          itemSomoothed.toFixed(2),
         ];
         const arrSmoothed = smooth(speed, windowSize, getter, setter);
-
+        const climbSmoothed = smooth(climbRate, 1, getter, setter);
         self.series = [
           {
             name: this.$i18n.t("mesvols.ALTITUDE"),
             data: da,
-            type: "area"
+            type: "area",
           },
           {
             name: this.$i18n.t("mesvols.SPEED"),
-            data: arrSmoothed
+            data: arrSmoothed,
             //type: "line"
-          }
+          },
+          {
+            name: this.$i18n.t("mesvols.CLIMBRATE"),
+            data: climbSmoothed,
+            // type: "bar",
+          },
         ];
       }
     });
-  }
+  },
 };
 
 function distance(lat1, lon1, lat2, lon2) {
@@ -480,7 +522,7 @@ function imageToDataUri(datas, wantedWidth, wantedHeight) {
   var img = document.createElement("img");
 
   // When the event "onload" is triggered we can resize the image.
-  img.onload = function() {
+  img.onload = function () {
     // We create a canvas and get its context.
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
@@ -508,7 +550,8 @@ function imageToDataUri(datas, wantedWidth, wantedHeight) {
 <style scoped>
 #mapid {
   width: 100%;
-  padding-top: 56.25%;
+  /* padding-top: 56.25%; */
+  height: 75vh;
   margin-bottom: 5px;
 }
 

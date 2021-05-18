@@ -1,7 +1,83 @@
 {
-    "home": {
-      "hello": "Привет"
+  "home": {
+    "hello": "Привет"
+  },
+  "global": {
+    "save": "Сохранить",
+    "reload": "Перезагрузить",
+    "DEVELOPPER": "Разработчик"
+  },
+  "menu": {
+    "FLIGHTS": "Мои полеты",
+    "SD": "SD карта",
+    "CONFIG": "Конфигурация",
+    "MAJ": "Обновление",
+    "ABOUT": "О программе",
+    "WIFI": "WiFi",
+    "SETTINGS": "Настройки",
+    "SAVEDB": "DB в Dropbox",
+    "WEBAPPVERSION": "WebApp version:"
+  },
+  "flights": {
+    "FLIGHTS_LIST": "Список моих полетов",
+    "FLIGHTS_FILES": "IGC файлы на SD карте",
+    "FLIGHTS_FILENAME": "Имя файла",
+    "FLIGHTS_ACTION": "Действия",
+    "FLIGHTS": "полет",
+    "FLIGHT_OF": "Дата полета",
+    "FLIGHT_DURATION": "Продолжительность полета",
+    "FLIGHT_START": "Начало полета",
+    "FLIGHT_END": "Конец полета",
+    "FLIGHT_ALT_START": "Начальная высота",
+    "FLIGHT_ALT_END": "Конечная высота",
+    "FLIGHT_ALT_MAX": "Максимальная высота",
+    "MAP_SETTINGS": "Настройки карты",
+    "TRACE_COLOR": "Цвет трека",
+    "TRACE_WIDTH": "Ширина трека",
+    "FLIGHTS_WAIT": "Загрузка полетов не завершена!",
+    "FLIGHT_NOFLIGHT": "Нет полетов.",
+    "MY_LOGBOOK": "Мой бортовой журнал",
+    "MY_SITES": "Мои места полетов",
+    "MY_unconfirmed_tracks": "Неподтвержденные треки"
+  },
+  "wifi": {
+    "CONF_LIB": "WIFI конфигурация",
+    "AP": "Точки доступа",
+    "CONF_SAVE": "Конфигурация WiFi сохранена на SD-карте.",
+    "FAILED_SAVE": "Не удалось сохранить конфигурацию WiFi."
+  },
+  "sd": {
+    "SD_CONTENT": "Контент на SD карте"
+  },
+  "about": {
+    "ABOUT": "О программе",
+    "CURRENT": "Текущая версия",
+    "CONTRIBUTOR": "Основные участники (в алфавитном порядке)"
+  },
+  "params": {
+    "PARAM": "Настройки",
+    "MODE_EXPERT": "Расширенные настройки",
+    "CONF_SAVE": "Конфигурация сохранена на SD-карте.",
+    "FAILED_SAVE": "Не удалось сохранить конфигурацию.",
+    "ota": {
+      "WARNING1": "Когда обновление начнется, эта страница больше не будет доступна.",
+      "WARNING2": "По окончании обновления вариометр перезапустится ...",
+      "H_FROM_INET": "Обновление через Интернет",
+      "H_FROM_LOCAL": "Локальное обновление",
+      "H_OTA": "OTA обновление",
+      "VERSION_BETA": "Доступна бета версия:",
+      "VERSION_STABLE": "Доступна стабильная версия:",
+      "NO_VERSION_BETA": "Нет доступной бета версии",
+      "NO_VERSION_STABLE": "Нет доступной стабильной версии",
+      "UPDATE": "Обновить",
+      "MESSAGE1": "Выберите файл прошивки для загрузки в вариометр:",
+      "MESSAGE2": "Обычно это файл в формате .bin",
+      "MESSAGE3": "Файл был успешно загружен в вариометр. Теперь он будет перезапущен для завершения обновления.",
+      "UPDATE_ERR1": "Вы должны выбрать файл...",
+      "UPDATE_ERR2": "Не удалось загрузить файл, обновление прервано.",
+      "UPDATE_ERR3": "Не удалось обновить."
     },
+<<<<<<< HEAD
     "global": {
       "save": "Сохранить",
       "reload": "Перезагрузить",
@@ -314,98 +390,359 @@
           "label": "Password 4",
           "help": ""
         }
+=======
+    "systeme": {
+      "TITLE": "Система",
+      "SUBTITLE": "Экспертный режим",
+      "MANAGE_WINGS": "Список моих крыльев",
+      "BT_ENABLE": {
+        "label": "Bluetooth activation",
+        "help": ""
+      },
+      "NO_RECORD": {
+        "label": "SDcard recording disable",
+        "help": ""
+      },
+      "ALARM_SDCARD": {
+        "label": "SDCARD non-presence alarm",
+        "help": ""
+      },
+      "BEEP_GPSFIX": {
+        "label": "Beep at fixed GPS",
+        "help": ""
+      },
+      "BEEP_VARIOBEGIN": {
+        "label": "Beep at vario start",
+        "help": ""
+      },
+      "BEEP_FLYBEGIN": {
+        "label": "Beep at the flight start",
+        "help": "Beep as soon as flight recording start"
+      },
+      "COMPENSATION_TEMP": {
+        "label": "Temperature compensation",
+        "help": ""
+      },
+      "COMPENSATION_GPSALTI": {
+        "label": "GPS altitude compensation",
+        "help": ""
+      },
+      "SLEEP_TIMEOUT_MINUTES": {
+        "label": "Time before deep sleep",
+        "help": "(in minutes)"
+      },
+      "SLEEP_THRESHOLD_CPS": {
+        "label": "Deep sleep threshold (m/s)",
+        "help": "Deep sleep threshold value if instrument does not exceed +/- this value during the \"Time before deep sleep\" (EG 0.5m/s)"
+      },
+      "MULTIDISPLAY_DURATION": {
+        "label": "Data fields alternative display duration",
+        "help": "(millisecond)"
+      },
+      "DISPLAY_STAT_DURATION": {
+        "label": "Statistic page display duration",
+        "help": "(second)"
+      },
+      "URL_UPDATE": {
+        "label": "URL for update",
+        "help": "by default http://gnuvario-e.yj.fr/webupdate/checkversion"
+      },
+      "LANGUAGE": {
+        "label": "Vario language",
+        "help": ""
+>>>>>>> 152317d92e58ba486781222a50ee80c5854692ab
       }
     },
-    "pref": {
-      "Failed_save_settings": "Не удалось сохранить настройки.",
-      "Save_settings": "Настройки сохранены на SD карте.",
-      "Preferences": "Предпочтения",
-      "Interface": "Интерфейс",
-      "Theme": "Тема",
-      "Variant": "Вариант",
-      "Type": "Тип",
-      "Language": "Язык",
-      "pgactive": "Включено",
-      "pglogin": "Имя",
-      "pgpassword": "Пароль",
-      "dropbox_header": "Процедура настройки Dropbox",
-      "dropbox_info1": "Токен Dropbox получается в два этапа.",
-      "dropbox_info2": "При нажатии на «Получить код» откроется новое окно, в котором вы сможете подключиться к своей учетной записи Dropbox, принять запрошенные авторизации и сгенерировать код.",
-      "dropbox_info3": "Этот код необходимо скопировать в область кода, которая появится ниже.",
-      "dropbox_info4": "Далее вы должны нажать «Получить токен», чтобы получить токен из своей учетной записи Dropbox. Токен будет автоматически скопирован в предназначенное для этого поле.",
-      "dropbox_info5": "Затем вы можете сохранить настройки и перезагрузить страницу.",
-      "dropbox_info6": "Теперь активируется загрузка в ваш Dropbox.",
-      "button_get_code": "Получить код",
-      "button_get_token": "Получить токен",
-      "perform_calibration": "Process calibration"
+    "general": {
+      "TITLE": "Основные",
+      "SUBTITLE": "Основные настройки",
+      "PILOT_NAME": {
+        "label": "Имя пилота",
+        "help": ""
+      },
+      "GLIDER_NAME": {
+        "label": "Wing",
+        "help": ""
+      },
+      "GLIDER_SELECT": {
+        "label": "Используемое крыло",
+        "help": ""
+      },
+      "GLIDER_NAME1": {
+        "label": "Крыло 1",
+        "help": ""
+      },
+      "GLIDER_NAME2": {
+        "label": "Крыло 2",
+        "help": ""
+      },
+      "GLIDER_NAME3": {
+        "label": "Крыло 3",
+        "help": ""
+      },
+      "GLIDER_NAME4": {
+        "label": "Крыло 4",
+        "help": ""
+      },
+      "TIME_ZONE": {
+        "label": "Часовой пояс",
+        "help": "Определяет часовой пояс UTC: Москва (+3)"
+      }
     },
-    "mesvols": {
-      "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал.",    
-      "TITLE_MSG_modal": "Мой полет",
-      "ALTITUDE": "Высота",
-      "SPEED": "Скорость",
-      "TIME": "Время"
-    },  
-    "actions": {
-      "edit": "Редактировать",
-      "delete": "Удалить",
-      "add": "Добавить",
-      "del_message": "Уверен?",
-      "yes": "Да",
-      "no": "Нет",
-      "TO_LOGBOOK": "Перенести в бортовой журнал",
-      "download": "Скачать",
-      "upload": "Загрузить",
-      "create_dir": "Создать папку",
-      "info": "Просмотреть",
-      "del_failed": "Не удалось удалить.",
-      "del_positive1": "Файл ",
-      "del_positive11": "Папка ",
-      "del_positive2": " удален с SD-карты.",
-      "download_failed": "Не удалось скачать файл.",
-      "to_logbook_failed": "Не удалось переместить полет.",
-      "be_patient": "Пожалуйста, проявите терпение, это может занять некоторое время...",
-      "del_failed_fly": "Не удалось удалить полет.",
-      "print_but": "Печатать",
-      "no_conf": "Конфигурация еще не загружена!",
-      "upload_to": "Загрузить на "       
+    "vario": {
+      "TITLE": "Вариометр",
+      "SUBTITLE": "Настройки вариометра",
+      "VALUE": "значение",
+      "SINKING_THRESHOLD": {
+        "label": "Triggering sinking threshold",
+        "help": ""
+      },
+      "CLIMBING_THRESHOLD": {
+        "label": "Triggering climbing threshold",
+        "help": ""
+      },
+      "NEAR_CLIMBING_SENSITIVITY": {
+        "label": "Near climbing sensitivity",
+        "help": ""
+      },
+      "ENABLE_NEAR_CLIMBING_ALARM": {
+        "label": "Alarm when entering or leaving a lifting zone",
+        "help": ""
+      },
+      "ENABLE_NEAR_CLIMBING_BEEP": {
+        "label": "Thermal sniffer beep",
+        "help": ""
+      },
+      "DISPLAY_INTEGRATED_CLIMB_RATE": {
+        "label": "Displays the integrated climb rate",
+        "help": "Display integrated climb rate or instantaneous values if disabled. If enabled set the integration time in ms. ! Climb rate integration time must not be more than glide ratio one !"
+      },
+      "CLIMB_PERIOD_COUNT": {
+        "label": "Integration period of climb rate",
+        "help": "second"
+      },
+      "SETTINGS_GLIDE_RATIO_PERIOD_COUNT": {
+        "label": "Integration period of glide ratio",
+        "help": "second"
+      },
+      "RATIO_MAX_VALUE": {
+        "label": "Number of integration values ​​in the glide ratio calculation",
+        "help": ""
+      },
+      "RATIO_MIN_SPEED": {
+        "label": "Minimum speed taken into account for glide ratio",
+        "help": ""
+      },
+      "RATIO_CLIMB_RATE": {
+        "label": "Display glide ratio, sink rate or the both",
+        "help": "1 Glide ratio, 2 sink rate, 3 the both alternatively",
+        "lable1": "Glide ratio",
+        "lable2": "Sink rate",
+        "lable3": "The both alternatively"
+      },
+      "SENT_LXNAV_SENTENCE": {
+        "label": "Bluetooth frame type",
+        "help": "0=LK8000, 1=LXNAV"
+      },
+      "VARIOMETER_ENABLE_AGL": {
+        "label": "AGL display",
+        "help": "Requires elevation files on SD card"
+      },
+      "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
+        "label": "Kalman filter settings",
+        "help": "This parameter  directly influences the kalman filter (value between 0.3 and 0.6)"
+      },
+      "VARIOMETER_INTEGRATED_CLIMB_RATE": {
+        "label": "Vario integration",
+        "help": ""
+      },
+      "SETTINGS_VARIO_PERIOD_COUNT": {
+        "label": "Integration period",
+        "help": " between 0 and 40 (Integration period by 50ms step between 0 and 2s"
+      },
+      "IGC_SEND_CALIBRATED_ALTITUDE": {
+        "label": "Use calibrated altitude in IGC files",
+        "help": ""
+      },
+      "BLUETOOTH_SEND_CALIBRATED_ALTITUDE": {
+        "label": "Use calibrated altitude in bluetooth frames",
+        "help": ""
+      }
     },
-    "sitelist": {
-      "name": "Название"
+    "vol": {
+      "TITLE": "Начало полета",
+      "SUBTITLE": "Настройки начала полета",
+      "FLIGHT_START_MIN_TIMESTAMP": {
+        "label": "Minimum time since start before flight recording in millisecond",
+        "help": ""
+      },
+      "FLIGHT_START_VARIO_LOW_THRESHOLD": {
+        "label": "Flight start trigger VZ min",
+        "help": ""
+      },
+      "FLIGHT_START_VARIO_HIGH_THRESHOLD": {
+        "label": "Flight start trigger threshold VZ max",
+        "help": ""
+      },
+      "FLIGHT_START_MIN_SPEED": {
+        "label": "Flight start trigger threshold - minimum speed",
+        "help": ""
+      },
+      "VARIOMETER_RECORD_WHEN_FLIGHT_START": {
+        "label": "Start of recording after start of flight",
+        "help": ""
+      },
+      "MUTE_VARIOBEGIN": {
+        "label": "Без звука до начала полета",
+        "help": ""
+      }
     },
-    "siteform": {
-      "title": "Место",
-      "description": "Описание",
-      "latitude": "Широта",
-      "longitude": "Долгота"
+    "calibrate": {
+      "TITLE": "Calibration",
+      "SUBTITLE": "Calcul du fichier de calibration",
+      "HELP_BLOCK": [
+        "<p>",
+        "Une fois la procédure de calibration effectuée, vous",
+        "pouvez générer le fichier de calibration utilisé par",
+        "le vario automatiquement à partir de cet écran.",
+        "</p>",
+        "<p>",
+        "Ceci est à faire lorsque une nouvelle calibration est",
+        "effectuée et une seule fois. Le résultat du calcul",
+        "sera stockée dans le fichier \"variocal.cfg\" stocké à",
+        "la racine de la carte SD.",
+        "</p>",
+        "<p>",
+        "Cette procédure va envoyer votre fichier",
+        "\"RECORD00.CAL\" sur un serveur distant pour exécuter les calculs et peut",
+        "prendre quelques secondes.",
+        "</p>"
+      ],
+      "perform_calibration": "Lancer la génération du fichier de calibration"
     },
-    "carnet": {
-      "VOLS": "Полеты",
-      "after_date": "После",
-      "total_duration": "Суммарная продолжительность",
-      "sites": "Места полетов",
-      "add_flight": "Добавить полет (без IGC)",
-      "site": "локация",
-      "Site": "Локация",
-      "Pilote": "Пилот",
-      "Voile": "Крыло",
-      "Pilote_name": "Имя пилота",
-      "Voile_name": "Название крыла",
-      "Start_time": "Время начала",
-      "End_time": "Время окончания",
-      "Duration": "Продолжительность",
-      "Alt": "Высота. нач./ Высота. кон.",
-      "Alt_min": "Высота мин.",
-      "Alt_max": "Высота макс.",
-      "Alt_start": "Высота старта",
-      "Alt_end": "Высота приземления",
-
-      "no_trace": "Нет трека этого полета"
-    },
-    "flightform": {
-      "title": "Полет",
-      "Comment": "Комментарий",
-      "save_failed": "Не удалось сохранить полет."
+    "wifi": {
+      "SSID_1": {
+        "label": "SSID 1",
+        "help": ""
+      },
+      "PASSWORD_1": {
+        "label": "Password 1",
+        "help": ""
+      },
+      "SSID_2": {
+        "label": "SSID 2",
+        "help": ""
+      },
+      "PASSWORD_2": {
+        "label": "Password 2",
+        "help": ""
+      },
+      "SSID_3": {
+        "label": "SSID 3",
+        "help": ""
+      },
+      "PASSWORD_3": {
+        "label": "Password 3",
+        "help": ""
+      },
+      "SSID_4": {
+        "label": "SSID 4",
+        "help": ""
+      },
+      "PASSWORD_4": {
+        "label": "Password 4",
+        "help": ""
+      }
     }
+  },
+  "pref": {
+    "Failed_save_settings": "Не удалось сохранить настройки.",
+    "Save_settings": "Настройки сохранены на SD карте.",
+    "Preferences": "Предпочтения",
+    "Interface": "Интерфейс",
+    "Theme": "Тема",
+    "Variant": "Вариант",
+    "Type": "Тип",
+    "Language": "Язык",
+    "pgactive": "Включено",
+    "pglogin": "Имя",
+    "pgpassword": "Пароль",
+    "dropbox_header": "Процедура настройки Dropbox",
+    "dropbox_info1": "Токен Dropbox получается в два этапа.",
+    "dropbox_info2": "При нажатии на «Получить код» откроется новое окно, в котором вы сможете подключиться к своей учетной записи Dropbox, принять запрошенные авторизации и сгенерировать код.",
+    "dropbox_info3": "Этот код необходимо скопировать в область кода, которая появится ниже.",
+    "dropbox_info4": "Далее вы должны нажать «Получить токен», чтобы получить токен из своей учетной записи Dropbox. Токен будет автоматически скопирован в предназначенное для этого поле.",
+    "dropbox_info5": "Затем вы можете сохранить настройки и перезагрузить страницу.",
+    "dropbox_info6": "Теперь активируется загрузка в ваш Dropbox.",
+    "button_get_code": "Получить код",
+    "button_get_token": "Получить токен"
+  },
+  "mesvols": {
+    "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал.",
+    "TITLE_MSG_modal": "Мой полет",
+    "ALTITUDE": "Высота",
+    "SPEED": "Скорость",
+    "TIME": "Время",
+    "CLIMBRATE": "Climb rate"
+  },
+  "actions": {
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "add": "Добавить",
+    "del_message": "Уверен?",
+    "yes": "Да",
+    "no": "Нет",
+    "TO_LOGBOOK": "Перенести в бортовой журнал",
+    "download": "Скачать",
+    "upload": "Загрузить",
+    "create_dir": "Создать папку",
+    "info": "Просмотреть",
+    "del_failed": "Не удалось удалить.",
+    "del_positive1": "Файл ",
+    "del_positive11": "Папка ",
+    "del_positive2": " удален с SD-карты.",
+    "download_failed": "Не удалось скачать файл.",
+    "to_logbook_failed": "Не удалось переместить полет.",
+    "be_patient": "Пожалуйста, проявите терпение, это может занять некоторое время...",
+    "del_failed_fly": "Не удалось удалить полет.",
+    "print_but": "Печатать",
+    "no_conf": "Конфигурация еще не загружена!",
+    "upload_to": "Загрузить на "
+  },
+  "sitelist": {
+    "name": "Название"
+  },
+  "siteform": {
+    "title": "Место",
+    "description": "Описание",
+    "latitude": "Широта",
+    "longitude": "Долгота"
+  },
+  "carnet": {
+    "VOLS": "Полеты",
+    "after_date": "После",
+    "total_duration": "Суммарная продолжительность",
+    "sites": "Места полетов",
+    "add_flight": "Добавить полет (без IGC)",
+    "site": "локация",
+    "Site": "Локация",
+    "Pilote": "Пилот",
+    "Voile": "Крыло",
+    "Pilote_name": "Имя пилота",
+    "Voile_name": "Название крыла",
+    "Start_time": "Время начала",
+    "End_time": "Время окончания",
+    "Duration": "Продолжительность",
+    "Alt": "Высота. нач./ Высота. кон.",
+    "Alt_min": "Высота мин.",
+    "Alt_max": "Высота макс.",
+    "Alt_start": "Высота старта",
+    "Alt_end": "Высота приземления",
+    "no_trace": "Нет трека этого полета"
+  },
+  "flightform": {
+    "title": "Полет",
+    "Comment": "Комментарий",
+    "save_failed": "Не удалось сохранить полет."
   }
-  
+}

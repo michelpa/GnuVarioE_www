@@ -7,7 +7,7 @@
       @ok="doCancel"
       @hidden="doHidden"
       ref="modal"
-      :title= "$t('mesvols.TITLE_MSG_modal')"
+      :title="$t('mesvols.TITLE_MSG_modal')"
       size="full"
     >
       <visu-data :igc="igc" :flight="flight"></visu-data>
@@ -88,32 +88,32 @@ export default {
   props: {
     show: { type: Boolean, default: false },
     igc: { type: Object, default: null },
-    flight: { type: Object, default: null }
+    flight: { type: Object, default: null },
   },
-  data: function() {
+  data: function () {
     return {};
   },
   methods: {
-    showModal: function() {
+    showModal: function () {
       this.$bvModal.show("modal-visu");
     },
-    doCancel: function() {
+    doCancel: function () {
       //   store.dispatch("loadConfigWeb");
     },
-    doHidden: function() {
+    doHidden: function () {
       this.$emit("visuClosed");
-    }
+    },
   },
   computed: {
-    ...mapGetters(["configWeb"])
+    ...mapGetters(["configWeb"]),
   },
   watch: {
-    show: function(newVal, oldVal) {
+    show: function (newVal, oldVal) {
       if (newVal && !oldVal) {
         this.showModal();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

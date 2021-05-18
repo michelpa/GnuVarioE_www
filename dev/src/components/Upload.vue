@@ -51,7 +51,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <p><br><em>Ou utiliser le bouton ci dessous:</em></p>
+      <p><br /><em>Ou utiliser le bouton ci dessous:</em></p>
       <b-form-file v-model="files" class="mt-3" multiple plain></b-form-file>
     </b-modal>
   </div>
@@ -59,7 +59,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import store from "@/store";
+
 export default {
   name: "UPLOAD",
   props: {
@@ -93,7 +93,7 @@ export default {
       this.nbEncoursUpload--;
       if (this.nbEncoursUpload == 0) {
         this.uploading = false;
-        store.dispatch("loadSDFiles", this.uploadPath);
+        this.$store.dispatch("loadSDFiles", this.uploadPath);
         this.$nextTick(() => {
           this.$refs.modal.hide();
         });
@@ -113,7 +113,7 @@ export default {
         this.uploading = true;
 
         window.setTimeout(function () {
-          store.dispatch("uploadFile", formData).then(
+          self.$store.dispatch("uploadFile", formData).then(
             // eslint-disable-next-line
             (response) => {
               self.removeFile(f);

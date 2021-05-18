@@ -1,17 +1,14 @@
 import store from "./store"
 import App from './App.vue'
-
 import router from './router'
 
 import './css/commun.scss'
 import './css/custom.scss'
 
-
 // eslint-disable-next-line no-undef
 Vue.component('click-confirm', clickConfirm.component);
 Vue.component('apexchart', VueApexCharts)
 Vue.component('vue-color', VueColor)
-
 
 // eslint-disable-next-line no-undef
 Vue.use(vueMoment, {
@@ -60,4 +57,3 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
