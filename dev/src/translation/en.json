@@ -284,26 +284,24 @@
     },
     "calibrate": {
       "TITLE": "Calibration",
-      "SUBTITLE": "Calcul du fichier de calibration",
+      "SUBTITLE": "Calculation of the calibration file",
       "HELP_BLOCK": [
         "<p>",
-        "Une fois la procédure de calibration effectuée, vous",
-        "pouvez générer le fichier de calibration utilisé par",
-        "le vario automatiquement à partir de cet écran.",
+        "Once the calibration procedure has been carried out, you",
+        "can generate the calibration file used by",
+        "the vario automatically from this screen.",
         "</p>",
         "<p>",
-        "Ceci est à faire lorsque une nouvelle calibration est",
-        "effectuée et une seule fois. Le résultat du calcul",
-        "sera stockée dans le fichier \"variocal.cfg\" stocké à",
-        "la racine de la carte SD.",
+        "This is to be done when a new calibration is carried out and only once.",
+        "The result of the calculation will be stored in the \"variocal.cfg\"",
+        "file stored at the root of the SD card.",
         "</p>",
         "<p>",
-        "Cette procédure va envoyer votre fichier",
-        "\"RECORD00.CAL\" sur un serveur distant pour exécuter les calculs et peut",
-        "prendre quelques secondes.",
+        "This procedure will send your \"RECORD00.CAL\" file to a remote server",
+        "to run the calculations and may take a few seconds.",
         "</p>"
       ],
-      "perform_calibration": "Process calibration"
+      "perform_calibration": "Start the generation of the calibration file"
     },
     "wifi": {
       "SSID_1": {

@@ -169,10 +169,10 @@
               </div>
             </b-card>
           </b-tab>
-          <b-tab title="Calibration">
+          <b-tab :title="$t('params.calibrate.TITLE')">
             <b-card>
               <button class="btn btn-primary btn-block" @click="calibration()">
-                {{ $t("pref.perform_calibration") }}
+                {{ $t("params.calibrate.perform_calibration") }}
               </button>
             </b-card>
           </b-tab>

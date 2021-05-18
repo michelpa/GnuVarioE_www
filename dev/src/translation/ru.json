@@ -235,7 +235,7 @@
       },
       "ACCELERATION_MEASURE_STANDARD_DEVIATION": {
         "label": "Kalman filter settings",
-        "help": "This parameter  directly influences the kalman filter (value between 0.3 and 0.6)"
+        "help": "This parameter directly influences the kalman filter (value between 0.3 and 0.6)"
       },
       "VARIOMETER_INTEGRATED_CLIMB_RATE": {
         "label": "Vario integration",
@@ -283,27 +283,25 @@
       }
     },
     "calibrate": {
-      "TITLE": "Calibration",
-      "SUBTITLE": "Calcul du fichier de calibration",
+      "TITLE": "Калибровка",
+      "SUBTITLE": "Расчет файла калибровки",
       "HELP_BLOCK": [
         "<p>",
-        "Une fois la procédure de calibration effectuée, vous",
-        "pouvez générer le fichier de calibration utilisé par",
-        "le vario automatiquement à partir de cet écran.",
+        "После выполнения процедуры калибровки, с этого экране,",
+        "вы можете автоматически сгенерировать калибровочный файл,",
+        "используемый вариометром.",
         "</p>",
         "<p>",
-        "Ceci est à faire lorsque une nouvelle calibration est",
-        "effectuée et une seule fois. Le résultat du calcul",
-        "sera stockée dans le fichier \"variocal.cfg\" stocké à",
-        "la racine de la carte SD.",
+        "Это нужно сделать при новой калибровке и только один раз.",
+        "Результат расчета будет сохранен в файле «varocal.cfg»,",
+        "хранящемся в корне SD-карты.",
         "</p>",
         "<p>",
-        "Cette procédure va envoyer votre fichier",
-        "\"RECORD00.CAL\" sur un serveur distant pour exécuter les calculs et peut",
-        "prendre quelques secondes.",
+        "Эта процедура отправит ваш файл «RECORD00.CAL» на удаленный сервер",
+        "для выполнения расчетов и это может занять несколько секунд.",
         "</p>"
       ],
-      "perform_calibration": "Lancer la génération du fichier de calibration"
+      "perform_calibration": "Начать создание файла калибровки"
     },
     "wifi": {
       "SSID_1": {
