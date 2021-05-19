@@ -865,7 +865,18 @@ export default {
           });
         },
         // eslint-disable-next-line
-        (error) => {}
+        (error) => {
+          let msg = "KO";
+          if (error.custommsg) {
+            msg += " " + error.custommsg;
+          }
+          self.$bvToast.toast(msg, {
+            title: this.$i18n.t("params.calibrate.SUBTITLE"),
+            toaster: "b-toaster-top-right",
+            solid: true,
+            variant: "danger",
+          });
+        }
       );
     },
   },

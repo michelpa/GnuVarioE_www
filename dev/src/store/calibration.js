@@ -33,10 +33,13 @@ export const actions = {
                     },
                     // eslint-disable-next-line
                     (error) => {
-                        console.log(error);
+                        error.custommsg = 'cannot upload to remote server'
+                        return Promise.reject(error);
                     }
                 );
+                // eslint-disable-next-line
             }).catch(function (error) {
+                error.custommsg = 'no RECORD00.CAL'
                 return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
