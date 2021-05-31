@@ -10,9 +10,11 @@ const initialState = {
     challenge: false
 };
 
-export const state = Object.assign({}, initialState);
+const namespaced = true;
 
-export const actions = {
+const state = Object.assign({}, initialState);
+
+const actions = {
     getAuthUrl(context) {
         if (!context.state.codeVerifier || !context.state.challenge) {
             const verifier = getCodeVerifier();
@@ -70,7 +72,7 @@ export const actions = {
             url = baseUrl + url;
         }
 
-        if (!context.getters.dropboxpref.token || !context.getters.dropboxpref.enable) {
+        if (!context.rootGetters.dropboxpref.token || !context.rootGetters.dropboxpref.enable) {
             alert('Dropbox account misconfigured')
             return;
         }
@@ -101,7 +103,7 @@ export const actions = {
         });
     },
     uploadFileToDBox: function (context, { filename, content, type }) {
-        let dbx = new Dropbox.Dropbox({ accessToken: context.getters.dropboxpref.token });
+        let dbx = new Dropbox.Dropbox({ accessToken: context.rootGetters.dropboxpref.token });
         let path = '';
         switch (type) {
             case 'DB':
@@ -112,7 +114,6 @@ export const actions = {
                 break;
             case 'VOLPARSED':
                 path = "/vols/parsed/";
-
                 break;
             default:
                 return;
@@ -131,7 +132,7 @@ export const actions = {
     },
 };
 
-export const mutations = {
+const mutations = {
     setCodes: function (state, { verifier, challenge }) {
         state.codeVerifier = verifier;
         state.challenge = challenge;
@@ -141,7 +142,9 @@ export const mutations = {
 const getters = {
 }
 
+
 export default {
+    namespaced,
     state,
     actions,
     mutations,

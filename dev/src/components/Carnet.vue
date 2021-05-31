@@ -586,7 +586,7 @@ export default {
     },
     flightToDropbox: function (f) {
       this.$store
-        .dispatch("uploadToDropbox", { filename: f, type: "VOLPARSED" })
+        .dispatch("dropbox/uploadToDropbox", { filename: f, type: "VOLPARSED" })
         .then(
           // eslint-disable-next-line no-unused-vars
           (response) => {},

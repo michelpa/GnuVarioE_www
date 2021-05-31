@@ -337,7 +337,7 @@ export default {
       this.$emit("themeClosed");
     },
     dropboxAuthenticate: function () {
-      this.$store.dispatch("getAuthUrl").then(
+      this.$store.dispatch("dropbox/getAuthUrl").then(
         (response) => {
           window.open(response, "_blank");
           this.showSaisieCode = true;
@@ -353,7 +353,7 @@ export default {
       let self = this;
       if (this.dropboxCode) {
         this.$store
-          .dispatch("getDropboxToken", { dropboxCode: this.dropboxCode })
+          .dispatch("dropbox/getDropboxToken", { dropboxCode: this.dropboxCode })
           .then(
             (response) => {
               if (response.access_token) {

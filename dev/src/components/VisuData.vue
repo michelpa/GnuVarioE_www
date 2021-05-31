@@ -56,8 +56,7 @@
 // eslint-disable-next-line no-unused-vars
 import { mapGetters } from "vuex";
 import ColorPicker from "./ColorPicker";
-import store from "@/store";
-const smooth = require("../lib/smooth.js");
+import { getChartOptions, getSeriesFromIgcData } from "./../lib/helperCharts";
 export default {
   /* eslint-disable no-unused-vars */
   name: "VisuData",
@@ -65,7 +64,8 @@ export default {
   props: {
     show: { type: Boolean, default: false },
     igc: { type: Object, default: null },
-    flight: { type: Object, default: null },
+    altMin: Number,
+    altMax: Number,
   },
   data: function () {
     return {
@@ -74,92 +74,6 @@ export default {
       polyline: null,
       series: [],
       marker: null,
-      options: {
-        chart: {
-          id: "vuechart-example",
-          type: "line",
-        },
-        fill: {
-          type: "solid",
-          opacity: [0.35, 1],
-        },
-        stroke: {
-          show: true,
-          curve: ["smooth", "smooth", "smooth"],
-          lineCap: "butt",
-          colors: "#17A2B8",
-          width: 2,
-          dashArray: 0,
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        xaxis: {
-          type: "datetime",
-          title: {
-            text: this.$i18n.t("mesvols.TIME"),
-          },
-          axisTicks: {
-            show: true,
-            borderType: "solid",
-            color: "#666",
-            height: 10,
-            offsetX: 0,
-            offsetY: -5,
-          },
-
-          labels: {
-            show: true,
-            // eslint-disable-next-line
-            formatter: function (value, timestamp, index) {
-              return moment(new Date(timestamp)).format("HH:mm:ss");
-            },
-          },
-        },
-        yaxis: [
-          {
-            forceNiceScale: true,
-            min: this.flight.min_height - 50,
-            max: this.flight.max_height + 50,
-            labels: {
-              show: true,
-              // eslint-disable-next-line
-              formatter: function (value, val, index) {
-                return value + " m";
-              },
-            },
-            title: {
-              text: this.$i18n.t("mesvols.ALTITUDE"),
-            },
-          },
-          {
-            opposite: true,
-            labels: {
-              show: true,
-              // eslint-disable-next-line
-              formatter: function (value, val, index) {
-                return value + " km/h";
-              },
-            },
-            title: {
-              text: this.$i18n.t("mesvols.SPEED"),
-            },
-          },
-          {
-            // opposite: true,
-            labels: {
-              show: true,
-              // eslint-disable-next-line
-              formatter: function (value, val, index) {
-                return value + " m/s";
-              },
-            },
-            title: {
-              text: this.$i18n.t("mesvols.CLIMBRATE"),
-            },
-          },
-        ],
-      },
     };
   },
   methods: {
@@ -168,10 +82,10 @@ export default {
     },
     doSaveReglage: function () {
       let self = this;
-      store.dispatch("saveConfigWeb").then(
+      this.$store.dispatch("saveConfigWeb").then(
         // eslint-disable-next-line
         (response) => {
-          store.dispatch("loadConfigWeb");
+          this.$store.dispatch("loadConfigWeb");
           self.$bvToast.toast("Préférences sauvegardées sur la carte SD.", {
             title: "Préférences",
             toaster: "b-toaster-top-right",
@@ -181,7 +95,7 @@ export default {
         },
         // eslint-disable-next-line
         (error) => {
-          self.$bvToast.toast(`3Echec de la sauvegarde des préférences.`, {
+          self.$bvToast.toast(`Echec de la sauvegarde des préférences.`, {
             title: "Préférences",
             toaster: "b-toaster-top-right",
             solid: true,
@@ -224,7 +138,7 @@ export default {
         }
       },
       set(value) {
-        store.commit("updateConfigWeb", {
+        this.$store.commit("updateConfigWeb", {
           property: "map.trace.epaisseur",
           with: value,
         });
@@ -240,7 +154,7 @@ export default {
         }
       },
       set(value) {
-        store.commit("updateConfigWeb", {
+        this.$store.commit("updateConfigWeb", {
           property: "map.trace.color",
           with: value,
         });
@@ -248,15 +162,16 @@ export default {
       },
     },
     chartsOptions: function () {
+      let options = getChartOptions(this.altMin, this.altMax, this.$i18n);
       let self = this;
-      self.options.chart.events = {
+      options.chart.events = {
         mouseMove: function (event, chartContext, config) {
           // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts.
           var index = config.dataPointIndex;
           self.setMidx(index);
         },
       };
-      return this.options;
+      return options;
     },
     markerLength: function () {
       if (this.polyline) {
@@ -432,90 +347,12 @@ export default {
         //       });
         //   }, 20);
         // });
-
-        //les données pour le graph altitude
-        let da = self.igc.pressureAltitude.map((a, i) => [
-          self.igc.recordTime[i].getTime(),
-          a,
-        ]);
-
-        //les données pour le graph vitesse
-        let nbVal = self.igc.latLong.length;
-        let speed = [];
-        let climbRate = [];
-
-        for (var i = 1; i < nbVal; i++) {
-          var dist = distance(
-            self.igc.latLong[i - 1][0],
-            self.igc.latLong[i - 1][1],
-            self.igc.latLong[i][0],
-            self.igc.latLong[i][1]
-          );
-          var altDiff =
-            self.igc.pressureAltitude[i] - self.igc.pressureAltitude[i - 1];
-          var interv =
-            (self.igc.recordTime[i].getTime() -
-              self.igc.recordTime[i - 1].getTime()) /
-            1000;
-
-          var temps = interv / 3600;
-
-          var sp = (dist / temps).toFixed(2);
-
-          var climbRateUnit = altDiff / interv;
-
-          climbRate.push([self.igc.recordTime[i - 1].getTime(), climbRateUnit]);
-          speed.push([self.igc.recordTime[i - 1].getTime(), sp]);
-        }
-        speed.push([self.igc.recordTime[nbVal - 1].getTime(), sp]);
-        const windowSize = 2;
-        const getter = (item) => parseFloat(item[1]);
-        const setter = (item, itemSomoothed) => [
-          item[0],
-          itemSomoothed.toFixed(2),
-        ];
-        const arrSmoothed = smooth(speed, windowSize, getter, setter);
-        const climbSmoothed = smooth(climbRate, 1, getter, setter);
-        self.series = [
-          {
-            name: this.$i18n.t("mesvols.ALTITUDE"),
-            data: da,
-            type: "area",
-          },
-          {
-            name: this.$i18n.t("mesvols.SPEED"),
-            data: arrSmoothed,
-            //type: "line"
-          },
-          {
-            name: this.$i18n.t("mesvols.CLIMBRATE"),
-            data: climbSmoothed,
-            // type: "bar",
-          },
-        ];
+        self.series = getSeriesFromIgcData(self.igc, this.$i18n);
       }
     });
   },
 };
 
-function distance(lat1, lon1, lat2, lon2) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2 - lat1); // deg2rad below
-  var dLon = deg2rad(lon2 - lon1);
-  var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) *
-      Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c; // Distance in km
-  return d;
-}
-
-function deg2rad(deg) {
-  return deg * (Math.PI / 180);
-}
 // eslint-disable-next-line no-unused-vars
 function imageToDataUri(datas, wantedWidth, wantedHeight) {
   // We create an image to receive the Data URI

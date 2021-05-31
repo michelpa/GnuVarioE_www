@@ -90,7 +90,6 @@
 
 
 <script>
-import store from "@/store";
 import { logo } from "@/lib/logo";
 import { mapGetters } from "vuex";
 import { ThemeHelper } from "@/lib/themeHelper";
@@ -108,6 +107,7 @@ export default {
       themeHelper: new ThemeHelper(),
     };
   },
+
   computed: {
     ...mapGetters([
       "isLoading",
@@ -125,14 +125,14 @@ export default {
   },
   methods: {
     changeLocale: function (locale) {
-      store.commit("updateConfigWeb", {
+      this.$store.commit("updateConfigWeb", {
         property: "language",
         with: locale,
       });
     },
     saveDBtoDropbox: function () {
-      store
-        .dispatch("uploadToDropbox", { filename: "vol.db", type: "DB" })
+      this.$store
+        .dispatch("dropbox/uploadToDropbox", { filename: "vol.db", type: "DB" })
         .then(
           // eslint-disable-next-line no-unused-vars
           (response) => {},
@@ -167,13 +167,14 @@ export default {
     });
   },
   created: function () {
+    let self = this;
     window.setTimeout(function () {
-      Promise.all([store.dispatch("loadConfig")]).then(() => {
+      Promise.all([self.$store.dispatch("loadConfig")]).then(() => {
         //next();
       });
     }, 100);
     window.setTimeout(function () {
-      Promise.all([store.dispatch("loadConfigWeb")]).then(() => {
+      Promise.all([self.$store.dispatch("loadConfigWeb")]).then(() => {
         //next();
       });
     }, 300);

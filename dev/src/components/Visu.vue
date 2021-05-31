@@ -10,7 +10,7 @@
       :title="$t('mesvols.TITLE_MSG_modal')"
       size="full"
     >
-      <visu-data :igc="igc" :flight="flight"></visu-data>
+      <visu-data :igc="igc" :altMin="Number(flight.min_height)" :altMax="Number(flight.max_height)"></visu-data>
       <div class="row">
         <div class="col-md-4">
           <table class="table table-sm">
