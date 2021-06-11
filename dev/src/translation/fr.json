@@ -360,7 +360,9 @@
     "dropbox_info5": "Vous pouvez alors sauver les paramètres et recharger la page.",
     "dropbox_info6": "Le téléchargement vers votre dropbox est alors activé.",
     "button_get_code": "Récupérer un code",
-    "button_get_token": "Obtenir un jeton"
+    "button_get_token": "Obtenir un jeton",
+    "dropboxactive": "Dropbox active",
+    "dropboxtoken":  "Dropbox token"
   },
   "mesvols": {
     "MESVOL_WARNING": "Cette zone doit être vide. Pour cela, supprimer les traces erronées et envoyer les traces valides dans votre carnet de vol.",

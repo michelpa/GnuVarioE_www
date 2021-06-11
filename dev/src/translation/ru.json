@@ -358,7 +358,9 @@
     "dropbox_info5": "Затем вы можете сохранить настройки и перезагрузить страницу.",
     "dropbox_info6": "Теперь активируется загрузка в ваш Dropbox.",
     "button_get_code": "Получить код",
-    "button_get_token": "Получить токен"
+    "button_get_token": "Получить токен",
+    "dropboxactive": "Dropbox active",
+    "dropboxtoken":  "Dropbox token"
   },
   "mesvols": {
     "MESVOL_WARNING": "Эта область должна быть пустой. Для этого удалите ошибочные треки и перенесите нужные в свой бортовой журнал.",
