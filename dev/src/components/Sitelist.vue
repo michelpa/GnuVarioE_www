@@ -65,6 +65,27 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+        <p>
+          Pour récupérer des coordonnées à partir de la carte, faire un clic
+          droit à l'endroit voulu. Ces coordonnées seront automatiquement
+          copiées lors de la création d'un site.
+        </p>
+        <div v-show="latOnClick">
+          Latitude
+          <span class="coord">
+            <b-badge variant="info">{{ latOnClick }}</b-badge>
+          </span>
+        </div>
+        <div v-show="lonOnClick">
+          Longitude
+          <span class="coord">
+            <b-badge variant="info">{{ lonOnClick }}</b-badge>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <div id="mapsiteid"></div>
       </div>
     </div>
@@ -85,6 +106,8 @@ export default {
       currentSite: {},
       showPopupSite: false,
       macarte: null,
+      latOnClick: "",
+      lonOnClick: "",
     };
   },
 
@@ -94,6 +117,12 @@ export default {
   methods: {
     addSite: function () {
       this.currentSite = {};
+      if (this.latOnClick) {
+        this.currentSite.lat = this.latOnClick;
+      }
+      if (this.lonOnClick) {
+        this.currentSite.lon = this.lonOnClick;
+      }
       this.showPopupSite = true;
     },
     editSite: function (site) {
@@ -191,6 +220,12 @@ export default {
         layers: [GeoportailFrance_orthos],
       });
 
+      this.macarte.on("contextmenu", function (event) {
+        let latLon = event.latlng;
+        self.latOnClick = latLon.lat;
+        self.lonOnClick = latLon.lng;
+      });
+
       var baseMaps = {
         OpenStreetMap: OpenStreetMap,
         OpenTopoMap: OpenTopoMap,
@@ -262,4 +297,8 @@ td.btns div {
   padding-top: 56.25%;
   margin-bottom: 5px;
 }
+.coord {
+  font-size: 1.1em;
+}
+
 </style>
