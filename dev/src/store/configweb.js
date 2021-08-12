@@ -81,8 +81,13 @@ export const mutations = {
             }
             return data;
         }
+        var modsStr;
+        if (isNaN(payload.with)) {
+            modsStr = "{\"" + payload.property + "\":\"" + payload.with + "\"}";
+        } else {
+            modsStr = "{\"" + payload.property + "\":" + payload.with + "}";
+        }
 
-        var modsStr = "{\"" + payload.property + "\":\"" + payload.with + "\"}";
         var mods = JSON.parse(modsStr);
         let ob = apply(state.configWeb, mods);
         state.configWeb = Object.assign({}, state.configWeb, ob);
@@ -112,7 +117,7 @@ const getters = {
         return state.configWeb.dropbox;
     },
     isdropboxenabled(state) {
-        return (state.configWeb.dropbox.enable && state.configWeb.dropbox.token != "");
+        return state.configWeb.dropbox.enable;
     },
 }
 

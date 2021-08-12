@@ -14,7 +14,10 @@
               active-nav-item-class="font-weight-bold text-uppercase text-info"
               @activate-tab="tabChanged"
             >
-              <b-tab :title="$t('flights.MY_unconfirmed_tracks')" :active="Object.entries(flightsMonth).length !== 0">
+              <b-tab
+                :title="$t('flights.MY_unconfirmed_tracks')"
+                :active="Object.entries(flightsMonth).length !== 0"
+              >
                 <div
                   v-if="
                     flightsMonth && Object.entries(flightsMonth).length !== 0
@@ -100,7 +103,12 @@
                                   >
                                     <b-card-body>
                                       <table
-                                        class="table table-bordered table-striped table-hover"
+                                        class="
+                                          table
+                                          table-bordered
+                                          table-striped
+                                          table-hover
+                                        "
                                       >
                                         <thead>
                                           <tr>
@@ -127,6 +135,26 @@
                                             </td>
                                             <td class="btns">
                                               <button
+                                                class="btn btn-sm btn-info"
+                                                @click="flightInfo(f.name)"
+                                                v-b-tooltip.hover="{
+                                                  delay: {
+                                                    show: 1000,
+                                                    hide: 50,
+                                                  },
+                                                }"
+                                                :title="$t('actions.info')"
+                                              >
+                                                <i
+                                                  class="fa fa-info-circle"
+                                                ></i>
+                                                <i
+                                                  class="fa fa-arrow-right"
+                                                  v-show="currentF == f.name"
+                                                ></i>
+                                              </button>
+
+                                              <button
                                                 v-if="isdropboxenabled"
                                                 class="btn btn-sm btn-primary"
                                                 @click="flightToDropbox(f.name)"
@@ -141,10 +169,8 @@
                                                   'dropbox'
                                                 "
                                               >
-                                                <i
-                                                  class="fab fa-dropbox"
-                                                ></i></button
-                                              >&nbsp;
+                                                <i class="fab fa-dropbox"></i>
+                                              </button>
                                               <button
                                                 v-if="pgenabled"
                                                 class="btn btn-sm btn-primary"
@@ -162,10 +188,8 @@
                                                   'paraglidinglogbook.com'
                                                 "
                                               >
-                                                <i
-                                                  class="fa fa-book"
-                                                ></i></button
-                                              >&nbsp;
+                                                <i class="fa fa-book"></i>
+                                              </button>
                                               <button
                                                 class="btn btn-sm btn-primary"
                                                 @click="flightToBook(f.name)"
@@ -179,10 +203,8 @@
                                                   $t('actions.TO_LOGBOOK')
                                                 "
                                               >
-                                                <i
-                                                  class="fa fa-book-open"
-                                                ></i></button
-                                              >&nbsp;
+                                                <i class="fa fa-book-open"></i>
+                                              </button>
                                               <button
                                                 class="btn btn-sm btn-success"
                                                 @click="downloadFromSD(f.name)"
@@ -195,9 +217,11 @@
                                                 :title="$t('actions.download')"
                                               >
                                                 <i
-                                                  class="fa fa-arrow-alt-circle-down"
-                                                ></i></button
-                                              >&nbsp;
+                                                  class="
+                                                    fa fa-arrow-alt-circle-down
+                                                  "
+                                                ></i>
+                                              </button>
                                               <click-confirm
                                                 placement="bottom"
                                                 button-size="sm"
@@ -225,27 +249,8 @@
                                                   <i
                                                     class="fa fa-trash-alt"
                                                   ></i>
-                                                </button> </click-confirm
-                                              >&nbsp;
-                                              <button
-                                                class="btn btn-sm btn-info"
-                                                @click="flightInfo(f.name)"
-                                                v-b-tooltip.hover="{
-                                                  delay: {
-                                                    show: 1000,
-                                                    hide: 50,
-                                                  },
-                                                }"
-                                                :title="$t('actions.info')"
-                                              >
-                                                <i
-                                                  class="fa fa-info-circle"
-                                                ></i>
-                                                <i
-                                                  class="fa fa-arrow-right"
-                                                  v-show="currentF == f.name"
-                                                ></i>
-                                              </button>
+                                                </button>
+                                              </click-confirm>
                                             </td>
                                           </tr>
                                         </tbody>
@@ -336,7 +341,10 @@
                   </div>
                 </div>
               </b-tab>
-              <b-tab :title="$t('flights.MY_LOGBOOK')" :active="Object.entries(flightsMonth).length === 0">
+              <b-tab
+                :title="$t('flights.MY_LOGBOOK')"
+                :active="Object.entries(flightsMonth).length === 0"
+              >
                 <log-book></log-book>
                 <!-- <carnet ref="carnet"></carnet> -->
               </b-tab>
@@ -508,9 +516,24 @@ export default {
         .dispatch("dropbox/uploadToDropbox", { filename: f, type: "VOL" })
         .then(
           // eslint-disable-next-line no-unused-vars
-          (response) => {},
           // eslint-disable-next-line
-          (error) => {}
+          (response) => {
+            this.$bvToast.toast("OK", {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success",
+            });
+          },
+          // eslint-disable-next-line
+          (error) => {
+            this.$bvToast.toast(error, {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            });
+          }
         );
     },
     flightInfo: function (f) {
@@ -706,12 +729,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-th.act {
-  width: 250px;
-}
-
 td.btns div {
   display: inline;
+}
+
+td.btns button {
+  margin-right: 10px;
 }
 
 .close-info {

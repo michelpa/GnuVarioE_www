@@ -135,9 +135,23 @@ export default {
         .dispatch("dropbox/uploadToDropbox", { filename: "vol.db", type: "DB" })
         .then(
           // eslint-disable-next-line no-unused-vars
-          (response) => {},
+          (response) => {
+            this.$bvToast.toast("OK", {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success",
+            });
+          },
           // eslint-disable-next-line
-          (error) => {}
+          (error) => {
+            this.$bvToast.toast(error, {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            });
+          }
         );
     },
   },

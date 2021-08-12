@@ -75,6 +75,8 @@
                 <b-form-checkbox
                   v-model="pgenabled"
                   @input="changePg"
+                  value="1"
+                  unchecked-value="0"
                 ></b-form-checkbox>
               </b-form-group>
               <b-form-group
@@ -110,6 +112,8 @@
                 <b-form-checkbox
                   v-model="dropboxenabled"
                   @input="changeDropbox"
+                  value="1"
+                  unchecked-value="0"
                 ></b-form-checkbox>
               </b-form-group>
               <b-form-group
@@ -272,7 +276,7 @@ export default {
     changePg: function () {
       this.$store.commit("updateConfigWeb", {
         property: "paraglidinglogbook.enable",
-        with: this.pgenabled,
+        with: this.pgenabled == ("1" || true) ? 1 : 0,
       });
       this.$store.commit("updateConfigWeb", {
         property: "paraglidinglogbook.login",
@@ -286,7 +290,7 @@ export default {
     changeDropbox: function () {
       this.$store.commit("updateConfigWeb", {
         property: "dropbox.enable",
-        with: this.dropboxenabled,
+        with: this.dropboxenabled == ("1" || true) ? 1 : 0,
       });
       this.$store.commit("updateConfigWeb", {
         property: "dropbox.token",
@@ -298,10 +302,10 @@ export default {
       this.variantSelected = this.themeVariant;
       this.typeSelected = this.themeType;
       this.langSelected = this.lang;
-      this.pgenabled = this.pg.enable;
+      this.pgenabled = this.pg.enable == ("1" || true) ? 1 : 0;
       this.pglogin = this.pg.login;
       this.pgpass = this.pg.password;
-      this.dropboxenabled = this.dropboxpref.enable;
+      this.dropboxenabled = this.dropboxpref.enable == ("1" || true) ? 1 : 0;
       this.dropboxtoken = this.dropboxpref.token;
       this.$bvModal.show("modal-theme");
     },
@@ -353,7 +357,9 @@ export default {
       let self = this;
       if (this.dropboxCode) {
         this.$store
-          .dispatch("dropbox/getDropboxToken", { dropboxCode: this.dropboxCode })
+          .dispatch("dropbox/getDropboxToken", {
+            dropboxCode: this.dropboxCode,
+          })
           .then(
             (response) => {
               if (response.access_token) {

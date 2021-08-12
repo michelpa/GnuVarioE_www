@@ -73,7 +73,7 @@ const actions = {
         }
 
         if (!context.rootGetters.dropboxpref.token || !context.rootGetters.dropboxpref.enable) {
-            alert('Dropbox account misconfigured')
+            alert('Dropbox account misconfigured');
             return;
         }
 
@@ -85,21 +85,23 @@ const actions = {
             return axios.get(url, axiosConfig).then(response => {
                 let blob = new Blob([response.data]);
 
-                context.dispatch("uploadFileToDBox", { filename: filename, content: blob, type: type }).then(
+                return context.dispatch("uploadFileToDBox", { filename: filename, content: blob, type: type }).then(
                     // eslint-disable-next-line
                     (response) => {
                     },
-                    // eslint-disable-next-line
-                    (error) => {
-                        console.log(error);
+                    (msgErr) => {
+                        return Promise.reject(msgErr);
                     }
-                );
-                return response;
-            }).catch(function (error) {
-                return Promise.reject(error);
-            }).finally(function () {
-                context.commit('setLoadingState', false);
-            });
+                ).catch(function (msgErr) {
+                    return Promise.reject(msgErr);
+                });
+
+            })
+                .catch(function (msgErr) {
+                    return Promise.reject(msgErr);
+                }).finally(function () {
+                    context.commit('setLoadingState', false);
+                });
         });
     },
     uploadFileToDBox: function (context, { filename, content, type }) {
@@ -120,14 +122,17 @@ const actions = {
 
         }
 
-        dbx.filesUpload({ path: path + filename, contents: content })
+        return dbx.filesUpload({ path: path + filename, contents: content })
             // eslint-disable-next-line
             .then(function (response) {
                 // console.log(response);
             })
-            // eslint-disable-next-line
             .catch(function (error) {
-                // console.error(error);
+                let msgErr = 'Erreur lors du transfert vers votre Dropbox'
+                if (error.status === 409) {
+                    msgErr = 'Conflit lors du transfert vers votre Dropbox, le transfert a été annulé'
+                }
+                return Promise.reject(msgErr);
             });
     },
 };

@@ -311,7 +311,9 @@
                                               :title="$t('actions.download')"
                                             >
                                               <i
-                                                class="fa fa-arrow-alt-circle-down"
+                                                class="
+                                                  fa fa-arrow-alt-circle-down
+                                                "
                                               ></i>
                                             </button>
                                             &nbsp;
@@ -589,9 +591,24 @@ export default {
         .dispatch("dropbox/uploadToDropbox", { filename: f, type: "VOLPARSED" })
         .then(
           // eslint-disable-next-line no-unused-vars
-          (response) => {},
+         // eslint-disable-next-line
+          (response) => {
+            this.$bvToast.toast("OK", {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success",
+            });
+          },
           // eslint-disable-next-line
-          (error) => {}
+          (error) => {
+            this.$bvToast.toast(error, {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            });
+          }
         );
     },
   },

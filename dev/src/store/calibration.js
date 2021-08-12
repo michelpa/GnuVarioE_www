@@ -2,7 +2,7 @@ import { waitFor, baseUrl } from '../lib/helperStore.js'
 
 const env = process.env;
 
-
+const namespaced = true;
 
 const initialState = {
 
@@ -11,7 +11,7 @@ const initialState = {
 export const state = Object.assign({}, initialState);
 
 export const actions = {
-    uploadToCalibration: function (context) {
+    performCalibration: function (context) {
         let url = "/file?path=/RECORD00.CAL";
 
         if (env.NODE_ENV == "development") {
@@ -31,15 +31,14 @@ export const actions = {
                     (response) => {
                         return response;
                     },
-                    // eslint-disable-next-line
                     (error) => {
-                        error.custommsg = 'cannot upload to remote server'
                         return Promise.reject(error);
                     }
                 );
-                // eslint-disable-next-line
             }).catch(function (error) {
-                error.custommsg = 'no RECORD00.CAL'
+                if (!error.custommsg) {
+                    error.custommsg = 'no RECORD00.CAL on SD'
+                }
                 return Promise.reject(error);
             }).finally(function () {
                 context.commit('setLoadingState', false);
@@ -55,6 +54,7 @@ export const actions = {
 
         return axios.post(url, { record: content }).then(response => {
             if (response.data.result !== false) {
+
                 context.commit('setLoadingState', false);
                 let cont = response.data.result;
 
@@ -63,14 +63,40 @@ export const actions = {
                     type: 'text/plain',
                 });
                 formData.append('data', calFile);
+
                 // eslint-disable-next-line
-                return context.dispatch("uploadFile", formData).then(response => {
-                    context.dispatch("loadSDFiles", '/').then(response => {
-                        return response;
-                    });
-                });
+                return context.dispatch("uploadFile", formData, { root: true }).then(
+                    // eslint-disable-next-line
+                    (response) => {
+                        return context.dispatch("loadSDFiles", '/', { root: true }).then(response => {
+                            return response;
+                        }).catch(function (error) {
+                            error.custommsg = 'Cannot refresh files display'
+                            return Promise.reject(error);
+                        });
+                    },
+                    (error) => {
+                        if (!error.custommsg) {
+                            error.custommsg = 'Cannot upload calibration file to SD'
+                        }
+                        return Promise.reject(error);
+                    }
+                ).catch(function (error) {
+                    if (!error.custommsg) {
+                        error.custommsg = 'Cannot upload calibration file to SD'
+                    }
+                    return Promise.reject(error);
+                }
+                );
+            } else {
+                let error = {}
+                error.custommsg = 'No data from remote server'
+                return Promise.reject(error);
             }
         }).catch(function (error) {
+            if (!error.custommsg) {
+                error.custommsg = 'Cannot perform calibration on remote server'
+            }
             return Promise.reject(error);
         }).finally(function () {
             context.commit('setLoadingState', false);
@@ -85,6 +111,7 @@ const getters = {
 }
 
 export default {
+    namespaced,
     state,
     actions,
     mutations,

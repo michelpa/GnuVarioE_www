@@ -67,7 +67,7 @@
       <div class="col-md-12">
         <p>
           Pour récupérer des coordonnées à partir de la carte, faire un clic
-          droit à l'endroit voulu. Ces coordonnées seront automatiquement
+          gauche à l'endroit voulu. Ces coordonnées seront automatiquement
           copiées lors de la création d'un site.
         </p>
         <div v-show="latOnClick">
@@ -220,7 +220,7 @@ export default {
         layers: [GeoportailFrance_orthos],
       });
 
-      this.macarte.on("contextmenu", function (event) {
+      this.macarte.on("click", function (event) {
         let latLon = event.latlng;
         self.latOnClick = latLon.lat;
         self.lonOnClick = latLon.lng;
@@ -298,7 +298,6 @@ td.btns div {
   margin-bottom: 5px;
 }
 .coord {
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
-
 </style>

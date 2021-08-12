@@ -7,6 +7,27 @@
             <div class="float-right">
               <div class="btns">
                 <button
+                  v-if="f.filename"
+                  class="btn btn-sm btn-info"
+                  @click="flightInfo(f)"
+                  v-b-tooltip.hover="{
+                    delay: { show: 1000, hide: 50 },
+                  }"
+                  :title="$t('actions.info')"
+                >
+                  <i class="fa fa-info-circle"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-primary"
+                  @click="edit(f)"
+                  v-b-tooltip.hover="{
+                    delay: { show: 1000, hide: 50 },
+                  }"
+                  :title="$t('actions.edit')"
+                >
+                  <i class="fa fa-pen"></i>
+                </button>
+                <button
                   v-if="isdropboxenabled && f.filename"
                   class="btn btn-sm btn-primary"
                   @click="flightToDropbox(f.filename)"
@@ -18,8 +39,8 @@
                   }"
                   :title="$t('actions.upload_to') + 'dropbox'"
                 >
-                  <i class="fab fa-dropbox"></i></button
-                >&nbsp;
+                  <i class="fab fa-dropbox"></i>
+                </button>
                 <button
                   v-if="pgenabled"
                   class="btn btn-sm btn-primary"
@@ -32,31 +53,8 @@
                   }"
                   :title="$t('actions.upload_to') + 'paraglidinglogbook.com'"
                 >
-                  <i class="fa fa-book"></i></button
-                >&nbsp;
-                <button
-                  class="btn btn-sm btn-primary"
-                  @click="edit(f)"
-                  v-b-tooltip.hover="{
-                    delay: { show: 1000, hide: 50 },
-                  }"
-                  :title="$t('actions.edit')"
-                >
-                  <i class="fa fa-pen"></i>
+                  <i class="fa fa-book"></i>
                 </button>
-                &nbsp;
-                <button
-                  v-if="f.filename"
-                  class="btn btn-sm btn-info"
-                  @click="flightInfo(f)"
-                  v-b-tooltip.hover="{
-                    delay: { show: 1000, hide: 50 },
-                  }"
-                  :title="$t('actions.info')"
-                >
-                  <i class="fa fa-info-circle"></i>
-                </button>
-                &nbsp;
                 <button
                   v-if="f.filename"
                   class="btn btn-sm btn-success"
@@ -68,7 +66,6 @@
                 >
                   <i class="fa fa-arrow-alt-circle-down"></i>
                 </button>
-                &nbsp;
                 <click-confirm
                   placement="bottom"
                   button-size="sm"
@@ -105,7 +102,7 @@
               <tbody>
                 <tr>
                   <td>{{ $t("carnet.Site") }}</td>
-                  <th>{{ f.site_lib }}</th>
+                  <th style="font-size:1.1em;">{{ f.site_lib }}</th>
                 </tr>
                 <tr>
                   <td>{{ $t("carnet.Pilote") }}</td>
@@ -186,7 +183,10 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["isdropboxenabled", "pgenabled"]),
+    ...mapGetters(["isdropboxenabled", "pg"]),
+    pgenabled: function () {
+      return this.pg.enable && this.pg.login != "" && this.pg.password != "";
+    },
   },
   methods: {
     edit: function (flight) {
@@ -295,9 +295,24 @@ export default {
         .dispatch("dropbox/uploadToDropbox", { filename: f, type: "VOLPARSED" })
         .then(
           // eslint-disable-next-line no-unused-vars
-          (response) => {},
           // eslint-disable-next-line
-          (error) => {}
+          (response) => {
+            this.$bvToast.toast("OK", {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "success",
+            });
+          },
+          // eslint-disable-next-line
+          (error) => {
+            this.$bvToast.toast(error, {
+              title: "Dropbox",
+              toaster: "b-toaster-top-right",
+              solid: true,
+              variant: "danger",
+            });
+          }
         );
     },
     flightToParagliding: function (f) {
@@ -328,6 +343,11 @@ export default {
 .btns div {
   display: inline;
 }
+
+.btns button {
+  margin-right: 10px;
+}
+
 .comments {
   border: 1px solid #ccc;
   padding: 5px;

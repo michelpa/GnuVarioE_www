@@ -522,13 +522,13 @@
                           :maxLength="50"
                           input-type="text"
                         ></config-field>
-                        <config-field
+                        <!-- <config-field
                           v-model="localConfig.systeme.COMPENSATION_TEMP"
                           :label="$t('params.systeme.COMPENSATION_TEMP.label')"
                           :help="$t('params.systeme.COMPENSATION_TEMP.help')"
                           input-type="number"
                           :step="0.1"
-                        ></config-field>
+                        ></config-field> -->
                         <config-field
                           v-model="localConfig.systeme.COMPENSATION_GPSALTI"
                           :label="
@@ -854,7 +854,7 @@ export default {
     },
     calibration: function () {
       let self = this;
-      this.$store.dispatch("uploadToCalibration", {}).then(
+      this.$store.dispatch("calibration/performCalibration", {}).then(
         // eslint-disable-next-line no-unused-vars
         (response) => {
           self.$bvToast.toast("OK", {

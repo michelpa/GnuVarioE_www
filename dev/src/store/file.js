@@ -14,7 +14,7 @@ export const actions = {
     loadSDFiles: function (context, path) {
         let url = "/list";
         if (path) {
-            console.log(path);
+            // console.log(path);
             if (path.length > 1 && path.slice(-1) == "/") {
                 path = path.slice(0, -1);
             }
