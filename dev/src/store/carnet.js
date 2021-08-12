@@ -38,7 +38,7 @@ export const actions = {
         }).then(function () {
             context.commit('setLoadingState', true);
             return axios.get(url, axiosConfig).then(response => {
-                context.commit('setSites', response.data);
+                context.commit('setSites', response.data || {});
             }).catch(function (error) {
                 return Promise.reject(error);
             }).finally(function () {

@@ -258,8 +258,12 @@ export default {
       }
 
       //zoom the map to the markers
-      markers.addTo(this.macarte);
-      this.macarte.fitBounds(markers.getBounds());
+      if (this.sites.length) {
+        markers.addTo(this.macarte);
+        this.macarte.fitBounds(markers.getBounds());
+      } else {
+        this.macarte.fitWorld();
+      }
     },
   },
   mounted: function () {
