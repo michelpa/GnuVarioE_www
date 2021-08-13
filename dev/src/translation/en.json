@@ -430,5 +430,10 @@
     "title": "Flight",
     "Comment": "Comments",
     "save_failed": "Failed to save flight."
+  },
+  "dropbox_msg": {
+    "account_conf_error": "Dropbox account misconfigured",
+    "error_upload": "Error while uploading to your Dropbox",
+    "error_upload_conflict": "Conflict while uploading to your Dropbox, upload was canceled"
   }
 }

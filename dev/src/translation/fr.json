@@ -432,5 +432,10 @@
     "title": "Vol",
     "Comment": "Commentaires",
     "save_failed": "Echec de la sauvegarde du vol."
+  },
+  "dropbox_msg": {
+    "account_conf_error": "Dropbox account misconfigured",
+    "error_upload": "Erreur lors du transfert vers votre Dropbox",
+    "error_upload_conflict": "Conflit lors du transfert vers votre Dropbox, le transfert a été annulé"
   }
 }
