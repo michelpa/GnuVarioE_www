@@ -435,5 +435,13 @@
     "account_conf_error": "Dropbox account misconfigured",
     "error_upload": "Error while uploading to your Dropbox",
     "error_upload_conflict": "Conflict while uploading to your Dropbox, upload was canceled"
+  },
+  "UpLoad": {
+    "upload_to": "Upload in",
+    "info": "Drop the files to upload here",
+    "info1": "Or use the button below:",
+    "file": "The file ",
+    "success_upload": " was successfully uploaded to the vario.",
+    "fail_upload": "Failed to download file "
   }
 }
