@@ -395,7 +395,8 @@
     "upload_to": "Upload to "
   },
   "sitelist": {
-    "name": "Name"
+    "name": "Name",
+    "description": "To copy coordinates from the map, left click at the desired location. These coordinates will be automatically pasted when creating a new location."
   },
   "siteform": {
     "title": "Site",

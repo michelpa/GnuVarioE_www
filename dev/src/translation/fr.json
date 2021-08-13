@@ -397,7 +397,8 @@
     "upload_to": "Téléversement vers "
   },
   "sitelist": {
-    "name": "Libellé"
+    "name": "Libellé",
+    "description": "Pour récupérer des coordonnées à partir de la carte, faire un clic gauche à l'endroit voulu. Ces coordonnées seront automatiquement copiées lors de la création d'un site."
   },
   "siteform": {
     "title": "Site",
