@@ -395,7 +395,8 @@
     "upload_to": "Upload to "
   },
   "sitelist": {
-    "name": "Name"
+    "name": "Name",
+    "description": "To copy coordinates from the map, left click at the desired location. These coordinates will be automatically pasted when creating a new location."
   },
   "siteform": {
     "title": "Site",
@@ -429,5 +430,18 @@
     "title": "Flight",
     "Comment": "Comments",
     "save_failed": "Failed to save flight."
+  },
+  "dropbox_msg": {
+    "account_conf_error": "Dropbox account misconfigured",
+    "error_upload": "Error while uploading to your Dropbox",
+    "error_upload_conflict": "Conflict while uploading to your Dropbox, upload was canceled"
+  },
+  "UpLoad": {
+    "upload_to": "Upload in",
+    "info": "Drop the files to upload here",
+    "info1": "Or use the button below:",
+    "file": "The file ",
+    "success_upload": " was successfully uploaded to the vario.",
+    "fail_upload": "Failed to download file "
   }
 }

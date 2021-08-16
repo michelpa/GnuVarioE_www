@@ -397,7 +397,8 @@
     "upload_to": "Téléversement vers "
   },
   "sitelist": {
-    "name": "Libellé"
+    "name": "Libellé",
+    "description": "Pour récupérer des coordonnées à partir de la carte, faire un clic gauche à l'endroit voulu. Ces coordonnées seront automatiquement copiées lors de la création d'un site."
   },
   "siteform": {
     "title": "Site",
@@ -431,5 +432,18 @@
     "title": "Vol",
     "Comment": "Commentaires",
     "save_failed": "Echec de la sauvegarde du vol."
+  },
+  "dropbox_msg": {
+    "account_conf_error": "Dropbox account misconfigured",
+    "error_upload": "Erreur lors du transfert vers votre Dropbox",
+    "error_upload_conflict": "Conflit lors du transfert vers votre Dropbox, le transfert a été annulé"
+  },
+  "UpLoad": {
+    "upload_to": "Upload vers",
+    "info": "Déposer les fichiers à uploader ici",
+    "info1": "Ou utiliser le bouton ci dessous:",
+    "file": "Le fichier ",
+    "success_upload": " a été correctement téléchargée sur le vario.",
+    "fail_upload": "Echec du téléchargement du fichier "
   }
 }

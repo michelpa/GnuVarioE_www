@@ -7,7 +7,7 @@
       @hidden="doHidden"
       ref="modal"
     >
-      <template v-slot:modal-title>Upload vers "{{ uploadPath }}"</template>
+      <template v-slot:modal-title>{{ $t("UpLoad.upload_to") }} "{{ uploadPath }}"</template>
       <div
         @dragleave="onDragLeave"
         @dragover="onDragOver"
@@ -25,7 +25,7 @@
         >
           <div v-if="files.length == 0">
             <span class="alert alert-info"
-              >Déposer les fichiers à uploader ici</span
+              >{{ $t("UpLoad.info") }}</span
             >
           </div>
           <b-progress
@@ -40,7 +40,7 @@
               {{ file.name }}
               <button
                 @click="removeFile(file)"
-                title="Remove"
+                :title="$t('actions.delete')"
                 class="btn btn-sm btn-danger"
               >
                 <i class="fa fa-trash-alt"></i>
@@ -51,7 +51,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <p><br /><em>Ou utiliser le bouton ci dessous:</em></p>
+      <p><br /><em>{{ $t("UpLoad.info1") }}</em></p>
       <b-form-file v-model="files" class="mt-3" multiple plain></b-form-file>
     </b-modal>
   </div>
@@ -119,7 +119,7 @@ export default {
               self.removeFile(f);
               self.endOneFileUpload();
               self.$bvToast.toast(
-                `Le fichier ${f.name} a été correctement téléchargée sur le vario.`,
+                this.$i18n.t("UpLoad.file") + `${f.name}` + this.$i18n.t("UpLoad.success_upload"),
                 {
                   title: "SD",
                   toaster: "b-toaster-top-right",
@@ -134,7 +134,7 @@ export default {
               self.removeFile(f);
               self.endOneFileUpload();
               self.$bvToast.toast(
-                `Echec du téléchargement du fichier  ${f.name}.`,
+                this.$i18n.t("UpLoad.fail_upload") + `${f.name}.`,
                 {
                   title: "SD",
                   toaster: "b-toaster-top-right",

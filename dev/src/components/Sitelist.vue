@@ -66,18 +66,16 @@
     <div class="row">
       <div class="col-md-12">
         <p>
-          Pour récupérer des coordonnées à partir de la carte, faire un clic
-          gauche à l'endroit voulu. Ces coordonnées seront automatiquement
-          copiées lors de la création d'un site.
+          {{ $t("sitelist.description") }}
         </p>
         <div v-show="latOnClick">
-          Latitude
+          {{ $t("siteform.latitude") }}
           <span class="coord">
             <b-badge variant="info">{{ latOnClick }}</b-badge>
           </span>
         </div>
         <div v-show="lonOnClick">
-          Longitude
+          {{ $t("siteform.longitude") }}
           <span class="coord">
             <b-badge variant="info">{{ lonOnClick }}</b-badge>
           </span>

@@ -73,7 +73,7 @@ const actions = {
         }
 
         if (!context.rootGetters.dropboxpref.token || !context.rootGetters.dropboxpref.enable) {
-            alert('Dropbox account misconfigured');
+            alert(this.$i18n.t("dropbox_msg.account_conf_error"));
             return;
         }
 
@@ -128,9 +128,9 @@ const actions = {
                 // console.log(response);
             })
             .catch(function (error) {
-                let msgErr = 'Erreur lors du transfert vers votre Dropbox'
+                let msgErr = this.$i18n.t("dropbox_msg.error_upload")
                 if (error.status === 409) {
-                    msgErr = 'Conflit lors du transfert vers votre Dropbox, le transfert a été annulé'
+                    msgErr = this.$i18n.t("dropbox_msg.error_upload_conflict")
                 }
                 return Promise.reject(msgErr);
             });
